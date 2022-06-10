@@ -1,0 +1,44 @@
+{
+	"manifest_version": 2,
+	"name": "SearchVue",
+	"namemsg": "searchvue-extensionname",
+	"type": "other",
+	"author": [
+		"Cormac Parle",
+		"Joseph Seddon",
+		"Marco Fossati",
+		"Matthias Mullie",
+		"Mark Shenoda"
+	],
+	"url": "https://www.mediawiki.org/wiki/Extension:SearchVue",
+	"descriptionmsg": "searchvue-desc",
+	"license-name": "GPL-2.0-or-later",
+	"requires": {
+		"MediaWiki": ">= 1.37.0"
+	},
+	"AutoloadNamespaces": {
+		"MediaWiki\\Extension\\SearchVue\\": "src/"
+	},
+	"config": {},
+	"HookHandlers": {},
+	"Hooks": {},
+	"MessagesDirs": {
+		"SearchVue": [
+			"i18n"
+		]
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "resources",
+		"remoteExtPath": "SearchVue/resources"
+	},
+	"ResourceModules": {
+		"ext.boilerPlate": {
+			"dependencies": [],
+			"styles": [],
+			"packageFiles": [
+				"init.js"
+			],
+			"messages": []
+		}
+	}
+}

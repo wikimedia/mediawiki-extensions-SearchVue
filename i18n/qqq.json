@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Your Name"
+		]
+	},
+	"searchvue-desc": "{{desc|name=SearchVue|url=https://www.mediawiki.org/wiki/Extension:SearchVue}}",
+	"searchvue-extensionname": "{{name}}"
+}

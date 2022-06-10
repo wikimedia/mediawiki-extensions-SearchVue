@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Joseph Seddon"
+		]
+	},
+	"searchvue-desc": "Vue.js feature additions and improvements to Special:Search",
+	"searchvue-extensionname": "SearchVue"
+}
