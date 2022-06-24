@@ -1,9 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Your Name"
+			"Joseph Seddon"
 		]
 	},
-	"searchvue-desc": "{{desc|name=SearchVue|url=https://www.mediawiki.org/wiki/Extension:SearchVue}}",
-	"searchvue-extensionname": "{{name}}"
+	"searchvue-desc": "{{desc|name=SearchVue|url=https://www.mediawiki.org/wiki/Extension:SearchVue}}"
 }

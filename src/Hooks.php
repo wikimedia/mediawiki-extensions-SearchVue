@@ -1,7 +1,8 @@
 <?php
 
-namespace MediaWiki\Extension\SearchVue;
+namespace SearchVue;
 
+use MediaWiki\MediaWikiServices;
 use MediaWiki\SpecialPage\Hook\SpecialPageBeforeExecuteHook;
 use SpecialPage;
 
@@ -23,5 +24,13 @@ class Hooks implements
 		if ( $special->getName() !== 'Search' ) {
 			return;
 		}
+
+		$services = MediaWikiServices::getInstance();
+
+		$mainConfig = $special->getConfig();
+
+		$special->getOutput()->addModules( [
+			'searchVue'
+		] );
 	}
 }
