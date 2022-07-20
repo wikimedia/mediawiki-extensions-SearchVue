@@ -42,7 +42,12 @@
 				"resources/components/App.vue",
 				"resources/components/QuickView.vue",
 				"resources/components/LeadImage.vue",
-				"resources/components/LeadText.vue"
+				"resources/components/LeadText.vue",
+				"resources/store/index.js",
+				"resources/store/state.js",
+				"resources/store/mutations.js",
+				"resources/store/getters.js",
+				"resources/store/actions.js"
 			],
 			"dependencies": [
 				"mediawiki.Uri",
@@ -55,6 +60,10 @@
 				"@vue/composition-api",
 				"vuex",
 				"web2017-polyfills"
+			],
+			"targets": [
+				"desktop",
+				"mobile"
 			]
 		}
 	},

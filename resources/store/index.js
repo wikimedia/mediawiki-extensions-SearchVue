@@ -1,6 +1,6 @@
 'use strict';
 
-var Vuex = require( 'vuex' ),
+const Vuex = require( 'vuex' ),
 	state = require( './state.js' ),
 	getters = require( './getters.js' ),
 	mutations = require( './mutations.js' ),

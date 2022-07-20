@@ -1,5 +1,5 @@
 <template>
-	<p>{{ text }}</p>
+	<p>{{ title }}</p>
 </template>
 
 <script>
@@ -8,15 +8,15 @@
  *
  * Placeholder
  */
+const mapState = require( 'vuex' ).mapState;
 
 // @vue/component
 module.exports = exports = {
 	name: 'LeadImage',
-
-	data: function () {
-		return {
-			text: 'Some filler article text.'
-		};
-	}
+	computed: $.extend( {},
+		mapState( [
+			'title'
+		] )
+	)
 };
 </script>

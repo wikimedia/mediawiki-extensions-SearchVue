@@ -2,17 +2,17 @@
 
 $( function () {
 
-	var Vue = require( 'vue' ),
+	const Vue = require( 'vue' ),
 		App = require( './components/App.vue' ),
+		store = require( './store/index.js' ),
 		/* eslint-disable no-jquery/no-global-selector */
-		$results = $( '.searchresults' ),
-		$vueContainer = $( '<div>' ).addClass( 'sdsv-container' ),
-		$vue = $( '<div>' ).appendTo( $vueContainer );
+		$vueContainer = $( '<div>' ).addClass( 'sdsv-container' );
 
-	$results.prepend( $vueContainer );
+	$( '#content' ).prepend( $vueContainer );
 
 	Vue.config.compilerOptions.whitespace = 'preserve';
 	Vue.createMwApp( App )
-		.mount( $vue.get( 0 ) );
+		.use( store )
+		.mount( $vueContainer.get( 0 ) );
 
 } );
