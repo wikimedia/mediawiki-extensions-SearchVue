@@ -4,5 +4,8 @@
 			"Joseph Seddon"
 		]
 	},
-	"searchvue-desc": "{{desc|name=SearchVue|url=https://www.mediawiki.org/wiki/Extension:SearchVue}}"
+	"searchvue-desc": "{{desc|name=SearchVue|url=https://www.mediawiki.org/wiki/Extension:SearchVue}}",
+	"quickview-close": "Title for the svg used to close the Quick View on mobile view",
+	"quickview-next": "Title of the svg used to move to the next result",
+	"quickview-previous": "Title of the svg used to move to the previous result"
 }

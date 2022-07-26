@@ -1,3 +1,5 @@
 module.exports = {
-	title: null
+	title: null,
+	selectedIndex: -1,
+	results: []
 };

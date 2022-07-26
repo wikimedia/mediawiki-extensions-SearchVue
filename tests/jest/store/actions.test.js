@@ -29,38 +29,157 @@ afterEach( () => {
 // this tests are focused at the internal search function
 describe( 'Actions', () => {
 	describe( 'handleTitleChange', () => {
-		it( 'Set title to null when called with undefined', () => {
-			actions.handleTitleChange( context, undefined );
+		describe( 'when called with undefined', () => {
+			it( 'Nothing is committed', () => {
+				actions.handleTitleChange( context, undefined );
 
-			expect( actions.commit ).toHaveBeenCalled();
-			expect( actions.commit ).toHaveBeenCalledWith( 'SET_TITLE', null );
+				expect( context.commit ).not.toHaveBeenCalled();
 
+			} );
 		} );
-		it( 'Set title to null when title provided is the same as state.title', () => {
-			const title = 'dummy';
-			context.state.title = title;
-			actions.handleTitleChange( context, title );
+		describe( 'when title provided is the same as state.title', () => {
+			it( 'Set title to null', () => {
+				const title = 'dummy';
+				context.state.title = title;
+				actions.handleTitleChange( context, title );
 
-			expect( actions.commit ).toHaveBeenCalled();
-			expect( actions.commit ).toHaveBeenCalledWith( 'SET_TITLE', null );
+				expect( actions.commit ).toHaveBeenCalled();
+				expect( actions.commit ).toHaveBeenCalledWith( 'SET_TITLE', null );
 
+			} );
+			it( 'Set selected index to -1', () => {
+				const title = 'dummy';
+				context.state.title = title;
+				actions.handleTitleChange( context, title );
+
+				expect( actions.commit ).toHaveBeenCalled();
+				expect( actions.commit ).toHaveBeenCalledWith( 'SET_SELECTED_INDEX', -1 );
+
+			} );
 		} );
-		it( 'Set title to value provided if state.title is empty', () => {
-			const title = 'dummy';
-			actions.handleTitleChange( context, title );
+		describe( 'when called with a valid title', () => {
+			it( 'and current title had no value, update the title', () => {
+				const title = 'dummy';
+				actions.handleTitleChange( context, title );
 
-			expect( actions.commit ).toHaveBeenCalled();
-			expect( actions.commit ).toHaveBeenCalledWith( 'SET_TITLE', title );
+				expect( actions.commit ).toHaveBeenCalled();
+				expect( actions.commit ).toHaveBeenCalledWith( 'SET_TITLE', title );
+
+			} );
+			it( 'and value differs from existing title, update the title', () => {
+				const title = 'dummy';
+				actions.handleTitleChange( context, title );
+
+				expect( actions.commit ).toHaveBeenCalled();
+				expect( actions.commit ).toHaveBeenCalledWith( 'SET_TITLE', title );
+
+			} );
+			it( 'Update the selectedIndex title', () => {
+				const title = 'dummy2';
+				context.state.results = [
+					{ prefixedText: 'dummy1' },
+					{ prefixedText: 'dummy2' }
+				];
+				actions.handleTitleChange( context, title );
+
+				expect( actions.commit ).toHaveBeenCalled();
+				expect( actions.commit ).toHaveBeenCalledWith( 'SET_SELECTED_INDEX', 1 );
+
+			} );
 		} );
-		it( 'Set title to value provided if state.title is different than value provided', () => {
-			const existingTitle = 'existing';
-			const newTitle = 'newTitle';
-			context.state.title = existingTitle;
+	} );
 
-			actions.handleTitleChange( context, newTitle );
+	describe( 'navigate', () => {
+		describe( 'Does not commit any action', () => {
+			it( 'When called with the wrong value', () => {
+				const wrongNavigation = 'doesNotExist';
+				actions.navigate( context, wrongNavigation );
 
-			expect( actions.commit ).toHaveBeenCalled();
-			expect( actions.commit ).toHaveBeenCalledWith( 'SET_TITLE', newTitle );
+				expect( context.commit ).not.toHaveBeenCalled();
+
+			} );
+			it( 'When trying to navigate too far back (index -1)', () => {
+				const wrongNavigation = 'previous';
+				context.state.selectedIndex = 0;
+				actions.navigate( context, wrongNavigation );
+
+				expect( context.commit ).not.toHaveBeenCalled();
+
+			} );
+			it( 'When trying to navigate too forward back (index bigger than array length)', () => {
+				const wrongNavigation = 'next';
+				context.state.selectedIndex = 0;
+				actions.navigate( context, wrongNavigation );
+
+				expect( context.commit ).not.toHaveBeenCalled();
+
+			} );
+		} );
+
+		describe( 'When navigating forward', () => {
+
+			beforeEach( () => {
+				context.state.results = [
+					{ prefixedText: 'faketitle 1' },
+					{ prefixedText: 'faketitle 2' }
+				];
+				context.state.selectedIndex = 0;
+			} );
+
+			afterEach( () => {
+				context = null;
+				actions = null;
+			} );
+
+			it( 'update the title with the next title index', () => {
+				const newTitle = context.state.results[ 1 ].prefixedText;
+				actions.navigate( context, 'next' );
+
+				expect( context.commit ).toHaveBeenCalled();
+				expect( actions.commit ).toHaveBeenNthCalledWith( 1, 'SET_TITLE', newTitle );
+
+			} );
+
+			it( 'update the selectedIndexs with the correct index', () => {
+				actions.navigate( context, 'next' );
+
+				expect( context.commit ).toHaveBeenCalled();
+				expect( actions.commit ).toHaveBeenNthCalledWith( 2, 'SET_SELECTED_INDEX', 1 );
+
+			} );
+		} );
+
+		describe( 'When navigating backward', () => {
+
+			beforeEach( () => {
+				context.state.results = [
+					{ prefixedText: 'faketitle 1' },
+					{ prefixedText: 'faketitle 2' }
+				];
+				context.state.selectedIndex = 1;
+			} );
+
+			afterEach( () => {
+				context = null;
+				actions = null;
+			} );
+
+			it( 'update the title with the next title index', () => {
+				const newTitle = context.state.results[ 0 ].prefixedText;
+				actions.navigate( context, 'previous' );
+
+				expect( context.commit ).toHaveBeenCalled();
+				expect( actions.commit ).toHaveBeenNthCalledWith( 1, 'SET_TITLE', newTitle );
+
+			} );
+
+			it( 'update the selectedIndexs with the correct index', () => {
+				actions.navigate( context, 'previous' );
+
+				expect( context.commit ).toHaveBeenCalled();
+				expect( actions.commit ).toHaveBeenNthCalledWith( 2, 'SET_SELECTED_INDEX', 0 );
+
+			} );
 		} );
 	} );
 } );

@@ -4,5 +4,8 @@
 			"Joseph Seddon"
 		]
 	},
-	"searchvue-desc": "Vue.js feature additions and improvements to Special:Search"
+	"searchvue-desc": "Vue.js feature additions and improvements to Special:Search",
+	"quickview-close": "Close",
+	"quickview-next": "Next",
+	"quickview-previous": "previous"
 }

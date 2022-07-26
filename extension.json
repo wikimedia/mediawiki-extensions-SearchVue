@@ -23,7 +23,9 @@
 		}
 	},
 	"Hooks": {
-		"SpecialPageBeforeExecute": "main"
+		"SpecialPageBeforeExecute": "main",
+		"SpecialSearchResults": "main",
+		"SpecialSearchResultsAppend": "main"
 
 	},
 	"MessagesDirs": {
@@ -64,6 +66,11 @@
 			"targets": [
 				"desktop",
 				"mobile"
+			],
+			"messages": [
+				"quickview-close",
+				"quickview-previous",
+				"quickview-next"
 			]
 		}
 	},

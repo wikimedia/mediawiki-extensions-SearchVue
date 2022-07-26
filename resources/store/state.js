@@ -2,5 +2,7 @@
 
 module.exports = {
 	title: null,
-	isMobile: mw.config.get( 'skin' ) === 'minerva'
+	selectedIndex: -1,
+	isMobile: mw.config.get( 'skin' ) === 'minerva',
+	results: mw.config.values.wgSpecialSearchTextMatches || []
 };
