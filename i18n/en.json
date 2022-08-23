@@ -8,7 +8,7 @@
 	"quickview-close": "Close",
 	"quickview-next": "Next",
 	"quickview-previous": "previous",
-	"quickview-snippet-gotofullarticle": "Go to full article",
+	"quickview-snippet-gotofullpage": "Go to full page",
 	"searchpreview-label": "Enable search result preview",
-	"searchpreview-help": "Preview the contents of the article and related pages."
+	"searchpreview-help": "Preview the contents of the page and related pages."
 }

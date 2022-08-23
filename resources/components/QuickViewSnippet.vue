@@ -2,7 +2,7 @@
 	<div class="quickViewSnippet">
 		<!-- eslint-disable vue/no-v-html -->
 		<p v-html="text"></p>
-		<a :href="url">{{ $i18n( 'quickview-snippet-gotofullarticle' ).text() }}</a>
+		<a :href="url">{{ $i18n( 'quickview-snippet-gotofullpage' ).text() }}</a>
 	</div>
 </template>
 
