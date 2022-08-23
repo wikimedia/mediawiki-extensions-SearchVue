@@ -1,5 +1,7 @@
 const initialState = require( '../fixtures/initialVuexState.js' );
 
+require( '../mocks/history.js' );
+
 let context;
 let actions;
 
@@ -19,6 +21,7 @@ beforeEach( () => {
 	actions.getters = context.getters;
 	actions.state = context.state;
 	actions.commit = context.commit;
+	actions.dispatch = context.dispatch;
 } );
 
 afterEach( () => {
@@ -38,22 +41,13 @@ describe( 'Actions', () => {
 			} );
 		} );
 		describe( 'when title provided is the same as state.title', () => {
-			it( 'Set title to null', () => {
+			it( 'Dispacth a call to closeQuickView', () => {
 				const title = 'dummy';
 				context.state.title = title;
 				actions.handleTitleChange( context, title );
 
-				expect( actions.commit ).toHaveBeenCalled();
-				expect( actions.commit ).toHaveBeenCalledWith( 'SET_TITLE', null );
-
-			} );
-			it( 'Set selected index to -1', () => {
-				const title = 'dummy';
-				context.state.title = title;
-				actions.handleTitleChange( context, title );
-
-				expect( actions.commit ).toHaveBeenCalled();
-				expect( actions.commit ).toHaveBeenCalledWith( 'SET_SELECTED_INDEX', -1 );
+				expect( actions.dispatch ).toHaveBeenCalled();
+				expect( actions.dispatch ).toHaveBeenCalledWith( 'closeQuickView' );
 
 			} );
 		} );
@@ -85,6 +79,20 @@ describe( 'Actions', () => {
 				expect( actions.commit ).toHaveBeenCalled();
 				expect( actions.commit ).toHaveBeenCalledWith( 'SET_SELECTED_INDEX', 1 );
 
+			} );
+
+			it( 'Adds QuickView to history state', () => {
+				const title = 'dummy';
+				actions.handleTitleChange( context, title );
+
+				expect( window.history.pushState ).toHaveBeenCalled();
+				expect( window.history.pushState ).toHaveBeenCalledWith(
+					expect.objectContaining(
+						{ quickView: title }
+					),
+					null,
+					expect.anything()
+				);
 			} );
 		} );
 	} );
@@ -180,6 +188,42 @@ describe( 'Actions', () => {
 				expect( actions.commit ).toHaveBeenNthCalledWith( 2, 'SET_SELECTED_INDEX', 0 );
 
 			} );
+		} );
+	} );
+
+	describe( 'closeQuickView', () => {
+		it( 'Set title to null', () => {
+			const title = 'dummy';
+			context.state.title = title;
+			actions.closeQuickView( context, title );
+
+			expect( actions.commit ).toHaveBeenCalled();
+			expect( actions.commit ).toHaveBeenCalledWith( 'SET_TITLE', null );
+
+		} );
+		it( 'Set selected index to -1', () => {
+			const title = 'dummy';
+			context.state.title = title;
+			actions.closeQuickView( context, title );
+
+			expect( actions.commit ).toHaveBeenCalled();
+			expect( actions.commit ).toHaveBeenCalledWith( 'SET_SELECTED_INDEX', -1 );
+
+		} );
+
+		it( 'Removes QuickView to history state', () => {
+			const title = 'dummy';
+			context.state.title = title;
+			actions.closeQuickView( context, title );
+
+			expect( window.history.pushState ).toHaveBeenCalled();
+			expect( window.history.pushState ).toHaveBeenCalledWith(
+				expect.not.objectContaining(
+					{ quickView: title }
+				),
+				null,
+				expect.anything()
+			);
 		} );
 	} );
 } );

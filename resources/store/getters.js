@@ -10,5 +10,21 @@ module.exports = {
 	 */
 	visible: ( state ) => {
 		return state.title !== null;
+	},
+	/**
+	 * Returns the currently selected result.
+	 *
+	 * @param {Object} state
+	 *
+	 * @return {Object}
+	 */
+	currentResult: ( state ) => {
+
+		if ( state.selectedIndex === -1 ) {
+			return {};
+		}
+
+		return state.results[ state.selectedIndex ];
 	}
+
 };
