@@ -25,7 +25,8 @@
 	"Hooks": {
 		"SpecialPageBeforeExecute": "main",
 		"SpecialSearchResults": "main",
-		"SpecialSearchResultsAppend": "main"
+		"SpecialSearchResultsAppend": "main",
+		"GetPreferences": [ "SearchVue\\Hooks::onGetPreferences" ]
 
 	},
 	"MessagesDirs": {
@@ -73,6 +74,9 @@
 				"quickview-next"
 			]
 		}
+	},
+	"DefaultUserOptions": {
+		"searchpreview": true
 	},
 	"manifest_version": 2
 }

@@ -7,5 +7,7 @@
 	"searchvue-desc": "Vue.js feature additions and improvements to Special:Search",
 	"quickview-close": "Close",
 	"quickview-next": "Next",
-	"quickview-previous": "previous"
+	"quickview-previous": "previous",
+	"searchpreview-label": "Enable search result preview",
+	"searchpreview-help": "Preview the contents of the article and related pages."
 }
