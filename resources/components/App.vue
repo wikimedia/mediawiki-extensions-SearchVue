@@ -62,20 +62,23 @@ module.exports = exports = {
 				// TODO: Improve calculation of the QuickView after improvement of the search page
 				if ( !this.isMobile && !this.offsetTop ) {
 					// Set the correct offset to align with the search results
-					this.offsetTop = element.offsetTop || 0 + 'px';
+					this.offsetTop = ( element.offsetTop || 0 ) + 'px';
 				}
 			}
 		}
 	),
 	mounted: function () {
 		// eslint-disable-next-line no-jquery/no-global-selector
-		const searchResults = $( '#mw-content-text .mw-search-result' );
+		const searchResults = $( '#mw-content-text .mw-search-result .searchresult' );
 
+		for ( const searchResult of searchResults ) {
+			searchResult.classList.add( 'searchresult-with-quickview' );
+		}
 		searchResults.click( function ( event ) {
 			// Calculate the offset when the item is clicked to make sure the page is fully loaded.
 			// This is to avoid wrong offset in case extension are loaded late (eg Advance search)
-			this.calculateOffsetTop( searchResults[ 0 ] );
-			const searchResultLink = event.currentTarget.getElementsByTagName( 'a' )[ 0 ];
+			this.calculateOffsetTop( searchResults[ 0 ].parentElement );
+			const searchResultLink = event.currentTarget.parentElement.getElementsByTagName( 'a' )[ 0 ];
 
 			if ( searchResultLink.hasAttribute( 'title' ) ) {
 				event.stopPropagation();
@@ -101,6 +104,8 @@ module.exports = exports = {
 </script>
 
 <style lang="less">
+@import '../styles/Search-result-hover.less';
+
 .mw-search-quick-view {
 
 	position: absolute;
