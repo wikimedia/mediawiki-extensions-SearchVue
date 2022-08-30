@@ -63,6 +63,7 @@
 				"vuex",
 				"web2017-polyfills"
 			],
+			"es6": true,
 			"targets": [
 				"desktop",
 				"mobile"
