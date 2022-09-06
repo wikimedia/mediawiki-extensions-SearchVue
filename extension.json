@@ -46,6 +46,7 @@
 				"resources/components/QuickView.vue",
 				"resources/components/LeadImage.vue",
 				"resources/components/QuickViewSnippet.vue",
+				"resources/components/QuickViewSections.vue",
 				"resources/store/index.js",
 				"resources/store/state.js",
 				"resources/store/mutations.js",

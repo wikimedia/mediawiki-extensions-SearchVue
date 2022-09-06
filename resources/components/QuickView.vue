@@ -34,6 +34,11 @@
 			:text="textWithEllipsis"
 			:title="currentResult.prefixedText"
 		></quick-view-snippet>
+		<quick-view-sections
+			v-if="sectionsExist"
+			:title="currentResult.prefixedText"
+			:sections="currentResult.sections"
+		></quick-view-sections>
 	</div>
 </template>
 
@@ -45,6 +50,7 @@
  */
 const LeadImage = require( './LeadImage.vue' ),
 	QuickViewSnippet = require( './QuickViewSnippet.vue' ),
+	QuickViewSections = require( './QuickViewSections.vue' ),
 	mapActions = require( 'vuex' ).mapActions,
 	mapGetters = require( 'vuex' ).mapGetters,
 	mapState = require( 'vuex' ).mapState;
@@ -54,7 +60,8 @@ module.exports = exports = {
 	name: 'QuickView',
 	components: {
 		'lead-image': LeadImage,
-		'quick-view-snippet': QuickViewSnippet
+		'quick-view-snippet': QuickViewSnippet,
+		'quick-view-sections': QuickViewSections
 	},
 	data: function () {
 		return {};
@@ -67,6 +74,9 @@ module.exports = exports = {
 			'currentResult'
 		] ),
 		{
+			sectionsExist() {
+				return this.currentResult.sections && this.currentResult.sections.length !== 0;
+			},
 			textWithEllipsis() {
 				return this.currentResult.text + this.$i18n( 'ellipsis' ).text();
 			}

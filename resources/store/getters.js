@@ -20,11 +20,19 @@ module.exports = {
 	 */
 	currentResult: ( state ) => {
 
-		if ( state.selectedIndex === -1 ) {
+		if ( state.selectedIndex === -1 || !state.results[ state.selectedIndex ] ) {
 			return {};
 		}
 
-		return state.results[ state.selectedIndex ];
+		const additionalInfo = {
+			sections: state.sections
+		};
+
+		return $.extend(
+			state.results[ state.selectedIndex ],
+			additionalInfo
+		);
+
 	}
 
 };

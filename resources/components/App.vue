@@ -124,6 +124,7 @@ module.exports = exports = {
 
 	position: absolute;
 	background-color: white;
+	font-family: -apple-system, 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Lato', 'Helvetica', 'Arial', sans-serif;
 
 	&__desktop {
 		border: solid 1px #c8CCd1;

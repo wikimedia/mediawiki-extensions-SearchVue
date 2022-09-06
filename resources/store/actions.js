@@ -34,6 +34,30 @@ const removeQuickViewFromHistoryState = () => {
 	window.history.pushState( mwUri.query, null, queryString );
 };
 
+const retriveArticleSections = ( context, title ) => {
+	const api = new mw.Api();
+	const options = {
+		action: 'parse',
+		format: 'json',
+		page: title,
+		prop: 'sections'
+	};
+
+	api
+		.get( options )
+		.done( ( result ) => {
+			if ( !result || !result.parse || result.parse.sections.length === 0 ) {
+				return;
+			}
+
+			const sections = result.parse.sections;
+			context.commit( 'SET_SECTIONS', sections );
+		} )
+		.catch( () => {
+			context.commit( 'SET_SECTIONS' );
+		} );
+};
+
 module.exports = {
 
 	/**
@@ -43,6 +67,7 @@ module.exports = {
 	 * @param {Object} context
 	 * @param {Object} context.state
 	 * @param {Function} context.commit
+	 * @param {Function} context.dispatch
 	 * @param {?string} title
 	 */
 	handleTitleChange: ( context, title ) => {
@@ -50,11 +75,10 @@ module.exports = {
 			return;
 		}
 
-		// Close the quickview if the snippet clicked is current one
-		if ( context.state.title === title ) {
-			context.dispatch( 'closeQuickView' );
-		} else {
-			// TODO -> Retrieve snippet information and save them in the store
+		context.dispatch( 'closeQuickView' );
+
+		if ( context.state.title !== title ) {
+			retriveArticleSections( context, title );
 			context.commit( 'SET_TITLE', title );
 			pushTitleToHistoryState( title );
 
@@ -74,6 +98,7 @@ module.exports = {
 	closeQuickView: ( context ) => {
 		context.commit( 'SET_TITLE', null );
 		context.commit( 'SET_SELECTED_INDEX', -1 );
+		context.commit( 'SET_SECTIONS' );
 		removeQuickViewFromHistoryState();
 	},
 	/**

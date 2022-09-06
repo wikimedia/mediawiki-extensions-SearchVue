@@ -18,5 +18,14 @@ module.exports = {
 	 */
 	SET_SELECTED_INDEX: ( state, index ) => {
 		state.selectedIndex = index;
+	},
+	/**
+	 * Set the value of sections or reset to empty array
+	 *
+	 * @param {Object} state
+	 * @param {Array} sections
+	 */
+	SET_SECTIONS: ( state, sections ) => {
+		state.sections = sections || [];
 	}
 };

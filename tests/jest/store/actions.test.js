@@ -29,7 +29,6 @@ afterEach( () => {
 	actions = null;
 } );
 
-// this tests are focused at the internal search function
 describe( 'Actions', () => {
 	describe( 'handleTitleChange', () => {
 		describe( 'when called with undefined', () => {
@@ -52,6 +51,21 @@ describe( 'Actions', () => {
 			} );
 		} );
 		describe( 'when called with a valid title', () => {
+			it( 'retrieves article sections', () => {
+				const mockSections = [ 'section1' ];
+				const dummyResponse = {
+					parse: {
+						sections: mockSections
+					}
+				};
+				global.mw.Api.prototype.get.mockReturnValueOnce( $.Deferred().resolve( dummyResponse ).promise() );
+				const title = 'dummy';
+				actions.handleTitleChange( context, title );
+
+				expect( actions.commit ).toHaveBeenCalled();
+				expect( actions.commit ).toHaveBeenCalledWith( 'SET_SECTIONS', mockSections );
+
+			} );
 			it( 'and current title had no value, update the title', () => {
 				const title = 'dummy';
 				actions.handleTitleChange( context, title );
@@ -208,6 +222,15 @@ describe( 'Actions', () => {
 
 			expect( actions.commit ).toHaveBeenCalled();
 			expect( actions.commit ).toHaveBeenCalledWith( 'SET_SELECTED_INDEX', -1 );
+
+		} );
+		it( 'Set sections to an empty array', () => {
+			const title = 'dummy';
+			context.state.title = title;
+			actions.closeQuickView( context, title );
+
+			expect( actions.commit ).toHaveBeenCalled();
+			expect( actions.commit ).toHaveBeenCalledWith( 'SET_SECTIONS' );
 
 		} );
 
