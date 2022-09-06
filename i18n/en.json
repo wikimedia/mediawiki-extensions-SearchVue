@@ -7,7 +7,7 @@
 	"searchvue-desc": "Vue.js feature additions and improvements to Special:Search",
 	"quickview-close": "Close",
 	"quickview-next": "Next",
-	"quickview-previous": "previous",
+	"quickview-previous": "Previous",
 	"quickview-snippet-gotofullpage": "Go to full page",
 	"searchpreview-label": "Enable search result preview",
 	"searchpreview-help": "Preview the contents of the page and related pages."
