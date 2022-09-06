@@ -7,5 +7,7 @@
 	"searchvue-desc": "{{desc|name=SearchVue|url=https://www.mediawiki.org/wiki/Extension:SearchVue}}",
 	"quickview-close": "Title for the svg used to close the Quick View on mobile view",
 	"quickview-next": "Title of the svg used to move to the next result",
-	"quickview-previous": "Title of the svg used to move to the previous result"
+	"quickview-previous": "Title of the svg used to move to the previous result",
+	"searchpreview-label": "Used in [[Special:Preferences]], tab \"Search\". Offer the user the ability to enable or disable the search preview feature.",
+	"searchpreview-help": "Help text for user preference that offer the user the ability to enable or disable the search preview feature."
 }

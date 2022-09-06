@@ -33,11 +33,14 @@ class Hooks implements
 
 		$services = MediaWikiServices::getInstance();
 
-		$mainConfig = $special->getConfig();
+		$userConfig = $services->getUserOptionsLookup();
+		$searchPreviewEnabled = $userConfig->getBoolOption( $special->getUser(), 'searchpreview' );
 
-		$special->getOutput()->addModules( [
-			'searchVue'
-		] );
+		if ( $searchPreviewEnabled ) {
+			$special->getOutput()->addModules( [
+				'searchVue'
+			] );
+		}
 	}
 
 	/**
@@ -94,5 +97,20 @@ class Hooks implements
 		}
 
 		return $formattedResultSet;
+	}
+
+	/**
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/GetPreferences
+	 * Adds a default-enabled preference to gate the feature
+	 * @param User $user
+	 * @param array &$prefs
+	 */
+	public static function onGetPreferences( $user, &$prefs ) {
+		$prefs['searchpreview'] = [
+			'type' => 'toggle',
+			'section' => 'searchoptions/searchmisc',
+			'label-message' => 'searchpreview-label',
+			'help-message' => 'searchpreview-help',
+		];
 	}
 }
