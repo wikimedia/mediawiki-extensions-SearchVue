@@ -66,8 +66,7 @@
 			],
 			"es6": true,
 			"targets": [
-				"desktop",
-				"mobile"
+				"desktop"
 			],
 			"messages": [
 				"quickview-close",
