@@ -64,6 +64,16 @@ module.exports = exports = {
 					// Set the correct offset to align with the search results
 					this.offsetTop = ( element.offsetTop || 0 ) + 'px';
 				}
+			},
+			restoreQuickViewOnNavigation() {
+				const mwUri = new mw.Uri();
+
+				const queryHasQuickView = !!mwUri.query.quickView;
+
+				if ( queryHasQuickView ) {
+					const title = mwUri.query.quickView;
+					this.handleTitleChange( title );
+				}
 			}
 		}
 	),
@@ -99,6 +109,10 @@ module.exports = exports = {
 				this.closeQuickView();
 			}
 		}.bind( this ) );
+
+		// Restore the quick view in the case in which the user has navigated back to a page
+		// that had a quickView open
+		this.restoreQuickViewOnNavigation();
 	}
 };
 </script>
@@ -114,9 +128,8 @@ module.exports = exports = {
 	&__desktop {
 		border: solid 1px #c8CCd1;
 		right: 0px;
-		max-width: 30em;
+		width: 30em;
 		display: inline-block;
-		margin-left: 8%;
 	}
 
 	&__mobile {

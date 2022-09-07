@@ -45,7 +45,7 @@
 				"resources/components/App.vue",
 				"resources/components/QuickView.vue",
 				"resources/components/LeadImage.vue",
-				"resources/components/LeadText.vue",
+				"resources/components/QuickViewSnippet.vue",
 				"resources/store/index.js",
 				"resources/store/state.js",
 				"resources/store/mutations.js",
@@ -72,7 +72,8 @@
 			"messages": [
 				"quickview-close",
 				"quickview-previous",
-				"quickview-next"
+				"quickview-next",
+				"quickview-snippet-gotofullarticle"
 			]
 		}
 	},

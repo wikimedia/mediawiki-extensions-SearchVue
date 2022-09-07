@@ -30,7 +30,10 @@
 		<header>
 			<lead-image></lead-image>
 		</header>
-		<lead-text></lead-text>
+		<quick-view-snippet
+			:text="currentResult.text"
+			:title="currentResult.prefixedText"
+		></quick-view-snippet>
 	</div>
 </template>
 
@@ -41,8 +44,9 @@
  * Placeholder
  */
 const LeadImage = require( './LeadImage.vue' ),
-	LeadText = require( './LeadText.vue' ),
+	QuickViewSnippet = require( './QuickViewSnippet.vue' ),
 	mapActions = require( 'vuex' ).mapActions,
+	mapGetters = require( 'vuex' ).mapGetters,
 	mapState = require( 'vuex' ).mapState;
 
 // @vue/component
@@ -50,7 +54,7 @@ module.exports = exports = {
 	name: 'QuickView',
 	components: {
 		'lead-image': LeadImage,
-		'lead-text': LeadText
+		'quick-view-snippet': QuickViewSnippet
 	},
 	data: function () {
 		return {};
@@ -58,6 +62,9 @@ module.exports = exports = {
 	computed: $.extend( {},
 		mapState( [
 			'isMobile'
+		] ),
+		mapGetters( [
+			'currentResult'
 		] )
 	),
 	methods: $.extend( {},
