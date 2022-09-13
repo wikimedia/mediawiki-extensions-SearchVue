@@ -27,5 +27,14 @@ module.exports = {
 	 */
 	SET_SECTIONS: ( state, sections ) => {
 		state.sections = sections || [];
+	},
+	/**
+	 * Set the thumbnail object of the selected item
+	 *
+	 * @param {Object} state
+	 * @param {Object} thumbnail
+	 */
+	SET_THUMBNAIL: ( state, thumbnail ) => {
+		state.thumbnail = thumbnail || null;
 	}
 };

@@ -46,7 +46,7 @@ const retriveArticleSections = ( context, title ) => {
 	api
 		.get( options )
 		.done( ( result ) => {
-			if ( !result || !result.parse || result.parse.sections.length === 0 ) {
+			if ( !result || !result.parse || !result.parse.sections || result.parse.sections.length === 0 ) {
 				return;
 			}
 
@@ -55,6 +55,37 @@ const retriveArticleSections = ( context, title ) => {
 		} )
 		.catch( () => {
 			context.commit( 'SET_SECTIONS' );
+		} );
+};
+
+const retriveArticleThumbnail = ( context, title ) => {
+
+	const api = new mw.Api();
+	const options = {
+		action: 'query',
+		format: 'json',
+		titles: title,
+		prop: 'pageimages',
+		formatversion: 2,
+		pithumbsize: 420,
+		piprop: 'thumbnail'
+	};
+
+	api
+		.get( options )
+		.done( ( result ) => {
+			if ( !result || !result.query || !result.query.pages || result.query.pages.length === 0 ) {
+				return;
+			}
+
+			// we select the first result that is the most relevant to our search term
+			const thumbnail = result.query.pages[ 0 ].thumbnail;
+			thumbnail.altText = result.query.pages[ 0 ].pageimage;
+
+			context.commit( 'SET_THUMBNAIL', thumbnail );
+		} )
+		.catch( () => {
+			context.commit( 'SET_THUMBNAIL' );
 		} );
 };
 
@@ -79,6 +110,7 @@ module.exports = {
 
 		if ( context.state.title !== title ) {
 			retriveArticleSections( context, title );
+			retriveArticleThumbnail( context, title );
 			context.commit( 'SET_TITLE', title );
 			pushTitleToHistoryState( title );
 
@@ -99,6 +131,7 @@ module.exports = {
 		context.commit( 'SET_TITLE', null );
 		context.commit( 'SET_SELECTED_INDEX', -1 );
 		context.commit( 'SET_SECTIONS' );
+		context.commit( 'SET_THUMBNAIL' );
 		removeQuickViewFromHistoryState();
 	},
 	/**

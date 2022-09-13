@@ -1,6 +1,6 @@
 <template>
 	<!-- eslint-disable -->
-	<div @click.stop>
+	<div class="mw-search-quick-view" @click.stop>
 		<nav v-if="isMobile" class="mw-search-quick-view__mobile_nav">
 			<button @click="closeQuickView">
 				<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
@@ -28,7 +28,11 @@
 			</button>
 		</nav>
 		<header>
-			<lead-image></lead-image>
+			<quick-view-image
+				v-if="currentResult.thumbnail"
+				v-bind="currentResult.thumbnail"
+				@close="closeQuickView"
+			></quick-view-image>
 		</header>
 		<quick-view-snippet
 			:text="textWithEllipsis"
@@ -48,7 +52,7 @@
  *
  * Placeholder
  */
-const LeadImage = require( './LeadImage.vue' ),
+const QuickViewImage = require( './QuickViewImage.vue' ),
 	QuickViewSnippet = require( './QuickViewSnippet.vue' ),
 	QuickViewSections = require( './QuickViewSections.vue' ),
 	mapActions = require( 'vuex' ).mapActions,
@@ -59,7 +63,7 @@ const LeadImage = require( './LeadImage.vue' ),
 module.exports = exports = {
 	name: 'QuickView',
 	components: {
-		'lead-image': LeadImage,
+		'quick-view-image': QuickViewImage,
 		'quick-view-snippet': QuickViewSnippet,
 		'quick-view-sections': QuickViewSections
 	},
@@ -92,19 +96,25 @@ module.exports = exports = {
 </script>
 
 <style lang="less">
-.mw-search-quick-view__mobile_nav {
-	display: flex;
-	justify-content: flex-end;
-	height: 48px;
-	box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1), inset 0px -1px 0px #C8CCD1;
+.mw-search-quick-view {
+	&__mobile_nav {
+		display: flex;
+		justify-content: flex-end;
+		height: 48px;
+		box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1), inset 0px -1px 0px #C8CCD1;
 
-	button {
-		padding: 14px;
+		button {
+			padding: 14px;
+		}
+
+		button:first-child {
+			// This is required to display the first button on the far left
+			margin-right: auto;
+		}
 	}
 
-	button:first-child {
-		// This is required to display the first button on the far left
-		margin-right: auto;
+	header {
+		padding-bottom: 24px;
 	}
 }
 </style>

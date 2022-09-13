@@ -66,6 +66,32 @@ describe( 'Actions', () => {
 				expect( actions.commit ).toHaveBeenCalledWith( 'SET_SECTIONS', mockSections );
 
 			} );
+			it( 'retrieves article thumbnail', () => {
+				const mockThumbnail = {
+					source: 'https://fakeImageUrl',
+					width: 400,
+					height: 700
+				};
+
+				const dummyResponse = {
+					query: {
+						pages: [
+							{
+								thumbnail: mockThumbnail
+							}
+						]
+					}
+				};
+				global.mw.Api.prototype.get.mockReturnValueOnce( $.Deferred().resolve( {} ).promise() );
+				// The Thumbnail request is the second one, so we need to mock it twice.
+				global.mw.Api.prototype.get.mockReturnValueOnce( $.Deferred().resolve( dummyResponse ).promise() );
+				const title = 'dummy';
+				actions.handleTitleChange( context, title );
+
+				expect( actions.commit ).toHaveBeenCalled();
+				expect( actions.commit ).toHaveBeenCalledWith( 'SET_THUMBNAIL', mockThumbnail );
+
+			} );
 			it( 'and current title had no value, update the title', () => {
 				const title = 'dummy';
 				actions.handleTitleChange( context, title );
@@ -215,6 +241,7 @@ describe( 'Actions', () => {
 			expect( actions.commit ).toHaveBeenCalledWith( 'SET_TITLE', null );
 
 		} );
+
 		it( 'Set selected index to -1', () => {
 			const title = 'dummy';
 			context.state.title = title;
@@ -231,6 +258,16 @@ describe( 'Actions', () => {
 
 			expect( actions.commit ).toHaveBeenCalled();
 			expect( actions.commit ).toHaveBeenCalledWith( 'SET_SECTIONS' );
+
+		} );
+
+		it( 'Set thumbnail to null', () => {
+			const title = 'dummy';
+			context.state.title = title;
+			actions.closeQuickView( context, title );
+
+			expect( actions.commit ).toHaveBeenCalled();
+			expect( actions.commit ).toHaveBeenCalledWith( 'SET_THUMBNAIL' );
 
 		} );
 

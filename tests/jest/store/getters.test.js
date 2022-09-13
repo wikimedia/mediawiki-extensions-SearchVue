@@ -39,6 +39,11 @@ describe( 'Getters', () => {
 				dummyState.sections = [
 					'myDummySection'
 				];
+				dummyState.thumbnail = {
+					source: 'https://picsum.photos/400/700',
+					width: 400,
+					height: 700
+				};
 			} );
 			it( 'includes the selected results', () => {
 				const result = getters.currentResult( dummyState );
@@ -52,6 +57,13 @@ describe( 'Getters', () => {
 
 				expect( result ).toEqual(
 					expect.objectContaining( { sections: dummyState.sections } )
+				);
+			} );
+			it( 'includes thumbnail from state', () => {
+				const result = getters.currentResult( dummyState );
+
+				expect( result ).toEqual(
+					expect.objectContaining( { thumbnail: dummyState.thumbnail } )
 				);
 			} );
 		} );
