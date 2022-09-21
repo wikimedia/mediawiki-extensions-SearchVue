@@ -54,7 +54,6 @@ module.exports = exports = {
 	&__loading {
 		background-color: #F8F9FA;
 		min-width: 120px;
-		height: 100px;
 
 		&::after {
 			position: absolute;
@@ -62,7 +61,9 @@ module.exports = exports = {
 			width: 20px;
 			height: 20px;
 			top: calc( 50% - 10px );
-			left: calc( 50% - 10px );
+			left:0;
+			right:0;
+			margin: 0 auto;
 		}
 		img {
 			visibility: hidden;

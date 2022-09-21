@@ -1,7 +1,10 @@
 <template>
 	<div
 		class="QuickViewImage"
-		:class="{ 'QuickViewImage--portrait': isPortrait }"
+		:class="{
+			'QuickViewImage--portrait': isPortrait,
+			'QuickViewImage--fixedHeight': fixedHeight
+		}"
 	>
 		<button @click="$emit( 'close' )">
 			<svg
@@ -28,10 +31,11 @@
 				/>
 			</svg>
 		</button>
-		<img
+		<image-with-placeholder
 			:src="source"
 			:alt="altText"
-		>
+			@load="onLoad"
+		></image-with-placeholder>
 	</div>
 </template>
 
@@ -41,13 +45,17 @@
  *
  * Placeholder
  */
+const ImageWithPlaceholder = require( '../generic/ImageWithPlaceholder.vue' );
 
 // @vue/component
 module.exports = exports = {
 	name: 'QuickViewImage',
+	components: {
+		'image-with-placeholder': ImageWithPlaceholder
+	},
 	props: {
 		source: {
-			type: Object,
+			type: String,
 			required: true
 		},
 		height: {
@@ -64,9 +72,19 @@ module.exports = exports = {
 			default: null
 		}
 	},
+	data() {
+		return {
+			fixedHeight: true
+		};
+	},
 	computed: {
 		isPortrait() {
 			return ( this.height > this.width );
+		}
+	},
+	methods: {
+		onLoad() {
+			this.fixedHeight = false;
 		}
 	}
 };
@@ -89,6 +107,13 @@ module.exports = exports = {
 	img {
 		width: 100%;
 		height: auto;
+	}
+
+	&--fixedHeight {
+		height: 268px;
+		img {
+			height: 268px;
+		}
 	}
 
 	button {
