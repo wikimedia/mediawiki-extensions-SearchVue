@@ -31,7 +31,7 @@
 			<lead-image></lead-image>
 		</header>
 		<quick-view-snippet
-			:text="currentResult.text"
+			:text="textWithEllipsis"
 			:title="currentResult.prefixedText"
 		></quick-view-snippet>
 	</div>
@@ -65,7 +65,12 @@ module.exports = exports = {
 		] ),
 		mapGetters( [
 			'currentResult'
-		] )
+		] ),
+		{
+			textWithEllipsis() {
+				return this.currentResult.text + this.$i18n( 'ellipsis' ).text();
+			}
+		}
 	),
 	methods: $.extend( {},
 		mapActions( [

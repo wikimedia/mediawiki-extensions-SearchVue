@@ -72,7 +72,8 @@
 				"searchvue-close",
 				"searchvue-previous",
 				"searchvue-next",
-				"searchvue-snippet-gotofullpage"
+				"searchvue-snippet-gotofullpage",
+				"ellipsis"
 			]
 		}
 	},
