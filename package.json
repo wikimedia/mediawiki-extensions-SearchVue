@@ -19,7 +19,7 @@
 		"grunt-banana-checker": "0.9.0",
 		"grunt-eslint": "23.0.0",
 		"grunt-stylelint": "0.16.0",
-		"jquery": "^3.6.0",
+		"jquery": "3.6.1",
 		"stylelint-config-wikimedia": "0.11.0",
 		"vue": "3.2.23",
 		"vuex": "4.0.2",
