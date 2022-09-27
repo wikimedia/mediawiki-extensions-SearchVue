@@ -1,6 +1,6 @@
 <template>
 	<div class="quickViewSections">
-		<h3>Sections in the article</h3>
+		<h3>{{ $i18n( 'searchvue-article-sections-heading' ).text() }}</h3>
 		<ul
 			ref="sections-container"
 			class="quickViewSections__list"
@@ -22,7 +22,7 @@
 			v-if="hiddenSectionsLength > 1"
 			:href="firstHiddenSectionsUrl"
 		>
-			+ {{ hiddenSectionsLength }} more sections
+			{{ $i18n( 'searchvue-more-sections', hiddenSectionsLength ).text() }}
 		</a>
 	</div>
 </template>

@@ -13,5 +13,7 @@
 	"searchvue-help": "Preview the contents of the page and related pages.",
 	"searchvue-commons-viewmore": "View more",
 	"searchvue-commons-footnote": "In Wikimedia Commons",
-	"searchvue-commons-heading": "Related images"
+	"searchvue-commons-heading": "Related images",
+	"searchvue-article-sections-heading": "Sections in the article",
+	"searchvue-more-sections": "+ $1 more {{PLURAL:$1|section|sections}}"
 }

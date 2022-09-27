@@ -79,6 +79,8 @@
 				"searchvue-commons-viewmore",
 				"searchvue-commons-footnote",
 				"searchvue-commons-heading",
+				"searchvue-article-sections-heading",
+				"searchvue-more-sections",
 				"ellipsis"
 			]
 		}
