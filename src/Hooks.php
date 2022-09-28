@@ -109,8 +109,8 @@ class Hooks implements
 		$prefs['searchpreview'] = [
 			'type' => 'toggle',
 			'section' => 'searchoptions/searchmisc',
-			'label-message' => 'searchpreview-label',
-			'help-message' => 'searchpreview-help',
+			'label-message' => 'searchvue-label',
+			'help-message' => 'searchvue-help',
 		];
 	}
 }

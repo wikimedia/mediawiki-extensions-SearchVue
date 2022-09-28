@@ -69,10 +69,10 @@
 				"desktop"
 			],
 			"messages": [
-				"quickview-close",
-				"quickview-previous",
-				"quickview-next",
-				"quickview-snippet-gotofullpage"
+				"searchvue-close",
+				"searchvue-previous",
+				"searchvue-next",
+				"searchvue-snippet-gotofullpage"
 			]
 		}
 	},
