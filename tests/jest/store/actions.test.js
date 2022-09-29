@@ -1,4 +1,6 @@
-const initialState = require( '../fixtures/initialVuexState.js' );
+const initialState = require( '../fixtures/initialVuexState.js' ),
+	when = require( 'jest-when' ).when,
+	commonsFakeResponse = require( '../fixtures/commonsApiResponse.js' );
 
 require( '../mocks/history.js' );
 
@@ -22,6 +24,13 @@ beforeEach( () => {
 	actions.state = context.state;
 	actions.commit = context.commit;
 	actions.dispatch = context.dispatch;
+
+	when( global.mw.config.get )
+		.calledWith( 'wgExternalEntityCommonBaseUri' )
+		.mockReturnValue( 'https://FakeExternalEnbtity.fake' );
+	when( global.mw.config.get )
+		.calledWith( 'wgQuickViewSearchFilterForQID' )
+		.mockReturnValue( 'DummySearchFilter' );
 } );
 
 afterEach( () => {
@@ -91,6 +100,110 @@ describe( 'Actions', () => {
 				expect( actions.commit ).toHaveBeenCalled();
 				expect( actions.commit ).toHaveBeenCalledWith( 'SET_THUMBNAIL', mockThumbnail );
 
+			} );
+			describe( 'when a QID is avilable in API response', () => {
+				const fakeQID = 'Q146';
+				const dummyReponseWithQid = {
+					query: {
+						pages: [
+							{
+								pageprops: {
+									// eslint-disable-next-line camelcase
+									wikibase_item: fakeQID
+								}
+							}
+						]
+					}
+				};
+				beforeEach( () => {
+					global.mw.Api.prototype.get.mockReturnValueOnce( $.Deferred().resolve( {} ).promise() );
+					global.mw.Api.prototype.get.mockReturnValueOnce( $.Deferred().resolve( dummyReponseWithQid ).promise() );
+					global.mw.ForeignApi.prototype.get.mockReturnValue( $.Deferred().resolve( commonsFakeResponse ).promise() );
+				} );
+				it( 'it does not trigger a commons request when wgExternalEntityCommonBaseUri is not set', () => {
+
+					when( global.mw.config.get )
+						.calledWith( 'wgExternalEntityCommonBaseUri' )
+						.mockReturnValueOnce( null );
+					const title = 'dummy';
+					actions.handleTitleChange( context, title );
+
+					expect( global.mw.ForeignApi.prototype.get ).not.toHaveBeenCalled();
+
+				} );
+				it( 'it does not trigger a commons request when wgQuickViewSearchFilterForQID is not set', () => {
+
+					when( global.mw.config.get )
+						.calledWith( 'wgQuickViewSearchFilterForQID' )
+						.mockReturnValueOnce( null );
+					const title = 'dummy';
+					actions.handleTitleChange( context, title );
+
+					expect( global.mw.ForeignApi.prototype.get ).not.toHaveBeenCalled();
+
+				} );
+				it( 'it trigger a commons request with the QID', () => {
+
+					const title = 'dummy';
+					actions.handleTitleChange( context, title );
+
+					expect( global.mw.ForeignApi.prototype.get ).toHaveBeenCalled();
+					expect( global.mw.ForeignApi.prototype.get.mock.calls[ 0 ][ 0 ].gsrsearch )
+						.toContain( fakeQID );
+
+				} );
+				it( 'it trigger a commons request with the configured wgQuickViewSearchFilterForQID', () => {
+
+					const title = 'dummy';
+					actions.handleTitleChange( context, title );
+
+					expect( global.mw.ForeignApi.prototype.get ).toHaveBeenCalled();
+					expect( global.mw.ForeignApi.prototype.get.mock.calls[ 0 ][ 0 ].gsrsearch )
+						.toContain( 'DummySearchFilter' ); // This is defined at the top of the file
+
+				} );
+				it( 'when commons API response has no pages, it does not update the store', () => {
+					const responseWithNoPages = {
+						query: {
+							pages: []
+						}
+					};
+					global.mw.ForeignApi.prototype.get.mockReturnValue( $.Deferred().resolve( responseWithNoPages ).promise() );
+
+					const title = 'dummy';
+					actions.handleTitleChange( context, title );
+
+					expect( actions.commit ).toHaveBeenCalledTimes( 2 );
+
+				} );
+				describe( 'when commons API response includes required results', () => {
+					it( 'it sorts the images by their INDEX', () => {
+						const title = 'dummy';
+
+						actions.handleTitleChange( context, title );
+						expect( actions.commit ).toHaveBeenCalledTimes( 3 );
+						expect( actions.commit.mock.calls[ 0 ][ 1 ].images[ 0 ].index ).toBe( 1 );
+						expect( actions.commit.mock.calls[ 0 ][ 1 ].images[ 1 ].index ).toBe( 2 );
+					} );
+					it( 'it define if there are further results', () => {
+						const title = 'dummy';
+
+						actions.handleTitleChange( context, title );
+
+						expect( actions.commit ).toHaveBeenCalledTimes( 3 );
+						expect( actions.commit.mock.calls[ 0 ][ 1 ].hasMoreImages ).toBe( true );
+					} );
+					it( 'it generates a search link', () => {
+						const title = 'dummy';
+
+						actions.handleTitleChange( context, title );
+
+						expect( actions.commit ).toHaveBeenCalledTimes( 3 );
+						expect( actions.commit.mock.calls[ 0 ][ 1 ].searchLink ).toBeTruthy();
+						expect( actions.commit.mock.calls[ 0 ][ 1 ].searchLink.query.search ).toBe( 'DummySearchFilter=Q146' );
+					} );
+
+				} );
 			} );
 			it( 'and current title had no value, update the title', () => {
 				const title = 'dummy';

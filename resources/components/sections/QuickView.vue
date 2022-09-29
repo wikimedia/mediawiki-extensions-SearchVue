@@ -1,6 +1,6 @@
 <template>
 	<!-- eslint-disable -->
-	<div class="mw-search-quick-view" @click.stop>
+	<div @click.stop>
 		<nav v-if="isMobile" class="mw-search-quick-view__mobile_nav">
 			<button @click="closeQuickView">
 				<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
@@ -39,10 +39,14 @@
 			:title="currentResult.prefixedText"
 		></quick-view-snippet>
 		<quick-view-sections
-			v-if="sectionsExist"
+			v-if="hasSections"
 			:title="currentResult.prefixedText"
 			:sections="currentResult.sections"
 		></quick-view-sections>
+		<quick-view-commons
+			v-if="hasCommonsImages"
+			v-bind="currentResult.commons"
+		></quick-view-commons>
 	</div>
 </template>
 
@@ -55,6 +59,7 @@
 const QuickViewImage = require( './QuickViewImage.vue' ),
 	QuickViewSnippet = require( './QuickViewSnippet.vue' ),
 	QuickViewSections = require( './QuickViewSections.vue' ),
+	QuickViewCommons = require( './QuickViewCommons.vue' ),
 	mapActions = require( 'vuex' ).mapActions,
 	mapGetters = require( 'vuex' ).mapGetters,
 	mapState = require( 'vuex' ).mapState;
@@ -65,7 +70,8 @@ module.exports = exports = {
 	components: {
 		'quick-view-image': QuickViewImage,
 		'quick-view-snippet': QuickViewSnippet,
-		'quick-view-sections': QuickViewSections
+		'quick-view-sections': QuickViewSections,
+		'quick-view-commons': QuickViewCommons
 	},
 	data: function () {
 		return {};
@@ -78,8 +84,13 @@ module.exports = exports = {
 			'currentResult'
 		] ),
 		{
-			sectionsExist() {
-				return this.currentResult.sections && this.currentResult.sections.length !== 0;
+			hasCommonsImages() {
+				return this.currentResult.commons &&
+					this.currentResult.commons.images &&
+					this.currentResult.commons.images.length > 0;
+			},
+			hasSections() {
+				return this.currentResult.sections && this.currentResult.sections.length > 0;
 			},
 			textWithEllipsis() {
 				return this.currentResult.text + this.$i18n( 'ellipsis' ).text();

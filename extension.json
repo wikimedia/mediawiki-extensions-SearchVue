@@ -43,10 +43,12 @@
 			"packageFiles": [
 				"resources/init.js",
 				"resources/components/App.vue",
-				"resources/components/QuickView.vue",
-				"resources/components/QuickViewImage.vue",
-				"resources/components/QuickViewSnippet.vue",
-				"resources/components/QuickViewSections.vue",
+				"resources/components/generic/ImageWithPlaceholder.vue",
+				"resources/components/sections/QuickView.vue",
+				"resources/components/sections/QuickViewImage.vue",
+				"resources/components/sections/QuickViewSnippet.vue",
+				"resources/components/sections/QuickViewSections.vue",
+				"resources/components/sections/QuickViewCommons.vue",
 				"resources/store/index.js",
 				"resources/store/state.js",
 				"resources/store/mutations.js",
@@ -74,6 +76,9 @@
 				"searchvue-previous",
 				"searchvue-next",
 				"searchvue-snippet-gotofullpage",
+				"searchvue-commons-viewmore",
+				"searchvue-commons-footnote",
+				"searchvue-commons-heading",
 				"ellipsis"
 			]
 		}
@@ -81,5 +86,15 @@
 	"DefaultUserOptions": {
 		"searchpreview": true
 	},
-	"manifest_version": 2
+	"manifest_version": 2,
+	"config": {
+		"QuickViewExternalEntityCommonBaseUri": {
+			"description": "Url to API of Common repository used to fetch commons images for the selected page. If not set, the 'related images' section will not appear.",
+			"value": ""
+		},
+		"QuickViewSearchFilterForQID": {
+			"description": "The search parameter used to link the current page with a QID to ensure that the search result are relevant to your search.",
+			"value": ""
+		}
+	}
 }

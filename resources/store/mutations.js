@@ -32,9 +32,22 @@ module.exports = {
 	 * Set the thumbnail object of the selected item
 	 *
 	 * @param {Object} state
-	 * @param {Object} thumbnail
+	 * @param {Object|undefined} thumbnail
 	 */
 	SET_THUMBNAIL: ( state, thumbnail ) => {
 		state.thumbnail = thumbnail || null;
+	},
+	/**
+	 * Set the additional images retrieved from the commons API
+	 *
+	 * @param {Object} state
+	 * @param {Object|undefined} commonsInfo
+	 * @param {Array} commonsInfo.images
+	 * @param {boolean} commonsInfo.continue
+	 */
+	SET_COMMONS: ( state, commonsInfo ) => {
+		state.commons.images = !commonsInfo ? [] : commonsInfo.images;
+		state.commons.hasMoreImages = commonsInfo && commonsInfo.hasMoreImages;
+		state.commons.searchLink = !commonsInfo ? '' : commonsInfo.searchLink;
 	}
 };

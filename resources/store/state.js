@@ -6,5 +6,10 @@ module.exports = {
 	isMobile: mw.config.get( 'skin' ) === 'minerva',
 	results: mw.config.values.wgSpecialSearchTextMatches || [],
 	sections: [],
-	thumbnail: null
+	thumbnail: null,
+	commons: {
+		images: [],
+		hasMoreImages: false,
+		searchLink: null
+	}
 };
