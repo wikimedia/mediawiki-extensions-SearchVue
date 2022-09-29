@@ -76,12 +76,13 @@
 				"searchvue-close",
 				"searchvue-previous",
 				"searchvue-next",
-				"searchvue-snippet-gotofullpage",
 				"searchvue-commons-viewmore",
 				"searchvue-commons-footnote",
 				"searchvue-commons-heading",
 				"searchvue-article-sections-heading",
 				"searchvue-more-sections",
+				"searchvue-snippet-gotofullpage",
+				"searchvue-snippet-gotofullpage-ns0",
 				"ellipsis"
 			]
 		}
