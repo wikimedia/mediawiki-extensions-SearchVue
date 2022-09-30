@@ -8,7 +8,7 @@
 
 <script>
 /**
- * @file LeadText.vue
+ * @file QuickViewSnippet.vue
  *
  * Placeholder
  */
@@ -38,6 +38,6 @@ module.exports = exports = {
 <style>
 .quickViewSnippet{
 	width: 365px;
-	margin: 0 auto 32px;
+	margin: 0 auto 20px;
 }
 </style>

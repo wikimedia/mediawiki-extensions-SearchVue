@@ -44,6 +44,11 @@ describe( 'Getters', () => {
 					width: 400,
 					height: 700
 				};
+				dummyState.commons = {
+					images: [ 'myDummyImage' ],
+					hasMoreImages: true,
+					searchLink: 'dummyLink'
+				};
 			} );
 			it( 'includes the selected results', () => {
 				const result = getters.currentResult( dummyState );
@@ -64,6 +69,13 @@ describe( 'Getters', () => {
 
 				expect( result ).toEqual(
 					expect.objectContaining( { thumbnail: dummyState.thumbnail } )
+				);
+			} );
+			it( 'includes commons object from state', () => {
+				const result = getters.currentResult( dummyState );
+
+				expect( result ).toEqual(
+					expect.objectContaining( { commons: dummyState.commons } )
 				);
 			} );
 		} );

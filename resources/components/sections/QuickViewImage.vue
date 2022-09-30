@@ -37,7 +37,7 @@
 
 <script>
 /**
- * @file LeadImage.vue
+ * @file QuickViewImage.vue
  *
  * Placeholder
  */

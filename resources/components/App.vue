@@ -19,7 +19,7 @@
  *
  * Placeholder
  */
-const QuickView = require( './QuickView.vue' ),
+const QuickView = require( './sections/QuickView.vue' ),
 	mapActions = require( 'vuex' ).mapActions,
 	mapState = require( 'vuex' ).mapState,
 	mapGetters = require( 'vuex' ).mapGetters;

@@ -8,6 +8,13 @@ Api.prototype.getToken = jest.fn().mockResolvedValue( {} );
 Api.prototype.postWithToken = jest.fn().mockResolvedValue( {} );
 Api.prototype.saveOption = jest.fn();
 
+function ForeignApi() {}
+ForeignApi.prototype.get = jest.fn().mockReturnValue( $.Deferred().resolve().promise() );
+ForeignApi.prototype.post = jest.fn().mockResolvedValue( {} );
+ForeignApi.prototype.getToken = jest.fn().mockResolvedValue( {} );
+ForeignApi.prototype.postWithToken = jest.fn().mockResolvedValue( {} );
+ForeignApi.prototype.saveOption = jest.fn();
+
 function Title() {}
 Title.prototype.getMainText = jest.fn().mockReturnValue( '' );
 Title.prototype.getName = jest.fn().mockReturnValue( '' );
@@ -25,6 +32,7 @@ Title.newFromText = jest.fn().mockReturnValue( {
 
 const mw = {
 	Api: Api,
+	ForeignApi: ForeignApi,
 	config: {
 		get: jest.fn()
 	},

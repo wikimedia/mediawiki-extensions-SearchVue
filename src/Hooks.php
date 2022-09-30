@@ -32,13 +32,19 @@ class Hooks implements
 		}
 
 		$services = MediaWikiServices::getInstance();
-
 		$userConfig = $services->getUserOptionsLookup();
 		$searchPreviewEnabled = $userConfig->getBoolOption( $special->getUser(), 'searchpreview' );
 
 		if ( $searchPreviewEnabled ) {
 			$special->getOutput()->addModules( [
 				'searchVue'
+			] );
+
+			$externalEntityCommonBaseUri = $services->getMainConfig()->get( 'QuickViewExternalEntityCommonBaseUri' );
+			$searchFilterForQID = $services->getMainConfig()->get( 'QuickViewSearchFilterForQID' );
+			$special->getOutput()->addJsConfigVars( [
+				'wgQuickViewExternalEntityCommonBaseUri' => $externalEntityCommonBaseUri,
+				'wgQuickViewSearchFilterForQID' => $searchFilterForQID
 			] );
 		}
 	}
