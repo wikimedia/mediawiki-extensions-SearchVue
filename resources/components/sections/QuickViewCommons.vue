@@ -9,11 +9,13 @@
 				:key="image.index"
 				class="loading"
 			>
-				<image-with-placeholder
-					:src="image.imageinfo[ 0 ].thumburl"
-					:alt="image.title"
-					@load="onImgLoad"
-				></image-with-placeholder>
+				<a :href="image.imageinfo[ 0 ].descriptionurl">
+					<image-with-placeholder
+						:src="image.imageinfo[ 0 ].thumburl"
+						:alt="image.title"
+						@load="onImgLoad"
+					></image-with-placeholder>
+				</a>
 			</li>
 		</ul>
 		<a
@@ -23,7 +25,9 @@
 			{{ $i18n( 'searchvue-commons-viewmore' ).text() }}
 		</a>
 		<p class="quickViewCommons__footNote">
-			{{ $i18n( 'searchvue-commons-footnote' ).text() }}
+			<a :href="repoLink">
+				{{ $i18n( 'searchvue-commons-footnote' ).text() }}
+			</a>
 		</p>
 	</div>
 </template>
@@ -58,6 +62,7 @@ module.exports = exports = {
 	},
 	data() {
 		return {
+			repoLink: mw.config.get( 'wgQuickViewMediaRepositoryUri' ),
 			numberOfImagesLoaded: 0,
 			hasHiddenImages: false
 		};
@@ -132,8 +137,14 @@ module.exports = exports = {
 			height: 100px;
 			list-style: none;
 			margin-bottom: 0; // required to override wiki styles
+
 			&:last-child {
 				flex: 0;
+			}
+
+			a {
+				display: flex;
+				flex: 1;
 			}
 		}
 	}
@@ -143,6 +154,10 @@ module.exports = exports = {
 		padding-left: 23px;
 		background-repeat: no-repeat;
 		background-position-y: center;
+
+		a {
+			color: inherit;
+		}
 	}
 }
 </style>
