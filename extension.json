@@ -88,8 +88,12 @@
 	},
 	"manifest_version": 2,
 	"config": {
-		"QuickViewExternalEntityCommonBaseUri": {
-			"description": "Url to API of Common repository used to fetch commons images for the selected page. If not set, the 'related images' section will not appear.",
+		"QuickViewMediaRepositoryApiBaseUri": {
+			"description": "Url to API of Commons repository used to fetch images for the selected page. If not set, the 'related images' section will not appear.",
+			"value": ""
+		},
+		"QuickViewMediaRepositorySearchUri": {
+			"description": "Url to Commons search page.",
 			"value": ""
 		},
 		"QuickViewSearchFilterForQID": {

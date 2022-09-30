@@ -40,10 +40,12 @@ class Hooks implements
 				'searchVue'
 			] );
 
-			$externalEntityCommonBaseUri = $services->getMainConfig()->get( 'QuickViewExternalEntityCommonBaseUri' );
+			$repositoryApiBaseUri = $services->getMainConfig()->get( 'QuickViewMediaRepositoryApiBaseUri' );
+			$repositorySearchUri = $services->getMainConfig()->get( 'QuickViewMediaRepositorySearchUri' );
 			$searchFilterForQID = $services->getMainConfig()->get( 'QuickViewSearchFilterForQID' );
 			$special->getOutput()->addJsConfigVars( [
-				'wgQuickViewExternalEntityCommonBaseUri' => $externalEntityCommonBaseUri,
+				'wgQuickViewMediaRepositoryApiBaseUri' => $repositoryApiBaseUri,
+				'wgQuickViewMediaRepositorySearchUri' => $repositorySearchUri,
 				'wgQuickViewSearchFilterForQID' => $searchFilterForQID
 			] );
 		}

@@ -119,24 +119,27 @@ const sortImagesArray = ( result ) => {
 };
 
 /**
- * Generate an URI that can be used to replicate the API request for the commons images
+ * @param {String} QID
+ * @return {String}
+ */
+const generateSearchTerm = ( QID ) => {
+	return mw.config.get( 'wgQuickViewSearchFilterForQID' ).replace( /%s/g, QID );
+};
+
+/**
+ * Generate a URI that can be used to replicate the API request for the commons images
  *
  * @param {string} QID
  * @return {Object}
  */
 const generateSearchLink = ( QID ) => {
-	const searchUri = new mw.Uri( mw.config.get( 'wgQuickViewExternalEntityCommonBaseUri' ) + '/' );
-	searchUri.query = {
-		title: 'Special:MediaSearch',
-		search: mw.config.get( 'wgQuickViewSearchFilterForQID' ) + '=' + QID
-	};
-
-	return searchUri;
+	const searchTerm = encodeURIComponent( generateSearchTerm( QID ) );
+	return new mw.Uri( mw.config.get( 'wgQuickViewMediaRepositorySearchUri' ).replace( /%s/g, searchTerm ) );
 };
 
 /**
  * Retrieved information from the Commons wiki using the foreignApi.
- * This method require two configuration settings to be set 'wgQuickViewExternalEntityCommonBaseUri' and
+ * This method require two configuration settings to be set 'wgQuickViewMediaRepositoryApiBaseUri' and
  * 'wgQuickViewSearchFilterForQID'.
  *
  * @param {Object} page
@@ -150,17 +153,16 @@ const setCommonsInfo = ( page, context ) => {
 	}
 
 	if (
-		!mw.config.get( 'wgQuickViewExternalEntityCommonBaseUri' ) ||
+		!mw.config.get( 'wgQuickViewMediaRepositoryApiBaseUri' ) ||
 		!mw.config.get( 'wgQuickViewSearchFilterForQID' )
 	) {
 		return;
 	}
 
-	const api = new mw.ForeignApi( mw.config.get( 'wgQuickViewExternalEntityCommonBaseUri' ) );
+	const api = new mw.ForeignApi( mw.config.get( 'wgQuickViewMediaRepositoryApiBaseUri' ) );
 
 	let gsrsearch = 'filetype:bitmap|drawing';
-	gsrsearch += ' ' + mw.config.get( 'wgQuickViewSearchFilterForQID' ).replace( /%s/g, QID );
-	gsrsearch += ' ' + mw.config.get( 'wgQuickViewSearchFilterForQID' ).replace( /%s/g, QID );
+	gsrsearch += ' ' + generateSearchTerm( QID );
 
 	// filter out images with resolution 0
 	gsrsearch += ' -fileres:0';
