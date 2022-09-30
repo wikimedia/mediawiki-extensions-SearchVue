@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Bjankuloski06"
+		]
+	},
+	"searchvue-desc": "Vue.js има додатоци и подобрувања на Special:Search",
+	"searchvue-close": "Затвори",
+	"searchvue-next": "Следно",
+	"searchvue-previous": "Претходно",
+	"searchvue-snippet-gotofullpage": "Оди на целата страница",
+	"searchvue-label": "Овозможи преглед на исходните ставки од пребарување",
+	"searchvue-help": "Преглед на содржините на страницата и поврзаните страници."
+}

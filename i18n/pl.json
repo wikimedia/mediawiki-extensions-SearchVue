@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Rail"
+		]
+	},
+	"searchvue-desc": "Dodatkowe i usprawnione funkcje Vue.js w Specjalna:Szukaj",
+	"searchvue-close": "Zamknij",
+	"searchvue-next": "Następny",
+	"searchvue-previous": "Poprzedni",
+	"searchvue-snippet-gotofullpage": "Przejdź do pełnej strony",
+	"searchvue-label": "Włącz podgląd wyników wyszukiwania",
+	"searchvue-help": "Wyświetl podgląd zawartości strony i powiązanych stron."
+}

@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Verdy p"
+		]
+	},
+	"searchvue-desc": "Vue.js propose des ajouts et des améliorations à Special:Search.",
+	"searchvue-close": "Fermer",
+	"searchvue-next": "Suivant",
+	"searchvue-previous": "Précédent",
+	"searchvue-snippet-gotofullpage": "Aller à la page complète",
+	"searchvue-label": "Activer l’aperçu des résultats de recherche",
+	"searchvue-help": "Prévisualiser le contenu de la page et des pages associées."
+}
