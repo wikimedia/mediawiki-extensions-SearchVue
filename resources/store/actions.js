@@ -34,28 +34,21 @@ const removeQuickViewFromHistoryState = () => {
 	window.history.pushState( mwUri.query, null, queryString );
 };
 
-const retrieveArticleSections = ( context, title ) => {
-	const api = new mw.Api();
-	const options = {
-		action: 'parse',
-		format: 'json',
-		page: title,
-		prop: 'sections'
-	};
+const setArticleSections = ( page, context ) => {
+	if ( !page || !page.cirrusdoc || page.cirrusdoc.length === 0 ) {
+		context.commit( 'SET_SECTIONS' );
+		return;
+	}
 
-	api
-		.get( options )
-		.done( ( result ) => {
-			if ( !result || !result.parse || !result.parse.sections || result.parse.sections.length === 0 ) {
-				return;
-			}
+	const cirrusdoc = page.cirrusdoc[ 0 ];
+	let sections = [];
 
-			const sections = result.parse.sections;
-			context.commit( 'SET_SECTIONS', sections );
-		} )
-		.catch( () => {
-			context.commit( 'SET_SECTIONS' );
-		} );
+	if ( cirrusdoc.source && cirrusdoc.source.heading ) {
+		sections = cirrusdoc.source.heading;
+	}
+
+	context.commit( 'SET_SECTIONS', sections );
+
 };
 
 /**
@@ -148,6 +141,7 @@ const generateSearchLink = ( QID ) => {
  */
 const setCommonsInfo = ( page, context ) => {
 	const QID = getQID( page );
+
 	if ( !QID ) {
 		context.commit( 'SET_COMMONS' );
 	}
@@ -223,7 +217,7 @@ const retrieveInfoFromQuery = ( context, title ) => {
 		action: 'query',
 		format: 'json',
 		titles: title,
-		prop: 'pageimages|pageprops',
+		prop: 'pageimages|pageprops|cirrusdoc',
 		formatversion: 2,
 		pithumbsize: 420,
 		piprop: 'thumbnail|name|original'
@@ -241,9 +235,11 @@ const retrieveInfoFromQuery = ( context, title ) => {
 
 			setThumbnail( page, context );
 			setCommonsInfo( page, context );
+			setArticleSections( page, context );
 		} )
 		.catch( () => {
 			context.commit( 'SET_THUMBNAIL' );
+			context.commit( 'SET_SECTIONS' );
 		} );
 };
 
@@ -267,7 +263,6 @@ module.exports = {
 		context.dispatch( 'closeQuickView' );
 
 		if ( context.state.title !== title ) {
-			retrieveArticleSections( context, title );
 			retrieveInfoFromQuery( context, title );
 			context.commit( 'SET_TITLE', title );
 			pushTitleToHistoryState( title );

@@ -8,13 +8,13 @@
 		>
 			<li
 				v-for="section in sections"
-				:key="section.anchor"
+				:key="section"
 				ref="sections"
 				class="quickViewSections__pill"
-				:data-anchor="section.anchor"
+				:data-anchor="generateAnchor( section )"
 			>
-				<a :href="getSectionsUri( section.anchor )">
-					{{ section.line }}
+				<a :href="getSectionsUri( section )">
+					{{ section }}
 				</a>
 			</li>
 		</ul>
@@ -60,20 +60,20 @@ module.exports = exports = {
 			// Props sections and Refs may have a different order
 			// So we find the section using the sections props
 			const firstHiddenSection = this.sections.find( ( section ) => {
-				return this.hiddenSections.indexOf( section.anchor ) !== -1;
+				return this.hiddenSections.indexOf( section ) !== -1;
 			} );
 
 			if ( !firstHiddenSection ) {
 				return;
 			}
-			return this.getSectionsUri( firstHiddenSection.anchor );
+			return this.getSectionsUri( firstHiddenSection );
 		}
 	},
 	methods: {
 		getSectionsUri( fragment ) {
 			const uri = new mw.Uri();
 			uri.query = { title: this.title };
-			uri.fragment = fragment;
+			uri.fragment = this.generateAnchor( fragment );
 
 			return uri;
 		},
@@ -92,6 +92,13 @@ module.exports = exports = {
 			} );
 
 			this.hiddenSections = hiddenSectionsAnchors;
+		},
+		generateAnchor( name ) {
+
+			// We replicate the logic defined in Sanitizer:escapeIdForLink
+			// that is used by the parse API
+			const formattedAnchor = name.replace( /[\t\n\f\r ]/g, '_' );
+			return formattedAnchor.replace( '/%([a-fA-F0-9]{2})/g', '%25$1' );
 		}
 	},
 	watch: {
