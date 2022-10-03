@@ -154,7 +154,8 @@ const setCommonsInfo = ( page, context ) => {
 
 	if (
 		!mw.config.get( 'wgQuickViewMediaRepositoryApiBaseUri' ) ||
-		!mw.config.get( 'wgQuickViewSearchFilterForQID' )
+		!mw.config.get( 'wgQuickViewSearchFilterForQID' ) ||
+		!mw.config.get( 'wgQuickViewMediaRepositorySearchUri' )
 	) {
 		return;
 	}

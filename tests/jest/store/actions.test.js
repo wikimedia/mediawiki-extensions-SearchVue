@@ -26,11 +26,14 @@ beforeEach( () => {
 	actions.dispatch = context.dispatch;
 
 	when( global.mw.config.get )
-		.calledWith( 'wgExternalEntityCommonBaseUri' )
+		.calledWith( 'wgQuickViewMediaRepositoryApiBaseUri' )
 		.mockReturnValue( 'https://FakeExternalEnbtity.fake' );
 	when( global.mw.config.get )
 		.calledWith( 'wgQuickViewSearchFilterForQID' )
-		.mockReturnValue( 'DummySearchFilter' );
+		.mockReturnValue( 'DummySearchFilter %s' );
+	when( global.mw.config.get )
+		.calledWith( 'wgQuickViewMediaRepositorySearchUri' )
+		.mockReturnValue( 'https://FakeRepositorySearchUri.fake/?search=%s' );
 } );
 
 afterEach( () => {
@@ -101,7 +104,7 @@ describe( 'Actions', () => {
 				expect( actions.commit ).toHaveBeenCalledWith( 'SET_THUMBNAIL', mockThumbnail );
 
 			} );
-			describe( 'when a QID is avilable in API response', () => {
+			describe( 'when a QID is available in API response', () => {
 				const fakeQID = 'Q146';
 				const dummyReponseWithQid = {
 					query: {
@@ -120,10 +123,10 @@ describe( 'Actions', () => {
 					global.mw.Api.prototype.get.mockReturnValueOnce( $.Deferred().resolve( dummyReponseWithQid ).promise() );
 					global.mw.ForeignApi.prototype.get.mockReturnValue( $.Deferred().resolve( commonsFakeResponse ).promise() );
 				} );
-				it( 'it does not trigger a commons request when wgExternalEntityCommonBaseUri is not set', () => {
+				it( 'it does not trigger a commons request when wgQuickViewMediaRepositoryApiBaseUri is not set', () => {
 
 					when( global.mw.config.get )
-						.calledWith( 'wgExternalEntityCommonBaseUri' )
+						.calledWith( 'wgQuickViewMediaRepositoryApiBaseUri' )
 						.mockReturnValueOnce( null );
 					const title = 'dummy';
 					actions.handleTitleChange( context, title );
@@ -135,6 +138,17 @@ describe( 'Actions', () => {
 
 					when( global.mw.config.get )
 						.calledWith( 'wgQuickViewSearchFilterForQID' )
+						.mockReturnValueOnce( null );
+					const title = 'dummy';
+					actions.handleTitleChange( context, title );
+
+					expect( global.mw.ForeignApi.prototype.get ).not.toHaveBeenCalled();
+
+				} );
+				it( 'it does not trigger a commons request when wgQuickViewMediaRepositorySearchUri is not set', () => {
+
+					when( global.mw.config.get )
+						.calledWith( 'wgQuickViewMediaRepositorySearchUri' )
 						.mockReturnValueOnce( null );
 					const title = 'dummy';
 					actions.handleTitleChange( context, title );
@@ -198,9 +212,11 @@ describe( 'Actions', () => {
 
 						actions.handleTitleChange( context, title );
 
-						expect( actions.commit ).toHaveBeenCalledTimes( 3 );
-						expect( actions.commit.mock.calls[ 0 ][ 1 ].searchLink ).toBeTruthy();
-						expect( actions.commit.mock.calls[ 0 ][ 1 ].searchLink.query.search ).toBe( 'DummySearchFilter=Q146' );
+						// wgQuickViewMediaRepositorySearchUri value
+						expect( global.mw.Uri.mock.calls[ 0 ][ 0 ] ).toContain( 'https://FakeRepositorySearchUri.fake' );
+						// wgQuickViewSearchFilterForQID value
+						expect( global.mw.Uri.mock.calls[ 0 ][ 0 ] ).toContain( 'DummySearchFilter' );
+						expect( global.mw.Uri.mock.calls[ 0 ][ 0 ] ).toContain( fakeQID );
 					} );
 
 				} );
