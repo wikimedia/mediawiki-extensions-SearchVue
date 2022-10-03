@@ -8,5 +8,8 @@
 	"searchvue-previous": "Vorherige",
 	"searchvue-snippet-gotofullpage": "Zur ganzen Seite gehen",
 	"searchvue-label": "Vorschau der Suchergebnisse aktivieren",
-	"searchvue-help": "Vorschau des Inhalts der Seite und verwandter Seiten."
+	"searchvue-help": "Vorschau des Inhalts der Seite und verwandter Seiten.",
+	"searchvue-commons-viewmore": "Mehr anzeigen",
+	"searchvue-commons-footnote": "In Wikimedia Commons",
+	"searchvue-commons-heading": "Verwandte Bilder"
 }

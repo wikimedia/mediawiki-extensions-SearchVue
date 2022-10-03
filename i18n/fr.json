@@ -10,5 +10,8 @@
 	"searchvue-previous": "Précédent",
 	"searchvue-snippet-gotofullpage": "Aller à la page complète",
 	"searchvue-label": "Activer l’aperçu des résultats de recherche",
-	"searchvue-help": "Prévisualiser le contenu de la page et des pages associées."
+	"searchvue-help": "Prévisualiser le contenu de la page et des pages associées.",
+	"searchvue-commons-viewmore": "Voir plus",
+	"searchvue-commons-footnote": "Sur Wikimedia Commons",
+	"searchvue-commons-heading": "Images associées"
 }

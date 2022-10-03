@@ -6,5 +6,8 @@
 	},
 	"searchvue-close": "閉じる",
 	"searchvue-next": "次へ",
-	"searchvue-previous": "前へ"
+	"searchvue-previous": "前へ",
+	"searchvue-commons-viewmore": "続きを表示",
+	"searchvue-commons-footnote": "ウィキメディア・コモンズ",
+	"searchvue-commons-heading": "関連画像"
 }

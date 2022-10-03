@@ -10,5 +10,8 @@
 	"searchvue-previous": "Prejšnji",
 	"searchvue-snippet-gotofullpage": "Pojdi na celotno stran",
 	"searchvue-label": "Omogoči predogled zadetkov iskanja",
-	"searchvue-help": "Predogled vsebine strani in povezanih strani."
+	"searchvue-help": "Predogled vsebine strani in povezanih strani.",
+	"searchvue-commons-viewmore": "Prikaži več",
+	"searchvue-commons-footnote": "V Wikimedijini zbirki",
+	"searchvue-commons-heading": "Sorodne slike"
 }
