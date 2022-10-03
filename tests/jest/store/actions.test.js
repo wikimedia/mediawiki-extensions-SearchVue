@@ -66,8 +66,16 @@ describe( 'Actions', () => {
 			it( 'retrieves article sections', () => {
 				const mockSections = [ 'section1' ];
 				const dummyResponse = {
-					parse: {
-						sections: mockSections
+					query: {
+						pages: [
+							{
+								cirrusdoc: [ {
+									source: {
+										heading: mockSections
+									}
+								} ]
+							}
+						]
 					}
 				};
 				global.mw.Api.prototype.get.mockReturnValueOnce( $.Deferred().resolve( dummyResponse ).promise() );
@@ -94,8 +102,6 @@ describe( 'Actions', () => {
 						]
 					}
 				};
-				global.mw.Api.prototype.get.mockReturnValueOnce( $.Deferred().resolve( {} ).promise() );
-				// The Thumbnail request is the second one, so we need to mock it twice.
 				global.mw.Api.prototype.get.mockReturnValueOnce( $.Deferred().resolve( dummyResponse ).promise() );
 				const title = 'dummy';
 				actions.handleTitleChange( context, title );
@@ -119,7 +125,6 @@ describe( 'Actions', () => {
 					}
 				};
 				beforeEach( () => {
-					global.mw.Api.prototype.get.mockReturnValueOnce( $.Deferred().resolve( {} ).promise() );
 					global.mw.Api.prototype.get.mockReturnValueOnce( $.Deferred().resolve( dummyReponseWithQid ).promise() );
 					global.mw.ForeignApi.prototype.get.mockReturnValue( $.Deferred().resolve( commonsFakeResponse ).promise() );
 				} );
@@ -187,7 +192,7 @@ describe( 'Actions', () => {
 					const title = 'dummy';
 					actions.handleTitleChange( context, title );
 
-					expect( actions.commit ).toHaveBeenCalledTimes( 2 );
+					expect( actions.commit ).toHaveBeenCalledTimes( 3 );
 
 				} );
 				describe( 'when commons API response includes required results', () => {
@@ -195,7 +200,7 @@ describe( 'Actions', () => {
 						const title = 'dummy';
 
 						actions.handleTitleChange( context, title );
-						expect( actions.commit ).toHaveBeenCalledTimes( 3 );
+						expect( actions.commit ).toHaveBeenCalledTimes( 4 );
 						expect( actions.commit.mock.calls[ 0 ][ 1 ].images[ 0 ].index ).toBe( 1 );
 						expect( actions.commit.mock.calls[ 0 ][ 1 ].images[ 1 ].index ).toBe( 2 );
 					} );
@@ -204,7 +209,7 @@ describe( 'Actions', () => {
 
 						actions.handleTitleChange( context, title );
 
-						expect( actions.commit ).toHaveBeenCalledTimes( 3 );
+						expect( actions.commit ).toHaveBeenCalledTimes( 4 );
 						expect( actions.commit.mock.calls[ 0 ][ 1 ].hasMoreImages ).toBe( true );
 					} );
 					it( 'it generates a search link', () => {
