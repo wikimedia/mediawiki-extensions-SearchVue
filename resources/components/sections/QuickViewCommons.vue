@@ -10,11 +10,12 @@
 				class="loading"
 			>
 				<a :href="image.imageinfo[ 0 ].descriptionurl">
-					<image-with-placeholder
+					<image-with-loading-background
 						:src="image.imageinfo[ 0 ].thumburl"
 						:alt="image.title"
+						:aspectratio="image.imageinfo[ 0 ].thumbheight ? image.imageinfo[ 0 ].thumbwidth / image.imageinfo[ 0 ].thumbheight : 0"
 						@load="onImgLoad"
-					></image-with-placeholder>
+					></image-with-loading-background>
 				</a>
 			</li>
 		</ul>
@@ -38,13 +39,13 @@
  *
  * Placeholder
  */
-const ImageWithPlaceholder = require( '../generic/ImageWithPlaceholder.vue' );
+const ImageWithLoadingBackground = require( '../generic/ImageWithLoadingBackground.vue' );
 
 // @vue/component
 module.exports = exports = {
 	name: 'QuickViewCommons',
 	components: {
-		'image-with-placeholder': ImageWithPlaceholder
+		'image-with-loading-background': ImageWithLoadingBackground
 	},
 	props: {
 		images: {

@@ -1,7 +1,8 @@
 <template>
 	<div
-		class="ImageWithPlaceholder"
-		:class="{ 'ImageWithPlaceholder__loading': !loaded }"
+		class="ImageWithLoadingBackground"
+		:class="{ 'ImageWithLoadingBackground__loading': !loaded }"
+		:style="aspectratio !== null ? { 'aspect-ratio': aspectratio } : null"
 	>
 		<img
 			:src="src"
@@ -13,14 +14,14 @@
 
 <script>
 /**
- * @file ImageWithPlaceholder.vue
+ * @file ImageWithLoadingBackground.vue
  *
  * Placeholder
  */
 
 // @vue/component
 module.exports = exports = {
-	name: 'ImageWithPlaceholder',
+	name: 'ImageWithLoadingBackground',
 	props: {
 		src: {
 			type: String,
@@ -28,6 +29,11 @@ module.exports = exports = {
 		},
 		alt: {
 			type: String,
+			required: false,
+			default: null
+		},
+		aspectratio: {
+			type: Number,
 			required: false,
 			default: null
 		}
@@ -48,23 +54,13 @@ module.exports = exports = {
 </script>
 
 <style lang="less">
-.ImageWithPlaceholder {
+.ImageWithLoadingBackground {
 	display: flex;
 	flex: 1;
+
 	&__loading {
 		background-color: #F8F9FA;
-		min-width: 120px;
 
-		&::after {
-			position: absolute;
-			content: url( '../../assets/icons/image-placeholder.svg' );
-			width: 20px;
-			height: 20px;
-			top: calc( 50% - 10px );
-			left:0;
-			right:0;
-			margin: 0 auto;
-		}
 		img {
 			visibility: hidden;
 		}

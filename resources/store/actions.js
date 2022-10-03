@@ -54,19 +54,22 @@ const setArticleSections = ( page, context ) => {
 /**
  * Set thumbnail in the store using the result object provided
  *
- * @param {Object} page
+ * @param {Object|undefined} thumbnail
+ * @param {string} alt
  * @param {Object} context
  */
-const setThumbnail = ( page, context ) => {
-	if ( !page.thumbnail ) {
+const setThumbnail = ( thumbnail, alt, context ) => {
+	if ( !thumbnail ) {
 		context.commit( 'SET_THUMBNAIL' );
 		return;
 	}
 
-	const thumbnail = Object.assign( {}, page.thumbnail );
-	thumbnail.altText = page.pageimage;
+	const clone = Object.assign( {}, thumbnail );
+	if ( alt ) {
+		clone.alt = alt;
+	}
 
-	context.commit( 'SET_THUMBNAIL', thumbnail );
+	context.commit( 'SET_THUMBNAIL', clone );
 };
 
 /**
@@ -250,7 +253,7 @@ const retrieveInfoFromQuery = ( context, title ) => {
 			// we select the first result that is the most relevant to our search term
 			const page = result.query.pages[ 0 ];
 
-			setThumbnail( page, context );
+			setThumbnail( page.thumbnail, page.pageimage || '', context );
 			setCommonsInfo( page, context );
 			setDescription( page, context );
 			setArticleSections( page, context );
@@ -273,8 +276,7 @@ module.exports = {
 	 * @param {Object} context.state
 	 * @param {Function} context.commit
 	 * @param {Function} context.dispatch
-	 * @param {?string} title
-	 * @param newTitle
+	 * @param {?string} newTitle
 	 */
 	handleTitleChange: ( context, newTitle ) => {
 		if ( !newTitle ) {
@@ -284,13 +286,14 @@ module.exports = {
 		context.dispatch( 'closeQuickView' );
 
 		if ( currentTitle !== newTitle ) {
-			retrieveInfoFromQuery( context, newTitle );
-			context.commit( 'SET_TITLE', newTitle );
-			pushTitleToHistoryState( newTitle );
-
 			const selectedTitleIndex = context.state.results.findIndex( ( result ) => {
 				return result.prefixedText === newTitle;
 			} );
+
+			setThumbnail( context.state.results[ selectedTitleIndex ].thumbnail, '', context );
+			retrieveInfoFromQuery( context, newTitle );
+			context.commit( 'SET_TITLE', newTitle );
+			pushTitleToHistoryState( newTitle );
 
 			context.commit( 'SET_SELECTED_INDEX', selectedTitleIndex );
 		}

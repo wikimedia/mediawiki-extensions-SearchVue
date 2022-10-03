@@ -1,11 +1,5 @@
 <template>
-	<div
-		class="QuickViewImage"
-		:class="{
-			'QuickViewImage--portrait': isPortrait,
-			'QuickViewImage--fixedHeight': fixedHeight
-		}"
-	>
+	<div class="QuickViewImage">
 		<button @click="$emit( 'close' )">
 			<svg
 				width="30"
@@ -15,7 +9,7 @@
 				xmlns="http://www.w3.org/2000/svg"
 			>
 				<title>
-					{{ $i18n( 'quickview-close' ).text() }}
+					{{ $i18n( 'searchvue-close' ).text() }}
 				</title>
 				<circle
 					cx="15"
@@ -31,11 +25,11 @@
 				/>
 			</svg>
 		</button>
-		<image-with-placeholder
+		<image-with-loading-background
 			:src="source"
-			:alt="altText"
-			@load="onLoad"
-		></image-with-placeholder>
+			:alt="alt"
+			:aspectratio="Math.max( minAspectRatio, width / height )"
+		></image-with-loading-background>
 	</div>
 </template>
 
@@ -45,13 +39,13 @@
  *
  * Placeholder
  */
-const ImageWithPlaceholder = require( '../generic/ImageWithPlaceholder.vue' );
+const ImageWithLoadingBackground = require( '../generic/ImageWithLoadingBackground.vue' );
 
 // @vue/component
 module.exports = exports = {
 	name: 'QuickViewImage',
 	components: {
-		'image-with-placeholder': ImageWithPlaceholder
+		'image-with-loading-background': ImageWithLoadingBackground
 	},
 	props: {
 		source: {
@@ -66,7 +60,7 @@ module.exports = exports = {
 			type: Number,
 			required: true
 		},
-		altText: {
+		alt: {
 			type: String,
 			required: false,
 			default: null
@@ -74,46 +68,26 @@ module.exports = exports = {
 	},
 	data() {
 		return {
-			fixedHeight: true
+			minAspectRatio: 0.85
 		};
-	},
-	computed: {
-		isPortrait() {
-			return ( this.height > this.width );
-		}
-	},
-	methods: {
-		onLoad() {
-			this.fixedHeight = false;
-		}
 	}
 };
 
 </script>
 
 <style lang="less">
+@import 'mediawiki.ui/variables.less';
+
 .QuickViewImage {
 	position: relative;
 	width: 100%;
-	max-height: 268px;
 	margin-bottom: 10px;
 	overflow: hidden;
-
-	&--portrait {
-		height: 100%;
-		max-height: 486px;
-	}
+	background-color: @colorGray15;
 
 	img {
 		width: 100%;
 		height: auto;
-	}
-
-	&--fixedHeight {
-		height: 268px;
-		img {
-			height: 268px;
-		}
 	}
 
 	button {

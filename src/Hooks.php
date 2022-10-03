@@ -3,6 +3,7 @@
 namespace SearchVue;
 
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Search\SearchWidgets\FullSearchResultWidget;
 use MediaWiki\SpecialPage\Hook\SpecialPageBeforeExecuteHook;
 use SearchResultSet;
 use SpecialPage;
@@ -96,12 +97,27 @@ class Hooks implements
 			return [];
 		}
 
+		$services = MediaWikiServices::getInstance();
+		$thumbnailProvider = $services->getSearchResultThumbnailProvider();
+
 		$formattedResultSet = [];
 
 		foreach ( $resultSet as $result ) {
 			if ( $result->getTitle() !== '' ) {
+				$thumbnails = $thumbnailProvider->getThumbnails(
+					[ $result->getTitle() ],
+					FullSearchResultWidget::THUMBNAIL_SIZE
+				);
+
 				$formattedResult = $result->getTitle();
 				$formattedResult->text = $result->getTextSnippet();
+				if ( $thumbnails ) {
+					$thumbnail = reset( $thumbnails );
+					$formattedResult->thumbnail = [
+						'width' => $thumbnail->getWidth(),
+						'height' => $thumbnail->getHeight(),
+					];
+				}
 				$formattedResultSet[] = $formattedResult;
 			}
 		}
