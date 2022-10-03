@@ -112,13 +112,15 @@ describe( 'Actions', () => {
 			} );
 			describe( 'when a QID is available in API response', () => {
 				const fakeQID = 'Q146';
+				const fakeDescription = 'Q146';
 				const dummyReponseWithQid = {
 					query: {
 						pages: [
 							{
 								pageprops: {
 									// eslint-disable-next-line camelcase
-									wikibase_item: fakeQID
+									wikibase_item: fakeQID,
+									'wikibase-shortdesc': fakeDescription
 								}
 							}
 						]
@@ -127,6 +129,15 @@ describe( 'Actions', () => {
 				beforeEach( () => {
 					global.mw.Api.prototype.get.mockReturnValueOnce( $.Deferred().resolve( dummyReponseWithQid ).promise() );
 					global.mw.ForeignApi.prototype.get.mockReturnValue( $.Deferred().resolve( commonsFakeResponse ).promise() );
+				} );
+				it( 'it set the article description', () => {
+
+					const title = 'dummy';
+					actions.handleTitleChange( context, title );
+
+					expect( actions.commit ).toHaveBeenCalled();
+					expect( actions.commit ).toHaveBeenCalledWith( 'SET_DESCRIPTION', fakeDescription );
+
 				} );
 				it( 'it does not trigger a commons request when wgQuickViewMediaRepositoryApiBaseUri is not set', () => {
 
@@ -192,7 +203,7 @@ describe( 'Actions', () => {
 					const title = 'dummy';
 					actions.handleTitleChange( context, title );
 
-					expect( actions.commit ).toHaveBeenCalledTimes( 3 );
+					expect( actions.commit ).toHaveBeenCalledTimes( 5 );
 
 				} );
 				describe( 'when commons API response includes required results', () => {
@@ -200,17 +211,17 @@ describe( 'Actions', () => {
 						const title = 'dummy';
 
 						actions.handleTitleChange( context, title );
-						expect( actions.commit ).toHaveBeenCalledTimes( 4 );
-						expect( actions.commit.mock.calls[ 0 ][ 1 ].images[ 0 ].index ).toBe( 1 );
-						expect( actions.commit.mock.calls[ 0 ][ 1 ].images[ 1 ].index ).toBe( 2 );
+						expect( actions.commit ).toHaveBeenCalledTimes( 6 );
+						expect( actions.commit.mock.calls[ 1 ][ 1 ].images[ 0 ].index ).toBe( 1 );
+						expect( actions.commit.mock.calls[ 1 ][ 1 ].images[ 1 ].index ).toBe( 2 );
 					} );
 					it( 'it define if there are further results', () => {
 						const title = 'dummy';
 
 						actions.handleTitleChange( context, title );
 
-						expect( actions.commit ).toHaveBeenCalledTimes( 4 );
-						expect( actions.commit.mock.calls[ 0 ][ 1 ].hasMoreImages ).toBe( true );
+						expect( actions.commit ).toHaveBeenCalledTimes( 6 );
+						expect( actions.commit.mock.calls[ 1 ][ 1 ].hasMoreImages ).toBe( true );
 					} );
 					it( 'it generates a search link', () => {
 						const title = 'dummy';
@@ -402,6 +413,16 @@ describe( 'Actions', () => {
 
 			expect( actions.commit ).toHaveBeenCalled();
 			expect( actions.commit ).toHaveBeenCalledWith( 'SET_THUMBNAIL' );
+
+		} );
+
+		it( 'Set description to null', () => {
+			const title = 'dummy';
+			context.state.title = title;
+			actions.closeQuickView( context, title );
+
+			expect( actions.commit ).toHaveBeenCalled();
+			expect( actions.commit ).toHaveBeenCalledWith( 'SET_DESCRIPTION' );
 
 		} );
 

@@ -38,6 +38,15 @@ module.exports = {
 		state.thumbnail = thumbnail || null;
 	},
 	/**
+	 * Set the description of the selected item
+	 *
+	 * @param {Object} state
+	 * @param {string} description
+	 */
+	SET_DESCRIPTION: ( state, description ) => {
+		state.description = description || null;
+	},
+	/**
 	 * Set the additional images retrieved from the commons API
 	 *
 	 * @param {Object} state

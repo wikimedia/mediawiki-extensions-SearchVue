@@ -27,7 +27,8 @@ module.exports = {
 		const additionalInfo = {
 			sections: state.sections,
 			thumbnail: state.thumbnail,
-			commons: state.commons
+			commons: state.commons,
+			description: state.description
 		};
 
 		return $.extend(
