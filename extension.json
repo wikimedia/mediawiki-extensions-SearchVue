@@ -43,6 +43,8 @@
 			"packageFiles": [
 				"resources/init.js",
 				"resources/components/App.vue",
+				"resources/components/Tutorial.vue",
+				"resources/components/QuickViewTutorialPopup.vue",
 				"resources/components/generic/ImageWithPlaceholder.vue",
 				"resources/components/sections/QuickView.vue",
 				"resources/components/sections/QuickViewImage.vue",
@@ -84,12 +86,18 @@
 				"searchvue-more-sections",
 				"searchvue-snippet-gotofullpage",
 				"searchvue-snippet-gotofullpage-ns0",
-				"ellipsis"
+				"ellipsis",
+				"tutorial-popup-title",
+				"tutorial-popup-text1",
+				"tutorial-popup-text2",
+				"tutorial-popup-preferences",
+				"tutorial-popup-close"
 			]
 		}
 	},
 	"DefaultUserOptions": {
-		"searchpreview": true
+		"searchpreview": true,
+		"searchpreview-tutorial-enabled": 1
 	},
 	"manifest_version": 2,
 	"config": {

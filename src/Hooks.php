@@ -122,5 +122,9 @@ class Hooks implements
 			'label-message' => 'searchvue-label',
 			'help-message' => 'searchvue-help',
 		];
+
+		$prefs['searchpreview-tutorial-enabled'] = [
+			'type' => 'api'
+		];
 	}
 }

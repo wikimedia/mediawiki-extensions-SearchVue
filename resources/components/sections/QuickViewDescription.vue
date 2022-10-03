@@ -16,7 +16,7 @@
 
 // @vue/component
 module.exports = exports = {
-	name: 'quickViewDescription',
+	name: 'QuickViewDescription',
 	props: {
 		title: {
 			type: String,

@@ -128,8 +128,8 @@ const sortImagesArray = ( result ) => {
 };
 
 /**
- * @param {String} QID
- * @return {String}
+ * @param {string} QID
+ * @return {string}
  */
 const generateSearchTerm = ( QID ) => {
 	return mw.config.get( 'wgQuickViewSearchFilterForQID' ).replace( /%s/g, QID );
@@ -274,6 +274,7 @@ module.exports = {
 	 * @param {Function} context.commit
 	 * @param {Function} context.dispatch
 	 * @param {?string} title
+	 * @param newTitle
 	 */
 	handleTitleChange: ( context, newTitle ) => {
 		if ( !newTitle ) {
