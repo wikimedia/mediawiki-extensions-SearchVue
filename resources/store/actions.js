@@ -59,6 +59,7 @@ const setArticleSections = ( page, context ) => {
  */
 const setThumbnail = ( page, context ) => {
 	if ( !page.thumbnail ) {
+		context.commit( 'SET_THUMBNAIL' );
 		return;
 	}
 
@@ -66,6 +67,21 @@ const setThumbnail = ( page, context ) => {
 	thumbnail.altText = page.pageimage;
 
 	context.commit( 'SET_THUMBNAIL', thumbnail );
+};
+
+/**
+ * Set thumbnail in the store using the result object provided
+ *
+ * @param {Object} page
+ * @param {Object} context
+ */
+const setDescription = ( page, context ) => {
+	if ( !page.pageprops || !page.pageprops[ 'wikibase-shortdesc' ] ) {
+		context.commit( 'SET_DESCRIPTION' );
+		return;
+	}
+
+	context.commit( 'SET_DESCRIPTION', page.pageprops[ 'wikibase-shortdesc' ] );
 };
 
 /**
@@ -144,6 +160,7 @@ const setCommonsInfo = ( page, context ) => {
 
 	if ( !QID ) {
 		context.commit( 'SET_COMMONS' );
+		return;
 	}
 
 	if (
@@ -235,10 +252,13 @@ const retrieveInfoFromQuery = ( context, title ) => {
 
 			setThumbnail( page, context );
 			setCommonsInfo( page, context );
+			setDescription( page, context );
 			setArticleSections( page, context );
 		} )
 		.catch( () => {
 			context.commit( 'SET_THUMBNAIL' );
+			context.commit( 'SET_COMMONS' );
+			context.commit( 'SET_DESCRIPTION' );
 			context.commit( 'SET_SECTIONS' );
 		} );
 };
@@ -283,9 +303,10 @@ module.exports = {
 	closeQuickView: ( context ) => {
 		context.commit( 'SET_TITLE', null );
 		context.commit( 'SET_SELECTED_INDEX', -1 );
-		context.commit( 'SET_SECTIONS' );
 		context.commit( 'SET_THUMBNAIL' );
 		context.commit( 'SET_COMMONS' );
+		context.commit( 'SET_DESCRIPTION' );
+		context.commit( 'SET_SECTIONS' );
 		removeQuickViewFromHistoryState();
 	},
 	/**

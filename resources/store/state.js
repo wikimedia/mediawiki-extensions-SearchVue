@@ -7,6 +7,7 @@ module.exports = {
 	results: mw.config.values.wgSpecialSearchTextMatches || [],
 	sections: [],
 	thumbnail: null,
+	description: null,
 	commons: {
 		images: [],
 		hasMoreImages: false,

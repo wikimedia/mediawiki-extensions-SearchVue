@@ -140,5 +140,10 @@ module.exports = exports = {
 		margin: 0;
 		top: 0;
 	}
+
+	// we normalise the P tag by removing margin added by vector
+	p {
+		margin: 0;
+	}
 }
 </style>

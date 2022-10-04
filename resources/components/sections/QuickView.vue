@@ -34,6 +34,10 @@
 				@close="closeQuickView"
 			></quick-view-image>
 		</header>
+		<quick-view-description
+			:title="currentResult.prefixedText"
+			:description="currentResult.description"
+		></quick-view-description>
 		<quick-view-snippet
 			:text="textWithEllipsis"
 			:title="currentResult.prefixedText"
@@ -57,6 +61,7 @@
  * Placeholder
  */
 const QuickViewImage = require( './QuickViewImage.vue' ),
+	QuickViewDescription = require( './QuickViewDescription.vue' ),
 	QuickViewSnippet = require( './QuickViewSnippet.vue' ),
 	QuickViewSections = require( './QuickViewSections.vue' ),
 	QuickViewCommons = require( './QuickViewCommons.vue' ),
@@ -69,6 +74,7 @@ module.exports = exports = {
 	name: 'QuickView',
 	components: {
 		'quick-view-image': QuickViewImage,
+		'quick-view-description': QuickViewDescription,
 		'quick-view-snippet': QuickViewSnippet,
 		'quick-view-sections': QuickViewSections,
 		'quick-view-commons': QuickViewCommons
