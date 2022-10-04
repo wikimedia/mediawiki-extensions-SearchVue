@@ -79,12 +79,12 @@ module.exports = exports = {
 	),
 	mounted: function () {
 		// eslint-disable-next-line no-jquery/no-global-selector
-		const searchResults = $( '#mw-content-text .mw-search-result .searchresult' );
+		const searchResults = $( '#mw-content-text .mw-search-result' );
 
 		for ( const searchResult of searchResults ) {
 			searchResult.classList.add( 'searchresult-with-quickview' );
 		}
-		searchResults.click( function ( event ) {
+		searchResults.find( '.searchresult, .mw-search-result-data' ).click( function ( event ) {
 			// Calculate the offset when the item is clicked to make sure the page is fully loaded.
 			// This is to avoid wrong offset in case extension are loaded late (eg Advance search)
 			const firstElement = searchResults[ 0 ].parentElement;
