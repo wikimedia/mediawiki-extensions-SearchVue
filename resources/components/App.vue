@@ -87,14 +87,15 @@ module.exports = exports = {
 		searchResults.click( function ( event ) {
 			// Calculate the offset when the item is clicked to make sure the page is fully loaded.
 			// This is to avoid wrong offset in case extension are loaded late (eg Advance search)
-			this.calculateOffsetTop( searchResults[ 0 ].parentElement );
+			const firstElement = searchResults[ 0 ].parentElement;
+			this.calculateOffsetTop( firstElement );
 			const searchResultLink = event.currentTarget.parentElement.getElementsByTagName( 'a' )[ 0 ];
 
 			if ( searchResultLink.hasAttribute( 'title' ) ) {
 				event.stopPropagation();
 				const resultTitle = searchResultLink.getAttribute( 'title' );
 				if ( !this.isMobile ) {
-					searchResultLink.scrollIntoView( { behavior: 'smooth' } );
+					firstElement.scrollIntoView( { behavior: 'smooth' } );
 				} else {
 					const body = document.getElementsByTagName( 'body' )[ 0 ];
 					body.scrollIntoView( { behavior: 'smooth' } );
