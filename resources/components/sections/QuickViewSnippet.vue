@@ -2,7 +2,7 @@
 	<div class="quickViewSnippet">
 		<!-- eslint-disable vue/no-v-html -->
 		<p v-html="text"></p>
-		<a :href="url">{{ $i18n( 'searchvue-snippet-gotofullpage' ).text() }}</a>
+		<a :href="url">{{ gotoFullPageText }}</a>
 	</div>
 </template>
 
@@ -30,6 +30,12 @@ module.exports = exports = {
 		url() {
 			const title = new mw.Title( this.title );
 			return title.getUrl();
+		},
+		gotoFullPageText() {
+			const namespace = new mw.Title( this.title ).getNamespaceId();
+			return this.$i18n( 'searchvue-snippet-gotofullpage-ns' + namespace ).exists() ?
+				this.$i18n( 'searchvue-snippet-gotofullpage-ns' + namespace ).text() :
+				this.$i18n( 'searchvue-snippet-gotofullpage' ).text();
 		}
 	}
 };

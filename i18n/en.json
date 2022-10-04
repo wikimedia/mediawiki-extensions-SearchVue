@@ -8,12 +8,13 @@
 	"searchvue-close": "Close",
 	"searchvue-next": "Next",
 	"searchvue-previous": "Previous",
-	"searchvue-snippet-gotofullpage": "Go to full page",
 	"searchvue-label": "Enable search result preview",
-	"searchvue-help": "Preview the contents of the page and related pages.",
+	"searchvue-snippet-gotofullpage": "Go to full page",
+	"searchvue-snippet-gotofullpage-ns0": "Go to full article",
 	"searchvue-commons-viewmore": "View more",
 	"searchvue-commons-footnote": "In Wikimedia Commons",
 	"searchvue-commons-heading": "Related images",
 	"searchvue-article-sections-heading": "Sections in the article",
-	"searchvue-more-sections": "+ $1 more {{PLURAL:$1|section|sections}}"
+	"searchvue-more-sections": "+ $1 more {{PLURAL:$1|section|sections}}",
+	"searchvue-help": "Preview the contents of the page and related pages."
 }
