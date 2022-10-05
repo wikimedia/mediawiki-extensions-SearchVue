@@ -60,7 +60,7 @@ module.exports = exports = {
 		{
 			calculateOffsetTop: function ( element ) {
 				// TODO: Improve calculation of the QuickView after improvement of the search page
-				if ( !this.isMobile && !this.offsetTop ) {
+				if ( !this.isMobile ) {
 					// Set the correct offset to align with the search results
 					this.offsetTop = ( element.offsetTop || 0 ) + 'px';
 				}
@@ -74,24 +74,28 @@ module.exports = exports = {
 					const title = mwUri.query.quickView;
 					this.handleTitleChange( title );
 				}
+			},
+			listenToMainBodyResize() {
+				const mainBodyElement = document.getElementById( 'bodyContent' );
+				const resizeObserver = new ResizeObserver( () => {
+					const firstResult = document.querySelector( '#mw-content-text .mw-search-result' );
+					this.calculateOffsetTop( firstResult );
+				} );
+				resizeObserver.observe( mainBodyElement );
 			}
 		}
 	),
 	mounted: function () {
 		// eslint-disable-next-line no-jquery/no-global-selector
 		const searchResults = $( '#mw-content-text .mw-search-result' );
-
 		for ( const searchResult of searchResults ) {
 			searchResult.classList.add( 'searchresult-with-quickview' );
 		}
 		searchResults.find( '.searchresult, .mw-search-result-data' ).click( function ( event ) {
-			// Calculate the offset when the item is clicked to make sure the page is fully loaded.
-			// This is to avoid wrong offset in case extension are loaded late (eg Advance search)
-			const firstElement = searchResults[ 0 ].parentElement;
-			this.calculateOffsetTop( firstElement );
 			const searchResultLink = event.currentTarget.parentElement.getElementsByTagName( 'a' )[ 0 ];
 
 			if ( searchResultLink.hasAttribute( 'title' ) ) {
+				const firstElement = searchResults[ 0 ].parentElement;
 				event.stopPropagation();
 				const resultTitle = searchResultLink.getAttribute( 'title' );
 				if ( !this.isMobile ) {
@@ -114,6 +118,7 @@ module.exports = exports = {
 		// Restore the quick view in the case in which the user has navigated back to a page
 		// that had a quickView open
 		this.restoreQuickViewOnNavigation();
+		this.listenToMainBodyResize();
 	}
 };
 </script>
