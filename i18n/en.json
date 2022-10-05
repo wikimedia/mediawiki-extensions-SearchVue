@@ -16,5 +16,5 @@
 	"searchvue-commons-heading": "Related images",
 	"searchvue-article-sections-heading": "Sections in the article",
 	"searchvue-more-sections": "+ $1 more {{PLURAL:$1|section|sections}}",
-	"searchvue-help": "Preview the contents of the page and related pages."
+	"searchvue-help": "Preview the contents of the page and related content."
 }
