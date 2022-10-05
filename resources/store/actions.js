@@ -275,20 +275,20 @@ module.exports = {
 	 * @param {Function} context.dispatch
 	 * @param {?string} title
 	 */
-	handleTitleChange: ( context, title ) => {
-		if ( !title ) {
+	handleTitleChange: ( context, newTitle ) => {
+		if ( !newTitle ) {
 			return;
 		}
-
+		const currentTitle = context.state.title;
 		context.dispatch( 'closeQuickView' );
 
-		if ( context.state.title !== title ) {
-			retrieveInfoFromQuery( context, title );
-			context.commit( 'SET_TITLE', title );
-			pushTitleToHistoryState( title );
+		if ( currentTitle !== newTitle ) {
+			retrieveInfoFromQuery( context, newTitle );
+			context.commit( 'SET_TITLE', newTitle );
+			pushTitleToHistoryState( newTitle );
 
 			const selectedTitleIndex = context.state.results.findIndex( ( result ) => {
-				return result.prefixedText === title;
+				return result.prefixedText === newTitle;
 			} );
 
 			context.commit( 'SET_SELECTED_INDEX', selectedTitleIndex );
