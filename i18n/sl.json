@@ -8,10 +8,13 @@
 	"searchvue-close": "Zapri",
 	"searchvue-next": "Naslednji",
 	"searchvue-previous": "Prejšnji",
-	"searchvue-snippet-gotofullpage": "Pojdi na celotno stran",
 	"searchvue-label": "Omogoči predogled zadetkov iskanja",
-	"searchvue-help": "Predogled vsebine strani in povezanih strani.",
+	"searchvue-snippet-gotofullpage": "Pojdi na celotno stran",
+	"searchvue-snippet-gotofullpage-ns0": "Pojdi na celotni članek",
 	"searchvue-commons-viewmore": "Prikaži več",
 	"searchvue-commons-footnote": "V Wikimedijini zbirki",
-	"searchvue-commons-heading": "Sorodne slike"
+	"searchvue-commons-heading": "Sorodne slike",
+	"searchvue-article-sections-heading": "Razdelki v članku",
+	"searchvue-more-sections": "+ $1 {{PLURAL:$1|razdelek|razdelka|razdelki|razdelkov}}",
+	"searchvue-help": "Predogled vsebine strani in povezanih strani."
 }

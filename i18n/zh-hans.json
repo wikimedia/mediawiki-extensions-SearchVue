@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"Lakejason0"
+		]
+	},
+	"searchvue-desc": "对Special:Search的Vue.js功能附加与改进",
+	"searchvue-close": "关闭",
+	"searchvue-next": "下一个",
+	"searchvue-previous": "上一个",
+	"searchvue-label": "启用搜索结果预览",
+	"searchvue-snippet-gotofullpage": "转到完整页面",
+	"searchvue-snippet-gotofullpage-ns0": "转到全文",
+	"searchvue-commons-viewmore": "查看更多",
+	"searchvue-commons-footnote": "来自维基共享资源",
+	"searchvue-commons-heading": "相关图像",
+	"searchvue-article-sections-heading": "条目中的章节",
+	"searchvue-more-sections": "+ 还有$1{{PLURAL:$1|个章节}}",
+	"searchvue-help": "预览页面和相关页面的内容。"
+}

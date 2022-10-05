@@ -8,10 +8,10 @@
 	"searchvue-close": "বন্ধ করুন",
 	"searchvue-next": "পরবর্তী",
 	"searchvue-previous": "পূর্ববর্তী",
-	"searchvue-snippet-gotofullpage": "পূর্ণ পাতায় যান",
 	"searchvue-label": "অনুসন্ধানের ফলাফলে প্রাকদর্শন সক্রিয় করুন",
-	"searchvue-help": "পাতার বিষয়বস্তু ও সম্পর্কিত পাতাগুলোর প্রাকদর্শন দেখুন।",
+	"searchvue-snippet-gotofullpage": "পূর্ণ পাতায় যান",
 	"searchvue-commons-viewmore": "আরও দেখুন",
 	"searchvue-commons-footnote": "উইকিমিডিয়া কমন্সে",
-	"searchvue-commons-heading": "সম্পর্কিত ছবি"
+	"searchvue-commons-heading": "সম্পর্কিত ছবি",
+	"searchvue-help": "পাতার বিষয়বস্তু ও সম্পর্কিত পাতাগুলোর প্রাকদর্শন দেখুন।"
 }

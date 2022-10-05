@@ -7,8 +7,8 @@
 	"searchvue-close": "Fechar",
 	"searchvue-next": "Próximo",
 	"searchvue-previous": "Anterior",
-	"searchvue-snippet-gotofullpage": "Ir para a página completa",
 	"searchvue-label": "Ativar pré-visualização do resultado da pesquisa",
-	"searchvue-help": "Pré-visualize o conteúdo da página e páginas relacionadas.",
-	"searchvue-commons-viewmore": "Ver mais"
+	"searchvue-snippet-gotofullpage": "Ir para a página completa",
+	"searchvue-commons-viewmore": "Ver mais",
+	"searchvue-help": "Pré-visualize o conteúdo da página e páginas relacionadas."
 }

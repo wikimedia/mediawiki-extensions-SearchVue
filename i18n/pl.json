@@ -8,7 +8,12 @@
 	"searchvue-close": "Zamknij",
 	"searchvue-next": "Następny",
 	"searchvue-previous": "Poprzedni",
-	"searchvue-snippet-gotofullpage": "Przejdź do pełnej strony",
 	"searchvue-label": "Włącz podgląd wyników wyszukiwania",
+	"searchvue-snippet-gotofullpage": "Przejdź do pełnej strony",
+	"searchvue-commons-viewmore": "Zobacz więcej",
+	"searchvue-commons-footnote": "W Wikimedia Commons",
+	"searchvue-commons-heading": "Powiązane obrazy",
+	"searchvue-article-sections-heading": "Sekcje w artykule",
+	"searchvue-more-sections": "+ $1 więcej {{PLURAL:$1|sekcja|sekcje|sekcji}}",
 	"searchvue-help": "Wyświetl podgląd zawartości strony i powiązanych stron."
 }
