@@ -7,6 +7,9 @@
 	"searchvue-close": "మూసివేయి",
 	"searchvue-next": "తదుపరి",
 	"searchvue-previous": "మునుపటి",
+	"searchvue-snippet-gotofullpage-ns0": "పూర్తి వ్యాసానికి వెళ్ళండి",
 	"searchvue-commons-viewmore": "ఇంకా చూడండి",
-	"searchvue-commons-heading": "సంబంధిత బొమ్మలు"
+	"searchvue-commons-heading": "సంబంధిత బొమ్మలు",
+	"searchvue-article-sections-heading": "వ్యాసంలోని విభాగాలు",
+	"searchvue-more-sections": "+ {{PLURAL:$1|ఇంకో విభాగం|మరో $1 విభాగాలు}}"
 }

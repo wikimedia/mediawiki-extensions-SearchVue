@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"Hedda"
+		]
+	},
+	"searchvue-desc": "Vue.js, Özel:Arama'ya eklemeler ve iyileştirmeler içerir",
+	"searchvue-close": "Kapat",
+	"searchvue-next": "Sonraki",
+	"searchvue-previous": "Önceki",
+	"searchvue-label": "Arama sonucu önizlemesini etkinleştir",
+	"searchvue-snippet-gotofullpage": "Tüm sayfaya git",
+	"searchvue-snippet-gotofullpage-ns0": "Tüm maddeye git",
+	"searchvue-commons-viewmore": "Daha fazla göster",
+	"searchvue-commons-footnote": "Wikimedia Commons'ta",
+	"searchvue-commons-heading": "İlgili resimler",
+	"searchvue-article-sections-heading": "Maddedeki bölümler",
+	"searchvue-more-sections": "+ $1 {{PLURAL:$1|bölüm}} daha",
+	"searchvue-help": "Sayfanın ve ilgili sayfaların içeriğini önizleyin."
+}

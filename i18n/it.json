@@ -6,5 +6,8 @@
 	},
 	"searchvue-close": "Chiudi",
 	"searchvue-next": "Successivo",
-	"searchvue-previous": "Precedente"
+	"searchvue-previous": "Precedente",
+	"searchvue-snippet-gotofullpage-ns0": "Vai alla voce completa",
+	"searchvue-article-sections-heading": "Sezioni nella voce",
+	"searchvue-more-sections": "+ $1 {{PLURAL:$1|altra sezione|altre sezioni}}"
 }
