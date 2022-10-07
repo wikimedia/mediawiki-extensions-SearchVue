@@ -1,6 +1,6 @@
 <template>
 	<div class="quickViewSections">
-		<h3>{{ $i18n( 'searchvue-article-sections-heading' ).text() }}</h3>
+		<h3>{{ headingText }}</h3>
 		<ul
 			ref="sections-container"
 			class="quickViewSections__list"
@@ -67,6 +67,12 @@ module.exports = exports = {
 				return;
 			}
 			return this.getSectionsUri( firstHiddenSection );
+		},
+		headingText() {
+			const namespace = new mw.Title( this.title ).getNamespaceId();
+			return this.$i18n( 'searchvue-article-sections-heading-ns' + namespace ).exists() ?
+				this.$i18n( 'searchvue-article-sections-heading-ns' + namespace ).text() :
+				this.$i18n( 'searchvue-article-sections-heading' ).text();
 		}
 	},
 	methods: {
