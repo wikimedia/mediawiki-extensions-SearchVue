@@ -14,7 +14,8 @@
 	"searchvue-commons-viewmore": "Погл. уште",
 	"searchvue-commons-footnote": "На Ризницата",
 	"searchvue-commons-heading": "Поврзани слики",
-	"searchvue-article-sections-heading": "Поднаслови во статијата",
+	"searchvue-article-sections-heading": "Поднаслови на страницата",
+	"searchvue-article-sections-heading-ns0": "Поднаслови во статијата",
 	"searchvue-more-sections": "+ уште {{PLURAL:$1|$1 поднаслов|$1 поднаслови}}",
-	"searchvue-help": "Преглед на содржините на страницата и поврзаните страници."
+	"searchvue-help": "Преглед на содржините на страницата и поврзаните содржини."
 }

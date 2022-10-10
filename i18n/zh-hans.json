@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Lakejason0"
+			"Lakejason0",
+			"LittlePaw365"
 		]
 	},
 	"searchvue-desc": "对Special:Search的Vue.js功能附加与改进",
@@ -14,7 +15,7 @@
 	"searchvue-commons-viewmore": "查看更多",
 	"searchvue-commons-footnote": "来自维基共享资源",
 	"searchvue-commons-heading": "相关图像",
-	"searchvue-article-sections-heading": "条目中的章节",
+	"searchvue-article-sections-heading": "页面中的章节",
 	"searchvue-more-sections": "+ 还有$1{{PLURAL:$1|个章节}}",
 	"searchvue-help": "预览页面和相关页面的内容。"
 }

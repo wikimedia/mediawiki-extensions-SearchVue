@@ -14,7 +14,8 @@
 	"searchvue-commons-viewmore": "Zobacz więcej",
 	"searchvue-commons-footnote": "W Wikimedia Commons",
 	"searchvue-commons-heading": "Powiązane obrazy",
-	"searchvue-article-sections-heading": "Sekcje w artykule",
+	"searchvue-article-sections-heading": "Sekcje na stronie",
+	"searchvue-article-sections-heading-ns0": "Sekcje w artykule",
 	"searchvue-more-sections": "+ $1 więcej {{PLURAL:$1|sekcja|sekcje|sekcji}}",
 	"searchvue-help": "Wyświetl podgląd zawartości strony i powiązanych stron."
 }

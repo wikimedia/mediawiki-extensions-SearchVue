@@ -7,6 +7,9 @@
 	"searchvue-close": "Sluiten",
 	"searchvue-next": "Volgende",
 	"searchvue-previous": "Vorige",
+	"searchvue-commons-viewmore": "Meer weergeven",
 	"searchvue-commons-footnote": "Van Wikimedia Commons",
-	"searchvue-commons-heading": "Gerelateerde afbeeldingen"
+	"searchvue-commons-heading": "Gerelateerde afbeeldingen",
+	"searchvue-more-sections": "+ nog $1 {{PLURAL:$2|sectie|secties}}",
+	"searchvue-help": "Bekijk een voorbeeld van de inhoud van de pagina en gerelateerde inhoud."
 }

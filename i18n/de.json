@@ -14,5 +14,5 @@
 	"searchvue-commons-heading": "Verwandte Bilder",
 	"searchvue-article-sections-heading": "Abschnitte im Artikel",
 	"searchvue-more-sections": "+ $1 {{PLURAL:$1|weiterer Abschnitt|weitere Abschnitte}}",
-	"searchvue-help": "Vorschau des Inhalts der Seite und verwandter Seiten."
+	"searchvue-help": "Vorschau des Inhalts der Seite und zugehöriger Inhalte."
 }

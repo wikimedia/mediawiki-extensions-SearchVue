@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Okras",
 			"UniCollab"
 		]
 	},
@@ -10,5 +11,7 @@
 	"searchvue-label": "Включить предварительный просмотр результатов поиска",
 	"searchvue-snippet-gotofullpage": "Перейти на страницу",
 	"searchvue-commons-footnote": "На Викискладе",
-	"searchvue-help": "Включить предварительный просмотр содержимого страницы и связанных страниц."
+	"searchvue-article-sections-heading": "Разделы на странице",
+	"searchvue-article-sections-heading-ns0": "Разделы в статье",
+	"searchvue-help": "Включить предварительный просмотр содержимого страницы и связанного содержимого."
 }
