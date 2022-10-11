@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ajiniyaz"
+			"Ajiniyaz",
+			"Ajiniyaz Nurniyazov"
 		]
 	},
 	"searchvue-article-sections-heading": "Bettegi bólimler",
-	"searchvue-article-sections-heading-ns0": "Maqala bólimleri"
+	"searchvue-article-sections-heading-ns0": "Maqala bólimleri",
+	"searchvue-help": "Bettiń mazmunın hám baylanısqan kontentti aldın ala kórip shıǵıń."
 }
