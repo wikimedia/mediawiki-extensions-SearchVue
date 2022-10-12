@@ -16,5 +16,5 @@
 	"searchvue-commons-heading": "תמונות קשורים",
 	"searchvue-article-sections-heading": "פרקים בערך",
 	"searchvue-more-sections": "ועוד {{PLURAL:$1|פרק אחד|$1 פרקים}}",
-	"searchvue-help": "תצוגה מקדימה של תוכן הדף והדפים הקשורים."
+	"searchvue-help": "תצוגה מקדימה של תוכן הדף ותוכן קשור."
 }

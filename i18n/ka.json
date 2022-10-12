@@ -1,0 +1,21 @@
+{
+	"@metadata": {
+		"authors": [
+			"Გიო ოქრო"
+		]
+	},
+	"searchvue-desc": "Vue.js-ის ფუნქციის დამატებები და გაუმჯობესებები Special:Search-ისათვის",
+	"searchvue-close": "დახურვა",
+	"searchvue-next": "შემდეგი",
+	"searchvue-previous": "წინა",
+	"searchvue-label": "ძიების შედეგების წინასწარი გადახედვის ჩართვა",
+	"searchvue-snippet-gotofullpage": "გვერდზე გადასვლა",
+	"searchvue-snippet-gotofullpage-ns0": "სტატიაზე გადასვლა",
+	"searchvue-commons-viewmore": "მეტის ნახვა",
+	"searchvue-commons-footnote": "ვიკისაწყობში",
+	"searchvue-commons-heading": "დაკავშირებული სურათები",
+	"searchvue-article-sections-heading": "გვერდის სექციები",
+	"searchvue-article-sections-heading-ns0": "სტატიის სექციები",
+	"searchvue-more-sections": "+ $1 სხვა {{PLURAL:$1|სექცია}}",
+	"searchvue-help": "გვერდის შიგთავსისა და მასთან დაკავშირებული სხვა ინფორმაციის წინასწარ გადახედვა."
+}
