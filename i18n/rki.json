@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": [
+			"Cakkaparla",
+			"ReyLon Mrat",
+			"YaThaWinTha"
+		]
+	},
+	"searchvue-close": "ပိတ်ပါ",
+	"searchvue-next": "ထပ်လို့",
+	"searchvue-previous": "အယင်",
+	"searchvue-label": "ရှာဖွေမှုရလဒ်တိကြိုကြေ့စွာကိုဖွင့်",
+	"searchvue-snippet-gotofullpage": "စာမျက်အပြည့်စုံကိုလား",
+	"searchvue-snippet-gotofullpage-ns0": "ဆောင်းပါအပြည့်စုံကိုလားပါ",
+	"searchvue-commons-viewmore": "ပိုလို့ကြည့်ရေ",
+	"searchvue-commons-heading": "ဆက်စပ်ပုံတိ",
+	"searchvue-article-sections-heading": "စာမျက်နှာမှာဟိရေအချက်အလက်များ",
+	"searchvue-article-sections-heading-ns0": "ဆောင်းပါးမှာပါရေအချက်တိ"
+}
