@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Cakkaparla",
+			"Nay Thu Rin",
 			"ReyLon Mrat",
 			"YaThaWinTha"
 		]
@@ -14,6 +15,7 @@
 	"searchvue-snippet-gotofullpage-ns0": "ဆောင်းပါအပြည့်စုံကိုလားပါ",
 	"searchvue-commons-viewmore": "ပိုလို့ကြည့်ရေ",
 	"searchvue-commons-heading": "ဆက်စပ်ပုံတိ",
-	"searchvue-article-sections-heading": "စာမျက်နှာမှာဟိရေအချက်အလက်များ",
-	"searchvue-article-sections-heading-ns0": "ဆောင်းပါးမှာပါရေအချက်တိ"
+	"searchvue-article-sections-heading": "စာမျက်နှာထဲက အပိုက်ခွဲတိ",
+	"searchvue-article-sections-heading-ns0": "ဆောင်းပါးမှာပါရေအချက်အလက်တိ",
+	"searchvue-help": "သက်ဆိုင်ရေအချက်လက်နှင့် ဒေစာမျက်နှာက အချက်လက်တိကို ကြိုကြေ့ပါ။"
 }

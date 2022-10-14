@@ -1,9 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Boke"
+			"Boke",
+			"Cakkaparla"
 		]
 	},
-	"searchvue-article-sections-heading": "စာမျက်နှာဟိန့် ကဏ္ဍတိ",
-	"searchvue-article-sections-heading-ns0": "ဆောင်းပါးပါ ကဏ္ဍတိ"
+	"searchvue-article-sections-heading": "စာမျက်နှာမှာဟိန့်ရေ အချက်အလက်တိ",
+	"searchvue-article-sections-heading-ns0": "စာဝထု အစိတ်အပိုင်း"
 }

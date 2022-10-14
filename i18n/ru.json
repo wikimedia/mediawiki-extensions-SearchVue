@@ -1,17 +1,23 @@
 {
 	"@metadata": {
 		"authors": [
+			"Mehman (WMF)",
 			"Okras",
 			"UniCollab"
 		]
 	},
+	"searchvue-desc": "Добавления и улучшения для функции Vue.js в Special:Search",
 	"searchvue-close": "Закрыть",
 	"searchvue-next": "Далее",
 	"searchvue-previous": "Назад",
 	"searchvue-label": "Включить предварительный просмотр результатов поиска",
 	"searchvue-snippet-gotofullpage": "Перейти на страницу",
+	"searchvue-snippet-gotofullpage-ns0": "Перейти к полной статье",
+	"searchvue-commons-viewmore": "Показать подробно",
 	"searchvue-commons-footnote": "На Викискладе",
+	"searchvue-commons-heading": "Связанные изображения",
 	"searchvue-article-sections-heading": "Разделы на странице",
 	"searchvue-article-sections-heading-ns0": "Разделы в статье",
+	"searchvue-more-sections": "+ $1 больше {{PLURAL:$1|секция|секции}}",
 	"searchvue-help": "Включить предварительный просмотр содержимого страницы и связанного содержимого."
 }
