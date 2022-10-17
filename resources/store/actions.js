@@ -240,7 +240,8 @@ const retrieveInfoFromQuery = ( context, title ) => {
 		prop: 'pageimages|pageprops|cirrusdoc',
 		formatversion: 2,
 		pithumbsize: 420,
-		piprop: 'thumbnail|name|original'
+		piprop: 'thumbnail|name|original',
+		cdincludes: 'heading'
 	};
 
 	api
