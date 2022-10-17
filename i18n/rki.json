@@ -8,14 +8,16 @@
 		]
 	},
 	"searchvue-close": "ပိတ်ပါ",
-	"searchvue-next": "ထပ်လို့",
-	"searchvue-previous": "အယင်",
+	"searchvue-next": "နောက်တဆင့်",
+	"searchvue-previous": "နောက်ဖက်ကို",
 	"searchvue-label": "ရှာဖွေမှုရလဒ်တိကြိုကြေ့စွာကိုဖွင့်",
-	"searchvue-snippet-gotofullpage": "စာမျက်အပြည့်စုံကိုလား",
+	"searchvue-snippet-gotofullpage": "စာမျက်အပြည့်စုံကိုလားပါ",
 	"searchvue-snippet-gotofullpage-ns0": "ဆောင်းပါအပြည့်စုံကိုလားပါ",
 	"searchvue-commons-viewmore": "ပိုလို့ကြည့်ရေ",
+	"searchvue-commons-footnote": "ဘုံဖြိုက်တေ ဝီကီမီဒီယာ",
 	"searchvue-commons-heading": "ဆက်စပ်ပုံတိ",
 	"searchvue-article-sections-heading": "စာမျက်နှာထဲက အပိုက်ခွဲတိ",
 	"searchvue-article-sections-heading-ns0": "ဆောင်းပါးမှာပါရေအချက်အလက်တိ",
+	"searchvue-more-sections": "+ $1 ပိုလို့ {{PLURAL:$1|section|sections}}",
 	"searchvue-help": "သက်ဆိုင်ရေအချက်လက်နှင့် ဒေစာမျက်နှာက အချက်လက်တိကို ကြိုကြေ့ပါ။"
 }
