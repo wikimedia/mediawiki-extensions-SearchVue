@@ -171,7 +171,7 @@ module.exports = exports = {
 		padding: 2px 8px;
 		border-radius: 12px;
 		border: 1px solid @colorGray10;
-		a{
+		a {
 			font-size: 0.9285em;
 			line-height: 1.286em;
 			color: @colorGray2;
