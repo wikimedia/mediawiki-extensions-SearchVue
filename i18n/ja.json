@@ -11,5 +11,7 @@
 	"searchvue-commons-viewmore": "続きを表示",
 	"searchvue-commons-footnote": "ウィキメディア・コモンズ",
 	"searchvue-commons-heading": "関連画像",
-	"searchvue-article-sections-heading": "ページ内のセクション"
+	"searchvue-article-sections-heading": "ページ内のセクション",
+	"tutorial-popup-preferences": "設定",
+	"tutorial-popup-close": "閉じる"
 }

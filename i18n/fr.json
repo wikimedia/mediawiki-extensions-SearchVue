@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Thibaut120094",
-			"Verdy p"
+			"Verdy p",
+			"Wladek92"
 		]
 	},
 	"searchvue-desc": "Vue.js propose des ajouts et des améliorations à Special:Search.",
@@ -18,5 +19,10 @@
 	"searchvue-article-sections-heading": "Sections dans la page",
 	"searchvue-article-sections-heading-ns0": "Sections dans l’article",
 	"searchvue-more-sections": "+ $1 autre{{PLURAL:$1||s}} section{{PLURAL:$1||s}}",
-	"searchvue-help": "Prévisualiser le contenu de la page et des contenus associées."
+	"searchvue-help": "Prévisualiser le contenu de la page et des contenus associées.",
+	"tutorial-popup-title": "Aperçus des résultats de recherche",
+	"tutorial-popup-text1": "Cliquez sur l’extrait d’article pour prévisualiser le résultat de la recherche et voir le contenu associé.",
+	"tutorial-popup-text2": "Vous pouvez activer ou désactiver les aperçus dans la recherche",
+	"tutorial-popup-preferences": "préférences",
+	"tutorial-popup-close": "Fermer"
 }

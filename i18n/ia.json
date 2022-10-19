@@ -8,5 +8,6 @@
 	"searchvue-article-sections-heading": "Sectiones in le pagina",
 	"searchvue-article-sections-heading-ns0": "Sectiones in le articulo",
 	"searchvue-more-sections": "+ $1 altere section{{PLURAL:$1||es}}",
-	"searchvue-help": "Previsualisar le contento del pagina e su contento associate."
+	"searchvue-help": "Previsualisar le contento del pagina e su contento associate.",
+	"tutorial-popup-preferences": "preferentias"
 }
