@@ -87,7 +87,8 @@ module.exports = exports = {
 	),
 	mounted: function () {
 		// eslint-disable-next-line no-jquery/no-global-selector
-		const searchResults = $( '#mw-content-text .mw-search-result' );
+		const searchResults = $( '#mw-content-text .mw-search-result-ns-0' )
+			.not( '#mw-content-text .mw-search-interwiki-results .mw-search-result-ns-0' );
 		for ( const searchResult of searchResults ) {
 			searchResult.classList.add( 'searchresult-with-quickview' );
 		}
