@@ -144,7 +144,7 @@ module.exports = exports = {
 		align-items: center;
 		margin: 0;
 		margin-bottom: 8px;
-		height: 100px;
+		max-height: 100px;
 		overflow: hidden;
 
 		&--expanded{
