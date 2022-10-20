@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Kareyac",
 			"Mehman (WMF)",
 			"Okras",
 			"Pacha Tchernof",
@@ -20,5 +21,7 @@
 	"searchvue-article-sections-heading": "Разделы на странице",
 	"searchvue-article-sections-heading-ns0": "Разделы в статье",
 	"searchvue-more-sections": "+ ещё $1 {{PLURAL:$1|секция|секции|секций}}",
-	"searchvue-help": "Предпросмотр содержимого страницы и связанного содержимого."
+	"searchvue-help": "Предпросмотр содержимого страницы и связанного содержимого.",
+	"tutorial-popup-preferences": "настройки",
+	"tutorial-popup-close": "Закрыть"
 }
