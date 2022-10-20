@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Mehman (WMF)",
+			"Okras",
+			"Pacha Tchernof",
+			"UniCollab"
+		]
+	},
+	"searchvue-desc": "Добавления и улучшения для функции Vue.js в Special:Search"
+}
