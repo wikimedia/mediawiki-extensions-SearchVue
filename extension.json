@@ -46,6 +46,8 @@
 				"resources/components/Tutorial.vue",
 				"resources/components/QuickViewTutorialPopup.vue",
 				"resources/components/generic/ImageWithLoadingBackground.vue",
+				"resources/components/generic/ContentSkeleton.vue",
+				"resources/components/generic/LoadingDots.vue",
 				"resources/components/sections/QuickView.vue",
 				"resources/components/sections/QuickViewImage.vue",
 				"resources/components/sections/QuickViewDescription.vue",

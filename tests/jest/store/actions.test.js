@@ -1,4 +1,4 @@
-const initialState = require( '../fixtures/initialVuexState.js' ),
+const initialState = require( '../../../resources/store/state.js' ),
 	when = require( 'jest-when' ).when,
 	commonsFakeResponse = require( '../fixtures/commonsApiResponse.js' );
 
@@ -19,6 +19,11 @@ beforeEach( () => {
 		commit: jest.fn(),
 		dispatch: jest.fn()
 	};
+
+	context.state.results = [
+		{ prefixedText: 'dummy1', thumbnail: { width: 1, height: 2 } },
+		{ prefixedText: 'dummy2' }
+	];
 
 	actions.getters = context.getters;
 	actions.state = context.state;
@@ -79,14 +84,23 @@ describe( 'Actions', () => {
 					}
 				};
 				global.mw.Api.prototype.get.mockReturnValueOnce( $.Deferred().resolve( dummyResponse ).promise() );
-				const title = 'dummy';
+				const title = 'dummy1';
 				actions.handleTitleChange( context, title );
 
 				expect( actions.commit ).toHaveBeenCalled();
 				expect( actions.commit ).toHaveBeenCalledWith( 'SET_SECTIONS', mockSections );
 
 			} );
-			it( 'retrieves article thumbnail', () => {
+			it( 'Setup article thumbnail height and width from the info available in the result', () => {
+
+				const title = 'dummy1';
+				actions.handleTitleChange( context, title );
+
+				expect( actions.commit ).toHaveBeenCalled();
+				expect( actions.commit ).toHaveBeenCalledWith( 'SET_THUMBNAIL', context.state.results[ 0 ].thumbnail );
+
+			} );
+			it( 'updates the article thumbnail with the info received from the API', () => {
 				const mockThumbnail = {
 					source: 'https://fakeImageUrl',
 					width: 400,
@@ -103,11 +117,11 @@ describe( 'Actions', () => {
 					}
 				};
 				global.mw.Api.prototype.get.mockReturnValueOnce( $.Deferred().resolve( dummyResponse ).promise() );
-				const title = 'dummy';
+				const title = 'dummy1';
 				actions.handleTitleChange( context, title );
 
 				expect( actions.commit ).toHaveBeenCalled();
-				expect( actions.commit ).toHaveBeenCalledWith( 'SET_THUMBNAIL', mockThumbnail );
+				expect( actions.commit.mock.calls[ 2 ][ 1 ] ).toEqual( dummyResponse.query.pages[ 0 ].thumbnail );
 
 			} );
 			describe( 'when a QID is available in API response', () => {
@@ -132,7 +146,7 @@ describe( 'Actions', () => {
 				} );
 				it( 'it set the article description', () => {
 
-					const title = 'dummy';
+					const title = 'dummy1';
 					actions.handleTitleChange( context, title );
 
 					expect( actions.commit ).toHaveBeenCalled();
@@ -144,7 +158,7 @@ describe( 'Actions', () => {
 					when( global.mw.config.get )
 						.calledWith( 'wgQuickViewMediaRepositoryApiBaseUri' )
 						.mockReturnValueOnce( null );
-					const title = 'dummy';
+					const title = 'dummy1';
 					actions.handleTitleChange( context, title );
 
 					expect( global.mw.ForeignApi.prototype.get ).not.toHaveBeenCalled();
@@ -155,7 +169,7 @@ describe( 'Actions', () => {
 					when( global.mw.config.get )
 						.calledWith( 'wgQuickViewSearchFilterForQID' )
 						.mockReturnValueOnce( null );
-					const title = 'dummy';
+					const title = 'dummy1';
 					actions.handleTitleChange( context, title );
 
 					expect( global.mw.ForeignApi.prototype.get ).not.toHaveBeenCalled();
@@ -166,7 +180,7 @@ describe( 'Actions', () => {
 					when( global.mw.config.get )
 						.calledWith( 'wgQuickViewMediaRepositorySearchUri' )
 						.mockReturnValueOnce( null );
-					const title = 'dummy';
+					const title = 'dummy1';
 					actions.handleTitleChange( context, title );
 
 					expect( global.mw.ForeignApi.prototype.get ).not.toHaveBeenCalled();
@@ -174,7 +188,7 @@ describe( 'Actions', () => {
 				} );
 				it( 'it trigger a commons request with the QID', () => {
 
-					const title = 'dummy';
+					const title = 'dummy1';
 					actions.handleTitleChange( context, title );
 
 					expect( global.mw.ForeignApi.prototype.get ).toHaveBeenCalled();
@@ -184,7 +198,7 @@ describe( 'Actions', () => {
 				} );
 				it( 'it trigger a commons request with the configured wgQuickViewSearchFilterForQID', () => {
 
-					const title = 'dummy';
+					const title = 'dummy1';
 					actions.handleTitleChange( context, title );
 
 					expect( global.mw.ForeignApi.prototype.get ).toHaveBeenCalled();
@@ -200,31 +214,44 @@ describe( 'Actions', () => {
 					};
 					global.mw.ForeignApi.prototype.get.mockReturnValue( $.Deferred().resolve( responseWithNoPages ).promise() );
 
-					const title = 'dummy';
+					const title = 'dummy1';
 					actions.handleTitleChange( context, title );
 
-					expect( actions.commit ).toHaveBeenCalledTimes( 5 );
+					const allSetThumbnailRequest = actions.commit.mock.calls.filter( ( payload ) => {
+						return payload[ 0 ] === 'SET_THUMBNAIL';
+					} );
+					expect( allSetThumbnailRequest.length ).toBe( 2 );
+					expect( allSetThumbnailRequest[ 1 ][ 1 ] ).toBeFalsy();
 
 				} );
 				describe( 'when commons API response includes required results', () => {
 					it( 'it sorts the images by their INDEX', () => {
-						const title = 'dummy';
+						const title = 'dummy1';
 
 						actions.handleTitleChange( context, title );
-						expect( actions.commit ).toHaveBeenCalledTimes( 6 );
-						expect( actions.commit.mock.calls[ 1 ][ 1 ].images[ 0 ].index ).toBe( 1 );
-						expect( actions.commit.mock.calls[ 1 ][ 1 ].images[ 1 ].index ).toBe( 2 );
+
+						const allSetCommonsRequest = actions.commit.mock.calls.filter( ( payload ) => {
+							return payload[ 0 ] === 'SET_COMMONS';
+						} );
+
+						expect( allSetCommonsRequest.length ).toBe( 1 );
+						expect( allSetCommonsRequest[ 0 ][ 1 ].images[ 0 ].index ).toBe( 1 );
+						expect( allSetCommonsRequest[ 0 ][ 1 ].images[ 1 ].index ).toBe( 2 );
 					} );
 					it( 'it define if there are further results', () => {
-						const title = 'dummy';
+						const title = 'dummy1';
 
 						actions.handleTitleChange( context, title );
 
-						expect( actions.commit ).toHaveBeenCalledTimes( 6 );
-						expect( actions.commit.mock.calls[ 1 ][ 1 ].hasMoreImages ).toBe( true );
+						const allSetCommonsRequest = actions.commit.mock.calls.filter( ( payload ) => {
+							return payload[ 0 ] === 'SET_COMMONS';
+						} );
+
+						expect( allSetCommonsRequest.length ).toBe( 1 );
+						expect( allSetCommonsRequest[ 0 ][ 1 ].hasMoreImages ).toBe( true );
 					} );
 					it( 'it generates a search link', () => {
-						const title = 'dummy';
+						const title = 'dummy1';
 
 						actions.handleTitleChange( context, title );
 
@@ -238,7 +265,7 @@ describe( 'Actions', () => {
 				} );
 			} );
 			it( 'and current title had no value, update the title', () => {
-				const title = 'dummy';
+				const title = 'dummy1';
 				actions.handleTitleChange( context, title );
 
 				expect( actions.commit ).toHaveBeenCalled();
@@ -246,7 +273,7 @@ describe( 'Actions', () => {
 
 			} );
 			it( 'and value differs from existing title, update the title', () => {
-				const title = 'dummy';
+				const title = 'dummy1';
 				actions.handleTitleChange( context, title );
 
 				expect( actions.commit ).toHaveBeenCalled();
@@ -255,10 +282,6 @@ describe( 'Actions', () => {
 			} );
 			it( 'Update the selectedIndex title', () => {
 				const title = 'dummy2';
-				context.state.results = [
-					{ prefixedText: 'dummy1' },
-					{ prefixedText: 'dummy2' }
-				];
 				actions.handleTitleChange( context, title );
 
 				expect( actions.commit ).toHaveBeenCalled();
@@ -267,7 +290,7 @@ describe( 'Actions', () => {
 			} );
 
 			it( 'Adds QuickView to history state', () => {
-				const title = 'dummy';
+				const title = 'dummy1';
 				actions.handleTitleChange( context, title );
 
 				expect( window.history.pushState ).toHaveBeenCalled();
@@ -301,7 +324,7 @@ describe( 'Actions', () => {
 			} );
 			it( 'When trying to navigate too forward back (index bigger than array length)', () => {
 				const wrongNavigation = 'next';
-				context.state.selectedIndex = 0;
+				context.state.selectedIndex = 1;
 				actions.navigate( context, wrongNavigation );
 
 				expect( context.commit ).not.toHaveBeenCalled();
@@ -312,10 +335,6 @@ describe( 'Actions', () => {
 		describe( 'When navigating forward', () => {
 
 			beforeEach( () => {
-				context.state.results = [
-					{ prefixedText: 'faketitle 1' },
-					{ prefixedText: 'faketitle 2' }
-				];
 				context.state.selectedIndex = 0;
 			} );
 
@@ -345,10 +364,6 @@ describe( 'Actions', () => {
 		describe( 'When navigating backward', () => {
 
 			beforeEach( () => {
-				context.state.results = [
-					{ prefixedText: 'faketitle 1' },
-					{ prefixedText: 'faketitle 2' }
-				];
 				context.state.selectedIndex = 1;
 			} );
 

@@ -1,4 +1,4 @@
-const initialState = require( '../fixtures/initialVuexState.js' ),
+const initialState = require( '../../../resources/store/state.js' ),
 	getters = require( '../../../resources/store/getters.js' );
 
 let dummyState;

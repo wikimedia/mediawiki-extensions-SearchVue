@@ -2,6 +2,7 @@
 	<Teleport :to="destination">
 		<quick-view
 			v-if="visible"
+			ref="quick-view"
 			class="mw-search-quick-view"
 			:class="{
 				'mw-search-quick-view__mobile': isMobile,
@@ -40,7 +41,8 @@ module.exports = exports = {
 			'visible'
 		] ),
 		mapState( [
-			'isMobile'
+			'isMobile',
+			'title'
 		] ),
 		{
 			destination: function () {
@@ -61,8 +63,17 @@ module.exports = exports = {
 			calculateOffsetTop: function ( element ) {
 				// TODO: Improve calculation of the QuickView after improvement of the search page
 				if ( !this.isMobile ) {
-					// Set the correct offset to align with the search results
-					this.offsetTop = ( element.offsetTop || 0 ) + 'px';
+
+					this.$nextTick()
+						.then(
+							() => {
+								// Set the correct offset to align with the search results
+								const bottomOfElement = element.offsetHeight + element.offsetTop;
+								const quickViewheight = this.$refs[ 'quick-view' ].$el.offsetHeight;
+								const offsetTop = bottomOfElement - quickViewheight;
+								this.offsetTop = Math.max( offsetTop, 0 ) + 'px';
+							}
+						);
 				}
 			},
 			restoreQuickViewOnNavigation() {
@@ -74,6 +85,11 @@ module.exports = exports = {
 					const title = mwUri.query.quickView;
 					this.handleTitleChange( title );
 				}
+			},
+			getSearchResults() {
+				// eslint-disable-next-line no-jquery/no-global-selector
+				return $( '#mw-content-text .mw-search-result-ns-0' )
+					.not( '#mw-content-text .mw-search-interwiki-results .mw-search-result-ns-0' );
 			},
 			listenToMainBodyResize() {
 				const mainBodyElement = document.getElementById( 'bodyContent' );
@@ -96,14 +112,22 @@ module.exports = exports = {
 			}
 		}
 	),
+	watch: {
+		visible: {
+			handler( visible ) {
+				if ( visible ) {
+					const currentElement = this.getSearchResults().find( `[title=${this.title}]` ).closest( 'li' )[ 0 ];
+					this.calculateOffsetTop( currentElement );
+				}
+			},
+			flush: 'post'
+		}
+	},
 	mounted: function () {
 		if ( !this.isEnabled() ) {
 			return;
 		}
-
-		// eslint-disable-next-line no-jquery/no-global-selector
-		const searchResults = $( '#mw-content-text .mw-search-result-ns-0' )
-			.not( '#mw-content-text .mw-search-interwiki-results .mw-search-result-ns-0' );
+		const searchResults = this.getSearchResults();
 		for ( const searchResult of searchResults ) {
 			searchResult.classList.add( 'searchresult-with-quickview' );
 		}
@@ -111,15 +135,8 @@ module.exports = exports = {
 			const searchResultLink = event.currentTarget.parentElement.getElementsByTagName( 'a' )[ 0 ];
 
 			if ( searchResultLink.hasAttribute( 'title' ) ) {
-				const firstElement = searchResults[ 0 ].parentElement;
 				event.stopPropagation();
 				const resultTitle = searchResultLink.getAttribute( 'title' );
-				if ( !this.isMobile ) {
-					firstElement.scrollIntoView( { behavior: 'smooth' } );
-				} else {
-					const body = document.getElementsByTagName( 'body' )[ 0 ];
-					body.scrollIntoView( { behavior: 'smooth' } );
-				}
 				this.handleTitleChange( resultTitle );
 			}
 		}.bind( this ) );
@@ -134,7 +151,6 @@ module.exports = exports = {
 		// Restore the quick view in the case in which the user has navigated back to a page
 		// that had a quickView open
 		this.restoreQuickViewOnNavigation();
-		this.listenToMainBodyResize();
 	}
 };
 </script>
