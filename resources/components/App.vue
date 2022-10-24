@@ -82,10 +82,25 @@ module.exports = exports = {
 					this.calculateOffsetTop( firstResult );
 				} );
 				resizeObserver.observe( mainBodyElement );
+			},
+			isEnabled() {
+				let enable = !this.isMobile;
+				if ( ( new mw.Uri() ).query.quickViewEnableMobile !== undefined ) {
+					// casting with parseInt instead of Boolean to also consider
+					// a (string) '0' as off
+					enable = enable || parseInt( ( new mw.Uri() ).query.quickViewEnableMobile );
+				} else {
+					enable = enable || mw.config.get( 'wgQuickViewEnableMobile' );
+				}
+				return enable;
 			}
 		}
 	),
 	mounted: function () {
+		if ( !this.isEnabled() ) {
+			return;
+		}
+
 		// eslint-disable-next-line no-jquery/no-global-selector
 		const searchResults = $( '#mw-content-text .mw-search-result-ns-0' )
 			.not( '#mw-content-text .mw-search-interwiki-results .mw-search-result-ns-0' );
