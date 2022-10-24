@@ -17,5 +17,10 @@
 	"searchvue-article-sections-heading": "გვერდის სექციები",
 	"searchvue-article-sections-heading-ns0": "სტატიის სექციები",
 	"searchvue-more-sections": "+ $1 სხვა {{PLURAL:$1|სექცია}}",
-	"searchvue-help": "გვერდის შიგთავსისა და მასთან დაკავშირებული სხვა ინფორმაციის წინასწარ გადახედვა."
+	"searchvue-help": "გვერდის შიგთავსისა და მასთან დაკავშირებული სხვა ინფორმაციის წინასწარ გადახედვა.",
+	"tutorial-popup-title": "ძიების შედეგების გადახედვები",
+	"tutorial-popup-text1": "დააწკაპუნეთ სტატიის ფრაგმენტზე, რათა გადახედოთ ძიების შედეგს და ნახოთ შესაბამისი შიგთავსი.",
+	"tutorial-popup-text2": "თქვენ შეგიძლიათ ჩართოთ და გამორთოთ გადახედვები ძიებაში",
+	"tutorial-popup-preferences": "კონფიგურაცია",
+	"tutorial-popup-close": "დახურვა"
 }

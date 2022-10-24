@@ -4,10 +4,23 @@
 			"McDutchie"
 		]
 	},
+	"searchvue-desc": "Additiones e meliorationes de functionalitate de Vue.js pro Special:Recerca",
+	"searchvue-close": "Clauder",
+	"searchvue-next": "Sequente",
+	"searchvue-previous": "Precedente",
+	"searchvue-label": "Activar le previsualisation del resultatos de recerca",
+	"searchvue-snippet-gotofullpage": "Visitar le pagina complete",
 	"searchvue-snippet-gotofullpage-ns0": "Visitar le articulo complete",
+	"searchvue-commons-viewmore": "Vider plus",
+	"searchvue-commons-footnote": "Visitar Wikimedia Commons",
+	"searchvue-commons-heading": "Imagines associate",
 	"searchvue-article-sections-heading": "Sectiones in le pagina",
 	"searchvue-article-sections-heading-ns0": "Sectiones in le articulo",
 	"searchvue-more-sections": "+ $1 altere section{{PLURAL:$1||es}}",
 	"searchvue-help": "Previsualisar le contento del pagina e su contento associate.",
-	"tutorial-popup-preferences": "preferentias"
+	"tutorial-popup-title": "Previsualisationes de resultatos de recerca",
+	"tutorial-popup-text1": "Clicca sur le extracto de articulo pro previsualisar le resultato de recerca e vider le contento associate.",
+	"tutorial-popup-text2": "Tu pote activar e disactivar le previsualisationes in le recerca",
+	"tutorial-popup-preferences": "preferentias",
+	"tutorial-popup-close": "Clauder"
 }
