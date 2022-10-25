@@ -141,6 +141,7 @@ module.exports = exports = {
 
 <style lang="less">
 @import '../styles/Search-result-hover.less';
+@import '../styles/Search-result-mobile.less';
 
 .mw-search-quick-view {
 
