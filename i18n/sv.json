@@ -1,0 +1,26 @@
+{
+	"@metadata": {
+		"authors": [
+			"Sabelöga"
+		]
+	},
+	"searchvue-desc": "Vue.js-funktionstillägg och förbättringar av Special:Search",
+	"searchvue-close": "Stäng",
+	"searchvue-next": "Nästa",
+	"searchvue-previous": "Föregående",
+	"searchvue-label": "Aktivera förhandsgranskningar av sökresultat",
+	"searchvue-snippet-gotofullpage": "Gå till sidan",
+	"searchvue-snippet-gotofullpage-ns0": "Gå till den fullständiga artikeln",
+	"searchvue-commons-viewmore": "Visa mer",
+	"searchvue-commons-footnote": "På Wikimedia Commons",
+	"searchvue-commons-heading": "Relaterade bilder",
+	"searchvue-article-sections-heading": "Avsnitt på sidan",
+	"searchvue-article-sections-heading-ns0": "Avsnitt i artikeln",
+	"searchvue-more-sections": "+ $1 {{PLURAL:$1|avsnitt till}}",
+	"searchvue-help": "Förhandsgranska sidans innehåll och relaterat innehåll.",
+	"tutorial-popup-title": "Förhandsgranskningar av sökresultat",
+	"tutorial-popup-text1": "Klicka på artikelfragmentet för att förhandsgranska sökresultatet och se relaterat innehåll.",
+	"tutorial-popup-text2": "Du kan aktivera och inaktivera förhandsgranskningar i sökningarna",
+	"tutorial-popup-preferences": "inställningar",
+	"tutorial-popup-close": "Stäng"
+}
