@@ -68,7 +68,6 @@ module.exports = {
 	 * @param {string} payload.status
 	 */
 	SET_REQUEST_STATUS: ( state, payload ) => {
-
 		if ( state.requestStatus[ payload.type ] ) {
 			state.requestStatus[ payload.type ] = payload.status;
 		}

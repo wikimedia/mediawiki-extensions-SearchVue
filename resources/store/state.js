@@ -10,6 +10,7 @@ const requestStatuses = {
 module.exports = {
 	title: null,
 	selectedIndex: -1,
+	prevSelectedIndex: null,
 	isMobile: mw.config.get( 'skin' ) === 'minerva',
 	results: mw.config.get( 'wgSpecialSearchTextMatches' ) || [],
 	sections: [],

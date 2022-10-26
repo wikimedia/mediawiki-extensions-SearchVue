@@ -1,4 +1,5 @@
 const initialState = require( '../../../resources/store/state.js' ),
+	events = require( '../../../resources/store/modules/Event.js' ),
 	when = require( 'jest-when' ).when,
 	commonsFakeResponse = require( '../fixtures/commonsApiResponse.js' );
 
@@ -15,6 +16,7 @@ beforeEach( () => {
 	// (see: https://vuex.vuejs.org/api/#actions)
 	context = {
 		state: JSON.parse( JSON.stringify( initialState ) ),
+		eventsState: JSON.parse( JSON.stringify( events.state() ) ),
 		getters: jest.fn(),
 		commit: jest.fn(),
 		dispatch: jest.fn()
@@ -302,6 +304,17 @@ describe( 'Actions', () => {
 					expect.anything()
 				);
 			} );
+
+			it( 'Set open-searchpreview event', () => {
+				context.state.title = 'dummy1';
+				const title = 'dummy2';
+				const eventName = 'open-searchpreview';
+
+				actions.handleTitleChange( context, title );
+				expect( context.dispatch ).toHaveBeenCalledTimes( 2 );
+				expect( context.dispatch.mock.calls[ 1 ][ 0 ] ).toBe( 'events/logQuickViewEvent' );
+				expect( context.dispatch.mock.calls[ 1 ][ 1 ].action ).toBe( eventName );
+			} );
 		} );
 	} );
 
@@ -454,6 +467,17 @@ describe( 'Actions', () => {
 				null,
 				expect.anything()
 			);
+		} );
+
+		it( 'Set close-searchpreview event', () => {
+			const title = 'dummy';
+			context.state.title = title;
+			const eventName = 'close-searchpreview';
+
+			actions.closeQuickView( context, title );
+			expect( context.dispatch.mock.calls[ 0 ][ 0 ] ).toBe( 'events/logQuickViewEvent' );
+			expect( context.dispatch.mock.calls[ 0 ][ 1 ].action ).toBe( eventName );
+
 		} );
 	} );
 } );
