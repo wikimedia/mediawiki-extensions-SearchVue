@@ -8,6 +8,7 @@
 			:src="src"
 			:alt="alt"
 			@load="onLoad"
+			@click="$emit('image-click')"
 		>
 	</div>
 </template>

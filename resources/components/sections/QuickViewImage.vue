@@ -5,6 +5,7 @@
 			:src="source"
 			:alt="alt"
 			:aspectratio="Math.max( minAspectRatio, width / height )"
+			@image-click="onImageClick"
 		></image-with-loading-background>
 	</div>
 </template>
@@ -46,6 +47,11 @@ module.exports = exports = {
 		return {
 			minAspectRatio: 0.85
 		};
+	},
+	methods: {
+		onImageClick() {
+			this.$emit( 'log-event', { action: 'click-image' } );
+		}
 	}
 };
 

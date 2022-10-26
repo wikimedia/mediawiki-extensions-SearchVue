@@ -2,7 +2,7 @@
 	<div class="quickViewSnippet">
 		<!-- eslint-disable vue/no-v-html -->
 		<p v-html="text"></p>
-		<a :href="url">{{ gotoFullPageText }}</a>
+		<a :href="url" @click.prevent="onClick">{{ gotoFullPageText }}</a>
 	</div>
 </template>
 
@@ -36,6 +36,16 @@ module.exports = exports = {
 			return this.$i18n( 'searchvue-snippet-gotofullpage-ns' + namespace ).exists() ?
 				this.$i18n( 'searchvue-snippet-gotofullpage-ns' + namespace ).text() :
 				this.$i18n( 'searchvue-snippet-gotofullpage' ).text();
+		}
+	},
+	methods: {
+		onClick() {
+			this.$emit(
+				'log-event',
+				{
+					action: 'click-snippet',
+					goTo: this.url
+				} );
 		}
 	}
 };
