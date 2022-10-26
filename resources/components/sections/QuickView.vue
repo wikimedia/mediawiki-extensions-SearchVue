@@ -36,6 +36,7 @@
 				v-if="currentResult.thumbnail"
 				v-bind="currentResult.thumbnail"
 				@close="closeQuickView"
+				@log-event="onLogEvent"
 			></quick-view-image>
 		</header>
 		<template v-if="requestStatus.query === requestStatuses.inProgress" >
@@ -50,6 +51,7 @@
 			<quick-view-snippet
 				:text="textWithEllipsis"
 				:title="currentResult.prefixedText"
+				@log-event="onLogEvent"
 			></quick-view-snippet>
 			<quick-view-sections
 				v-if="hasSections"
@@ -124,19 +126,24 @@ module.exports = exports = {
 			}
 		}
 	),
-	methods: $.extend( {
-		onLogEvent( action ) {
-			this.logQuickViewEvent( {
-				action: action,
-				selectedIndex: this.selectedIndex
-			} );
-		}
-	},
-	mapActions( [
-		'closeQuickView',
-		'navigate'
-	] ),
-	mapActions( 'events', [ 'logQuickViewEvent' ] )
+	methods: $.extend(
+		{
+			onLogEvent( { action, goTo } ) {
+				this.logQuickViewEvent( {
+					action: action,
+					selectedIndex: this.selectedIndex
+				} ).then( function () {
+					if ( goTo ) {
+						window.location.href = goTo;
+					}
+				} );
+			}
+		},
+		mapActions( [
+			'closeQuickView',
+			'navigate'
+		] ),
+		mapActions( 'events', [ 'logQuickViewEvent' ] )
 	)
 };
 </script>
