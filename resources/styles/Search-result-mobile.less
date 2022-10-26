@@ -1,6 +1,17 @@
 .skin-minerva {
+	.mw-search-results,
+	.iw-results {
+		padding-left: 0;
+	}
+
 	.searchresult-with-quickview {
-		padding-right: 18px;
+		position: relative;
+		margin-right: -16px;
+
+		.searchresult,
+		.mw-search-result-data {
+			padding-right: 32px;
+		}
 
 		&:after {
 			background-image: url( ../assets/icons/arrow-down.svg );
@@ -9,9 +20,19 @@
 			content: '';
 			position: absolute;
 			width: 24px;
-			height: 100%;
+			height: min( calc( 100% ), 162px );
 			top: 0;
-			right: -8px;
+			right: 8px;
+			transition: transform 0.3s;
+			z-index: -1;
+		}
+	}
+
+	&.search-preview-open {
+		.searchresult-with-quickview--open {
+			&:after {
+				transform: scaleY( -1 );
+			}
 		}
 	}
 }

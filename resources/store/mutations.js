@@ -38,6 +38,33 @@ module.exports = {
 		state.thumbnail = thumbnail || null;
 	},
 	/**
+	 * Set the visibility of the search preview. This is used to control the animation timing.
+	 *
+	 * @param {Object} state
+	 * @param {boolean} show
+	 */
+	SET_VISIBLE: ( state, show ) => {
+		state.visible = show;
+	},
+	/**
+	 * Set the next title. This value is used when transitioning between different Search Previews on mobile
+	 *
+	 * @param {Object} state
+	 * @param {string} title
+	 */
+	SET_NEXT_TITLE: ( state, title ) => {
+		state.nextTitle = title;
+	},
+	/**
+	 * Set the destination for the app container, used by the teleport
+	 *
+	 * @param {Object} state
+	 * @param {string} destination
+	 */
+	SET_DESTINATION: ( state, destination ) => {
+		state.destination = destination;
+	},
+	/**
 	 * Set the description of the selected item
 	 *
 	 * @param {Object} state

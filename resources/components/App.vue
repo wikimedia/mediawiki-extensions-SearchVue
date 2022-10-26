@@ -1,16 +1,27 @@
 <template>
-	<Teleport :to="destination">
-		<quick-view
-			v-if="visible"
-			ref="quick-view"
-			class="mw-search-quick-view"
-			:class="{
-				'mw-search-quick-view__mobile': isMobile,
-				'mw-search-quick-view__desktop': !isMobile
-			}"
-			:style="{ top: offsetTop }"
-		>
-		</quick-view>
+	<Teleport
+		v-if="destination"
+		:to="destination">
+		<Transition
+			:css="isMobile"
+			@after-leave="() => toggleVisibily( {
+				title: nextTitle,
+				element: currentElement( nextTitle ),
+				force: true
+			} )"
+			@after-enter="scrollScreenOnMobile">
+			<quick-view
+				v-if="visible"
+				ref="quick-view"
+				class="mw-search-quick-view"
+				:class="{
+					'mw-search-quick-view__mobile': isMobile,
+					'mw-search-quick-view__desktop': !isMobile
+				}"
+				:style="{ top: offsetTop }"
+			>
+			</quick-view>
+		</Transition>
 	</Teleport>
 </template>
 
@@ -22,8 +33,7 @@
  */
 const QuickView = require( './sections/QuickView.vue' ),
 	mapActions = require( 'vuex' ).mapActions,
-	mapState = require( 'vuex' ).mapState,
-	mapGetters = require( 'vuex' ).mapGetters;
+	mapState = require( 'vuex' ).mapState;
 
 // @vue/component
 module.exports = exports = {
@@ -38,27 +48,17 @@ module.exports = exports = {
 		};
 	},
 	computed: $.extend( {},
-		mapGetters( [
-			'visible'
-		] ),
 		mapState( [
 			'isMobile',
 			'title',
-			'selectedIndex'
-		] ),
-		{
-			destination: function () {
-				if ( this.isMobile ) {
-					return '#content';
-				} else {
-					return '.searchresults';
-				}
-			}
-		}
+			'visible',
+			'nextTitle',
+			'destination'
+		] )
 	),
 	methods: $.extend( {},
 		mapActions( [
-			'handleTitleChange',
+			'toggleVisibily',
 			'closeQuickView',
 			'onPageClose'
 		] ),
@@ -88,7 +88,12 @@ module.exports = exports = {
 			},
 			restoreQuickViewOnNavigation() {
 				if ( this.queryQuickViewTitle ) {
-					this.handleTitleChange( this.queryQuickViewTitle );
+					const currentElement = this.currentElement( this.queryQuickViewTitle );
+					this.toggleVisibily( {
+						title: this.queryQuickViewTitle,
+						element: currentElement,
+						force: true
+					} );
 				}
 			},
 			getSearchResults() {
@@ -96,15 +101,23 @@ module.exports = exports = {
 				return $( '#mw-content-text .mw-search-result-ns-0' )
 					.not( '#mw-content-text .mw-search-interwiki-results .mw-search-result-ns-0' );
 			},
-			listenToMainBodyResize() {
-				const mainBodyElement = document.getElementById( 'bodyContent' );
-				const resizeObserver = new ResizeObserver( () => {
-					const firstResult = document.querySelector( '#mw-content-text .mw-search-result' );
-					this.calculateOffsetTop( firstResult );
-				} );
-				resizeObserver.observe( mainBodyElement );
+			currentElement: function ( title ) {
+				return this.getSearchResults().find( `[title='${title}']` ).closest( 'li' )[ 0 ];
 			},
-			isEnabled() {
+			scrollScreenOnMobile: function () {
+				if ( !this.isMobile ) {
+					return;
+				}
+				const currentElement = this.currentElement( this.title );
+
+				const docViewBottom = $( window ).scrollTop() + $( window ).height();
+				const elemBottom = $( currentElement ).offset().top + $( currentElement ).height();
+
+				if ( elemBottom >= docViewBottom ) {
+					this.currentElement( this.title ).scrollIntoView( { behavior: 'smooth' } );
+				}
+			},
+			isEnabled: function () {
 				let enable = !this.isMobile;
 				if ( ( new mw.Uri() ).query.quickViewEnableMobile !== undefined ) {
 					// casting with parseInt instead of Boolean to also consider
@@ -127,7 +140,7 @@ module.exports = exports = {
 		visible: {
 			handler( visible ) {
 				if ( visible ) {
-					const currentElement = this.getSearchResults().find( `[title='${this.title}']` ).closest( 'li' )[ 0 ];
+					const currentElement = this.currentElement( this.title );
 					this.calculateOffsetTop( currentElement );
 				}
 				this.setQueryQuickViewTitle();
@@ -149,6 +162,8 @@ module.exports = exports = {
 		const searchResults = this.getSearchResults();
 		for ( const searchResult of searchResults ) {
 			searchResult.classList.add( 'searchresult-with-quickview' );
+			const title = searchResult.querySelector( '.mw-search-result-heading a' ).getAttribute( 'title' );
+			searchResult.dataset.title = title;
 		}
 
 		searchResults.find( '.searchresult, .mw-search-result-data' ).click( function ( event ) {
@@ -157,7 +172,8 @@ module.exports = exports = {
 			if ( searchResultLink.hasAttribute( 'title' ) ) {
 				event.stopPropagation();
 				const resultTitle = searchResultLink.getAttribute( 'title' );
-				this.handleTitleChange( resultTitle );
+				const currentElement = this.currentElement( resultTitle );
+				this.toggleVisibily( { title: resultTitle, element: currentElement } );
 			}
 		}.bind( this ) );
 
@@ -183,11 +199,11 @@ module.exports = exports = {
 
 .mw-search-quick-view {
 
-	position: absolute;
 	background-color: white;
 	font-family: -apple-system, 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Lato', 'Helvetica', 'Arial', sans-serif;
 
 	&__desktop {
+		position: absolute;
 		border: solid 1px #c8CCd1;
 		right: 0px;
 		width: 30em;
@@ -197,14 +213,29 @@ module.exports = exports = {
 	&__mobile {
 		z-index: 1000;
 		width: 100%;
-		height: 100%;
+		display: flex;
+		overflow: auto;
+		height: 174px;
 		margin: 0;
 		top: 0;
+		& > * {
+			min-width: 300px;
+		}
 	}
-
 	// we normalise the P tag by removing margin added by vector
 	p {
 		margin: 0;
 	}
+}
+
+// Vue transition classes.
+.v-enter-active,
+.v-leave-active {
+	transition: height 0.3s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+	height: 0;
 }
 </style>

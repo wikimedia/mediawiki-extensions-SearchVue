@@ -9,6 +9,7 @@ const requestStatuses = {
 
 module.exports = {
 	title: null,
+	nextTitle: null,
 	selectedIndex: -1,
 	prevSelectedIndex: null,
 	isMobile: mw.config.get( 'skin' ) === 'minerva',
@@ -25,5 +26,7 @@ module.exports = {
 	requestStatus: {
 		query: requestStatuses.notStarted,
 		commons: requestStatuses.notStarted
-	}
+	},
+	visible: false,
+	destination: ''
 };
