@@ -1,0 +1,26 @@
+{
+	"@metadata": {
+		"authors": [
+			"FDoria-WMF"
+		]
+	},
+	"searchvue-desc": "Vue.js apresenta adições e melhorias para Especial:Busca",
+	"searchvue-close": "Fechar",
+	"searchvue-next": "Próximo",
+	"searchvue-previous": "Anterior",
+	"searchvue-label": "Ativar pré-visualização do resultado da pesquisa",
+	"searchvue-snippet-gotofullpage": "Ir para a página completa",
+	"searchvue-snippet-gotofullpage-ns0": "Ir para o artigo completo",
+	"searchvue-commons-viewmore": "Ver mais",
+	"searchvue-commons-footnote": "No Wikimedia Commons",
+	"searchvue-commons-heading": "Imagens relacionadas",
+	"searchvue-article-sections-heading": "Seções na página",
+	"searchvue-article-sections-heading-ns0": "Seções no artigo",
+	"searchvue-more-sections": "+ $1 mais {{PLURAL:$1| seção|seções}}",
+	"searchvue-help": "Pré-visualize o conteúdo da página e conteúdos relacionadas.",
+	"tutorial-popup-title": "Pré-visualizações de resultados de pesquisa",
+	"tutorial-popup-text1": "Clique no trecho do artigo para visualizar o resultado da pesquisa e ver o conteúdo relacionado.",
+	"tutorial-popup-text2": "Você pode ativar e desativar as visualizações na pesquisa",
+	"tutorial-popup-preferences": "preferências",
+	"tutorial-popup-close": "Fechar"
+}

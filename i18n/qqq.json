@@ -23,5 +23,5 @@
 	"tutorial-popup-text1": "First paragraph in the tutorial popup",
 	"tutorial-popup-text2": "Second paragraph in the tutorial popup",
 	"tutorial-popup-preferences": "Text that represent preferences",
-	"tutorial-popup-close": "Title for the svg used to close tutorial popup"
+	"tutorial-popup-close": "Title for the svg used to close tutorial popup\n{{identical|Close}}"
 }

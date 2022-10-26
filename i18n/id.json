@@ -1,9 +1,21 @@
 {
 	"@metadata": {
 		"authors": [
+			"BAPerdana-WMF",
 			"Veracious"
 		]
 	},
+	"searchvue-desc": "Vue.js merupakan fitur tambahan dan peningkatan untuk halaman Istimewa:Pencarian",
+	"searchvue-close": "Tutup",
+	"searchvue-next": "Selanjutnya",
+	"searchvue-previous": "Sebelumnya",
+	"searchvue-label": "Aktifkan pratinjau hasil pencarian",
+	"searchvue-snippet-gotofullpage": "Buka halaman penuh",
+	"searchvue-snippet-gotofullpage-ns0": "Menuju ke artikel lengkap",
+	"searchvue-commons-viewmore": "Lihat selengkapnya",
+	"searchvue-commons-footnote": "Konten dari Wikimedia Commons",
+	"searchvue-commons-heading": "Gambar terkait",
+	"searchvue-more-sections": "+ $1 {{PLURAL:$1|lainnya}}",
 	"tutorial-popup-title": "Pratinjau hasil pencarian",
 	"tutorial-popup-preferences": "preferensi",
 	"tutorial-popup-close": "Tutup"
