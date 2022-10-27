@@ -295,6 +295,8 @@ module.exports = {
 			retrieveInfoFromQuery( context, newTitle );
 			context.commit( 'SET_TITLE', newTitle );
 			pushTitleToHistoryState( newTitle );
+			// eslint-disable-next-line no-jquery/no-global-selector
+			$( 'body' ).addClass( 'search-preview-open' );
 
 			context.commit( 'SET_SELECTED_INDEX', selectedTitleIndex );
 		}
@@ -313,6 +315,8 @@ module.exports = {
 		context.commit( 'SET_DESCRIPTION' );
 		context.commit( 'SET_SECTIONS' );
 		removeQuickViewFromHistoryState();
+		// eslint-disable-next-line no-jquery/no-global-selector
+		$( 'body' ).removeClass( 'search-preview-open' );
 	},
 	/**
 	 * Navigate results
