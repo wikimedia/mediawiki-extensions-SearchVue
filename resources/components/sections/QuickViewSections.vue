@@ -7,13 +7,13 @@
 			:class="{ 'quickViewSections__list--expanded': hiddenSectionsLength === 1 }"
 		>
 			<li
-				v-for="section in sections"
+				v-for="(section, i) in sections"
 				:key="section"
 				ref="sections"
 				class="quickViewSections__pill"
-				:data-anchor="generateAnchor( section )"
+				:data-anchor="section"
 			>
-				<a :href="getSectionsUri( section )">
+				<a :href="getSectionsUri( section, i )">
 					{{ section }}
 				</a>
 			</li>
@@ -59,14 +59,15 @@ module.exports = exports = {
 		firstHiddenSectionsUrl() {
 			// Props sections and Refs may have a different order
 			// So we find the section using the sections props
-			const firstHiddenSection = this.sections.find( ( section ) => {
+			const firstHiddenSectionIndex = this.sections.findIndex( ( section ) => {
 				return this.hiddenSections.indexOf( section ) !== -1;
 			} );
 
-			if ( !firstHiddenSection ) {
+			if ( firstHiddenSectionIndex < 0 ) {
 				return;
 			}
-			return this.getSectionsUri( firstHiddenSection );
+
+			return this.getSectionsUri( this.sections[ firstHiddenSectionIndex ], firstHiddenSectionIndex );
 		},
 		headingText() {
 			const namespace = new mw.Title( this.title ).getNamespaceId();
@@ -76,12 +77,33 @@ module.exports = exports = {
 		}
 	},
 	methods: {
-		getSectionsUri( fragment ) {
-			const uri = new mw.Uri();
-			uri.query = { title: this.title };
-			uri.fragment = this.generateAnchor( fragment );
+		getSectionsUri( fragment, index ) {
+			// Known issue: vertical tab html entity (&#x0B;) ends up being
+			// a space in cirrusdoc output
 
-			return uri;
+			let hash = fragment
+				// mw.Title already does this transformation, but we'll also
+				// roundtrip through URL, which would otherwise end up
+				// encoding these as %20
+				.replace( / /g, '_' )
+				// We replicate the logic defined in Sanitizer:escapeIdForLink
+				// that is used by the parse API
+				.replace( /%([a-fA-F0-9]{2})/g, '%25$1' );
+
+			// In the case of duplicate sections, they get a _X suffix
+			const priorOccurences = this.sections
+				.slice( 0, index )
+				.filter( ( section ) => section === fragment )
+				.length;
+			if ( priorOccurences > 0 ) {
+				hash += '_' + ( priorOccurences + 1 );
+			}
+
+			// Roundtrip fragment through URL to ensure it's properly en-/decoded
+			// before feeding it into mw.Title
+			const url = new URL( '#' + hash, mw.config.get( 'wgServer' ) );
+			const title = new mw.Title( this.title + url.hash );
+			return title.getUrl();
 		},
 		defineHiddenSection( sections, sectionsContainer ) {
 			if ( !sections || !sectionsContainer ) {
@@ -98,13 +120,6 @@ module.exports = exports = {
 			} );
 
 			this.hiddenSections = hiddenSectionsAnchors;
-		},
-		generateAnchor( name ) {
-
-			// We replicate the logic defined in Sanitizer:escapeIdForLink
-			// that is used by the parse API
-			const formattedAnchor = name.replace( /[\t\n\f\r ]/g, '_' );
-			return formattedAnchor.replace( '/%([a-fA-F0-9]{2})/g', '%25$1' );
 		}
 	},
 	watch: {
