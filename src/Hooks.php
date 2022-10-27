@@ -45,11 +45,13 @@ class Hooks implements
 			$repositorySearchUri = $services->getMainConfig()->get( 'QuickViewMediaRepositorySearchUri' );
 			$repositoryUri = $services->getMainConfig()->get( 'QuickViewMediaRepositoryUri' );
 			$searchFilterForQID = $services->getMainConfig()->get( 'QuickViewSearchFilterForQID' );
+			$enableMobile = $services->getMainConfig()->get( 'QuickViewEnableMobile' );
 			$special->getOutput()->addJsConfigVars( [
 				'wgQuickViewMediaRepositoryApiBaseUri' => $repositoryApiBaseUri,
 				'wgQuickViewMediaRepositorySearchUri' => $repositorySearchUri,
 				'wgQuickViewMediaRepositoryUri' => $repositoryUri,
-				'wgQuickViewSearchFilterForQID' => $searchFilterForQID
+				'wgQuickViewSearchFilterForQID' => $searchFilterForQID,
+				'wgQuickViewEnableMobile' => $enableMobile
 			] );
 		}
 	}
