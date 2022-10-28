@@ -2,7 +2,7 @@
 	"name": "SearchVue",
 	"private": true,
 	"scripts": {
-		"test": "grunt test",
+		"test": "grunt test && npm run test:unit",
 		"test:unit": "jest",
 		"lint:fix": "grunt fix"
 	},
