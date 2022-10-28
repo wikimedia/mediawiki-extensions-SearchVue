@@ -22,6 +22,9 @@
 	"searchvue-article-sections-heading-ns0": "Разделы в статье",
 	"searchvue-more-sections": "+ ещё $1 {{PLURAL:$1|секция|секции|секций}}",
 	"searchvue-help": "Предпросмотр содержимого страницы и связанного содержимого.",
+	"tutorial-popup-title": "Предпосмотр результатов поиска",
+	"tutorial-popup-text1": "Нажмите на фрагмент статьи, чтобы просмотреть результат поиска и соответствующее содержание.",
+	"tutorial-popup-text2": "Вы можете включать и выключать предпосмотр в поиске",
 	"tutorial-popup-preferences": "настройки",
 	"tutorial-popup-close": "Закрыть"
 }

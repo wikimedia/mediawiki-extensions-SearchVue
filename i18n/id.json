@@ -15,8 +15,13 @@
 	"searchvue-commons-viewmore": "Lihat selengkapnya",
 	"searchvue-commons-footnote": "Konten dari Wikimedia Commons",
 	"searchvue-commons-heading": "Gambar terkait",
+	"searchvue-article-sections-heading": "Subjudul di halaman",
+	"searchvue-article-sections-heading-ns0": "Subjudul di artikel",
 	"searchvue-more-sections": "+ $1 {{PLURAL:$1|lainnya}}",
+	"searchvue-help": "Pratinjau isi halaman dan konten terkait.",
 	"tutorial-popup-title": "Pratinjau hasil pencarian",
+	"tutorial-popup-text1": "Klik pada cuplikan artikel untuk melihat pratinjau dari hasil pencarian dan melihat konten terkait.",
+	"tutorial-popup-text2": "Anda dapat mengaktifkan dan menonaktifkan pratinjau dalam pencarian",
 	"tutorial-popup-preferences": "preferensi",
 	"tutorial-popup-close": "Tutup"
 }
