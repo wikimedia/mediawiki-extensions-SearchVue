@@ -194,10 +194,20 @@ const setCommonsInfo = ( page, context ) => {
 		iiurlwidth: 365
 	};
 
+	context.commit( 'SET_REQUEST_STATUS', {
+		type: 'commons',
+		status: context.state.requestStatuses.inProgress
+	} );
+
 	api
 		.get( options )
 		.done( ( result ) => {
 			if ( !result || !result.query || !result.query.pages || result.query.pages.length === 0 ) {
+
+				context.commit( 'SET_REQUEST_STATUS', {
+					type: 'commons',
+					status: context.state.requestStatuses.done
+				} );
 				return;
 			}
 
@@ -218,9 +228,18 @@ const setCommonsInfo = ( page, context ) => {
 			};
 
 			context.commit( 'SET_COMMONS', commonsInfo );
+			context.commit( 'SET_REQUEST_STATUS', {
+				type: 'commons',
+				status: context.state.requestStatuses.done
+			} );
 		} )
 		.catch( () => {
 			context.commit( 'SET_COMMONS' );
+
+			context.commit( 'SET_REQUEST_STATUS', {
+				type: 'commons',
+				status: context.state.requestStatuses.error
+			} );
 		} );
 };
 
@@ -232,6 +251,11 @@ const setCommonsInfo = ( page, context ) => {
  * @param {string} title
  */
 const retrieveInfoFromQuery = ( context, title ) => {
+
+	context.commit( 'SET_REQUEST_STATUS', {
+		type: 'query',
+		status: context.state.requestStatuses.inProgress
+	} );
 	const api = new mw.Api();
 	const options = {
 		action: 'query',
@@ -248,6 +272,11 @@ const retrieveInfoFromQuery = ( context, title ) => {
 		.get( options )
 		.done( ( result ) => {
 			if ( !result || !result.query || !result.query.pages || result.query.pages.length === 0 ) {
+
+				context.commit( 'SET_REQUEST_STATUS', {
+					type: 'query',
+					status: context.state.requestStatuses.done
+				} );
 				return;
 			}
 
@@ -258,12 +287,22 @@ const retrieveInfoFromQuery = ( context, title ) => {
 			setCommonsInfo( page, context );
 			setDescription( page, context );
 			setArticleSections( page, context );
+
+			context.commit( 'SET_REQUEST_STATUS', {
+				type: 'query',
+				status: context.state.requestStatuses.done
+			} );
 		} )
 		.catch( () => {
 			context.commit( 'SET_THUMBNAIL' );
 			context.commit( 'SET_COMMONS' );
 			context.commit( 'SET_DESCRIPTION' );
 			context.commit( 'SET_SECTIONS' );
+
+			context.commit( 'SET_REQUEST_STATUS', {
+				type: 'query',
+				status: context.state.requestStatuses.error
+			} );
 		} );
 };
 

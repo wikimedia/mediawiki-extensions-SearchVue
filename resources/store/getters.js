@@ -36,6 +36,22 @@ module.exports = {
 			additionalInfo
 		);
 
+	},
+	/**
+	 * Define if any part of the search preview are still in a loading state
+	 *
+	 * @param {Object} state
+	 *
+	 * @return {Object}
+	 */
+	loading: ( state ) => {
+		for ( const property in state.requestStatus ) {
+			if ( state.requestStatus[ property ] === state.requestStatuses.inProgress ) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 };

@@ -58,5 +58,19 @@ module.exports = {
 		state.commons.images = !commonsInfo ? [] : commonsInfo.images;
 		state.commons.hasMoreImages = commonsInfo && commonsInfo.hasMoreImages;
 		state.commons.searchLink = !commonsInfo ? '' : commonsInfo.searchLink;
+	},
+	/**
+	 * Updates the status of a current API requests
+	 *
+	 * @param {Object} state
+	 * @param {Object} payload
+	 * @param {string} payload.type
+	 * @param {string} payload.status
+	 */
+	SET_REQUEST_STATUS: ( state, payload ) => {
+
+		if ( state.requestStatus[ payload.type ] ) {
+			state.requestStatus[ payload.type ] = payload.status;
+		}
 	}
 };

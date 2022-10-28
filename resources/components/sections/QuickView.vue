@@ -36,23 +36,30 @@
 				@close="closeQuickView"
 			></quick-view-image>
 		</header>
-		<quick-view-description
-			:title="currentResult.prefixedText"
-			:description="currentResult.description"
-		></quick-view-description>
-		<quick-view-snippet
-			:text="textWithEllipsis"
-			:title="currentResult.prefixedText"
-		></quick-view-snippet>
-		<quick-view-sections
-			v-if="hasSections"
-			:title="currentResult.prefixedText"
-			:sections="currentResult.sections"
-		></quick-view-sections>
+		<template v-if="requestStatus.query === requestStatuses.inProgress" >
+			<content-skeleton></content-skeleton>
+			<content-skeleton :lines="4"></content-skeleton>
+		</template>
+		<template v-else-if="requestStatus.query === requestStatuses.done" >
+			<quick-view-description
+				:title="currentResult.prefixedText"
+				:description="currentResult.description"
+			></quick-view-description>
+			<quick-view-snippet
+				:text="textWithEllipsis"
+				:title="currentResult.prefixedText"
+			></quick-view-snippet>
+			<quick-view-sections
+				v-if="hasSections"
+				:title="currentResult.prefixedText"
+				:sections="currentResult.sections"
+			></quick-view-sections>
+		</template>
 		<quick-view-commons
 			v-if="hasCommonsImages"
 			v-bind="currentResult.commons"
 		></quick-view-commons>
+		<loading-dots :loading="loading" />
 	</div>
 </template>
 
@@ -67,6 +74,8 @@ const QuickViewImage = require( './QuickViewImage.vue' ),
 	QuickViewSnippet = require( './QuickViewSnippet.vue' ),
 	QuickViewSections = require( './QuickViewSections.vue' ),
 	QuickViewCommons = require( './QuickViewCommons.vue' ),
+	ContentSkeleton = require( '../generic/ContentSkeleton.vue' ),
+	LoadingDots = require( '../generic/LoadingDots.vue' ),
 	mapActions = require( 'vuex' ).mapActions,
 	mapGetters = require( 'vuex' ).mapGetters,
 	mapState = require( 'vuex' ).mapState;
@@ -79,17 +88,22 @@ module.exports = exports = {
 		'quick-view-description': QuickViewDescription,
 		'quick-view-snippet': QuickViewSnippet,
 		'quick-view-sections': QuickViewSections,
-		'quick-view-commons': QuickViewCommons
+		'quick-view-commons': QuickViewCommons,
+		'content-skeleton': ContentSkeleton,
+		'loading-dots': LoadingDots
 	},
 	data: function () {
 		return {};
 	},
 	computed: $.extend( {},
 		mapState( [
-			'isMobile'
+			'isMobile',
+			'requestStatus',
+			'requestStatuses'
 		] ),
 		mapGetters( [
-			'currentResult'
+			'currentResult',
+			'loading'
 		] ),
 		{
 			hasCommonsImages() {
@@ -142,5 +156,6 @@ module.exports = exports = {
 		padding-bottom: 24px;
 		min-height: 32px;
 	}
+
 }
 </style>
