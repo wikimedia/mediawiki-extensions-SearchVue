@@ -1,8 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
-			"FDoria-WMF"
+			"FDoria-WMF",
+			"Hamilton Abreu"
 		]
 	},
-	"searchvue-desc": "Vue.js apresenta adições e melhorias para Especial:Busca"
+	"searchvue-desc": "Adições e melhoramentos da funcionalidade Vue.js a Especial:Pesquisa"
 }
