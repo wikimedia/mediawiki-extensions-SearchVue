@@ -77,8 +77,7 @@ module.exports = exports = {
 	border-radius: 2px;
 	padding: 12px;
 	width: 320px;
-	left: 380px;
-	margin-top: -25px;
+	left: 310px;
 	&__triangle {
 		top: 0;
 		left: 50%;

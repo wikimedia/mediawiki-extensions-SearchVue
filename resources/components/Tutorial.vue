@@ -3,7 +3,7 @@
 		<quick-view-tutorial-popup
 			v-if="tutorialPopupVisible"
 			:url="preferencesUrl"
-			:style="{ 'top': firstSectionHeight + 'px' }"
+			:style="{ 'top': firstSectionHeight / 2 + 'px' }"
 			@close="onCloseTutorialPopup"
 		>
 		</quick-view-tutorial-popup>
