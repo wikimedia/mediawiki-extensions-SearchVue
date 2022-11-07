@@ -17,5 +17,10 @@
 	"searchvue-article-sections-heading": "Sekcje na stronie",
 	"searchvue-article-sections-heading-ns0": "Sekcje w artykule",
 	"searchvue-more-sections": "+ $1 więcej {{PLURAL:$1|sekcja|sekcje|sekcji}}",
-	"searchvue-help": "Wyświetl podgląd zawartości strony i powiązanych stron."
+	"searchvue-help": "Wyświetl podgląd zawartości strony i powiązanych treści.",
+	"tutorial-popup-title": "Podgląd wyników wyszukiwania",
+	"tutorial-popup-text1": "Kliknij fragment artykułu, aby wyświetlić podgląd wyników i zobaczyć powiązane treści.",
+	"tutorial-popup-text2": "Możesz włączać i wyłączać podgląd podczas wyszukiwania",
+	"tutorial-popup-preferences": "preferencje",
+	"tutorial-popup-close": "Zamknij"
 }
