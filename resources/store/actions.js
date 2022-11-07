@@ -264,6 +264,7 @@ const retrieveInfoFromQuery = ( context, title ) => {
 		prop: 'pageimages|pageprops|cirrusdoc',
 		formatversion: 2,
 		pithumbsize: 400,
+		pilicense: 'free',
 		piprop: 'thumbnail|name|original',
 		cdincludes: 'heading'
 	};
