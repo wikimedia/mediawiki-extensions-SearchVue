@@ -191,7 +191,7 @@ const setCommonsInfo = ( page, context ) => {
 		gsrlimit: 7,
 		prop: 'imageinfo',
 		iiprop: 'url',
-		iiurlwidth: 365
+		iiurlwidth: 400
 	};
 
 	context.commit( 'SET_REQUEST_STATUS', {
@@ -263,7 +263,7 @@ const retrieveInfoFromQuery = ( context, title ) => {
 		titles: title,
 		prop: 'pageimages|pageprops|cirrusdoc',
 		formatversion: 2,
-		pithumbsize: 420,
+		pithumbsize: 400,
 		piprop: 'thumbnail|name|original',
 		cdincludes: 'heading'
 	};
