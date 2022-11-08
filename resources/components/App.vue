@@ -116,7 +116,7 @@ module.exports = exports = {
 		visible: {
 			handler( visible ) {
 				if ( visible ) {
-					const currentElement = this.getSearchResults().find( `[title=${this.title}]` ).closest( 'li' )[ 0 ];
+					const currentElement = this.getSearchResults().find( `[title='${this.title}']` ).closest( 'li' )[ 0 ];
 					this.calculateOffsetTop( currentElement );
 				}
 			},
