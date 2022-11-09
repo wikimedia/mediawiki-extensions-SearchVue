@@ -4,6 +4,7 @@
 			:src="source"
 			:alt="alt"
 			:aspectratio="Math.max( minAspectRatio, width / height )"
+			:key="source"
 		></image-with-loading-background>
 	</div>
 </template>
