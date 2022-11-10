@@ -42,7 +42,7 @@ module.exports = exports = {
 
 .quickViewDescription{
 	width: 365px;
-	margin: 0 auto 32px;
+	margin: 0 auto 20px;
 
 	h2 {
 		font-family: inherit;

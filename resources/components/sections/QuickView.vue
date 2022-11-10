@@ -153,7 +153,7 @@ module.exports = exports = {
 	}
 
 	header {
-		padding-bottom: 24px;
+		padding-bottom: 20px;
 		min-height: 32px;
 	}
 
