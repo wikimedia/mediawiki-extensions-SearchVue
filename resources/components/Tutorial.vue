@@ -40,7 +40,7 @@ module.exports = exports = {
 		] ),
 		{
 			preferencesUrl() {
-				return new mw.Title( 'Preferences', -1 ).getUrl();
+				return new mw.Title( 'Preferences#mw-prefsection-searchoptions', -1 ).getUrl();
 			}
 		}
 	),
