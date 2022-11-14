@@ -148,7 +148,7 @@ module.exports = exports = {
 		overflow: hidden;
 
 		&--expanded{
-			height: 136px;
+			max-height: 140px;
 		}
 	}
 
