@@ -317,20 +317,23 @@ module.exports = {
 	 * @param {Object} context.state
 	 * @param {Function} context.commit
 	 * @param {Function} context.dispatch
-	 * @param {?string} newTitle
+	 * @param {?string} title
 	 */
-	handleTitleChange: ( context, newTitle ) => {
-		if ( !newTitle ) {
+	handleTitleChange: ( context, title ) => {
+		if ( !title ) {
 			return;
 		}
+
+		const newTitle = title;
 		const currentTitle = context.state.title;
+
+		// This invokes on each title change
 		context.dispatch( 'closeQuickView' );
 
 		if ( currentTitle !== newTitle ) {
 			const selectedTitleIndex = context.state.results.findIndex( ( result ) => {
 				return result.prefixedText === newTitle;
 			} );
-
 			setThumbnail( context.state.results[ selectedTitleIndex ].thumbnail, '', context );
 			retrieveInfoFromQuery( context, newTitle );
 			context.commit( 'SET_TITLE', newTitle );
@@ -339,6 +342,8 @@ module.exports = {
 			$( 'body' ).addClass( 'search-preview-open' );
 
 			context.commit( 'SET_SELECTED_INDEX', selectedTitleIndex );
+
+			context.dispatch( 'events/logQuickViewEvent', { action: 'open-searchpreview', selectedIndex: context.state.selectedIndex }, { root: true } );
 		}
 	},
 	/**
@@ -348,6 +353,9 @@ module.exports = {
 	 * @param {Function} context.commit
 	 */
 	closeQuickView: ( context ) => {
+		if ( context.state.title !== null ) {
+			context.dispatch( 'events/logQuickViewEvent', { action: 'close-searchpreview', selectedIndex: context.state.selectedIndex }, { root: true } );
+		}
 		context.commit( 'SET_TITLE', null );
 		context.commit( 'SET_SELECTED_INDEX', -1 );
 		context.commit( 'SET_THUMBNAIL' );
@@ -357,6 +365,15 @@ module.exports = {
 		removeQuickViewFromHistoryState();
 		// eslint-disable-next-line no-jquery/no-global-selector
 		$( 'body' ).removeClass( 'search-preview-open' );
+	},
+	/**
+	 * Emit close event when page is closing/refreshing while QuickView is open
+	 *
+	 * @param {Object} context
+	 * @param {Function} context.dispatch
+	 */
+	onPageClose: ( context ) => {
+		context.dispatch( 'events/logQuickViewEvent', { action: 'close-searchpreview', selectedIndex: context.state.selectedIndex }, { root: true } );
 	},
 	/**
 	 * Navigate results

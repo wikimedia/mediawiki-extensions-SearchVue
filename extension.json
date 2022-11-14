@@ -58,7 +58,8 @@
 				"resources/store/state.js",
 				"resources/store/mutations.js",
 				"resources/store/getters.js",
-				"resources/store/actions.js"
+				"resources/store/actions.js",
+				"resources/store/modules/Event.js"
 			],
 			"dependencies": [
 				"mediawiki.Uri",

@@ -33,7 +33,8 @@ module.exports = exports = {
 	},
 	data: function () {
 		return {
-			offsetTop: null
+			offsetTop: null,
+			queryQuickViewTitle: null
 		};
 	},
 	computed: $.extend( {},
@@ -42,7 +43,8 @@ module.exports = exports = {
 		] ),
 		mapState( [
 			'isMobile',
-			'title'
+			'title',
+			'selectedIndex'
 		] ),
 		{
 			destination: function () {
@@ -57,9 +59,17 @@ module.exports = exports = {
 	methods: $.extend( {},
 		mapActions( [
 			'handleTitleChange',
-			'closeQuickView'
+			'closeQuickView',
+			'onPageClose'
 		] ),
+		mapActions( 'events', [ 'setSearchResultPosition', 'setQuickViewEventProps' ] ),
 		{
+			setQueryQuickViewTitle: function () {
+				const mwUri = new mw.Uri();
+				if ( mwUri.query.quickView ) {
+					this.queryQuickViewTitle = mwUri.query.quickView;
+				}
+			},
 			calculateOffsetTop: function ( element ) {
 				// TODO: Improve calculation of the QuickView after improvement of the search page
 				if ( !this.isMobile ) {
@@ -77,13 +87,8 @@ module.exports = exports = {
 				}
 			},
 			restoreQuickViewOnNavigation() {
-				const mwUri = new mw.Uri();
-
-				const queryHasQuickView = !!mwUri.query.quickView;
-
-				if ( queryHasQuickView ) {
-					const title = mwUri.query.quickView;
-					this.handleTitleChange( title );
+				if ( this.queryQuickViewTitle ) {
+					this.handleTitleChange( this.queryQuickViewTitle );
 				}
 			},
 			getSearchResults() {
@@ -109,6 +114,12 @@ module.exports = exports = {
 					enable = enable || mw.config.get( 'wgQuickViewEnableMobile' );
 				}
 				return enable;
+			},
+			leaving() {
+				// Emit QuickView closing event only if QuickView is present in url
+				if ( this.queryQuickViewTitle ) {
+					this.onPageClose();
+				}
 			}
 		}
 	),
@@ -119,18 +130,27 @@ module.exports = exports = {
 					const currentElement = this.getSearchResults().find( `[title='${this.title}']` ).closest( 'li' )[ 0 ];
 					this.calculateOffsetTop( currentElement );
 				}
+				this.setQueryQuickViewTitle();
 			},
 			flush: 'post'
 		}
+	},
+	created() {
+		this.setQuickViewEventProps().then( () => {
+			// This event triggers only if user interacts with the page before closing
+			window.addEventListener( 'beforeunload', this.leaving );
+		} );
 	},
 	mounted: function () {
 		if ( !this.isEnabled() ) {
 			return;
 		}
+
 		const searchResults = this.getSearchResults();
 		for ( const searchResult of searchResults ) {
 			searchResult.classList.add( 'searchresult-with-quickview' );
 		}
+
 		searchResults.find( '.searchresult, .mw-search-result-data' ).click( function ( event ) {
 			const searchResultLink = event.currentTarget.parentElement.getElementsByTagName( 'a' )[ 0 ];
 
@@ -147,6 +167,8 @@ module.exports = exports = {
 				this.closeQuickView();
 			}
 		}.bind( this ) );
+
+		this.setQueryQuickViewTitle();
 
 		// Restore the quick view in the case in which the user has navigated back to a page
 		// that had a quickView open
