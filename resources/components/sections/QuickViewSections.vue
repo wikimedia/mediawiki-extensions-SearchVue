@@ -157,7 +157,7 @@ module.exports = exports = {
 <style lang="less">
 @import 'mediawiki.ui/variables.less';
 
-.quickViewSections{
+.quickViewSections {
 	width: 365px;
 	margin: 0 auto 20px;
 
@@ -171,13 +171,14 @@ module.exports = exports = {
 		max-height: 100px;
 		overflow: hidden;
 
-		&--expanded{
+		&--expanded {
 			max-height: 140px;
 		}
 	}
 
-	h3, &__pill {
-		font-weight: 400;
+	h3,
+	&__pill {
+		font-weight: normal;
 		font-size: 1em;
 		margin: 0;
 		padding: 0;
@@ -187,14 +188,15 @@ module.exports = exports = {
 		text-overflow: ellipsis;
 	}
 
-	h3{
+	h3 {
 		margin-bottom: 8px;
 	}
 
-	&__pill{
+	&__pill {
 		padding: 2px 8px;
 		border-radius: 12px;
 		border: 1px solid @colorGray10;
+
 		a {
 			font-size: 0.9285em;
 			line-height: 1.286em;

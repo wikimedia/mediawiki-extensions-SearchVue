@@ -26,7 +26,6 @@ module.exports = exports = {
 	// Re-usable LESS project code.
 	@width-bounce-dot: 1em;
 	@margin-bounce-dot: @width-bounce-dot / 4;
-
 	white-space: nowrap;
 	display: block;
 	width: 3 * @width-bounce-dot + 2 * @margin-bounce-dot;
@@ -61,6 +60,7 @@ module.exports = exports = {
 		100% {
 			transform: scale( 0.625 );
 		}
+
 		20% {
 			opacity: 0.87;
 			transform: scale( 1 );

@@ -40,7 +40,7 @@ module.exports = exports = {
 <style lang="less">
 @import 'mediawiki.ui/variables.less';
 
-.quickViewDescription{
+.quickViewDescription {
 	width: 365px;
 	margin: 0 auto 20px;
 

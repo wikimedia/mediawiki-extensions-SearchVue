@@ -198,14 +198,13 @@ module.exports = exports = {
 @import '../styles/Search-result-mobile.less';
 
 .mw-search-quick-view {
-
-	background-color: white;
-	font-family: -apple-system, 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Lato', 'Helvetica', 'Arial', sans-serif;
+	background-color: #000;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Lato', 'Helvetica', 'Arial', sans-serif;
 
 	&__desktop {
 		position: absolute;
-		border: solid 1px #c8CCd1;
-		right: 0px;
+		border: solid 1px #c8ccd1;
+		right: 0;
 		width: 30em;
 		display: inline-block;
 	}
@@ -218,6 +217,7 @@ module.exports = exports = {
 		height: 174px;
 		margin: 0;
 		top: 0;
+
 		& > * {
 			min-width: 300px;
 		}
