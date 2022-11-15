@@ -20,6 +20,17 @@ li.searchresult-with-quickview .mw-search-result-data:hover {
 	}
 }
 
+/* use the opposite arrow on RTL */
+body.rtl {
+	li.searchresult-with-quickview--hover .searchresult,
+	li.searchresult-with-quickview .searchresult:hover,
+	li.searchresult-with-quickview .mw-search-result-data:hover {
+		&:after {
+			transform: scaleX( -1 );
+		}
+	}
+}
+
 .search-preview-open:not( .skin-minerva ) {
 	/* stylelint-disable-next-line selector-max-id */
 	#mw-interwiki-results {
