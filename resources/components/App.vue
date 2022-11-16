@@ -215,11 +215,19 @@ module.exports = exports = {
 		display: flex;
 		overflow: auto;
 		height: 174px;
+		overflow-y: hidden;
 		margin: 0;
 		top: 0;
 
 		& > * {
 			min-width: 300px;
+		}
+
+		& > div {
+			margin-left: 8px;
+			border-radius: 2px;
+			border: 1px solid #c8ccd1;
+			margin-bottom: 0;
 		}
 	}
 	// we normalise the P tag by removing margin added by vector
