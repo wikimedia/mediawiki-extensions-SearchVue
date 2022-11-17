@@ -9,7 +9,8 @@
 				:key="image.index"
 				class="loading"
 			>
-				<a :href="image.imageinfo[ 0 ].descriptionurl">
+				<a :href="image.imageinfo[ 0 ].descriptionurl"
+					@click="onCommonsClick">
 					<image-with-loading-background
 						:src="image.imageinfo[ 0 ].thumburl"
 						:alt="image.title"
@@ -22,6 +23,7 @@
 		<a
 			v-if="hasMoreImages || hasHiddenImages"
 			:href="searchLink"
+			@click="onCommonsClick"
 		>
 			{{ $i18n( 'searchvue-commons-viewmore' ).text() }}
 		</a>
@@ -85,6 +87,12 @@ module.exports = exports = {
 		},
 		onImgLoad() {
 			this.numberOfImagesLoaded++;
+		},
+		onCommonsClick() {
+			this.$emit(
+				'log-event',
+				'click-interwiki-commons'
+			);
 		}
 	},
 	watch: {

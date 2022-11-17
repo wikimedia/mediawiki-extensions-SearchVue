@@ -53,11 +53,13 @@
 				v-if="hasSections"
 				:title="currentResult.prefixedText"
 				:sections="currentResult.sections"
+				@log-event="onLogEvent"
 			></quick-view-sections>
 		</template>
 		<quick-view-commons
 			v-if="hasCommonsImages"
 			v-bind="currentResult.commons"
+			@log-event="onLogEvent"
 		></quick-view-commons>
 		<loading-dots :loading="loading" />
 	</div>
@@ -99,7 +101,8 @@ module.exports = exports = {
 		mapState( [
 			'isMobile',
 			'requestStatus',
-			'requestStatuses'
+			'requestStatuses',
+			'selectedIndex'
 		] ),
 		mapGetters( [
 			'currentResult',
@@ -119,11 +122,19 @@ module.exports = exports = {
 			}
 		}
 	),
-	methods: $.extend( {},
-		mapActions( [
-			'closeQuickView',
-			'navigate'
-		] )
+	methods: $.extend( {
+		onLogEvent( action ) {
+			this.logQuickViewEvent( {
+				action: action,
+				selectedIndex: this.selectedIndex
+			} );
+		}
+	},
+	mapActions( [
+		'closeQuickView',
+		'navigate'
+	] ),
+	mapActions( 'events', [ 'logQuickViewEvent' ] )
 	)
 };
 </script>

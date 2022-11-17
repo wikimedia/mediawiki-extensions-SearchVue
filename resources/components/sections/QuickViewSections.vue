@@ -13,7 +13,9 @@
 				class="quickViewSections__pill"
 				:data-anchor="section"
 			>
-				<a :href="getSectionsUri( section, i )">
+				<a :href="getSectionsUri( section, i )"
+					@click="onSectionClick('click-section')"
+				>
 					{{ section }}
 				</a>
 			</li>
@@ -21,6 +23,7 @@
 		<a
 			v-if="hiddenSectionsLength > 1"
 			:href="firstHiddenSectionsUrl"
+			@click="onSectionClick('click-section-view-more')"
 		>
 			{{ $i18n( 'searchvue-more-sections', hiddenSectionsLength ).text() }}
 		</a>
@@ -120,6 +123,12 @@ module.exports = exports = {
 			} );
 
 			this.hiddenSections = hiddenSectionsAnchors;
+		},
+		onSectionClick( action ) {
+			this.$emit(
+				'log-event',
+				action
+			);
 		}
 	},
 	watch: {

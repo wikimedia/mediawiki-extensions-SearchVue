@@ -1,10 +1,10 @@
 <template>
 	<div class="QuickViewImage">
 		<image-with-loading-background
+			:key="source"
 			:src="source"
 			:alt="alt"
 			:aspectratio="Math.max( minAspectRatio, width / height )"
-			:key="source"
 		></image-with-loading-background>
 	</div>
 </template>

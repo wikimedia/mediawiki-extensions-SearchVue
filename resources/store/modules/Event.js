@@ -35,7 +35,12 @@ const events = {
 		 * @param {string} action
 		 */
 		logQuickViewEvent: ( context, { action, selectedIndex } ) => {
-			mw.loader.using( [ 'ext.eventLogging', 'ext.wikimediaEvents' ] ).then( function () {
+
+			if ( !action ) {
+				return;
+			}
+
+			return mw.loader.using( [ 'ext.eventLogging', 'ext.wikimediaEvents' ] ).then( function () {
 
 				context.commit( 'SET_SESSION_ID', mw.storage.get( 'wmE-sS--sessionId' ) );
 				/* eslint-disable camelcase */
