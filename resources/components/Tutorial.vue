@@ -3,6 +3,7 @@
 		<quick-view-tutorial-popup
 			v-if="tutorialPopupVisible"
 			:url="preferencesUrl"
+			:is-mobile="isMobile"
 			:style="{ 'top': firstSectionHeight / 2 + 'px' }"
 			@close="onCloseTutorialPopup"
 		>
@@ -36,7 +37,8 @@ module.exports = exports = {
 	},
 	computed: $.extend( {},
 		mapState( [
-			'selectedIndex'
+			'selectedIndex',
+			'isMobile'
 		] ),
 		{
 			preferencesUrl() {
@@ -103,5 +105,11 @@ module.exports = exports = {
 .tutorial-popup {
 	position: absolute;
 	z-index: 50;
+}
+
+.skin-minerva {
+	.tutorial-popup {
+		position: relative;
+	}
 }
 </style>

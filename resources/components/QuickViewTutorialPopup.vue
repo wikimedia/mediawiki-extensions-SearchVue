@@ -1,5 +1,5 @@
 <template>
-	<section class="QuickViewTutorialPopup">
+	<section :class="QuickViewTutorialPopupClass">
 		<div class="QuickViewTutorialPopup__triangle">
 		</div>
 		<div class="QuickViewTutorialPopup__heading">
@@ -32,14 +32,21 @@
 			</div>
 		</div>
 		<div class="QuickViewTutorialPopup__content">
-			<p>
-				{{ $i18n('tutorial-popup-text1').text() }}
-			</p>
-			<p>
-				{{ $i18n('tutorial-popup-text2').text() }} <a :href="url" target="_blank">
-					{{ $i18n('tutorial-popup-preferences').text() }}
-				</a>.
-			</p>
+			<template v-if="isMobile">
+				<p>
+					{{ $i18n('tutorial-popup-text-mobile').text() }}
+				</p>
+			</template>
+			<template v-else>
+				<p>
+					{{ $i18n('tutorial-popup-text1').text() }}
+				</p>
+				<p>
+					{{ $i18n('tutorial-popup-text2').text() }} <a :href="url" target="_blank">
+						{{ $i18n('tutorial-popup-preferences').text() }}
+					</a>.
+				</p>
+			</template>
 		</div>
 	</section>
 </template>
@@ -58,6 +65,15 @@ module.exports = exports = {
 		url: {
 			type: String,
 			required: true
+		},
+		isMobile: {
+			type: String,
+			required: true
+		}
+	},
+	computed: {
+		QuickViewTutorialPopupClass() {
+			return this.isMobile ? 'QuickViewTutorialPopup__mobile' : 'QuickViewTutorialPopup';
 		}
 	}
 };
@@ -70,6 +86,23 @@ module.exports = exports = {
 @pulse-dot-transparent: fade(@pulse-dot-color, 0);
 
 .QuickViewTutorialPopup {
+	left: 310px;
+}
+
+.QuickViewTutorialPopup__mobile {
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+
+	@media ( max-width: 360px ) {
+		& {
+			margin-left: 8px;
+		}
+	}
+}
+
+.QuickViewTutorialPopup,
+.QuickViewTutorialPopup__mobile {
 	position: absolute;
 	box-sizing: border-box;
 	background: #fff;
@@ -77,7 +110,6 @@ module.exports = exports = {
 	border-radius: 2px;
 	padding: 12px;
 	width: 320px;
-	left: 310px;
 
 	&__triangle {
 		top: 0;
