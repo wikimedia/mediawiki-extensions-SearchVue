@@ -1,7 +1,8 @@
 const initialState = require( '../../../resources/store/state.js' ),
 	events = require( '../../../resources/store/modules/Event.js' ),
 	when = require( 'jest-when' ).when,
-	commonsFakeResponse = require( '../fixtures/commonsApiResponse.js' );
+	commonsFakeResponse = require( '../fixtures/commonsApiResponse.js' ),
+	fakeElement = require( '../mocks/element.js' );
 
 require( '../mocks/history.js' );
 
@@ -50,9 +51,9 @@ afterEach( () => {
 
 describe( 'Actions', () => {
 	describe( 'handleTitleChange', () => {
-		describe( 'when called with undefined', () => {
+		describe( 'when called with empty title', () => {
 			it( 'Nothing is committed', () => {
-				actions.handleTitleChange( context, undefined );
+				actions.handleTitleChange( context, { nextTitle: undefined } );
 
 				expect( context.commit ).not.toHaveBeenCalled();
 
@@ -62,7 +63,7 @@ describe( 'Actions', () => {
 			it( 'Dispacth a call to closeQuickView', () => {
 				const title = 'dummy';
 				context.state.title = title;
-				actions.handleTitleChange( context, title );
+				actions.handleTitleChange( context, { newTitle: title } );
 
 				expect( actions.dispatch ).toHaveBeenCalled();
 				expect( actions.dispatch ).toHaveBeenCalledWith( 'closeQuickView' );
@@ -87,7 +88,7 @@ describe( 'Actions', () => {
 				};
 				global.mw.Api.prototype.get.mockReturnValueOnce( $.Deferred().resolve( dummyResponse ).promise() );
 				const title = 'dummy1';
-				actions.handleTitleChange( context, title );
+				actions.handleTitleChange( context, { newTitle: title, element: fakeElement } );
 
 				expect( actions.commit ).toHaveBeenCalled();
 				expect( actions.commit ).toHaveBeenCalledWith( 'SET_SECTIONS', mockSections );
@@ -96,7 +97,7 @@ describe( 'Actions', () => {
 			it( 'Setup article thumbnail height and width from the info available in the result', () => {
 
 				const title = 'dummy1';
-				actions.handleTitleChange( context, title );
+				actions.handleTitleChange( context, { newTitle: title, element: fakeElement } );
 
 				expect( actions.commit ).toHaveBeenCalled();
 				expect( actions.commit ).toHaveBeenCalledWith( 'SET_THUMBNAIL', context.state.results[ 0 ].thumbnail );
@@ -120,7 +121,7 @@ describe( 'Actions', () => {
 				};
 				global.mw.Api.prototype.get.mockReturnValueOnce( $.Deferred().resolve( dummyResponse ).promise() );
 				const title = 'dummy1';
-				actions.handleTitleChange( context, title );
+				actions.handleTitleChange( context, { newTitle: title, element: fakeElement } );
 
 				expect( actions.commit ).toHaveBeenCalled();
 				expect( actions.commit.mock.calls[ 2 ][ 1 ] ).toEqual( dummyResponse.query.pages[ 0 ].thumbnail );
@@ -149,7 +150,7 @@ describe( 'Actions', () => {
 				it( 'it set the article description', () => {
 
 					const title = 'dummy1';
-					actions.handleTitleChange( context, title );
+					actions.handleTitleChange( context, { newTitle: title, element: fakeElement } );
 
 					expect( actions.commit ).toHaveBeenCalled();
 					expect( actions.commit ).toHaveBeenCalledWith( 'SET_DESCRIPTION', fakeDescription );
@@ -161,7 +162,7 @@ describe( 'Actions', () => {
 						.calledWith( 'wgQuickViewMediaRepositoryApiBaseUri' )
 						.mockReturnValueOnce( null );
 					const title = 'dummy1';
-					actions.handleTitleChange( context, title );
+					actions.handleTitleChange( context, { newTitle: title, element: fakeElement } );
 
 					expect( global.mw.ForeignApi.prototype.get ).not.toHaveBeenCalled();
 
@@ -172,7 +173,7 @@ describe( 'Actions', () => {
 						.calledWith( 'wgQuickViewSearchFilterForQID' )
 						.mockReturnValueOnce( null );
 					const title = 'dummy1';
-					actions.handleTitleChange( context, title );
+					actions.handleTitleChange( context, { newTitle: title, element: fakeElement } );
 
 					expect( global.mw.ForeignApi.prototype.get ).not.toHaveBeenCalled();
 
@@ -183,7 +184,7 @@ describe( 'Actions', () => {
 						.calledWith( 'wgQuickViewMediaRepositorySearchUri' )
 						.mockReturnValueOnce( null );
 					const title = 'dummy1';
-					actions.handleTitleChange( context, title );
+					actions.handleTitleChange( context, { newTitle: title, element: fakeElement } );
 
 					expect( global.mw.ForeignApi.prototype.get ).not.toHaveBeenCalled();
 
@@ -191,7 +192,7 @@ describe( 'Actions', () => {
 				it( 'it trigger a commons request with the QID', () => {
 
 					const title = 'dummy1';
-					actions.handleTitleChange( context, title );
+					actions.handleTitleChange( context, { newTitle: title, element: fakeElement } );
 
 					expect( global.mw.ForeignApi.prototype.get ).toHaveBeenCalled();
 					expect( global.mw.ForeignApi.prototype.get.mock.calls[ 0 ][ 0 ].gsrsearch )
@@ -201,7 +202,7 @@ describe( 'Actions', () => {
 				it( 'it trigger a commons request with the configured wgQuickViewSearchFilterForQID', () => {
 
 					const title = 'dummy1';
-					actions.handleTitleChange( context, title );
+					actions.handleTitleChange( context, { newTitle: title, element: fakeElement } );
 
 					expect( global.mw.ForeignApi.prototype.get ).toHaveBeenCalled();
 					expect( global.mw.ForeignApi.prototype.get.mock.calls[ 0 ][ 0 ].gsrsearch )
@@ -217,7 +218,7 @@ describe( 'Actions', () => {
 					global.mw.ForeignApi.prototype.get.mockReturnValue( $.Deferred().resolve( responseWithNoPages ).promise() );
 
 					const title = 'dummy1';
-					actions.handleTitleChange( context, title );
+					actions.handleTitleChange( context, { newTitle: title, element: fakeElement } );
 
 					const allSetThumbnailRequest = actions.commit.mock.calls.filter( ( payload ) => {
 						return payload[ 0 ] === 'SET_THUMBNAIL';
@@ -230,7 +231,7 @@ describe( 'Actions', () => {
 					it( 'it sorts the images by their INDEX', () => {
 						const title = 'dummy1';
 
-						actions.handleTitleChange( context, title );
+						actions.handleTitleChange( context, { newTitle: title, element: fakeElement } );
 
 						const allSetCommonsRequest = actions.commit.mock.calls.filter( ( payload ) => {
 							return payload[ 0 ] === 'SET_COMMONS';
@@ -243,7 +244,7 @@ describe( 'Actions', () => {
 					it( 'it define if there are further results', () => {
 						const title = 'dummy1';
 
-						actions.handleTitleChange( context, title );
+						actions.handleTitleChange( context, { newTitle: title, element: fakeElement } );
 
 						const allSetCommonsRequest = actions.commit.mock.calls.filter( ( payload ) => {
 							return payload[ 0 ] === 'SET_COMMONS';
@@ -255,7 +256,7 @@ describe( 'Actions', () => {
 					it( 'it generates a search link', () => {
 						const title = 'dummy1';
 
-						actions.handleTitleChange( context, title );
+						actions.handleTitleChange( context, { newTitle: title, element: fakeElement } );
 
 						// wgQuickViewMediaRepositorySearchUri value
 						expect( global.mw.Uri.mock.calls[ 0 ][ 0 ] ).toContain( 'https://FakeRepositorySearchUri.fake' );
@@ -268,7 +269,7 @@ describe( 'Actions', () => {
 			} );
 			it( 'and current title had no value, update the title', () => {
 				const title = 'dummy1';
-				actions.handleTitleChange( context, title );
+				actions.handleTitleChange( context, { newTitle: title, element: fakeElement } );
 
 				expect( actions.commit ).toHaveBeenCalled();
 				expect( actions.commit ).toHaveBeenCalledWith( 'SET_TITLE', title );
@@ -276,7 +277,7 @@ describe( 'Actions', () => {
 			} );
 			it( 'and value differs from existing title, update the title', () => {
 				const title = 'dummy1';
-				actions.handleTitleChange( context, title );
+				actions.handleTitleChange( context, { newTitle: title, element: fakeElement } );
 
 				expect( actions.commit ).toHaveBeenCalled();
 				expect( actions.commit ).toHaveBeenCalledWith( 'SET_TITLE', title );
@@ -284,7 +285,7 @@ describe( 'Actions', () => {
 			} );
 			it( 'Update the selectedIndex title', () => {
 				const title = 'dummy2';
-				actions.handleTitleChange( context, title );
+				actions.handleTitleChange( context, { newTitle: title, element: fakeElement } );
 
 				expect( actions.commit ).toHaveBeenCalled();
 				expect( actions.commit ).toHaveBeenCalledWith( 'SET_SELECTED_INDEX', 1 );
@@ -293,7 +294,7 @@ describe( 'Actions', () => {
 
 			it( 'Adds QuickView to history state', () => {
 				const title = 'dummy1';
-				actions.handleTitleChange( context, title );
+				actions.handleTitleChange( context, { newTitle: title, element: fakeElement } );
 
 				expect( window.history.pushState ).toHaveBeenCalled();
 				expect( window.history.pushState ).toHaveBeenCalledWith(
@@ -310,7 +311,7 @@ describe( 'Actions', () => {
 				const title = 'dummy2';
 				const eventName = 'open-searchpreview';
 
-				actions.handleTitleChange( context, title );
+				actions.handleTitleChange( context, { newTitle: title, element: fakeElement } );
 				expect( context.dispatch ).toHaveBeenCalledTimes( 2 );
 				expect( context.dispatch.mock.calls[ 1 ][ 0 ] ).toBe( 'events/logQuickViewEvent' );
 				expect( context.dispatch.mock.calls[ 1 ][ 1 ].action ).toBe( eventName );
@@ -478,6 +479,105 @@ describe( 'Actions', () => {
 			expect( context.dispatch.mock.calls[ 0 ][ 0 ] ).toBe( 'events/logQuickViewEvent' );
 			expect( context.dispatch.mock.calls[ 0 ][ 1 ].action ).toBe( eventName );
 
+		} );
+	} );
+
+	describe( 'toggleVisibily', () => {
+		describe( 'on mobile', () => {
+
+			beforeEach( () => {
+				context.state.isMobile = true;
+			} );
+
+			afterEach( () => {
+				context = null;
+			} );
+
+			describe( 'When called with force=true', () => {
+				it( 'Set destination to false, if title is not passed', () => {
+					actions.toggleVisibily( context, { force: true } );
+
+					expect( context.commit ).toHaveBeenCalled();
+					expect( context.commit ).toHaveBeenCalledWith( 'SET_DESTINATION', false );
+				} );
+				it( 'Set destination to title provided', () => {
+					actions.toggleVisibily( context, { title: 'dummy', force: true } );
+
+					expect( context.commit ).toHaveBeenCalled();
+					expect( context.commit ).toHaveBeenCalledWith( 'SET_DESTINATION', '[data-title=\'dummy\']' );
+				} );
+				it( 'Set the NEXT_TITLE as null', () => {
+					actions.toggleVisibily( context, { force: true } );
+
+					expect( context.commit ).toHaveBeenCalled();
+					expect( context.commit ).toHaveBeenCalledWith( 'SET_NEXT_TITLE', null );
+				} );
+			} );
+			describe( 'When called with force=false and title is not set in the state', () => {
+				it( 'Set destination to title provided', () => {
+					actions.toggleVisibily( context, { title: 'dummy' } );
+
+					expect( context.commit ).toHaveBeenCalled();
+					expect( context.commit ).toHaveBeenCalledWith( 'SET_DESTINATION', '[data-title=\'dummy\']' );
+				} );
+			} );
+			describe( 'When called with force=false and title is set in the state', () => {
+				beforeEach( () => {
+					context.state.title = 'titleExist';
+				} );
+
+				afterEach( () => {
+					context = null;
+				} );
+
+				it( 'Set new title as NEXT_TITLE', () => {
+					actions.toggleVisibily( context, { title: 'dummy' } );
+
+					expect( context.commit ).toHaveBeenCalled();
+					expect( context.commit ).toHaveBeenCalledWith( 'SET_NEXT_TITLE', 'dummy' );
+				} );
+				it( 'Set VISIBLE to false', () => {
+					actions.toggleVisibily( context, { title: 'dummy' } );
+
+					expect( context.commit ).toHaveBeenCalled();
+					expect( context.commit ).toHaveBeenCalledWith( 'SET_VISIBLE', false );
+				} );
+				it( 'Does not set DESTINATION', () => {
+					actions.toggleVisibily( context, { title: 'dummy' } );
+
+					expect( context.commit ).not.toHaveBeenCalledWith( 'SET_DESTINATION' );
+				} );
+				it( 'Does not dispatch handleTitleChange', () => {
+					actions.toggleVisibily( context, { title: 'dummy' } );
+
+					expect( context.dispatch ).not.toHaveBeenCalled();
+				} );
+			} );
+		} );
+		describe( 'on desktop', () => {
+
+			beforeEach( () => {
+				context.state.isMobile = false;
+			} );
+
+			afterEach( () => {
+				context = null;
+			} );
+
+			it( 'Set destination to .searchresults', () => {
+
+				actions.toggleVisibily( context, {} );
+
+				expect( context.commit ).toHaveBeenCalled();
+				expect( context.commit ).toHaveBeenCalledWith( 'SET_DESTINATION', '.searchresults' );
+			} );
+			it( 'Dispatch a title change', () => {
+
+				actions.toggleVisibily( context, {} );
+
+				expect( context.commit ).toHaveBeenCalled();
+				expect( context.dispatch ).toHaveBeenCalledWith( 'handleTitleChange', expect.any( Object ) );
+			} );
 		} );
 	} );
 } );

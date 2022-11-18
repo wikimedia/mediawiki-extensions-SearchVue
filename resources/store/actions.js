@@ -307,8 +307,61 @@ const retrieveInfoFromQuery = ( context, title ) => {
 		} );
 };
 
+/**
+ * Handle the addition and removal of classes to the body and other element to define
+ * when the Search Preview is open. This classes are used to apply specific CSS properties.
+ *
+ * @param {boolean} open
+ * @param {Element} currentElement
+ */
+const handleClassesToggle = ( open, currentElement ) => {
+	if ( open ) {
+		document.getElementsByTagName( 'body' )[ 0 ].classList.add( 'search-preview-open' );
+		currentElement.classList.add( 'searchresult-with-quickview--open' );
+	} else {
+		document.getElementsByTagName( 'body' )[ 0 ].classList.remove( 'search-preview-open' );
+		const openElement = document.getElementsByClassName( 'searchresult-with-quickview--open' )[ 0 ];
+		if ( openElement ) {
+			openElement.classList.remove( 'searchresult-with-quickview--open' );
+		}
+	}
+};
+
 module.exports = {
 
+	/**
+	 * Handles the visibility of the Search Preview definiting title, destination and visibility state.
+	 * This action is most used on mobile where toggling between Search Previews has an animation transition
+	 * and visibility need to be handled around its timing.
+	 *
+	 * @param {Object} context
+	 * @param {Object} context.state
+	 * @param {Function} context.commit
+	 * @param {Object} payload
+	 * @param {string} payload.title
+	 * @param {Element} payload.element
+	 * @param {boolean} payload.force
+	 */
+	toggleVisibily: ( context, { title, element, force } ) => {
+		let destination = '.searchresults';
+		if ( context.state.isMobile ) {
+			// phpcs:disable Squiz.WhiteSpace.OperatorSpacing.NoSpaceBefore,Squiz.WhiteSpace.OperatorSpacing.NoSpaceAfter
+			const dataTitleSelector = `[data-title='${title}']`;
+			// phpcs:enable Squiz.WhiteSpace.OperatorSpacing.NoSpaceBefore,Squiz.WhiteSpace.OperatorSpacing.NoSpaceAfter
+			if ( force ) {
+				destination = title ? dataTitleSelector : false;
+				context.commit( 'SET_NEXT_TITLE', null );
+			} else if ( !context.state.title ) {
+				destination = dataTitleSelector;
+			} else if ( context.state.title ) {
+				context.commit( 'SET_NEXT_TITLE', title );
+				context.commit( 'SET_VISIBLE', false );
+				return;
+			}
+		}
+		context.commit( 'SET_DESTINATION', destination );
+		context.dispatch( 'handleTitleChange', { newTitle: title, element: element } );
+	},
 	/**
 	 * Handle the change in title by retrieving the information from server
 	 * and managing the visibility of the panel
@@ -317,14 +370,15 @@ module.exports = {
 	 * @param {Object} context.state
 	 * @param {Function} context.commit
 	 * @param {Function} context.dispatch
-	 * @param {?string} title
+	 * @param {Object} payload
+	 * @param {?string} payload.newTitle
+	 * @param {?Element} payload.element
 	 */
-	handleTitleChange: ( context, title ) => {
-		if ( !title ) {
+	handleTitleChange: ( context, { newTitle: newTitle, element: element } ) => {
+		if ( !newTitle ) {
 			return;
 		}
 
-		const newTitle = title;
 		const currentTitle = context.state.title;
 
 		// This invokes on each title change
@@ -337,9 +391,9 @@ module.exports = {
 			setThumbnail( context.state.results[ selectedTitleIndex ].thumbnail, '', context );
 			retrieveInfoFromQuery( context, newTitle );
 			context.commit( 'SET_TITLE', newTitle );
+			context.commit( 'SET_VISIBLE', true );
 			pushTitleToHistoryState( newTitle );
-			// eslint-disable-next-line no-jquery/no-global-selector
-			$( 'body' ).addClass( 'search-preview-open' );
+			handleClassesToggle( true, element );
 
 			context.commit( 'SET_SELECTED_INDEX', selectedTitleIndex );
 
@@ -362,9 +416,9 @@ module.exports = {
 		context.commit( 'SET_COMMONS' );
 		context.commit( 'SET_DESCRIPTION' );
 		context.commit( 'SET_SECTIONS' );
+		context.commit( 'SET_VISIBLE' );
 		removeQuickViewFromHistoryState();
-		// eslint-disable-next-line no-jquery/no-global-selector
-		$( 'body' ).removeClass( 'search-preview-open' );
+		handleClassesToggle( false );
 	},
 	/**
 	 * Emit close event when page is closing/refreshing while QuickView is open

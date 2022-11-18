@@ -1,7 +1,10 @@
 <template>
 	<!-- eslint-disable -->
 	<div @click.stop>
-		<nav class="mw-search-quick-view__nav">
+		<nav 
+			v-if="!isMobile"
+			class="mw-search-quick-view__nav"
+		>
 			<button @click="closeQuickView">
 				<svg
 					width="30"
@@ -28,7 +31,6 @@
 				</svg>
 			</button>
 		</nav>
-		
 		<header>
 			<quick-view-image
 				v-if="currentResult.thumbnail"
