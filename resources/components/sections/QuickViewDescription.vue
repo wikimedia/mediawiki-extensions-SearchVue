@@ -41,9 +41,6 @@ module.exports = exports = {
 @import 'mediawiki.ui/variables.less';
 
 .quickViewDescription {
-	width: 365px;
-	margin: 0 auto 20px;
-
 	h2 {
 		font-family: inherit;
 		font-size: 16px;

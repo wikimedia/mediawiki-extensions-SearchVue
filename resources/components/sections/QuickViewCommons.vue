@@ -116,9 +116,6 @@ module.exports = exports = {
 
 <style lang="less">
 .quickViewCommons {
-	width: 365px;
-	margin: 0 auto 20px;
-
 	h3 {
 		font-weight: normal;
 		font-size: 1em;

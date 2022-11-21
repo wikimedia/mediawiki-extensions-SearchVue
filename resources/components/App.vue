@@ -1,6 +1,6 @@
 <template>
 	<Teleport
-		v-if="destination"
+		v-if="destination && ( isMobile || isLargeScreen)"
 		:to="destination">
 		<Transition
 			:css="isMobile"
@@ -33,7 +33,8 @@
  */
 const QuickView = require( './sections/QuickView.vue' ),
 	mapActions = require( 'vuex' ).mapActions,
-	mapState = require( 'vuex' ).mapState;
+	mapState = require( 'vuex' ).mapState,
+	onDocumentResize = require( '../composables/onDocumentResize.js' );
 
 // @vue/component
 module.exports = exports = {
@@ -41,13 +42,25 @@ module.exports = exports = {
 	components: {
 		'quick-view': QuickView
 	},
+	setup() {
+		const { width } = onDocumentResize();
+
+		return {
+			width: width
+		};
+	},
 	data: function () {
 		return {
 			offsetTop: null,
 			queryQuickViewTitle: null
 		};
 	},
-	computed: $.extend( {},
+	computed: $.extend(
+		{
+			isLargeScreen() {
+				return this.width >= 1000;
+			}
+		},
 		mapState( [
 			'isMobile',
 			'title',
@@ -72,7 +85,7 @@ module.exports = exports = {
 			},
 			calculateOffsetTop: function ( element ) {
 				// TODO: Improve calculation of the QuickView after improvement of the search page
-				if ( !this.isMobile ) {
+				if ( !this.isMobile && this.isLargeScreen ) {
 
 					this.$nextTick()
 						.then(
@@ -146,6 +159,12 @@ module.exports = exports = {
 				this.setQueryQuickViewTitle();
 			},
 			flush: 'post'
+		},
+		isLargeScreen( newValue ) {
+			const isSmallScreen = !newValue;
+			if ( isSmallScreen && this.title ) {
+				this.closeQuickView();
+			}
 		}
 	},
 	created() {
@@ -196,17 +215,29 @@ module.exports = exports = {
 <style lang="less">
 @import '../styles/Search-result-hover.less';
 @import '../styles/Search-result-mobile.less';
+@import '../../lib/mediawiki-ui-base.less';
 
 .mw-search-quick-view {
-	background-color: #fff;
+	background-color: @wmui-color-base100;
 	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Lato', 'Helvetica', 'Arial', sans-serif;
 
 	&__desktop {
 		position: absolute;
 		border: solid 1px #c8ccd1;
 		right: 0;
-		width: 30em;
+		// We set the quickview to 4 column, but shrink it a little for the arrow to display
+		// by the search result
+		width: ~'calc( ( 100% / 12 * 4 ) - 50px )';
 		display: inline-block;
+
+		& > div {
+			margin: 0 auto 20px;
+			padding: 0 16px;
+		}
+
+		@media only screen and ( min-width: 1440px ) {
+			margin-right: calc( 100% / 12 );
+		}
 	}
 
 	&__mobile {
@@ -225,9 +256,10 @@ module.exports = exports = {
 
 		& > div {
 			margin-left: 8px;
-			border-radius: 2px;
-			border: 1px solid #c8ccd1;
 			margin-bottom: 0;
+			border-radius: 2px;
+			border: 1px solid @wmui-color-base70;
+			padding: 12px;
 		}
 	}
 	// we normalise the P tag by removing margin added by vector
