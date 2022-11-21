@@ -52,7 +52,7 @@ module.exports = exports = {
 </script>
 
 <style>
-.quickViewSnippet{
+.quickViewSnippet {
 	width: 365px;
 	margin: 0 auto 20px;
 }

@@ -176,6 +176,5 @@ module.exports = exports = {
 		padding-bottom: 20px;
 		min-height: 32px;
 	}
-
 }
 </style>

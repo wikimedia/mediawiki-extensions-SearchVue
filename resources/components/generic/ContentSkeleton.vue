@@ -32,13 +32,15 @@ module.exports = exports = {
 <style lang="less">
 .content-skeleton {
 	margin: 0 20px;
+
 	&__block {
 		margin-bottom: 32px;
 	}
+
 	&__row {
 		height: 16px;
 		margin-bottom: 6px;
-		background-color: #EAECF0;
+		background-color: #eaecf0;
 	}
 }
 </style>

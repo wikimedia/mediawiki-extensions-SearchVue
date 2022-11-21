@@ -78,6 +78,7 @@ module.exports = exports = {
 	padding: 12px;
 	width: 320px;
 	left: 310px;
+
 	&__triangle {
 		top: 0;
 		left: 50%;
@@ -90,6 +91,7 @@ module.exports = exports = {
 		border-right: 8px solid transparent;
 		border-left: 8px solid transparent;
 		position: absolute;
+
 		&:after {
 			content: '';
 			width: 0;
@@ -102,6 +104,7 @@ module.exports = exports = {
 			top: -7px;
 			left: -8px;
 		}
+
 		&:before {
 			top: -8px;
 			left: -6px;
@@ -115,21 +118,26 @@ module.exports = exports = {
 			animation: pulse 2s infinite;
 			z-index: 10;
 		}
+
 		@keyframes pulse {
 			0% {
 				box-shadow: 0 0 0 0 @pulse-dot-fading;
 			}
+
 			70% {
 				box-shadow: 0 0 0 10px @pulse-dot-transparent;
 			}
+
 			100% {
 				box-shadow: 0 0 0 0 @pulse-dot-transparent;
 			}
 		}
 	}
+
 	&__heading {
 		display: flex;
 	}
+
 	&__title {
 		h4 {
 			font-size: 16px;
@@ -140,22 +148,27 @@ module.exports = exports = {
 			text-transform: capitalize;
 		}
 	}
+
 	&__article--icon {
 		background-image: url( ../assets/icons/article.svg );
 		background-repeat: no-repeat;
 		width: 14px;
 	}
+
 	&__close--icon {
 		cursor: pointer;
 		margin-left: auto;
 		line-height: 1;
 	}
+
 	&__content {
 		padding-top: 25px;
+
 		p {
 			padding: 0;
 			margin: 0;
 			line-height: 1.45;
+
 			&:first-child {
 				margin-bottom: 16px;
 			}

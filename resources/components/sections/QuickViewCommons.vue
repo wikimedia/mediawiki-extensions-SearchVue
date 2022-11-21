@@ -120,7 +120,7 @@ module.exports = exports = {
 	margin: 0 auto 20px;
 
 	h3 {
-		font-weight: 400;
+		font-weight: normal;
 		font-size: 1em;
 		margin: 0;
 		padding: 0;
@@ -129,6 +129,17 @@ module.exports = exports = {
 		white-space: nowrap;
 		text-overflow: ellipsis;
 		margin-bottom: 8px;
+	}
+
+	&__footNote {
+		background-image: url( ../../assets/icons/commons.svg );
+		padding-left: 23px;
+		background-repeat: no-repeat;
+		background-position-y: center;
+
+		a {
+			color: inherit;
+		}
 	}
 
 	ul {
@@ -155,17 +166,6 @@ module.exports = exports = {
 				display: flex;
 				flex: 1;
 			}
-		}
-	}
-
-	&__footNote {
-		background-image: url( '../../assets/icons/commons.svg' );
-		padding-left: 23px;
-		background-repeat: no-repeat;
-		background-position-y: center;
-
-		a {
-			color: inherit;
 		}
 	}
 }
