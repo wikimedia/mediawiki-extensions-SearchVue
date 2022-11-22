@@ -198,7 +198,7 @@ module.exports = exports = {
 @import '../styles/Search-result-mobile.less';
 
 .mw-search-quick-view {
-	background-color: #000;
+	background-color: #fff;
 	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Lato', 'Helvetica', 'Arial', sans-serif;
 
 	&__desktop {
