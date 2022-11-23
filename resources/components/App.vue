@@ -137,13 +137,13 @@ module.exports = exports = {
 		}
 	),
 	watch: {
-		visible: {
-			handler( visible ) {
-				if ( visible ) {
-					const currentElement = this.currentElement( this.title );
+		title: {
+			handler( title ) {
+				if ( title ) {
+					const currentElement = this.currentElement( title );
 					this.calculateOffsetTop( currentElement );
+					this.setQueryQuickViewTitle();
 				}
-				this.setQueryQuickViewTitle();
 			},
 			flush: 'post'
 		}
