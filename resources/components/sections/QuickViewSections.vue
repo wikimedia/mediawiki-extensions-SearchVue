@@ -158,45 +158,47 @@ module.exports = exports = {
 @import 'mediawiki.ui/variables.less';
 
 .quickViewSections {
-	&__list {
+	& &__list {
 		display: flex;
 		flex-wrap: wrap;
 		gap: 8px;
 		align-items: center;
+		padding: 0;
 		margin: 0;
 		margin-bottom: 8px;
-		max-height: 100px;
+		max-height: 90px;
 		overflow: hidden;
 
 		&--expanded {
-			max-height: 140px;
+			max-height: 125px;
 		}
 	}
 
 	h3,
 	&__pill {
 		font-weight: normal;
-		font-size: 1em;
 		margin: 0;
 		padding: 0;
-		line-height: 1.571em;
 		overflow: hidden;
 		white-space: nowrap;
 		text-overflow: ellipsis;
 	}
 
 	h3 {
+		font-size: 1em;
+		line-height: 1.571em;
 		margin-bottom: 8px;
 	}
 
-	&__pill {
+	& &__pill {
 		padding: 2px 8px;
 		border-radius: 12px;
 		border: 1px solid @colorGray10;
+		font-size: 0.9285em;
+		line-height: 1.385em;
+		margin-bottom: 0;
 
 		a {
-			font-size: 0.9285em;
-			line-height: 1.286em;
 			color: @colorGray2;
 		}
 	}

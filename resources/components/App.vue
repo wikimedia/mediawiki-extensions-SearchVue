@@ -249,6 +249,8 @@ module.exports = exports = {
 		overflow-y: hidden;
 		margin: 0;
 		top: 0;
+		font-size: 0.875em;
+		line-height: 1.6em;
 
 		& > * {
 			min-width: 300px;
