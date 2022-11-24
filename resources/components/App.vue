@@ -237,13 +237,28 @@ module.exports = exports = {
 }
 
 // Vue transition classes.
-.v-enter-active,
-.v-leave-active {
+.v-enter-active {
 	transition: height 0.3s ease;
+
+	&.mw-search-quick-view {
+		visibility: hidden;
+	}
+}
+
+.v-leave-active {
+	transition: height 0.1s ease;
+
+	&.mw-search-quick-view {
+		visibility: hidden;
+	}
 }
 
 .v-enter-from,
 .v-leave-to {
 	height: 0;
+
+	&.mw-search-quick-view {
+		visibility: hidden;
+	}
 }
 </style>
