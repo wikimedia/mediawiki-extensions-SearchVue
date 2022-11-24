@@ -158,9 +158,6 @@ module.exports = exports = {
 @import 'mediawiki.ui/variables.less';
 
 .quickViewSections {
-	width: 365px;
-	margin: 0 auto 20px;
-
 	&__list {
 		display: flex;
 		flex-wrap: wrap;

@@ -1,41 +1,47 @@
-body:not( .skin-minerva ) {
-	.searchresult-with-quickview {
-		position: relative;
-	}
 
-	li.searchresult-with-quickview--hover .searchresult,
-	li.searchresult-with-quickview .searchresult:hover,
-	li.searchresult-with-quickview .mw-search-result-data:hover {
-		cursor: pointer;
+@import '../../lib/mediawiki-ui-base.less';
 
-		&:after {
-			content: '';
-			position: absolute;
-			width: 24px;
-			height: 100%;
-			top: 0;
-			right: -21px;
-			background-image: url( ../assets/icons/arrow-forward.svg );
-			background-repeat: no-repeat;
-			background-position-y: center;
+@media only screen and ( min-width: @width-breakpoint-desktop ) {
+	body:not( .skin-minerva ) {
+		.searchresult-with-quickview {
+			position: relative;
 		}
-	}
 
-	/* use the opposite arrow on RTL */
-	&.rtl {
 		li.searchresult-with-quickview--hover .searchresult,
+		li.searchresult-with-quickview--open .searchresult,
 		li.searchresult-with-quickview .searchresult:hover,
 		li.searchresult-with-quickview .mw-search-result-data:hover {
+			cursor: pointer;
+
 			&:after {
-				transform: scaleX( -1 );
+				content: '';
+				position: absolute;
+				width: 24px;
+				height: 100%;
+				top: 0;
+				right: -21px;
+				background-image: url( ../assets/icons/arrow-forward.svg );
+				background-repeat: no-repeat;
+				background-position-y: center;
 			}
 		}
-	}
 
-	&.search-preview-open {
-		/* stylelint-disable-next-line selector-max-id */
-		#mw-interwiki-results {
-			opacity: 0.2;
+		/* use the opposite arrow on RTL */
+		&.rtl {
+			li.searchresult-with-quickview--hover .searchresult,
+			li.searchresult-with-quickview .searchresult:hover,
+			li.searchresult-with-quickview .mw-search-result-data:hover {
+				&:after {
+					transform: scaleX( -1 );
+				}
+			}
+		}
+
+		&.search-preview-open {
+			/* stylelint-disable-next-line selector-max-id */
+			#mw-interwiki-results {
+				opacity: 0.2;
+			}
 		}
 	}
 }

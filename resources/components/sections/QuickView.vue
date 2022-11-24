@@ -43,7 +43,7 @@
 			<content-skeleton></content-skeleton>
 			<content-skeleton :lines="4"></content-skeleton>
 		</template>
-		<template v-else-if="requestStatus.query === requestStatuses.done" >
+		<template v-if="requestStatus.query === requestStatuses.done" >
 			<quick-view-description
 				:title="currentResult.prefixedText"
 				:description="currentResult.description"

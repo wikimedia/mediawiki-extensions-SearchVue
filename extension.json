@@ -54,6 +54,7 @@
 				"resources/components/sections/QuickViewSnippet.vue",
 				"resources/components/sections/QuickViewSections.vue",
 				"resources/components/sections/QuickViewCommons.vue",
+				"resources/composables/onDocumentResize.js",
 				"resources/store/index.js",
 				"resources/store/state.js",
 				"resources/store/mutations.js",

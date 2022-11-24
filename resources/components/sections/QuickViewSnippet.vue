@@ -50,10 +50,3 @@ module.exports = exports = {
 	}
 };
 </script>
-
-<style>
-.quickViewSnippet {
-	width: 365px;
-	margin: 0 auto 20px;
-}
-</style>
