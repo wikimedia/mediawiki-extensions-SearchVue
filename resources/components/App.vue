@@ -262,6 +262,7 @@ module.exports = exports = {
 			padding: 12px;
 		}
 	}
+
 	// we normalise the P tag by removing margin added by vector
 	p {
 		margin: 0;

@@ -31,7 +31,7 @@
 				</svg>
 			</button>
 		</nav>
-		<header>
+		<header :class="{'mw-search-quick-view__no-thumb': hideThumb }">
 			<quick-view-image
 				v-if="currentResult.thumbnail"
 				v-bind="currentResult.thumbnail"
@@ -123,6 +123,9 @@ module.exports = exports = {
 			},
 			textWithEllipsis() {
 				return this.currentResult.text + this.$i18n( 'ellipsis' ).text();
+			},
+			hideThumb() {
+				return !this.currentResult.thumbnail && this.isMobile;
 			}
 		}
 	),
@@ -175,6 +178,14 @@ module.exports = exports = {
 	header {
 		padding-bottom: 20px;
 		min-height: 32px;
+	}
+
+	&__no-thumb {
+		min-width: 0;
+
+		& + div {
+			margin-left: 0;
+		}
 	}
 }
 </style>
