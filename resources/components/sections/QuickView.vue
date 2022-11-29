@@ -45,8 +45,10 @@
 		</template>
 		<template v-if="requestStatus.query === requestStatuses.done" >
 			<quick-view-description
+				v-if="showDescription"
 				:title="currentResult.prefixedText"
 				:description="currentResult.description"
+				:is-mobile="isMobile"
 			></quick-view-description>
 			<quick-view-snippet
 				:text="textWithEllipsis"
@@ -126,6 +128,15 @@ module.exports = exports = {
 			},
 			hideThumb() {
 				return !this.currentResult.thumbnail && this.isMobile;
+			},
+			showDescription() {
+				if ( this.isMobile ) {
+					// On mobile we just show this section if the description is set
+					return !!this.currentResult.description;
+				} else {
+					// On desktop we show it even just with title
+					return !!this.currentResult.prefixedText;
+				}
 			}
 		}
 	),

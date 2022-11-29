@@ -166,7 +166,7 @@ module.exports = exports = {
 		padding: 0;
 		margin: 0;
 		margin-bottom: 8px;
-		max-height: 90px;
+		max-height: 94px;
 		overflow: hidden;
 
 		&--expanded {
