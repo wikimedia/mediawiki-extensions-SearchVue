@@ -9,7 +9,7 @@ $( function () {
 		/* eslint-disable no-jquery/no-global-selector */
 		$vueContainer = $( '<div>' ).addClass( 'sdsv-container' ),
 		$tutorialPopupContainer = $( '<div>' ).addClass( 'tutorial-popup' );
-	$( '.mw-search-results-container' ).prepend( $tutorialPopupContainer );
+	$( '.mw-search-results-container > ul.mw-search-results > li:first-child' ).prepend( $tutorialPopupContainer );
 
 	$( '#content' ).prepend( $vueContainer );
 
