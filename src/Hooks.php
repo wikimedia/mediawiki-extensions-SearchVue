@@ -5,8 +5,11 @@ namespace SearchVue;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Search\SearchWidgets\FullSearchResultWidget;
 use MediaWiki\SpecialPage\Hook\SpecialPageBeforeExecuteHook;
+use OutputPage;
 use SearchResultSet;
 use SpecialPage;
+use SpecialSearch;
+use User;
 
 /**
  * @license GPL-2.0-or-later
