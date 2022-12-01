@@ -182,13 +182,15 @@ const setCommonsInfo = ( page, context ) => {
 	// filter out images with resolution 0
 	gsrsearch += ' -fileres:0';
 
+	const numberOfImagesToLoad = context.state.isMobile ? 3 : 7;
+
 	const options = {
 		action: 'query',
 		format: 'json',
 		generator: 'search',
 		gsrsearch: gsrsearch,
 		gsrnamespace: 6, // NS_FILE
-		gsrlimit: 7,
+		gsrlimit: numberOfImagesToLoad,
 		prop: 'imageinfo',
 		iiprop: 'url',
 		iiurlwidth: 400
