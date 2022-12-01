@@ -34,7 +34,6 @@
 const QuickView = require( './sections/QuickView.vue' ),
 	mapActions = require( 'vuex' ).mapActions,
 	mapState = require( 'vuex' ).mapState,
-	mapGetters = require( 'vuex' ).mapGetters,
 	onDocumentResize = require( '../composables/onDocumentResize.js' ),
 	onDocumentScroll = require( '../composables/onDocumentScroll.js' ),
 	onResizeObserver = require( '../composables/onResizeObserver.js' );
@@ -137,7 +136,6 @@ module.exports = exports = {
 			'onPageClose'
 		] ),
 		mapActions( 'events', [ 'setSearchResultPosition', 'setQuickViewEventProps' ] ),
-		mapGetters( [ 'isEnabled' ] ),
 		{
 			setQueryQuickViewTitle: function () {
 				const mwUri = new mw.Uri();
@@ -225,10 +223,6 @@ module.exports = exports = {
 		} );
 	},
 	mounted: function () {
-		if ( !this.isEnabled ) {
-			return;
-		}
-
 		const searchResults = this.getSearchResults();
 		for ( const searchResult of searchResults ) {
 			searchResult.classList.add( 'searchresult-with-quickview' );
@@ -264,8 +258,8 @@ module.exports = exports = {
 </script>
 
 <style lang="less">
-@import '../styles/Search-result-hover.less';
-@import '../styles/Search-result-mobile.less';
+@import '../styles/SearchVue-result-hover.less';
+@import '../styles/SearchVue-result-mobile.less';
 @import '../../lib/mediawiki-ui-base.less';
 
 .mw-search-quick-view {
