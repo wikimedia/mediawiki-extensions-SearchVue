@@ -11,9 +11,12 @@
 	"searchvue-label": "Овозможи преглед на исходните ставки од пребарување",
 	"searchvue-snippet-gotofullpage": "Оди на целата страница",
 	"searchvue-snippet-gotofullpage-ns0": "Оди на целата статија",
+	"searchvue-description-mobile": "$1 е $2",
 	"searchvue-commons-viewmore": "Погл. уште",
+	"searchvue-commons-viewmore-mobile": "Погл. повеќе слики",
 	"searchvue-commons-footnote": "На Ризницата",
 	"searchvue-commons-heading": "Поврзани слики",
+	"searchvue-commons-heading-mobile": "Поврзани слики на Ризницата",
 	"searchvue-article-sections-heading": "Поднаслови на страницата",
 	"searchvue-article-sections-heading-ns0": "Поднаслови во статијата",
 	"searchvue-more-sections": "+ уште {{PLURAL:$1|$1 поднаслов|$1 поднаслови}}",
@@ -21,6 +24,7 @@
 	"tutorial-popup-title": "Преглед на исходот од пребараното",
 	"tutorial-popup-text1": "Стиснете на исечок од статија за да добиете преглед на најденото од пребарувањето и да погледате поврзани содржини.",
 	"tutorial-popup-text2": "Можете да го вклучите или исклучите прегледот во пребарувањето",
+	"tutorial-popup-text-mobile": "Допрете на исечок од статијата или стрелката за да добиете преглед на најденото од пребарувањето и да погледате поврзани содржини.",
 	"tutorial-popup-preferences": "нагодувања",
 	"tutorial-popup-close": "Затвори"
 }

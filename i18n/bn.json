@@ -11,9 +11,12 @@
 	"searchvue-label": "অনুসন্ধানের ফলাফলে প্রাকদর্শন সক্রিয় করুন",
 	"searchvue-snippet-gotofullpage": "পূর্ণ পাতায় যান",
 	"searchvue-snippet-gotofullpage-ns0": "সম্পূর্ণ নিবন্ধে যান",
+	"searchvue-description-mobile": "$1 হলো $2",
 	"searchvue-commons-viewmore": "আরও দেখুন",
+	"searchvue-commons-viewmore-mobile": "আরও চিত্র দেখুন",
 	"searchvue-commons-footnote": "উইকিমিডিয়া কমন্সে",
 	"searchvue-commons-heading": "সম্পর্কিত ছবি",
+	"searchvue-commons-heading-mobile": "উইকিমিডিয়া কমন্সে সম্পর্কিত চিত্র",
 	"searchvue-article-sections-heading": "পাতাটিতে অনুচ্ছেদ",
 	"searchvue-article-sections-heading-ns0": "নিবন্ধটিতে অনুচ্ছেদ",
 	"searchvue-more-sections": "+ আরও $1টি {{PLURAL:$1|অনুচ্ছেদ}}",
@@ -21,6 +24,7 @@
 	"tutorial-popup-title": "অনুসন্ধান ফলাফলের পূর্বরূপ",
 	"tutorial-popup-text1": "অনুসন্ধান ফলাফলের পূর্বরূপ দেখতে এবং সম্পর্কিত বিষয়বস্তু দেখতে নিবন্ধের স্নিপেটে ক্লিক করুন।",
 	"tutorial-popup-text2": "আপনি অনুসন্ধানে পূর্বরূপ চালু ও বন্ধ করতে পারেন",
+	"tutorial-popup-text-mobile": "অনুসন্ধান ফলাফলের পূর্বরূপ দেখতে এবং সম্পর্কিত বিষয়বস্তু দেখতে নিবন্ধের স্নিপেটে বা তীরচিহ্নে ক্লিক করুন।",
 	"tutorial-popup-preferences": "পছন্দ",
 	"tutorial-popup-close": "বন্ধ করুন"
 }
