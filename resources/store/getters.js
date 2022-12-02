@@ -42,5 +42,39 @@ module.exports = {
 		}
 
 		return false;
+	},
+	/**
+	 * Determine when the search preview is actually supposed to be visible.
+	 * This is used to show the correct loading state.
+	 *
+	 * @param {Object} state
+	 *
+	 * @return {Object}
+	 */
+	visible: ( state ) => {
+		const searchResultSelected = !!state.title;
+
+		if ( !searchResultSelected ) {
+			return false;
+		} else if ( state.isMobile ) {
+			return state.componentReady && state.requestStatus.query === state.requestStatuses.done;
+		} else {
+			return state.componentReady;
+		}
+	},
+	/**
+	 * Determine if there is enough data to show the search preview.
+	 * This is used on mobile view only.
+	 *
+	 * @param {Object} _state
+	 * @param {Object} getters
+	 *
+	 * @return {Object}
+	 */
+	showOnMobile( _state, getters ) {
+		const descriptionIsSet = !!getters.currentResult.description;
+		const sectionIsSet = getters.currentResult.sections && getters.currentResult.sections.length !== 0;
+
+		return descriptionIsSet || sectionIsSet;
 	}
 };

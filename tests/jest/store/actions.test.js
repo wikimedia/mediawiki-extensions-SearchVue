@@ -515,7 +515,7 @@ describe( 'Actions', () => {
 					actions.toggleVisibily( context, { title: 'dummy' } );
 
 					expect( context.commit ).toHaveBeenCalled();
-					expect( context.commit ).toHaveBeenCalledWith( 'SET_VISIBLE', false );
+					expect( context.commit ).toHaveBeenCalledWith( 'SET_COMPONENT_READY', false );
 				} );
 				it( 'Does not set DESTINATION', () => {
 					actions.toggleVisibily( context, { title: 'dummy' } );

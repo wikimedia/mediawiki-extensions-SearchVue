@@ -32,7 +32,10 @@ const events = {
 
 		/**
 		 * @param {Object} context
-		 * @param {string} action
+		 * @param {Object} payload
+		 * @param {string} payload.action
+		 * @param {number} payload.selectedIndex
+		 * @return {null|Promise};
 		 */
 		logQuickViewEvent: ( context, { action, selectedIndex } ) => {
 
