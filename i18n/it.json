@@ -8,6 +8,7 @@
 	"searchvue-next": "Successivo",
 	"searchvue-previous": "Precedente",
 	"searchvue-snippet-gotofullpage-ns0": "Vai alla voce completa",
+	"searchvue-description-mobile": "$1 è un $2",
 	"searchvue-article-sections-heading": "Sezioni nella pagina",
 	"searchvue-article-sections-heading-ns0": "Sezioni nella voce",
 	"searchvue-more-sections": "+ $1 {{PLURAL:$1|altra sezione|altre sezioni}}",
