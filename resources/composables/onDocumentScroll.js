@@ -1,15 +1,14 @@
 const { ref, onMounted, onUnmounted } = require( 'vue' );
 
-module.exports = function onDocumentResize() {
+module.exports = function onDocumentScoll() {
 
-	const mainContainer = document.documentElement || document;
-	const width = ref( mainContainer.clientWidth );
-	const height = ref( mainContainer.clientHeight );
+	const scrollX = ref( window.scrollX );
+	const scrollY = ref( window.scrollY );
 	let timeout = null;
 
-	const updateValues = function ( w, h ) {
-		width.value = w;
-		height.value = h;
+	const updateValues = function ( x, y ) {
+		scrollX.value = x;
+		scrollY.value = y;
 	};
 
 	const throttle = function ( callback, delay ) {
@@ -42,23 +41,23 @@ module.exports = function onDocumentResize() {
 		};
 	};
 
-	const getThrottledResize = throttle(
+	const getThrottledScroll = throttle(
 		function () {
-			updateValues( mainContainer.clientWidth, mainContainer.clientHeight );
+			updateValues( window.scrollX, window.scrollY );
 		},
-		200
+		100
 	);
 
 	onMounted( function () {
-		window.addEventListener( 'resize', getThrottledResize );
+		window.addEventListener( 'scroll', getThrottledScroll );
 	} );
 
 	onUnmounted( function () {
-		window.addEventListener( 'resize', getThrottledResize );
+		window.removeEventListener( 'scroll', getThrottledScroll );
 	} );
 
 	return {
-		width,
-		height
+		scrollX,
+		scrollY
 	};
 };

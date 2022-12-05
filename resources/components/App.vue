@@ -18,7 +18,7 @@
 					'mw-search-quick-view__mobile': isMobile,
 					'mw-search-quick-view__desktop': !isMobile
 				}"
-				:style="{ top: offsetTop }"
+				:style="quickViewDynamicStyles"
 			>
 			</quick-view>
 		</Transition>
@@ -34,7 +34,9 @@
 const QuickView = require( './sections/QuickView.vue' ),
 	mapActions = require( 'vuex' ).mapActions,
 	mapState = require( 'vuex' ).mapState,
-	onDocumentResize = require( '../composables/onDocumentResize.js' );
+	onDocumentResize = require( '../composables/onDocumentResize.js' ),
+	onDocumentScroll = require( '../composables/onDocumentScroll.js' ),
+	onResizeObserver = require( '../composables/onResizeObserver.js' );
 
 // @vue/component
 module.exports = exports = {
@@ -44,21 +46,79 @@ module.exports = exports = {
 	},
 	setup() {
 		const { width } = onDocumentResize();
+		const { scrollY } = onDocumentScroll();
+		const { elementWidth } = onResizeObserver( document.querySelector( '#bodyContent' ) );
 
 		return {
-			width: width
+			width: width,
+			scrollY: scrollY,
+			elementWidth: elementWidth
 		};
 	},
 	data: function () {
 		return {
 			offsetTop: null,
-			queryQuickViewTitle: null
+			queryQuickViewTitle: null,
+			pageContainer: document.querySelector( '#bodyContent' ),
+			pageScrolled: false,
+			breakpoints: {
+				medium: 1000,
+				large: 1440
+			}
 		};
 	},
 	computed: $.extend(
 		{
 			isLargeScreen() {
-				return this.width >= 1000;
+				return this.width >= this.breakpoints.medium;
+			},
+			columnWidth() {
+				if ( this.width <= this.breakpoints.medium ) {
+					return 0;
+				}
+				return this.elementWidth / 12;
+			},
+			dynamicTop() {
+				if ( this.pageScrolled ) {
+					return 12;
+				} else {
+					return this.pageContainer.offsetTop + 50;
+				}
+			},
+			dynamicBottom() {
+				// extend downward until either bottom of the search results,
+				// or bottom of the screen; whichever is smaller
+				const scrollBottom = this.scrollY + window.innerHeight;
+				const pageContainerBottom = this.pageContainer.offsetTop + this.pageContainer.clientHeight;
+				return Math.max( 12, scrollBottom - pageContainerBottom );
+			},
+			dynamicRightMargin() {
+				let rightMargin = 0;
+				if ( this.width <= this.breakpoints.medium ) {
+					return rightMargin;
+				}
+				// we calculate the main container margin
+				rightMargin = this.width - this.pageContainer.getBoundingClientRect().right;
+
+				if ( this.width >= this.breakpoints.large ) {
+					// We then set margin to be 1 column + container margin
+					rightMargin += this.columnWidth;
+				}
+
+				return rightMargin;
+			},
+			dynamicWidth() {
+				// We set the quickview to 4 column, but shrink it a little for the arrow to display
+				// by the search result
+				return ( this.columnWidth * 4 ) - 50;
+			},
+			quickViewDynamicStyles() {
+				return {
+					'--dynamicTop': this.numberToPixel( this.dynamicTop ),
+					'--dynamicBottom': this.numberToPixel( this.dynamicBottom ),
+					'--dynamicMarginRight': this.numberToPixel( this.dynamicRightMargin ),
+					'--dynamicWidth': this.numberToPixel( this.dynamicWidth )
+				};
 			}
 		},
 		mapState( [
@@ -81,22 +141,6 @@ module.exports = exports = {
 				const mwUri = new mw.Uri();
 				if ( mwUri.query.quickView ) {
 					this.queryQuickViewTitle = mwUri.query.quickView;
-				}
-			},
-			calculateOffsetTop: function ( element ) {
-				// TODO: Improve calculation of the QuickView after improvement of the search page
-				if ( !this.isMobile && this.isLargeScreen ) {
-
-					this.$nextTick()
-						.then(
-							() => {
-								// Set the correct offset to align with the search results
-								const bottomOfElement = element.offsetHeight + element.offsetTop;
-								const quickViewheight = this.$refs[ 'quick-view' ].$el.offsetHeight;
-								const offsetTop = bottomOfElement - quickViewheight;
-								this.offsetTop = Math.max( offsetTop, 0 ) + 'px';
-							}
-						);
 				}
 			},
 			restoreQuickViewOnNavigation() {
@@ -146,6 +190,9 @@ module.exports = exports = {
 				if ( this.queryQuickViewTitle ) {
 					this.onPageClose();
 				}
+			},
+			numberToPixel( value ) {
+				return `${value}px`;
 			}
 		}
 	),
@@ -153,8 +200,6 @@ module.exports = exports = {
 		title: {
 			handler( title ) {
 				if ( title ) {
-					const currentElement = this.currentElement( title );
-					this.calculateOffsetTop( currentElement );
 					this.setQueryQuickViewTitle();
 				}
 			},
@@ -165,6 +210,21 @@ module.exports = exports = {
 			if ( isSmallScreen && this.title ) {
 				this.closeQuickView();
 			}
+		},
+		scrollY: {
+			handler( scrollValue ) {
+				if ( this.isMobile ) {
+					return;
+				}
+
+				// we apply a specific class to reduce the position top if the page is scrolled
+				if ( this.pageContainer.offsetTop >= scrollValue ) {
+					this.pageScrolled = false;
+				} else {
+					this.pageScrolled = true;
+				}
+			},
+			immediate: true
 		}
 	},
 	created() {
@@ -222,21 +282,20 @@ module.exports = exports = {
 	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Lato', 'Helvetica', 'Arial', sans-serif;
 
 	&__desktop {
-		position: absolute;
+		position: fixed;
 		border: solid 1px #c8ccd1;
 		right: 0;
-		// We set the quickview to 4 column, but shrink it a little for the arrow to display
-		// by the search result
-		width: ~'calc( ( 100% / 12 * 4 ) - 50px )';
+		width: var( --dynamicWidth );
 		display: inline-block;
+		margin-right: var( --dynamicMarginRight );
+		top: var( --dynamicTop );
+		bottom: var( --dynamicBottom );
+		transition: top 0.2s;
+		overflow: auto;
 
 		& > div {
 			margin: 0 auto 20px;
 			padding: 0 16px;
-		}
-
-		@media only screen and ( min-width: 1440px ) {
-			margin-right: calc( 100% / 12 );
 		}
 	}
 

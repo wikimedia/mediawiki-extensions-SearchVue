@@ -39,6 +39,11 @@
 		"remoteExtPath": "SearchVue"
 	},
 	"ResourceModules": {
+		"searchVue.styles": {
+			"styles": [
+				"resources/styles/SearchVue.less"
+			]
+		},
 		"searchVue": {
 			"packageFiles": [
 				"resources/init.js",
@@ -55,6 +60,8 @@
 				"resources/components/sections/QuickViewSections.vue",
 				"resources/components/sections/QuickViewCommons.vue",
 				"resources/composables/onDocumentResize.js",
+				"resources/composables/onDocumentScroll.js",
+				"resources/composables/onResizeObserver.js",
 				"resources/store/index.js",
 				"resources/store/state.js",
 				"resources/store/mutations.js",
