@@ -149,6 +149,7 @@ const generateSearchLink = ( QID ) => {
 	return new mw.Uri( mw.config.get( 'wgQuickViewMediaRepositorySearchUri' ).replace( /%s/g, searchTerm ) );
 };
 
+let apiQueryController;
 /**
  * Retrieved information from the Commons wiki using the foreignApi.
  * This method require two configuration settings to be set 'wgQuickViewMediaRepositoryApiBaseUri' and
@@ -201,8 +202,18 @@ const setCommonsInfo = ( page, context ) => {
 		status: context.state.requestStatuses.inProgress
 	} );
 
+	// Non-null instance of AbortController means that the previous request is still in-flight
+	if ( apiQueryController ) {
+		apiQueryController.abort();
+		apiQueryController = null;
+	}
+
+	// Track new instance of AbortController per start of each request
+	apiQueryController = new AbortController();
+	const signal = apiQueryController.signal;
+
 	api
-		.get( options )
+		.get( options, { signal } )
 		.done( ( result ) => {
 			if ( !result || !result.query || !result.query.pages || result.query.pages.length === 0 ) {
 
@@ -212,6 +223,7 @@ const setCommonsInfo = ( page, context ) => {
 				} );
 				return;
 			}
+			apiQueryController = null;
 
 			const images = sortImagesArray( result );
 			const hasMoreImages = !!result.continue;
@@ -236,6 +248,7 @@ const setCommonsInfo = ( page, context ) => {
 			} );
 		} )
 		.catch( () => {
+			apiQueryController = null;
 			context.commit( 'SET_COMMONS' );
 
 			context.commit( 'SET_REQUEST_STATUS', {
