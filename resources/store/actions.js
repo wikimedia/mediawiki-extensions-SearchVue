@@ -1,4 +1,5 @@
 'use strict';
+const restApi = new mw.Rest();
 /**
  * Push the current provided title to the browser's session history stack
  *
@@ -131,26 +132,6 @@ const sortImagesArray = ( result ) => {
 };
 
 /**
- * @param {string} QID
- * @return {string}
- */
-const generateSearchTerm = ( QID ) => {
-	return mw.config.get( 'wgQuickViewSearchFilterForQID' ).replace( /%s/g, QID );
-};
-
-/**
- * Generate a URI that can be used to replicate the API request for the commons images
- *
- * @param {string} QID
- * @return {Object}
- */
-const generateSearchLink = ( QID ) => {
-	const searchTerm = encodeURIComponent( generateSearchTerm( QID ) );
-	return new mw.Uri( mw.config.get( 'wgQuickViewMediaRepositorySearchUri' ).replace( /%s/g, searchTerm ) );
-};
-
-let apiQueryController;
-/**
  * Retrieved information from the Commons wiki using the foreignApi.
  * This method require two configuration settings to be set 'wgQuickViewMediaRepositoryApiBaseUri' and
  * 'wgQuickViewSearchFilterForQID'.
@@ -175,45 +156,13 @@ const setCommonsInfo = ( page, context ) => {
 		return;
 	}
 
-	const api = new mw.ForeignApi( mw.config.get( 'wgQuickViewMediaRepositoryApiBaseUri' ) );
-
-	let gsrsearch = 'filetype:bitmap|drawing';
-	gsrsearch += ' ' + generateSearchTerm( QID );
-
-	// filter out images with resolution 0
-	gsrsearch += ' -fileres:0';
-
-	const numberOfImagesToLoad = context.state.isMobile ? 3 : 7;
-
-	const options = {
-		action: 'query',
-		format: 'json',
-		generator: 'search',
-		gsrsearch: gsrsearch,
-		gsrnamespace: 6, // NS_FILE
-		gsrlimit: numberOfImagesToLoad,
-		prop: 'imageinfo',
-		iiprop: 'url',
-		iiurlwidth: 400
-	};
-
 	context.commit( 'SET_REQUEST_STATUS', {
 		type: 'commons',
 		status: context.state.requestStatuses.inProgress
 	} );
 
-	// Non-null instance of AbortController means that the previous request is still in-flight
-	if ( apiQueryController ) {
-		apiQueryController.abort();
-		apiQueryController = null;
-	}
-
-	// Track new instance of AbortController per start of each request
-	apiQueryController = new AbortController();
-	const signal = apiQueryController.signal;
-
-	api
-		.get( options, { signal } )
+	restApi
+		.get( '/searchvue/v0/media/' + QID )
 		.done( ( result ) => {
 			if ( !result || !result.query || !result.query.pages || result.query.pages.length === 0 ) {
 
@@ -223,22 +172,25 @@ const setCommonsInfo = ( page, context ) => {
 				} );
 				return;
 			}
-			apiQueryController = null;
 
-			const images = sortImagesArray( result );
-			const hasMoreImages = !!result.continue;
-			const mediaSearchLink = generateSearchLink( QID );
+			let images = sortImagesArray( result );
+			images = images.filter( ( image ) => {
+				// drop the image if it's the same as the page image we're
+				// already showing at the top
+				return !image.imageinfo[ 0 ] ||
+					!page.original ||
+					page.original.source !== image.imageinfo[ 0 ].url;
+			} );
+
+			// API is always returning 7 images, but mobile only uses 3
+			const numberOfImagesToLoad = context.state.isMobile ? 3 : 7;
+			const hasMoreImages = images.length > numberOfImagesToLoad || !!result.continue;
+			images = images.slice( 0, numberOfImagesToLoad );
 
 			const commonsInfo = {
-				images: images.filter( ( image ) => {
-					// drop the image if it's the same as the page image we're
-					// already showing at the top
-					return !image.imageinfo[ 0 ] ||
-						!page.original ||
-						page.original.source !== image.imageinfo[ 0 ].url;
-				} ),
+				images: images,
 				hasMoreImages: hasMoreImages,
-				searchLink: mediaSearchLink
+				searchLink: result.searchlink
 			};
 
 			context.commit( 'SET_COMMONS', commonsInfo );
@@ -248,7 +200,6 @@ const setCommonsInfo = ( page, context ) => {
 			} );
 		} )
 		.catch( () => {
-			apiQueryController = null;
 			context.commit( 'SET_COMMONS' );
 
 			context.commit( 'SET_REQUEST_STATUS', {
@@ -272,9 +223,8 @@ const retrieveInfoFromQuery = ( context, title ) => {
 		status: context.state.requestStatuses.inProgress
 	} );
 
-	const api = new mw.Rest();
 	const encodedTitle = mw.internalWikiUrlencode( title );
-	api
+	restApi
 		.get( '/searchvue/v0/page/' + encodedTitle )
 		.done( ( result ) => {
 			if ( !result ) {
@@ -420,6 +370,8 @@ module.exports = {
 		context.commit( 'SET_SECTIONS' );
 		context.commit( 'SET_VISIBLE' );
 		removeQuickViewFromHistoryState();
+		context.commit( 'RESET_REQUEST_STATUS' );
+		restApi.abort();
 		handleClassesToggle( false );
 	},
 	/**

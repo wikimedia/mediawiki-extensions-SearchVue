@@ -17,6 +17,7 @@ ForeignApi.prototype.saveOption = jest.fn();
 
 function Rest() {}
 Rest.prototype.get = jest.fn().mockReturnValue( $.Deferred().resolve().promise() );
+Rest.prototype.abort = jest.fn();
 Rest.prototype.post = jest.fn().mockResolvedValue( {} );
 Rest.prototype.getToken = jest.fn().mockResolvedValue( {} );
 Rest.prototype.postWithToken = jest.fn().mockResolvedValue( {} );

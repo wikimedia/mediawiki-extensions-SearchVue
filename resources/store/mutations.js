@@ -98,5 +98,15 @@ module.exports = {
 		if ( state.requestStatus[ payload.type ] ) {
 			state.requestStatus[ payload.type ] = payload.status;
 		}
+	},
+	/**
+	 * Updates the status of a current API requests
+	 *
+	 * @param {Object} state
+	 */
+	RESET_REQUEST_STATUS: ( state ) => {
+		for ( const property in state.requestStatus ) {
+			state.requestStatus[ property ] = state.requestStatuses.notStarted;
+		}
 	}
 };

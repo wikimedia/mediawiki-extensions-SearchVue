@@ -43,7 +43,6 @@ class Hooks implements
 			$special->getOutput()->addModules( [
 				'searchVue'
 			] );
-
 			$repositoryApiBaseUri = $services->getMainConfig()->get( 'QuickViewMediaRepositoryApiBaseUri' );
 			$repositorySearchUri = $services->getMainConfig()->get( 'QuickViewMediaRepositorySearchUri' );
 			$repositoryUri = $services->getMainConfig()->get( 'QuickViewMediaRepositoryUri' );
