@@ -271,23 +271,13 @@ const retrieveInfoFromQuery = ( context, title ) => {
 		type: 'query',
 		status: context.state.requestStatuses.inProgress
 	} );
-	const api = new mw.Api();
-	const options = {
-		action: 'query',
-		format: 'json',
-		titles: title,
-		prop: 'pageimages|pageprops|cirrusdoc',
-		formatversion: 2,
-		pithumbsize: 400,
-		pilicense: 'free',
-		piprop: 'thumbnail|name|original',
-		cdincludes: 'heading'
-	};
 
+	const api = new mw.Rest();
+	const encodedTitle = mw.internalWikiUrlencode( title );
 	api
-		.get( options )
+		.get( '/searchvue/v0/page/' + encodedTitle )
 		.done( ( result ) => {
-			if ( !result || !result.query || !result.query.pages || result.query.pages.length === 0 ) {
+			if ( !result ) {
 
 				context.commit( 'SET_REQUEST_STATUS', {
 					type: 'query',
@@ -296,13 +286,10 @@ const retrieveInfoFromQuery = ( context, title ) => {
 				return;
 			}
 
-			// we select the first result that is the most relevant to our search term
-			const page = result.query.pages[ 0 ];
-
-			setThumbnail( page.thumbnail, page.pageimage || '', context );
-			setCommonsInfo( page, context );
-			setDescription( page, context );
-			setArticleSections( page, context );
+			setThumbnail( result.thumbnail, result.pageimage || '', context );
+			setCommonsInfo( result, context );
+			setDescription( result, context );
+			setArticleSections( result, context );
 
 			context.commit( 'SET_REQUEST_STATUS', {
 				type: 'query',
