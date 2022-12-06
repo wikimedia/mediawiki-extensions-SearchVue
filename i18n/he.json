@@ -11,10 +11,20 @@
 	"searchvue-label": "הפעלת תצוגה מקדימה של תוצאות חיפוש",
 	"searchvue-snippet-gotofullpage": "מעבר לדף המלא",
 	"searchvue-snippet-gotofullpage-ns0": "מעבר לערך המלא",
+	"searchvue-description-mobile": "$1 הוא דף על $2",
 	"searchvue-commons-viewmore": "להציג עוד",
+	"searchvue-commons-viewmore-mobile": "לצפות בעוד תמונות",
 	"searchvue-commons-footnote": "בוויקישיתוף",
 	"searchvue-commons-heading": "תמונות קשורים",
+	"searchvue-commons-heading-mobile": "תמונות קשורות בוויקישיתוף",
 	"searchvue-article-sections-heading": "פרקים בערך",
+	"searchvue-article-sections-heading-ns0": "פרקים בערך",
 	"searchvue-more-sections": "ועוד {{PLURAL:$1|פרק אחד|$1 פרקים}}",
-	"searchvue-help": "תצוגה מקדימה של תוכן הדף ותוכן קשור."
+	"searchvue-help": "תצוגה מקדימה של תוכן הדף ותוכן קשור.",
+	"tutorial-popup-title": "תצוגות מקדימות של תוצאות חיפוש",
+	"tutorial-popup-text1": "לחיצה על קטע של ערך תראה תצוגה מקדימה של תוצאת החיפוש כדי לאפשר לך לצפות בתוכן קשור.",
+	"tutorial-popup-text2": "אפשר להפעיל ולכבות תצוגה מקדימה בחיפוש",
+	"tutorial-popup-text-mobile": "הקשה על קטע של ערך תראה תצוגה מקדימה של תוצאת החיפוש כדי לאפשר לך לצפות בתוכן קשור.",
+	"tutorial-popup-preferences": "העדפות",
+	"tutorial-popup-close": "סגירה"
 }

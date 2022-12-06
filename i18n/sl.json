@@ -21,10 +21,10 @@
 	"searchvue-article-sections-heading-ns0": "Razdelki v članku",
 	"searchvue-more-sections": "+ $1 {{PLURAL:$1|razdelek|razdelka|razdelki|razdelkov}}",
 	"searchvue-help": "Predogled vsebine strani in povezanih vsebin.",
-	"tutorial-popup-title": "Predogled rezultatov iskanja",
-	"tutorial-popup-text1": "Kliknite delček članka za predogled rezultatov iskanja in prikaz povezane vsebine.",
+	"tutorial-popup-title": "Predogled iskalnih zadetkov",
+	"tutorial-popup-text1": "Kliknite delček članka za predogled iskalnih zadetkov in prikaz povezane vsebine.",
 	"tutorial-popup-text2": "V iskanju lahko vklopite in izklopite predogled",
-	"tutorial-popup-text-mobile": "Tapnite delček članka za predogled rezultatov iskanja in prikaz povezane vsebine.",
+	"tutorial-popup-text-mobile": "Tapnite delček članka za predogled iskalnih zadetkov in prikaz povezane vsebine.",
 	"tutorial-popup-preferences": "nastavitve",
 	"tutorial-popup-close": "Zapri"
 }
