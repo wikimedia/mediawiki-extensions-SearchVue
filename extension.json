@@ -130,5 +130,12 @@
 			"description": "True to enable mobile, false to disable.",
 			"value": false
 		}
-	}
+	},
+	"RestRoutes": [
+		{
+			"path": "/searchvue/v0/page/{page_title}",
+			"method": "GET",
+			"class": "SearchVue\\Rest\\GetSearchVueResultInfo"
+		}
+	]
 }

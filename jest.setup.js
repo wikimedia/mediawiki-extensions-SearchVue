@@ -15,6 +15,13 @@ ForeignApi.prototype.getToken = jest.fn().mockResolvedValue( {} );
 ForeignApi.prototype.postWithToken = jest.fn().mockResolvedValue( {} );
 ForeignApi.prototype.saveOption = jest.fn();
 
+function Rest() {}
+Rest.prototype.get = jest.fn().mockReturnValue( $.Deferred().resolve().promise() );
+Rest.prototype.post = jest.fn().mockResolvedValue( {} );
+Rest.prototype.getToken = jest.fn().mockResolvedValue( {} );
+Rest.prototype.postWithToken = jest.fn().mockResolvedValue( {} );
+Rest.prototype.saveOption = jest.fn();
+
 function Title() {}
 Title.prototype.getMainText = jest.fn().mockReturnValue( '' );
 Title.prototype.getName = jest.fn().mockReturnValue( '' );
@@ -33,6 +40,7 @@ Title.newFromText = jest.fn().mockReturnValue( {
 const mw = {
 	Api: Api,
 	ForeignApi: ForeignApi,
+	Rest: Rest,
 	config: {
 		get: jest.fn()
 	},
@@ -77,7 +85,10 @@ const mw = {
 			set: jest.fn()
 		},
 		isAnon: jest.fn().mockReturnValue( false )
-	}
+	},
+	internalWikiUrlencode: jest.fn( ( value ) => {
+		return value;
+	} )
 };
 /*
  * MW front-end code expects certain global variables to exist in the

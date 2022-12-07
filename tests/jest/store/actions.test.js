@@ -74,19 +74,13 @@ describe( 'Actions', () => {
 			it( 'retrieves article sections', () => {
 				const mockSections = [ 'section1' ];
 				const dummyResponse = {
-					query: {
-						pages: [
-							{
-								cirrusdoc: [ {
-									source: {
-										heading: mockSections
-									}
-								} ]
-							}
-						]
-					}
+					cirrusdoc: [ {
+						source: {
+							heading: mockSections
+						}
+					} ]
 				};
-				global.mw.Api.prototype.get.mockReturnValueOnce( $.Deferred().resolve( dummyResponse ).promise() );
+				global.mw.Rest.prototype.get.mockReturnValueOnce( $.Deferred().resolve( dummyResponse ).promise() );
 				const title = 'dummy1';
 				actions.handleTitleChange( context, { newTitle: title, element: fakeElement } );
 
@@ -110,41 +104,27 @@ describe( 'Actions', () => {
 					height: 700
 				};
 
-				const dummyResponse = {
-					query: {
-						pages: [
-							{
-								thumbnail: mockThumbnail
-							}
-						]
-					}
-				};
-				global.mw.Api.prototype.get.mockReturnValueOnce( $.Deferred().resolve( dummyResponse ).promise() );
+				const dummyResponse = { thumbnail: mockThumbnail };
+				global.mw.Rest.prototype.get.mockReturnValueOnce( $.Deferred().resolve( dummyResponse ).promise() );
 				const title = 'dummy1';
 				actions.handleTitleChange( context, { newTitle: title, element: fakeElement } );
 
 				expect( actions.commit ).toHaveBeenCalled();
-				expect( actions.commit.mock.calls[ 2 ][ 1 ] ).toEqual( dummyResponse.query.pages[ 0 ].thumbnail );
+				expect( actions.commit.mock.calls[ 2 ][ 1 ] ).toEqual( dummyResponse.thumbnail );
 
 			} );
 			describe( 'when a QID is available in API response', () => {
 				const fakeQID = 'Q146';
 				const fakeDescription = 'Q146';
 				const dummyReponseWithQid = {
-					query: {
-						pages: [
-							{
-								pageprops: {
-									// eslint-disable-next-line camelcase
-									wikibase_item: fakeQID,
-									'wikibase-shortdesc': fakeDescription
-								}
-							}
-						]
+					pageprops: {
+						// eslint-disable-next-line camelcase
+						wikibase_item: fakeQID,
+						'wikibase-shortdesc': fakeDescription
 					}
 				};
 				beforeEach( () => {
-					global.mw.Api.prototype.get.mockReturnValueOnce( $.Deferred().resolve( dummyReponseWithQid ).promise() );
+					global.mw.Rest.prototype.get.mockReturnValueOnce( $.Deferred().resolve( dummyReponseWithQid ).promise() );
 					global.mw.ForeignApi.prototype.get.mockReturnValue( $.Deferred().resolve( commonsFakeResponse ).promise() );
 				} );
 				it( 'it set the article description', () => {
