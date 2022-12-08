@@ -21,10 +21,12 @@ module.exports = exports = {
 </script>
 
 <style lang="less">
+@import '../../../lib/mediawiki-ui-base.less';
+
 .loading-dots {
 	// The following code has been inspired by https://codepen.io/Volker_E/pen/yqNXMe
 	// Re-usable LESS project code.
-	@width-bounce-dot: 1em;
+	@width-bounce-dot: 0.858em;
 	@margin-bounce-dot: @width-bounce-dot / 4;
 	white-space: nowrap;
 	display: block;
@@ -35,7 +37,7 @@ module.exports = exports = {
 	&:before,
 	&:after {
 		content: '';
-		background-color: #72777d;
+		background-color: @wmui-color-accent50;
 		display: inline-block;
 		width: @width-bounce-dot;
 		height: @width-bounce-dot;
