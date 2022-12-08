@@ -11,7 +11,7 @@ use RequestContext;
 use Wikimedia\ParamValidator\ParamValidator;
 
 /**
- * Example class to retrieve page information to populate the Search Preview
+ * Class to retrieve page information to populate the Search Preview
  * GET /searchvue/v0/page/{page_title}/{snippet_field}
  */
 class GetSearchVueResultInfo extends SimpleHandler {

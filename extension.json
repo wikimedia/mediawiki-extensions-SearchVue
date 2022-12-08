@@ -112,15 +112,15 @@
 	"config": {
 		"QuickViewMediaRepositoryApiBaseUri": {
 			"description": "Url to API of Commons repository used to fetch images for the selected page. If not set, the 'related images' section will not appear.",
-			"value": "//commons.wikimedia.org/w/api.php"
+			"value": "https://commons.wikimedia.org/w/api.php"
 		},
 		"QuickViewMediaRepositorySearchUri": {
 			"description": "Url to Commons search page.",
-			"value": "//commons.wikimedia.org/wiki/Special:MediaSearch?search=%s"
+			"value": "https://commons.wikimedia.org/wiki/Special:MediaSearch?search=%s"
 		},
 		"QuickViewMediaRepositoryUri": {
 			"description": "Url to Commons home page.",
-			"value": "//commons.wikimedia.org"
+			"value": "https://commons.wikimedia.org"
 		},
 		"QuickViewSearchFilterForQID": {
 			"description": "The search parameter used to link the current page with a QID to ensure that the search result are relevant to your search.",
@@ -136,6 +136,15 @@
 			"path": "/searchvue/v0/page/{page_title}",
 			"method": "GET",
 			"class": "SearchVue\\Rest\\GetSearchVueResultInfo"
+		},
+		{
+			"path": "/searchvue/v0/media/{qid}",
+			"method": "GET",
+			"class": "SearchVue\\Rest\\GetSearchVueMedia",
+			"services": [
+				"MainConfig",
+				"HttpRequestFactory"
+			]
 		}
 	]
 }
