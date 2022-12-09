@@ -67,7 +67,7 @@ module.exports = exports = {
 			required: true
 		},
 		isMobile: {
-			type: String,
+			type: Boolean,
 			required: true
 		}
 	},

@@ -18,7 +18,8 @@
  * Placeholder
  */
 const QuickViewTutorialPopup = require( './QuickViewTutorialPopup.vue' ),
-	mapState = require( 'vuex' ).mapState;
+	mapState = require( 'vuex' ).mapState,
+	mapGetters = require( 'vuex' ).mapGetters;
 
 // @vue/component
 module.exports = exports = {
@@ -34,13 +35,16 @@ module.exports = exports = {
 			firstSectionHeadingHeight: null,
 			firstSectionContentHeight: null,
 			topPositionAdjuster: 0,
-			tutorialPopupVisible: true
+			tutorialPopupVisible: false
 		};
 	},
 	computed: $.extend( {},
 		mapState( [
 			'selectedIndex',
 			'isMobile'
+		] ),
+		mapGetters( [
+			'isEnabled'
 		] ),
 		{
 			preferencesUrl() {
@@ -50,11 +54,18 @@ module.exports = exports = {
 	),
 	methods: {
 		setTutorialPopupVisibility() {
-			if ( mw.user.isAnon() || !this.tutorialPopPref || this.selectedIndex !== -1 ) {
+			// If enabled mobile preview, temporary disable tutorial popup
+			if (
+				!this.isEnabled ||
+				mw.user.isAnon() ||
+				!this.tutorialPopPref ||
+				this.selectedIndex !== -1
+			) {
 				this.tutorialPopupVisible = false;
 				return;
 			}
-			return true;
+			this.tutorialPopupVisible = true;
+			return;
 		},
 		onCloseTutorialPopup() {
 			this.tutorialPopupVisible = false;

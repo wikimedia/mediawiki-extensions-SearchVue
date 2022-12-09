@@ -34,6 +34,7 @@
 const QuickView = require( './sections/QuickView.vue' ),
 	mapActions = require( 'vuex' ).mapActions,
 	mapState = require( 'vuex' ).mapState,
+	mapGetters = require( 'vuex' ).mapGetters,
 	onDocumentResize = require( '../composables/onDocumentResize.js' ),
 	onDocumentScroll = require( '../composables/onDocumentScroll.js' ),
 	onResizeObserver = require( '../composables/onResizeObserver.js' );
@@ -136,6 +137,7 @@ module.exports = exports = {
 			'onPageClose'
 		] ),
 		mapActions( 'events', [ 'setSearchResultPosition', 'setQuickViewEventProps' ] ),
+		mapGetters( [ 'isEnabled' ] ),
 		{
 			setQueryQuickViewTitle: function () {
 				const mwUri = new mw.Uri();
@@ -173,17 +175,6 @@ module.exports = exports = {
 				if ( elemBottom >= docViewBottom ) {
 					this.currentElement( this.title ).scrollIntoView( { behavior: 'smooth' } );
 				}
-			},
-			isEnabled: function () {
-				let enable = !this.isMobile;
-				if ( ( new mw.Uri() ).query.quickViewEnableMobile !== undefined ) {
-					// casting with parseInt instead of Boolean to also consider
-					// a (string) '0' as off
-					enable = enable || parseInt( ( new mw.Uri() ).query.quickViewEnableMobile );
-				} else {
-					enable = enable || mw.config.get( 'wgQuickViewEnableMobile' );
-				}
-				return enable;
 			},
 			leaving() {
 				// Emit QuickView closing event only if QuickView is present in url
@@ -234,7 +225,7 @@ module.exports = exports = {
 		} );
 	},
 	mounted: function () {
-		if ( !this.isEnabled() ) {
+		if ( !this.isEnabled ) {
 			return;
 		}
 
