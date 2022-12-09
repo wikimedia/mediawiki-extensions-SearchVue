@@ -4,7 +4,7 @@
 			v-if="tutorialPopupVisible"
 			:url="preferencesUrl"
 			:is-mobile="isMobile"
-			:style="{ 'top': firstSectionHeight / 2 + 'px' }"
+			:style="{ 'top': firstSectionContentHeight / 2 + firstSectionHeadingHeight + topPositionAdjuster + 'px' }"
 			@close="onCloseTutorialPopup"
 		>
 		</quick-view-tutorial-popup>
@@ -31,7 +31,9 @@ module.exports = exports = {
 			prefKey: 'searchpreview-tutorial-enabled',
 			tutorialPopPref: 0,
 			firstSection: null,
-			firstSectionHeight: null,
+			firstSectionHeadingHeight: null,
+			firstSectionContentHeight: null,
+			topPositionAdjuster: 0,
 			tutorialPopupVisible: true
 		};
 	},
@@ -65,7 +67,16 @@ module.exports = exports = {
 			this.firstSection = $( '#mw-content-text .mw-search-result' )[ 0 ];
 			if ( this.firstSection ) {
 				this.firstSection.classList.add( 'searchresult-with-quickview--hover' );
-				this.firstSectionHeight = this.firstSection.clientHeight;
+				this.firstSectionHeadingHeight = this.firstSection.querySelector( '.mw-search-result-heading' ).clientHeight;
+
+				const firstSectionTable = this.firstSection.querySelector( 'table' );
+				const firstSectionDiv = this.firstSection.querySelector( '.searchresult' );
+				if ( firstSectionTable ) {
+					this.firstSectionContentHeight = firstSectionTable.clientHeight;
+				} else if ( firstSectionDiv ) {
+					this.firstSectionContentHeight = firstSectionDiv.clientHeight;
+					this.topPositionAdjuster = 8;
+				}
 			}
 		},
 		removeFirstSectionStyles() {
