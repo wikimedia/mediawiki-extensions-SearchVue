@@ -1,17 +1,20 @@
 {
 	"@metadata": {
 		"authors": [
-			"MathXplore"
+			"MathXplore",
+			"バレロン"
 		]
 	},
 	"searchvue-close": "閉じる",
 	"searchvue-next": "次へ",
 	"searchvue-previous": "前へ",
 	"searchvue-snippet-gotofullpage-ns0": "記事全文へ",
+	"searchvue-description-mobile": "$1は$2です。",
 	"searchvue-commons-viewmore": "続きを表示",
 	"searchvue-commons-viewmore-mobile": "もっと画像を見る",
 	"searchvue-commons-footnote": "ウィキメディア・コモンズ",
 	"searchvue-commons-heading": "関連画像",
+	"searchvue-commons-heading-mobile": "コモンズの関連画像",
 	"searchvue-article-sections-heading": "ページ内のセクション",
 	"tutorial-popup-title": "検索結果のプレビュー",
 	"tutorial-popup-preferences": "設定",
