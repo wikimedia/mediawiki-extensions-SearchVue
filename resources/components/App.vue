@@ -62,6 +62,7 @@ module.exports = exports = {
 			pageContainer: document.querySelector( '#bodyContent' ),
 			pageScrolled: false,
 			breakpoints: {
+				small: 720,
 				medium: 1000,
 				large: 1440
 			}
@@ -70,10 +71,10 @@ module.exports = exports = {
 	computed: $.extend(
 		{
 			isLargeScreen() {
-				return this.width >= this.breakpoints.medium;
+				return this.width >= this.breakpoints.small;
 			},
 			columnWidth() {
-				if ( this.width <= this.breakpoints.medium ) {
+				if ( this.width <= this.breakpoints.small ) {
 					return 0;
 				}
 				return this.elementWidth / 12;
@@ -94,7 +95,7 @@ module.exports = exports = {
 			},
 			dynamicRightMargin() {
 				let rightMargin = 0;
-				if ( this.width <= this.breakpoints.medium ) {
+				if ( this.width <= this.breakpoints.small ) {
 					return rightMargin;
 				}
 				// we calculate the main container margin
