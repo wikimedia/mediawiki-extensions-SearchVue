@@ -21,7 +21,7 @@
 					class="loading"
 				>
 					<a :href="image.imageinfo[ 0 ].descriptionurl"
-						@click="onCommonsClick">
+						@click.prevent="onCommonsClick( image.imageinfo[ 0 ].descriptionurl )">
 						<image-with-loading-background
 							:src="image.imageinfo[ 0 ].thumburl"
 							:alt="image.title"
@@ -35,7 +35,7 @@
 				v-if="hasMoreImages || hasHiddenImages"
 				class="quickViewCommons__viewMore"
 				:href="searchLink"
-				@click="onCommonsClick"
+				@click.prevent="onCommonsClick( searchLink )"
 			>
 				<template v-if="isMobile">
 					{{ $i18n( 'searchvue-commons-viewmore-mobile' ).text() }}
@@ -115,11 +115,12 @@ module.exports = exports = {
 		onImgLoad() {
 			this.numberOfImagesLoaded++;
 		},
-		onCommonsClick() {
-			this.$emit(
-				'log-event',
-				'click-interwiki-commons'
-			);
+		onCommonsClick( url ) {
+			this.$emit( 'log-event',
+				{
+					action: 'click-interwiki-commons',
+					goTo: url
+				} );
 		},
 		calculateAspectRatio( image ) {
 			if ( !this.isMobile ) {

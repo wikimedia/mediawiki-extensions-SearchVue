@@ -14,7 +14,7 @@
 				:data-anchor="section"
 			>
 				<a :href="getSectionsUri( section, i )"
-					@click="onSectionClick('click-section')"
+					@click.prevent="onSectionClick( getSectionsUri( section, i ) )"
 				>
 					{{ section }}
 				</a>
@@ -23,7 +23,7 @@
 		<a
 			v-if="hiddenSectionsLength > 1"
 			:href="firstHiddenSectionsUrl"
-			@click="onSectionClick('click-section-view-more')"
+			@click.prevent="onSectionClick( firstHiddenSectionsUrl )"
 		>
 			{{ $i18n( 'searchvue-more-sections', hiddenSectionsLength ).text() }}
 		</a>
@@ -124,11 +124,13 @@ module.exports = exports = {
 
 			this.hiddenSections = hiddenSectionsAnchors;
 		},
-		onSectionClick( action ) {
+		onSectionClick( url ) {
 			this.$emit(
 				'log-event',
-				action
-			);
+				{
+					action: 'click-article-section',
+					goTo: url
+				} );
 		}
 	},
 	watch: {
