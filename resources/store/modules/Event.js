@@ -23,7 +23,7 @@ const events = {
 		 */
 		setQuickViewEventProps: ( context ) => {
 			const data = {
-				schema: '/analytics/mediawiki/searchpreview/1.0.0',
+				schema: '/analytics/mediawiki/searchpreview/2.0.0',
 				wikiId: mw.config.get( 'wgDBname' ),
 				platform: mw.config.get( 'skin' ) === 'minerva' ? 'mobile' : 'desktop'
 			};
