@@ -18,8 +18,7 @@
  * Placeholder
  */
 const QuickViewTutorialPopup = require( './QuickViewTutorialPopup.vue' ),
-	mapState = require( 'vuex' ).mapState,
-	mapGetters = require( 'vuex' ).mapGetters;
+	mapState = require( 'vuex' ).mapState;
 
 // @vue/component
 module.exports = exports = {
@@ -43,9 +42,6 @@ module.exports = exports = {
 			'selectedIndex',
 			'isMobile'
 		] ),
-		mapGetters( [
-			'isEnabled'
-		] ),
 		{
 			preferencesUrl() {
 				return new mw.Title( 'Preferences#mw-prefsection-searchoptions', -1 ).getUrl();
@@ -56,7 +52,6 @@ module.exports = exports = {
 		setTutorialPopupVisibility() {
 			// If enabled mobile preview, temporary disable tutorial popup
 			if (
-				!this.isEnabled ||
 				mw.user.isAnon() ||
 				!this.tutorialPopPref ||
 				this.selectedIndex !== -1
