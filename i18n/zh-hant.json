@@ -1,17 +1,20 @@
 {
 	"@metadata": {
 		"authors": [
-			"Lakejason0"
+			"Lakejason0",
+			"捍粵者"
 		]
 	},
-	"searchvue-desc": "對 Special:Search 的 Vue.js 功能附加與改進",
+	"searchvue-desc": "對Special:Search的Vue.js功能附加與改進",
 	"searchvue-close": "關閉",
 	"searchvue-next": "下一個",
 	"searchvue-previous": "上一個",
 	"searchvue-label": "啟用搜尋結果預覽",
 	"searchvue-snippet-gotofullpage": "轉到完整頁面",
 	"searchvue-snippet-gotofullpage-ns0": "轉到全文",
+	"searchvue-description-mobile": "$1是$2",
 	"searchvue-commons-viewmore": "檢視更多",
+	"searchvue-commons-viewmore-mobile": "檢視更多圖片",
 	"searchvue-commons-footnote": "來自維基共享資源",
 	"searchvue-commons-heading": "相關圖片",
 	"searchvue-article-sections-heading": "條目中的章節",
