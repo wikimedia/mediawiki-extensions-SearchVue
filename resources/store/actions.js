@@ -381,7 +381,9 @@ module.exports = {
 	 * @param {Function} context.dispatch
 	 */
 	onPageClose: ( context ) => {
-		context.dispatch( 'events/logQuickViewEvent', { action: 'close-searchpreview', selectedIndex: context.state.selectedIndex }, { root: true } );
+		if ( context.state.selectedIndex !== -1 ) {
+			context.dispatch( 'events/logQuickViewEvent', { action: 'close-searchpreview', selectedIndex: context.state.selectedIndex }, { root: true } );
+		}
 	},
 	/**
 	 * Navigate results
