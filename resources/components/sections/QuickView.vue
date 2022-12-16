@@ -49,6 +49,7 @@
 				:title="currentResult.prefixedText"
 				:description="currentResult.description"
 				:is-mobile="isMobile"
+				@log-event="onLogEvent"
 			></quick-view-description>
 			<quick-view-snippet
 				:text="textWithEllipsis"
