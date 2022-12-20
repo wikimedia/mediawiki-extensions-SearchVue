@@ -1,8 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
-			"Lakejason0"
+			"Lakejason0",
+			"捍粵者"
 		]
 	},
-	"searchvue-desc": "對 Special:Search 的 Vue.js 功能附加與改進"
+	"searchvue-desc": "對Special:Search的Vue.js功能附加與改進"
 }
