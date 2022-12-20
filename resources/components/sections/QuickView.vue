@@ -54,6 +54,7 @@
 			<quick-view-snippet
 				:text="textWithEllipsis"
 				:title="currentResult.prefixedText"
+				:is-mobile="isMobile"
 				@log-event="onLogEvent"
 			></quick-view-snippet>
 			<quick-view-sections
