@@ -13,12 +13,9 @@
 	"searchvue-label": "Aktifkan pratinjau hasil pencarian",
 	"searchvue-snippet-gotofullpage": "Buka halaman penuh",
 	"searchvue-snippet-gotofullpage-ns0": "Menuju ke artikel lengkap",
-	"searchvue-description-mobile": "$1 is a $2",
 	"searchvue-commons-viewmore": "Lihat selengkapnya",
-	"searchvue-commons-viewmore-mobile": "View more images",
 	"searchvue-commons-footnote": "Konten dari Wikimedia Commons",
 	"searchvue-commons-heading": "Gambar terkait",
-	"searchvue-commons-heading-mobile": "Related images in Wikimedia Commons",
 	"searchvue-article-sections-heading": "Subjudul di halaman",
 	"searchvue-article-sections-heading-ns0": "Subjudul di artikel",
 	"searchvue-more-sections": "+ $1 {{PLURAL:$1|lainnya}}",
@@ -26,7 +23,6 @@
 	"tutorial-popup-title": "Pratinjau hasil pencarian",
 	"tutorial-popup-text1": "Klik pada cuplikan artikel untuk melihat pratinjau dari hasil pencarian dan melihat konten terkait.",
 	"tutorial-popup-text2": "Anda dapat mengaktifkan dan menonaktifkan pratinjau dalam pencarian",
-	"tutorial-popup-text-mobile": "Tap on the the article snippet or the arrow to preview the search result and see related content.",
 	"tutorial-popup-preferences": "preferensi",
 	"tutorial-popup-close": "Tutup"
 }
