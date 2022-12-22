@@ -236,7 +236,11 @@ const retrieveInfoFromQuery = ( context, title ) => {
 				return;
 			}
 
-			setThumbnail( result.thumbnail, result.pageimage || '', context );
+			let thumbnail = null;
+			if ( result.thumbnail ) {
+				thumbnail = result.thumbnail;
+			}
+			setThumbnail( thumbnail, result.pageimage || '', context );
 			setCommonsInfo( result, context );
 			setDescription( result, context );
 			setArticleSections( result, context );
@@ -340,7 +344,11 @@ module.exports = {
 			const selectedTitleIndex = context.state.results.findIndex( ( result ) => {
 				return result.prefixedText === newTitle;
 			} );
-			setThumbnail( context.state.results[ selectedTitleIndex ].thumbnail, '', context );
+			let thumbnail = null;
+			if ( context.state.results[ selectedTitleIndex ] && context.state.results[ selectedTitleIndex ].thumbnail ) {
+				thumbnail = context.state.results[ selectedTitleIndex ].thumbnail;
+			}
+			setThumbnail( thumbnail, '', context );
 			retrieveInfoFromQuery( context, newTitle );
 			context.commit( 'SET_TITLE', newTitle );
 			context.commit( 'SET_VISIBLE', true );
