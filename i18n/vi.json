@@ -1,8 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"NguyenHung"
+			"NguyenHung",
+			"Nguyenphutrong2"
 		]
 	},
+	"searchvue-description-mobile": "$1 là $2",
+	"searchvue-commons-viewmore-mobile": "Xem thêm hình ảnh",
+	"searchvue-commons-heading-mobile": "Hình ảnh liên quan trong Wikimedia Commons",
 	"tutorial-popup-text-mobile": "Nhấn vào đoạn trích bài viết hoặc mũi tên để xem trước kết quả tìm kiếm và xem nội dung liên quan."
 }
