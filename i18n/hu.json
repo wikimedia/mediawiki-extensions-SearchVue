@@ -9,5 +9,13 @@
 	"searchvue-previous": "Előző",
 	"searchvue-label": "A keresési találatok előnézetének engedélyezése",
 	"searchvue-snippet-gotofullpage": "Ugrás a teljes lapra",
-	"searchvue-help": "A lap és kapcsolódó lapok előnézetének megjelenítése."
+	"searchvue-snippet-gotofullpage-ns0": "Ugrás a teljes szócikkre",
+	"searchvue-commons-heading": "Kapcsolódó képek",
+	"searchvue-commons-heading-mobile": "Kapcsolódó képek a Wikimédia Commonsban",
+	"searchvue-article-sections-heading": "Szakaszok a lapon",
+	"searchvue-article-sections-heading-ns0": "Szakaszok a szócikkben",
+	"searchvue-more-sections": "+ $1 további {{PLURAL:$1|szakasz}}",
+	"searchvue-help": "A lap és kapcsolódó tartalmak előnézetének megjelenítése.",
+	"tutorial-popup-title": "Keresési találatok előnézetei",
+	"tutorial-popup-close": "Bezárás"
 }
