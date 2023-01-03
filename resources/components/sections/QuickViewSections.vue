@@ -200,6 +200,10 @@ module.exports = exports = {
 		line-height: 1.385em;
 		margin-bottom: 0;
 
+		&:last-child {
+			margin-bottom: 0;
+		}
+
 		a {
 			color: @colorGray2;
 		}
