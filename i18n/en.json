@@ -16,7 +16,7 @@
 	"searchvue-commons-viewmore-mobile": "View more images",
 	"searchvue-commons-footnote": "In Wikimedia Commons",
 	"searchvue-commons-heading": "Related images",
-	"searchvue-commons-heading-mobile": "Related images in Wikimedia Commons",
+	"searchvue-commons-heading-mobile": "Related images from Wikimedia Commons",
 	"searchvue-article-sections-heading": "Sections in the page",
 	"searchvue-article-sections-heading-ns0": "Sections in the article",
 	"searchvue-more-sections": "+ $1 more {{PLURAL:$1|section|sections}}",
