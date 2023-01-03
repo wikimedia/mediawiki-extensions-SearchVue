@@ -42,24 +42,5 @@ module.exports = {
 		}
 
 		return false;
-	},
-	/**
-	 * Check if mobile version of quick view is enabled
-	 *
-	 * @param {Object} state
-	 *
-	 * @return {boolean}
-	 */
-	isEnabled: ( state ) => {
-		let enable = !state.isMobile;
-		if ( ( new mw.Uri() ).query.quickViewEnableMobile !== undefined ) {
-			// casting with parseInt instead of Boolean to also consider
-			// a (string) '0' as off
-			enable = enable || parseInt( ( new mw.Uri() ).query.quickViewEnableMobile );
-		} else {
-			enable = enable || mw.config.get( 'wgQuickViewEnableMobile' );
-		}
-		return enable;
 	}
-
 };

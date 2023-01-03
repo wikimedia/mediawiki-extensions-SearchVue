@@ -7,7 +7,14 @@
 		}"
 	>
 		<template v-if="!isMobile">
-			<h2><a :href="url">{{ title }}</a></h2>
+			<h2>
+				<a
+					:href="url"
+					@click.prevent="onClick"
+				>
+					{{ title }}
+				</a>
+			</h2>
 			<p v-if="description">
 				{{ description }}
 			</p>
@@ -83,8 +90,15 @@ module.exports = exports = {
 					}
 				} );
 			}
+		},
+		onClick() {
+			this.$emit(
+				'log-event',
+				{
+					action: 'click-snippet',
+					goTo: this.url
+				} );
 		}
-
 	},
 	mounted() {
 		this.defineFontSizeAndOverflow();

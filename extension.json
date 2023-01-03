@@ -39,11 +39,6 @@
 		"remoteExtPath": "SearchVue"
 	},
 	"ResourceModules": {
-		"searchVue.styles": {
-			"styles": [
-				"resources/styles/SearchVue.less"
-			]
-		},
 		"searchVue": {
 			"packageFiles": [
 				"resources/init.js",
@@ -108,6 +103,19 @@
 				"tutorial-popup-text-mobile",
 				"tutorial-popup-preferences",
 				"tutorial-popup-close"
+			]
+		},
+		"searchVue.styles": {
+			"styles": [
+				"resources/styles/SearchVue-immediate.less"
+			]
+		},
+		"searchVue.mobile.styles": {
+			"targets": [
+				"mobile"
+			],
+			"styles": [
+				"resources/styles/SearchVue-result-mobile-immediate.less"
 			]
 		}
 	},

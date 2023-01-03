@@ -34,26 +34,26 @@ class Hooks implements
 		if ( $special->getName() !== 'Search' ) {
 			return;
 		}
-
 		$services = MediaWikiServices::getInstance();
-		$userConfig = $services->getUserOptionsLookup();
-		$searchPreviewEnabled = $userConfig->getBoolOption( $special->getUser(), 'searchpreview' );
+		$searchPreviewEnabled = $this->searchPreviewIsEnabled( $special, $services );
 
 		if ( $searchPreviewEnabled ) {
 			$special->getOutput()->addModuleStyles( [ 'searchVue.styles' ] );
 			$special->getOutput()->addModules( [ 'searchVue' ] );
 
+			if ( $this->isMobileView( $special ) ) {
+				$special->getOutput()->addModuleStyles( [ 'searchVue.mobile.styles' ] );
+			}
+
 			$repositoryApiBaseUri = $services->getMainConfig()->get( 'QuickViewMediaRepositoryApiBaseUri' );
 			$repositorySearchUri = $services->getMainConfig()->get( 'QuickViewMediaRepositorySearchUri' );
 			$repositoryUri = $services->getMainConfig()->get( 'QuickViewMediaRepositoryUri' );
 			$searchFilterForQID = $services->getMainConfig()->get( 'QuickViewSearchFilterForQID' );
-			$enableMobile = $services->getMainConfig()->get( 'QuickViewEnableMobile' );
 			$special->getOutput()->addJsConfigVars( [
 				'wgQuickViewMediaRepositoryApiBaseUri' => $repositoryApiBaseUri,
 				'wgQuickViewMediaRepositorySearchUri' => $repositorySearchUri,
 				'wgQuickViewMediaRepositoryUri' => $repositoryUri,
-				'wgQuickViewSearchFilterForQID' => $searchFilterForQID,
-				'wgQuickViewEnableMobile' => $enableMobile
+				'wgQuickViewSearchFilterForQID' => $searchFilterForQID
 			] );
 		}
 	}
@@ -146,5 +146,57 @@ class Hooks implements
 		$prefs['searchpreview-tutorial-enabled'] = [
 			'type' => 'api'
 		];
+	}
+
+	/**
+	 * Define if the extension should be enabled. This consider the device type
+	 * and various configurations
+	 *
+	 * @param SpecialPage $special
+	 * @param MediaWikiServices $services
+	 * @return bool|string
+	 */
+	private function searchPreviewIsEnabled( $special, $services ) {
+		$userConfig = $services->getUserOptionsLookup();
+		$enabledInUserConfig = $userConfig->getBoolOption( $special->getUser(), 'searchpreview' );
+		$isMobileView = $this->isMobileView( $special );
+		$enabledOnMobile = $this->enableExtensionOnMobile( $special, $services );
+
+		if ( !$enabledInUserConfig ) {
+			return false;
+		}
+		if ( !$isMobileView ) {
+			return true;
+		}
+
+		return $enabledOnMobile;
+	}
+
+	/**
+	 * Define if the extension should be loaded on mobile taking into consideration
+	 * query parameters and configuration setting
+	 *
+	 * @param SpecialPage $special
+	 * @param MediaWikiServices $services
+	 * @return string
+	 */
+	private static function enableExtensionOnMobile( $special, $services ) {
+		$enableMobileQueryParams = $special->getRequest()->getVal( 'quickViewEnableMobile' );
+
+		if ( $enableMobileQueryParams !== null ) {
+			return $enableMobileQueryParams;
+		} else {
+			return $services->getMainConfig()->get( 'QuickViewEnableMobile' );
+		}
+	}
+
+	/**
+	 * Define if the the current request is serving the mobile skin 'minerva'
+	 *
+	 * @param SpecialPage $special
+	 * @return bool
+	 */
+	private function isMobileView( $special ) {
+		return $special->getSkin()->getSkinName() === 'minerva';
 	}
 }

@@ -17,7 +17,7 @@ describe( 'Events store', () => {
 	it( 'Mutate the initial event state', () => {
 		const initialData = {
 			sessionId: null,
-			schema: '/analytics/mediawiki/searchpreview/1.0.0',
+			schema: '/analytics/mediawiki/searchpreview/2.0.0',
 			wikiId: 'wiki',
 			platform: 'desktop'
 		};

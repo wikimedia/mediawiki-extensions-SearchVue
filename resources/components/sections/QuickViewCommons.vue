@@ -21,7 +21,7 @@
 					class="loading"
 				>
 					<a :href="image.imageinfo[ 0 ].descriptionurl"
-						@click="onCommonsClick">
+						@click.prevent="onCommonsClick( image.imageinfo[ 0 ].descriptionurl )">
 						<image-with-loading-background
 							:src="image.imageinfo[ 0 ].thumburl"
 							:alt="image.title"
@@ -35,7 +35,7 @@
 				v-if="hasMoreImages || hasHiddenImages"
 				class="quickViewCommons__viewMore"
 				:href="searchLink"
-				@click="onCommonsClick"
+				@click.prevent="onCommonsClick( searchLink )"
 			>
 				<template v-if="isMobile">
 					{{ $i18n( 'searchvue-commons-viewmore-mobile' ).text() }}
@@ -115,11 +115,12 @@ module.exports = exports = {
 		onImgLoad() {
 			this.numberOfImagesLoaded++;
 		},
-		onCommonsClick() {
-			this.$emit(
-				'log-event',
-				'click-interwiki-commons'
-			);
+		onCommonsClick( url ) {
+			this.$emit( 'log-event',
+				{
+					action: 'click-interwiki-commons',
+					goTo: url
+				} );
 		},
 		calculateAspectRatio( image ) {
 			if ( !this.isMobile ) {
@@ -180,38 +181,6 @@ div.quickViewCommons {
 		}
 	}
 
-	&__mobile {
-		border: none;
-		padding: 0;
-
-		.quickViewCommons__content {
-			display: flex;
-			width: fit-content;
-		}
-
-		.quickViewCommons__viewMore {
-			width: 74px;
-			margin-left: 10px;
-			margin-right: 26px;
-			display: flex;
-			align-items: center;
-			text-align: center;
-		}
-
-		ul {
-			flex-wrap: nowrap;
-			padding: 0;
-			margin-left: 0;
-			width: fit-content;
-			gap: 4px;
-
-			li {
-				height: 142px;
-				padding-bottom: 0;
-			}
-		}
-	}
-
 	ul {
 		max-height: 210px;
 		overflow: hidden;
@@ -239,6 +208,39 @@ div.quickViewCommons {
 				img {
 					max-width: ~'calc( 100vw - 50px )';
 				}
+			}
+		}
+	}
+
+	// Require further specificity
+	&.quickViewCommons__mobile {
+		border: none;
+		padding: 0;
+
+		.quickViewCommons__content {
+			display: flex;
+			width: fit-content;
+		}
+
+		.quickViewCommons__viewMore {
+			width: 74px;
+			margin-left: 10px;
+			margin-right: 26px;
+			display: flex;
+			align-items: center;
+			text-align: center;
+		}
+
+		ul {
+			flex-wrap: nowrap;
+			padding: 0;
+			margin-left: 0;
+			width: fit-content;
+			gap: 4px;
+
+			li {
+				height: 142px;
+				padding-bottom: 0;
 			}
 		}
 	}

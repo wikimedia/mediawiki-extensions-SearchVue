@@ -34,7 +34,6 @@
 const QuickView = require( './sections/QuickView.vue' ),
 	mapActions = require( 'vuex' ).mapActions,
 	mapState = require( 'vuex' ).mapState,
-	mapGetters = require( 'vuex' ).mapGetters,
 	onDocumentResize = require( '../composables/onDocumentResize.js' ),
 	onDocumentScroll = require( '../composables/onDocumentScroll.js' ),
 	onResizeObserver = require( '../composables/onResizeObserver.js' );
@@ -63,6 +62,7 @@ module.exports = exports = {
 			pageContainer: document.querySelector( '#bodyContent' ),
 			pageScrolled: false,
 			breakpoints: {
+				small: 720,
 				medium: 1000,
 				large: 1440
 			}
@@ -71,10 +71,10 @@ module.exports = exports = {
 	computed: $.extend(
 		{
 			isLargeScreen() {
-				return this.width >= this.breakpoints.medium;
+				return this.width >= this.breakpoints.small;
 			},
 			columnWidth() {
-				if ( this.width <= this.breakpoints.medium ) {
+				if ( this.width <= this.breakpoints.small ) {
 					return 0;
 				}
 				return this.elementWidth / 12;
@@ -95,7 +95,7 @@ module.exports = exports = {
 			},
 			dynamicRightMargin() {
 				let rightMargin = 0;
-				if ( this.width <= this.breakpoints.medium ) {
+				if ( this.width <= this.breakpoints.small ) {
 					return rightMargin;
 				}
 				// we calculate the main container margin
@@ -137,7 +137,6 @@ module.exports = exports = {
 			'onPageClose'
 		] ),
 		mapActions( 'events', [ 'setSearchResultPosition', 'setQuickViewEventProps' ] ),
-		mapGetters( [ 'isEnabled' ] ),
 		{
 			setQueryQuickViewTitle: function () {
 				const mwUri = new mw.Uri();
@@ -225,10 +224,6 @@ module.exports = exports = {
 		} );
 	},
 	mounted: function () {
-		if ( !this.isEnabled ) {
-			return;
-		}
-
 		const searchResults = this.getSearchResults();
 		for ( const searchResult of searchResults ) {
 			searchResult.classList.add( 'searchresult-with-quickview' );
@@ -264,8 +259,8 @@ module.exports = exports = {
 </script>
 
 <style lang="less">
-@import '../styles/Search-result-hover.less';
-@import '../styles/Search-result-mobile.less';
+@import '../styles/SearchVue-result-hover.less';
+@import '../styles/SearchVue-result-mobile.less';
 @import '../../lib/mediawiki-ui-base.less';
 
 .mw-search-quick-view {
@@ -297,7 +292,7 @@ module.exports = exports = {
 		overflow: auto;
 		height: 174px;
 		overflow-y: hidden;
-		margin: 0;
+		margin: 12px 0 20px 0;
 		top: 0;
 		font-size: 0.875em;
 		line-height: 1.6em;
