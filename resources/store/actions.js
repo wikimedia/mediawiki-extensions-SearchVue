@@ -80,12 +80,13 @@ const setThumbnail = ( thumbnail, alt, context ) => {
  * @param {Object} context
  */
 const setDescription = ( page, context ) => {
-	if ( !page.pageprops || !page.pageprops[ 'wikibase-shortdesc' ] ) {
+	if ( page.pageprops && page.pageprops[ 'wikibase-shortdesc' ] ) {
+		context.commit( 'SET_DESCRIPTION', page.pageprops[ 'wikibase-shortdesc' ] );
+	} else if ( page.terms && page.terms.description && page.terms.description[ 0 ] ) {
+		context.commit( 'SET_DESCRIPTION', page.terms.description[ 0 ] );
+	} else {
 		context.commit( 'SET_DESCRIPTION' );
-		return;
 	}
-
-	context.commit( 'SET_DESCRIPTION', page.pageprops[ 'wikibase-shortdesc' ] );
 };
 
 /**

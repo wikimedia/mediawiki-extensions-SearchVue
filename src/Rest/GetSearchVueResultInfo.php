@@ -26,10 +26,11 @@ class GetSearchVueResultInfo extends SimpleHandler {
 			'action' => 'query',
 			'format' => 'json',
 			'titles' => $decodedTitle,
-			'prop' => 'pageimages|pageprops|cirrusdoc',
+			'prop' => 'pageimages|pageprops|pageterms|cirrusdoc',
 			'pithumbsize' => 400,
 			'pilicense' => 'free',
 			'piprop' => 'thumbnail|name|original',
+			'wbptterms' => 'description',
 			'cdincludes' => 'heading'
 		] );
 		$api = new ApiMain( $payload );
