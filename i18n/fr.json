@@ -18,7 +18,7 @@
 	"searchvue-commons-viewmore-mobile": "Voir plus d’images",
 	"searchvue-commons-footnote": "Sur Wikimedia Commons",
 	"searchvue-commons-heading": "Images associées",
-	"searchvue-commons-heading-mobile": "Image liée dans Wikimedia Commons",
+	"searchvue-commons-heading-mobile": "Image liée provenant de Wikimedia Commons",
 	"searchvue-article-sections-heading": "Sections dans la page",
 	"searchvue-article-sections-heading-ns0": "Sections dans l’article",
 	"searchvue-more-sections": "+ $1 autre{{PLURAL:$1||s}} section{{PLURAL:$1||s}}",
