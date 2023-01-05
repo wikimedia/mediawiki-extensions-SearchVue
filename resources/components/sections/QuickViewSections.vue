@@ -104,7 +104,10 @@ module.exports = exports = {
 
 			// Roundtrip fragment through URL to ensure it's properly en-/decoded
 			// before feeding it into mw.Title
-			const url = new URL( '#' + hash, mw.config.get( 'wgServer' ) );
+			// Note: the 2nd argument for the `URL` constructor is required, even
+			// though we will not actually use it; we're just going to use a stub
+			// value that we know will be valid to construct `URL` with
+			const url = new URL( '#' + hash, 'http://localhost' );
 			const title = new mw.Title( this.title + url.hash );
 			return title.getUrl();
 		},
