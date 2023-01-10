@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Kokage si",
 			"MathXplore",
 			"バレロン"
 		]
@@ -14,7 +15,7 @@
 	"searchvue-commons-viewmore-mobile": "もっと画像を見る",
 	"searchvue-commons-footnote": "ウィキメディア・コモンズ",
 	"searchvue-commons-heading": "関連画像",
-	"searchvue-commons-heading-mobile": "コモンズの関連画像",
+	"searchvue-commons-heading-mobile": "コモンズからの関連画像",
 	"searchvue-article-sections-heading": "ページ内のセクション",
 	"tutorial-popup-title": "検索結果のプレビュー",
 	"tutorial-popup-preferences": "設定",
