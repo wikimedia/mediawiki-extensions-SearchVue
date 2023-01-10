@@ -165,22 +165,6 @@ div.quickViewCommons {
 		margin-bottom: 8px;
 	}
 
-	&__viewMore {
-		font-size: 0.875em;
-	}
-
-	&__footNote,
-	&__mobile h3 {
-		background-image: url( ../../assets/icons/commons.svg );
-		padding-left: 23px;
-		background-repeat: no-repeat;
-		background-position-y: center;
-
-		a {
-			color: inherit;
-		}
-	}
-
 	ul {
 		max-height: 210px;
 		overflow: hidden;
@@ -209,6 +193,18 @@ div.quickViewCommons {
 					max-width: ~'calc( 100vw - 50px )';
 				}
 			}
+		}
+	}
+
+	.quickViewCommons__footNote,
+	.quickViewCommons__mobile h3 {
+		background-image: url( ../../assets/icons/commons.svg );
+		padding-left: 23px;
+		background-repeat: no-repeat;
+		background-position-y: center;
+
+		a {
+			color: inherit;
 		}
 	}
 
