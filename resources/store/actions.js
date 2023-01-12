@@ -1,4 +1,5 @@
 'use strict';
+
 const restApi = new mw.Rest();
 /**
  * Push the current provided title to the browser's session history stack
@@ -310,9 +311,9 @@ module.exports = {
 				context.commit( 'SET_NEXT_TITLE', null );
 			} else if ( !context.state.title ) {
 				destination = dataTitleSelector;
-			} else if ( context.state.title ) {
+			} else if ( context.state.title && context.state.title !== title ) {
 				context.commit( 'SET_NEXT_TITLE', title );
-				context.commit( 'SET_VISIBLE', false );
+				context.commit( 'SET_COMPONENT_READY', false );
 				return;
 			}
 		}
@@ -352,7 +353,7 @@ module.exports = {
 			setThumbnail( thumbnail, '', context );
 			retrieveInfoFromQuery( context, newTitle );
 			context.commit( 'SET_TITLE', newTitle );
-			context.commit( 'SET_VISIBLE', true );
+			context.commit( 'SET_COMPONENT_READY', true );
 			pushTitleToHistoryState( newTitle );
 			handleClassesToggle( true, element );
 
@@ -377,7 +378,7 @@ module.exports = {
 		context.commit( 'SET_COMMONS' );
 		context.commit( 'SET_DESCRIPTION' );
 		context.commit( 'SET_SECTIONS' );
-		context.commit( 'SET_VISIBLE' );
+		context.commit( 'SET_COMPONENT_READY' );
 		removeQuickViewFromHistoryState();
 		context.commit( 'RESET_REQUEST_STATUS' );
 		restApi.abort();

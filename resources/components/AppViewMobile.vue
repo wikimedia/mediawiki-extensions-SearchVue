@@ -1,0 +1,177 @@
+<template>
+	<Teleport
+		v-if="destination"
+		:to="destination">
+		<p
+			v-if="!visible && loading"
+			v-spinner
+			class="mw-search-quick-view__mobile__info-text"
+		>
+			{{ $i18n( 'searchvue-loading' ).text() }}
+		</p>
+		<p
+			v-else-if="(!showOnMobile && visible)"
+			class="mw-search-quick-view__mobile__info-text"
+		>
+			{{ $i18n( 'searchvue-no-content' ).text() }}
+		</p>
+		<Transition
+			@after-leave="() => toggleVisibily( {
+				title: nextTitle,
+				element: currentElement( nextTitle ),
+				force: true
+			} )"
+			@after-enter="scrollScreenOnMobile">
+			<quick-view
+				v-if="visible && showOnMobile"
+				ref="quick-view"
+				class="mw-search-quick-view__mobile"
+			>
+				<template #loading-icon="{ loading }">
+					<div
+						v-if="loading"
+						v-spinner
+						class="mw-search-quick-view__mobile__loading-block"
+					></div>
+				</template>
+			</quick-view>
+		</Transition>
+	</Teleport>
+</template>
+
+<script>
+const mapGetters = require( 'vuex' ).mapGetters;
+
+const QuickView = require( './sections/QuickView.vue' ),
+	spinner = require( '../directives/spinner.js' ),
+	mapActions = require( 'vuex' ).mapActions,
+	mapState = require( 'vuex' ).mapState;
+
+// @vue/component
+module.exports = exports = {
+	name: 'SearchVue',
+	directives: {
+		spinner
+	},
+	components: {
+		'quick-view': QuickView
+	},
+	computed: $.extend(
+		{},
+		mapState( [
+			'title',
+			'nextTitle',
+			'destination'
+		] ),
+		mapGetters( [
+			'visible',
+			'loading',
+			'showOnMobile'
+		] )
+	),
+	methods: $.extend( {},
+		mapActions( [
+			'toggleVisibily'
+		] ),
+		{
+			getSearchResults() {
+				// eslint-disable-next-line no-jquery/no-global-selector
+				return $( '#mw-content-text .mw-search-result-ns-0' )
+					.not( '#mw-content-text .mw-search-interwiki-results .mw-search-result-ns-0' );
+			},
+			currentElement: function ( title ) {
+				return this.getSearchResults().find( `[title='${title}']` ).closest( 'li' )[ 0 ];
+			},
+			scrollScreenOnMobile: function () {
+				const currentElement = this.currentElement( this.title );
+
+				const docViewBottom = $( window ).scrollTop() + $( window ).height();
+				const elemBottom = $( currentElement ).offset().top + $( currentElement ).height();
+
+				if ( elemBottom >= docViewBottom ) {
+					this.currentElement( this.title ).scrollIntoView( { behavior: 'smooth' } );
+				}
+			}
+		}
+	)
+};
+</script>
+
+<style lang="less">
+@import '../styles/SearchVue-result-mobile.less';
+@import '../../lib/mediawiki-ui-base.less';
+
+.mw-search-quick-view__mobile {
+	z-index: 1000;
+	width: 100%;
+	display: flex;
+	overflow: auto;
+	height: 174px;
+	overflow-y: hidden;
+	margin: 0;
+	top: 0;
+	font-size: 0.875em;
+	line-height: 1.6em;
+
+	& > * {
+		min-width: 300px;
+	}
+
+	& > div {
+		margin-left: 8px;
+		margin-bottom: 0;
+		border-radius: 2px;
+		border: 1px solid @wmui-color-base70;
+		padding: 12px;
+	}
+
+	&__info-text {
+		position: relative;
+		margin: 0;
+		color: @wmui-color-base30;
+
+		// we set some spacing between text and loading icon
+		& .mw-spinner {
+			margin-left: 12px;
+		}
+	}
+
+	& &__loading-block {
+		height: 100%;
+		display: flex;
+		align-items: center;
+		border: none;
+	}
+
+	// we normalise the P tag by removing margin added by vector
+	p {
+		margin: 0;
+	}
+}
+
+// Vue transition classes.
+.v-enter-active {
+	transition: height 0.3s ease;
+
+	&.mw-search-quick-view {
+		visibility: hidden;
+	}
+}
+
+.v-leave-active {
+	transition: height 0.1s ease;
+
+	&.mw-search-quick-view {
+		visibility: hidden;
+	}
+}
+
+.v-enter-from,
+.v-leave-to {
+	height: 0;
+
+	&.mw-search-quick-view {
+		visibility: hidden;
+	}
+}
+</style>

@@ -9,6 +9,8 @@
 	"searchvue-next": "Next",
 	"searchvue-previous": "Previous",
 	"searchvue-label": "Enable search result preview",
+	"searchvue-loading": "Loading preview",
+	"searchvue-no-content": "No content to preview",
 	"searchvue-snippet-gotofullpage": "Go to full page",
 	"searchvue-snippet-gotofullpage-ns0": "Go to full article",
 	"searchvue-description-mobile": "$1 is a $2",

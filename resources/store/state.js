@@ -27,6 +27,11 @@ module.exports = {
 		query: requestStatuses.notStarted,
 		commons: requestStatuses.notStarted
 	},
-	visible: false,
-	destination: ''
+	componentReady: false,
+	destination: '',
+	breakpoints: {
+		medium: 1000,
+		large: 1440,
+		small: 720
+	}
 };

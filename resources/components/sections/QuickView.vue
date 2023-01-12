@@ -52,6 +52,7 @@
 				@log-event="onLogEvent"
 			></quick-view-description>
 			<quick-view-snippet
+				v-if="!isMobile"
 				:text="textWithEllipsis"
 				:title="currentResult.prefixedText"
 				:is-mobile="isMobile"
@@ -69,7 +70,11 @@
 			v-bind="currentResult.commons"
 			@log-event="onLogEvent"
 		></quick-view-commons>
-		<loading-dots :loading="loading" />
+		<slot
+			name="loading-icon"
+			:loading="loading"
+		>
+		</slot>
 	</div>
 </template>
 
@@ -85,7 +90,6 @@ const QuickViewImage = require( './QuickViewImage.vue' ),
 	QuickViewSections = require( './QuickViewSections.vue' ),
 	QuickViewCommons = require( './QuickViewCommons.vue' ),
 	ContentSkeleton = require( '../generic/ContentSkeleton.vue' ),
-	LoadingDots = require( '../generic/LoadingDots.vue' ),
 	mapActions = require( 'vuex' ).mapActions,
 	mapGetters = require( 'vuex' ).mapGetters,
 	mapState = require( 'vuex' ).mapState;
@@ -99,8 +103,7 @@ module.exports = exports = {
 		'quick-view-snippet': QuickViewSnippet,
 		'quick-view-sections': QuickViewSections,
 		'quick-view-commons': QuickViewCommons,
-		'content-skeleton': ContentSkeleton,
-		'loading-dots': LoadingDots
+		'content-skeleton': ContentSkeleton
 	},
 	data: function () {
 		return {};

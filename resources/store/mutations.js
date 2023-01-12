@@ -38,13 +38,14 @@ module.exports = {
 		state.thumbnail = thumbnail || null;
 	},
 	/**
-	 * Set the visibility of the search preview. This is used to control the animation timing.
+	 * Variable used to inform us that the component is ready to be shown.
+	 * This is used to control the animation timing.
 	 *
 	 * @param {Object} state
 	 * @param {boolean} show
 	 */
-	SET_VISIBLE: ( state, show ) => {
-		state.visible = show;
+	SET_COMPONENT_READY: ( state, show ) => {
+		state.componentReady = show;
 	},
 	/**
 	 * Set the next title. This value is used when transitioning between different Search Previews on mobile

@@ -11,7 +11,7 @@ $( function () {
 		$tutorialPopupContainer = $( '<div>' ).addClass( 'tutorial-popup' );
 	$( '.mw-search-results-container > ul.mw-search-results > li:first-child' ).prepend( $tutorialPopupContainer );
 
-	$( '#content' ).prepend( $vueContainer );
+	$( '.searchresults' ).append( $vueContainer );
 
 	Vue.config.compilerOptions.whitespace = 'preserve';
 	Vue.createMwApp( App )
