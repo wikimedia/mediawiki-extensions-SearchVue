@@ -31,10 +31,16 @@
 				</svg>
 			</button>
 		</nav>
-		<header :class="{'mw-search-quick-view__no-thumb': hideThumb }">
+		<header :class="
+			{
+				'mw-search-quick-view__no-thumb': hideThumb,
+				'mw-search-quick-view__mobile': isMobile,
+			}"
+		>
 			<quick-view-image
 				v-if="currentResult.thumbnail"
 				v-bind="currentResult.thumbnail"
+				:is-mobile="isMobile"
 				@close="closeQuickView"
 				@log-event="onLogEvent"
 			></quick-view-image>
@@ -202,6 +208,10 @@ module.exports = exports = {
 		& + div {
 			margin-left: 0;
 		}
+	}
+
+	& &__mobile {
+		padding-bottom: 0;
 	}
 }
 </style>

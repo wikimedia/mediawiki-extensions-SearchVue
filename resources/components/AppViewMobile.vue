@@ -5,13 +5,13 @@
 		<p
 			v-if="!visible && loading"
 			v-spinner
-			class="mw-search-quick-view__mobile__info-text"
+			class="mw-app-view-mobile__info-text"
 		>
 			{{ $i18n( 'searchvue-loading' ).text() }}
 		</p>
 		<p
 			v-else-if="(!showOnMobile && visible)"
-			class="mw-search-quick-view__mobile__info-text"
+			class="mw-app-view-mobile__info-text"
 		>
 			{{ $i18n( 'searchvue-no-content' ).text() }}
 		</p>
@@ -25,13 +25,13 @@
 			<quick-view
 				v-if="visible && showOnMobile"
 				ref="quick-view"
-				class="mw-search-quick-view__mobile"
+				class="mw-app-view-mobile"
 			>
 				<template #loading-icon="{ loading }">
 					<div
 						v-if="loading"
 						v-spinner
-						class="mw-search-quick-view__mobile__loading-block"
+						class="mw-app-view-mobile__loading-block"
 					></div>
 				</template>
 			</quick-view>
@@ -101,7 +101,7 @@ module.exports = exports = {
 @import '../styles/SearchVue-result-mobile.less';
 @import '../../lib/mediawiki-ui-base.less';
 
-.mw-search-quick-view__mobile {
+.mw-app-view-mobile {
 	z-index: 1000;
 	width: 100%;
 	display: flex;
@@ -113,7 +113,7 @@ module.exports = exports = {
 	font-size: 0.875em;
 	line-height: 1.6em;
 
-	& > * {
+	& > *:not( header ) {
 		min-width: 300px;
 	}
 

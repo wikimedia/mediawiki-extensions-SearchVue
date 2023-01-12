@@ -1,7 +1,7 @@
 <template>
 	<quick-view
 		v-if="visible"
-		class="mw-search-quick-view__desktop"
+		class="mw-app-view-desktop"
 		:style="quickViewDynamicStyles"
 	>
 		<template #loading-icon="{ loading }">
@@ -149,7 +149,7 @@ module.exports = exports = {
 @import '../styles/SearchVue-result-hover.less';
 @import '../../lib/mediawiki-ui-base.less';
 
-.mw-search-quick-view {
+.mw-app-view-desktop {
 	position: fixed;
 	border: solid 1px @wmui-color-base70;
 	right: 0;
