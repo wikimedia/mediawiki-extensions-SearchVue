@@ -9,8 +9,8 @@
 
 		li.searchresult-with-quickview--hover .searchresult,
 		li.searchresult-with-quickview--open .searchresult,
-		li.searchresult-with-quickview .searchresult:hover,
-		li.searchresult-with-quickview .mw-search-result-data:hover {
+		li.searchresult-with-quickview .searchresult,
+		li.searchresult-with-quickview .mw-search-result-data {
 			cursor: pointer;
 
 			&:after {
@@ -20,6 +20,14 @@
 				height: 100%;
 				top: 0;
 				right: -21px;
+			}
+		}
+
+		li.searchresult-with-quickview--hover .searchresult,
+		li.searchresult-with-quickview--open .searchresult,
+		li.searchresult-with-quickview .searchresult:hover,
+		li.searchresult-with-quickview .mw-search-result-data:hover {
+			&:after {
 				background-image: url( ../assets/icons/arrow-forward.svg );
 				background-repeat: no-repeat;
 				background-position-y: center;
