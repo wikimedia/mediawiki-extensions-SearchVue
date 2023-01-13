@@ -9,6 +9,8 @@
 	"searchvue-next": "הבאה",
 	"searchvue-previous": "הקודמת",
 	"searchvue-label": "הפעלת תצוגה מקדימה של תוצאות חיפוש",
+	"searchvue-loading": "טעינת תצוגה מקדימה",
+	"searchvue-no-content": "אין תוכן לתצוגה מקדימה",
 	"searchvue-snippet-gotofullpage": "מעבר לדף המלא",
 	"searchvue-snippet-gotofullpage-ns0": "מעבר לערך המלא",
 	"searchvue-description-mobile": "$1 הוא דף על $2",

@@ -9,6 +9,8 @@
 	"searchvue-next": "Naslednji",
 	"searchvue-previous": "Prejšnji",
 	"searchvue-label": "Omogoči predogled iskalnih zadetkov",
+	"searchvue-loading": "Nalaganje predogleda",
+	"searchvue-no-content": "Ni vsebine za predogled",
 	"searchvue-snippet-gotofullpage": "Pojdi na celotno stran",
 	"searchvue-snippet-gotofullpage-ns0": "Pojdi na celotni članek",
 	"searchvue-description-mobile": "$1 je $2",

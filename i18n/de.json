@@ -7,6 +7,8 @@
 	"searchvue-next": "Nächste",
 	"searchvue-previous": "Vorherige",
 	"searchvue-label": "Vorschau der Suchergebnisse aktivieren",
+	"searchvue-loading": "Vorschau wird geladen",
+	"searchvue-no-content": "Kein Inhalt für Vorschau",
 	"searchvue-snippet-gotofullpage": "Zur ganzen Seite gehen",
 	"searchvue-snippet-gotofullpage-ns0": "Gehe zum vollständigen Artikel",
 	"searchvue-description-mobile": "$1 ist eine $2",
