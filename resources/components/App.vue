@@ -1,6 +1,10 @@
 <template>
 	<component
 		:is="quickViewComponent"
+		role="dialog"
+		tabindex="-1"
+		:title="$i18n( 'searchvue-dialog-title' ).text()"
+		:aria-label="$i18n( 'searchvue-dialog-aria-label' ).text()"
 		class="mw-search-quick-view"
 	>
 	</component>
@@ -85,6 +89,40 @@ module.exports = exports = {
 				if ( this.queryQuickViewTitle ) {
 					this.onPageClose();
 				}
+			},
+			generateAndInsertAriaButton( container ) {
+				const ariaButton = document.createElement( 'BUTTON' );
+				ariaButton.classList.add( 'quickView-aria-button' );
+				ariaButton.ariaLabel = this.$i18n( 'searchvue-aria-button' ).text();
+				container.insertBefore( ariaButton, null );
+			},
+			closeOnEscapeAndFocus( event ) {
+				if ( event.key === 'Escape' && this.title ) {
+					this.currentElement( this.title ).querySelector( '.quickView-aria-button' ).focus();
+					this.closeQuickView();
+				}
+			},
+			handleResultEvent( event ) {
+				const searchResultLink = event.currentTarget.parentElement.getElementsByTagName( 'a' )[ 0 ];
+
+				if ( searchResultLink.hasAttribute( 'title' ) ) {
+					event.stopPropagation();
+					const resultTitle = searchResultLink.getAttribute( 'title' );
+					const currentElement = this.currentElement( resultTitle );
+					const payload = { title: resultTitle, element: currentElement };
+
+					// If the previous result did not have enough data to be shown
+					// (showOnMobile = false) Then we have to force toggleVisibility.
+					// Because the transition effect is not going to be called.
+					if ( this.isMobile ) {
+						payload.force = !this.showOnMobile;
+					}
+
+					this.toggleVisibily( payload );
+				}
+			},
+			focusDialog() {
+				this.$el.focus();
 			}
 		}
 	),
@@ -107,28 +145,27 @@ module.exports = exports = {
 	mounted: function () {
 
 		const searchResults = this.getSearchResults();
-		for ( const searchResult of searchResults ) {
-			searchResult.classList.add( 'searchresult-with-quickview' );
-			const title = searchResult.querySelector( '.mw-search-result-heading a' ).getAttribute( 'title' );
-			searchResult.dataset.title = title;
+		for ( const searchResultLi of searchResults ) {
+			searchResultLi.classList.add( 'searchresult-with-quickview' );
+			const title = searchResultLi.querySelector( '.mw-search-result-heading a' ).getAttribute( 'title' );
+			searchResultLi.dataset.title = title;
+
+			const searchResultContainer = searchResultLi.querySelector( '.searchresult' ).parentElement;
+			this.generateAndInsertAriaButton( searchResultContainer );
 		}
+
+		// Mouse click
 		searchResults.find( '.searchresult, .mw-search-result-data' ).click( function ( event ) {
-			const searchResultLink = event.currentTarget.parentElement.getElementsByTagName( 'a' )[ 0 ];
+			this.handleResultEvent( event );
+		}.bind( this ) );
 
-			if ( searchResultLink.hasAttribute( 'title' ) ) {
-				event.stopPropagation();
-				const resultTitle = searchResultLink.getAttribute( 'title' );
-				const currentElement = this.currentElement( resultTitle );
-				const payload = { title: resultTitle, element: currentElement };
-
-				// If the previous result did not have enough data to be shown
-				// (showOnMobile = false) Then we have to force toggleVisibility.
-				// Because the transition effect is not going to be called.
-				if ( this.isMobile ) {
-					payload.force = !this.showOnMobile;
-				}
-
-				this.toggleVisibily( payload );
+		// Keyboard navigation
+		searchResults.find( '.quickView-aria-button' ).keyup( function ( event ) {
+			if ( event.key === 'Enter' ) {
+				this.handleResultEvent( event );
+				this.$nextTick( function () {
+					this.focusDialog();
+				} );
 			}
 		}.bind( this ) );
 
@@ -144,6 +181,8 @@ module.exports = exports = {
 		// Restore the quick view in the case in which the user has navigated back to a page
 		// that had a quickView open
 		this.restoreQuickViewOnNavigation();
+
+		window.addEventListener( 'keyup', this.closeOnEscapeAndFocus );
 	}
 };
 </script>
@@ -154,5 +193,18 @@ module.exports = exports = {
 .mw-search-quick-view {
 	background-color: @wmui-color-base100;
 	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Lato', 'Helvetica', 'Arial', sans-serif;
+}
+
+// This class is used by buttons that are dynamically added after the page loads.
+// These buttons are added on a part of the page that is not handled by vue (search result list)
+.quickView-aria-button {
+	position: absolute;
+	width: 0;
+	height: 100%;
+	top: 0;
+	right: 0;
+	padding-left: 0;
+	border: none;
+	background: transparent;
 }
 </style>

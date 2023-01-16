@@ -86,6 +86,9 @@
 				"mobile"
 			],
 			"messages": [
+				"searchvue-aria-button",
+				"searchvue-dialog-title",
+				"searchvue-dialog-aria-label",
 				"searchvue-close",
 				"searchvue-previous",
 				"searchvue-next",
