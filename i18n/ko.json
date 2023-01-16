@@ -6,6 +6,8 @@
 	},
 	"searchvue-next": "다음",
 	"searchvue-previous": "이전",
+	"searchvue-loading": "미리보기를 불러오는 중",
+	"searchvue-no-content": "미리 볼 내용이 없음",
 	"searchvue-commons-viewmore": "더 보기",
 	"searchvue-commons-viewmore-mobile": "더 많은 이미지 보기"
 }

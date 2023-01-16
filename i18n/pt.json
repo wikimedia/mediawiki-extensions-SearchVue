@@ -10,6 +10,8 @@
 	"searchvue-next": "Próximo",
 	"searchvue-previous": "Anterior",
 	"searchvue-label": "Ativar antevisão dos resultados da pesquisa",
+	"searchvue-loading": "A carregar antevisão",
+	"searchvue-no-content": "Não há conteúdo para antever",
 	"searchvue-snippet-gotofullpage": "Ir para a página completa",
 	"searchvue-snippet-gotofullpage-ns0": "Ir para o artigo completo",
 	"searchvue-description-mobile": "$1 é um(a) $2",

@@ -8,9 +8,12 @@
 	"searchvue-close": "Sluiten",
 	"searchvue-next": "Volgende",
 	"searchvue-previous": "Vorige",
+	"searchvue-loading": "Voorbeeld laden",
+	"searchvue-no-content": "Geen inhoud om te bekijken",
 	"searchvue-commons-viewmore": "Meer weergeven",
 	"searchvue-commons-footnote": "Van Wikimedia Commons",
 	"searchvue-commons-heading": "Gerelateerde afbeeldingen",
+	"searchvue-commons-heading-mobile": "Gerelateerde afbeeldingen van Wikimedia Commons",
 	"searchvue-more-sections": "+ nog $1 {{PLURAL:$1|sectie|secties}}",
 	"searchvue-help": "Bekijk een voorbeeld van de inhoud van de pagina en gerelateerde inhoud."
 }

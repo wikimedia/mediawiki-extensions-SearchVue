@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Eukarióta",
 			"Hanna Tardos",
 			"Tacsipacsi"
 		]
@@ -9,6 +10,8 @@
 	"searchvue-next": "Következő",
 	"searchvue-previous": "Előző",
 	"searchvue-label": "A keresési találatok előnézetének engedélyezése",
+	"searchvue-loading": "Előnézet betöltése",
+	"searchvue-no-content": "Nincs tartalom, amit meg lehetne tekinteni",
 	"searchvue-snippet-gotofullpage": "Ugrás a teljes lapra",
 	"searchvue-snippet-gotofullpage-ns0": "Ugrás a teljes szócikkre",
 	"searchvue-commons-heading": "Kapcsolódó képek",
