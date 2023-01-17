@@ -1,10 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
+			"Fitoschido",
 			"La Mantis"
 		]
 	},
 	"searchvue-close": "Cerrar",
 	"searchvue-next": "Siguiente",
-	"searchvue-commons-footnote": "En Wikimedia Commons"
+	"searchvue-commons-footnote": "En Wikimedia Commons",
+	"searchvue-commons-heading-mobile": "Imágenes relacionadas de Wikimedia Commons"
 }
