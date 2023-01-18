@@ -54,7 +54,7 @@ module.exports = exports = {
 			'closeQuickView',
 			'onPageClose'
 		] ),
-		mapActions( 'events', [ 'setQuickViewEventProps' ] ),
+		mapActions( 'events', [ 'initEventLoggingSession' ] ),
 		{
 			setQueryQuickViewTitle: function () {
 				const mwUri = new mw.Uri();
@@ -81,6 +81,7 @@ module.exports = exports = {
 				return this.getSearchResults().find( `[title="${title}"]` ).closest( 'li' )[ 0 ];
 			},
 			leaving() {
+				this.handleEventTimeout( true );
 				// Emit QuickView closing event only if QuickView is present in url
 				if ( this.queryQuickViewTitle ) {
 					this.onPageClose();
@@ -99,10 +100,9 @@ module.exports = exports = {
 		}
 	},
 	created() {
-		this.setQuickViewEventProps().then( () => {
-			// This event triggers only if user interacts with the page before closing
-			window.addEventListener( 'beforeunload', this.leaving );
-		} );
+		this.initEventLoggingSession();
+		// This event triggers only if user interacts with the page before closing
+		window.addEventListener( 'beforeunload', this.leaving );
 	},
 	mounted: function () {
 

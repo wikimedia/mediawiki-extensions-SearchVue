@@ -68,6 +68,7 @@ const mw = {
 	},
 	storage: {
 		get: jest.fn(),
+		set: jest.fn(),
 		setObject: jest.fn(),
 		getObject: jest.fn(),
 		remove: jest.fn()
@@ -78,18 +79,22 @@ const mw = {
 		loadIfNeeded: jest.fn()
 	},
 	loader: {
-		using: jest.fn()
+		using: jest.fn().mockResolvedValue()
 	},
 	user: {
 		options: {
 			get: jest.fn().mockReturnValue( 0 ),
 			set: jest.fn()
 		},
-		isAnon: jest.fn().mockReturnValue( false )
+		isAnon: jest.fn().mockReturnValue( false ),
+		generateRandomSessionId: jest.fn().mockReturnValue( 'fakeRandomSession' )
 	},
 	internalWikiUrlencode: jest.fn( ( value ) => {
 		return value;
-	} )
+	} ),
+	eventLog: {
+		submit: jest.fn()
+	}
 };
 /*
  * MW front-end code expects certain global variables to exist in the

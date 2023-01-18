@@ -73,6 +73,7 @@
 				"mediawiki.api",
 				"mediawiki.storage",
 				"mediawiki.ForeignApi",
+				"mediawiki.storage",
 				"mediawiki.user",
 				"jquery.spinner",
 				"vue",
