@@ -20,8 +20,7 @@
 				title: nextTitle,
 				element: currentElement( nextTitle ),
 				force: true
-			} )"
-			@after-enter="scrollScreenOnMobile">
+			} )">
 			<quick-view
 				v-if="visible && showOnMobile"
 				ref="quick-view"
@@ -81,16 +80,6 @@ module.exports = exports = {
 			},
 			currentElement: function ( title ) {
 				return this.getSearchResults().find( `[title='${title}']` ).closest( 'li' )[ 0 ];
-			},
-			scrollScreenOnMobile: function () {
-				const currentElement = this.currentElement( this.title );
-
-				const docViewBottom = $( window ).scrollTop() + $( window ).height();
-				const elemBottom = $( currentElement ).offset().top + $( currentElement ).height();
-
-				if ( elemBottom >= docViewBottom ) {
-					this.currentElement( this.title ).scrollIntoView( { behavior: 'smooth' } );
-				}
 			}
 		}
 	)
