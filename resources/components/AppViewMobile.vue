@@ -97,7 +97,7 @@ module.exports = exports = {
 	overflow: auto;
 	height: 174px;
 	overflow-y: hidden;
-	margin: 0;
+	margin: 8px 0 20px;
 	top: 0;
 	font-size: 0.875em;
 	line-height: 1.6em;
