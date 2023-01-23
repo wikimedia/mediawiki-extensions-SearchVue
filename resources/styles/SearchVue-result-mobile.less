@@ -1,11 +1,7 @@
 .skin-minerva {
-	.searchresult-with-quickview {
-		position: relative;
-
+	.searchresult-with-quickview,
+	.quickView-aria-button {
 		&:after {
-			background-image: url( ../assets/icons/arrow-down.svg );
-			background-repeat: no-repeat;
-			background-position-y: center;
 			content: '';
 			position: absolute;
 			width: 24px;
@@ -14,6 +10,16 @@
 			right: 8px;
 			transition: transform 0.3s;
 			z-index: -1;
+		}
+	}
+
+	.searchresult-with-quickview {
+		position: relative;
+
+		&:after {
+			background-image: url( ../assets/icons/arrow-down.svg );
+			background-repeat: no-repeat;
+			background-position-y: center;
 		}
 	}
 

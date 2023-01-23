@@ -4,6 +4,9 @@
 			"Joseph Seddon"
 		]
 	},
+	"searchvue-aria-button": "Open the preview of this article.",
+	"searchvue-dialog-title": "Search Preview",
+	"searchvue-dialog-aria-label": "Preview dialog is now open. It shows key information on this article and related content.",
 	"searchvue-desc": "Vue.js feature additions and improvements to Special:Search",
 	"searchvue-close": "Close",
 	"searchvue-next": "Next",

@@ -1,6 +1,8 @@
 <template>
 	<!-- eslint-disable -->
-	<div @click.stop>
+	<div
+		@click.stop
+	>
 		<nav 
 			v-if="!isMobile"
 			class="mw-search-quick-view__nav"
