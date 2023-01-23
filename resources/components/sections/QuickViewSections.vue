@@ -1,5 +1,9 @@
 <template>
-	<div class="quickViewSections">
+	<div class="quickViewSections"
+		:class="{
+			'quickViewSections__mobile': isMobile
+		}"
+	>
 		<h3>{{ headingText }}</h3>
 		<ul
 			ref="sections-container"
@@ -47,6 +51,10 @@ module.exports = exports = {
 		},
 		sections: {
 			type: Array,
+			required: true
+		},
+		isMobile: {
+			type: Boolean,
 			required: true
 		}
 	},
@@ -210,6 +218,10 @@ module.exports = exports = {
 		a {
 			color: @colorGray2;
 		}
+	}
+
+	&__mobile {
+		min-width: 300px;
 	}
 }
 </style>

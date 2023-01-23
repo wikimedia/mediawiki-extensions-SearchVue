@@ -2,9 +2,7 @@
 	<div class="quickViewSnippet">
 		<!-- eslint-disable vue/no-v-html -->
 		<p v-html="text"></p>
-		<a v-if="!isMobile"
-			:href="url"
-			@click.prevent="onClick">{{ gotoFullPageText }}</a>
+		<a :href="url" @click.prevent="onClick">{{ gotoFullPageText }}</a>
 	</div>
 </template>
 
@@ -25,10 +23,6 @@ module.exports = exports = {
 		},
 		text: {
 			type: String,
-			required: true
-		},
-		isMobile: {
-			type: Boolean,
 			required: true
 		}
 	},

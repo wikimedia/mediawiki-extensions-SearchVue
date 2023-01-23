@@ -102,10 +102,6 @@ module.exports = exports = {
 	font-size: 0.875em;
 	line-height: 1.6em;
 
-	& > *:not( header ) {
-		min-width: 300px;
-	}
-
 	& > div {
 		margin-left: 8px;
 		margin-bottom: 0;
