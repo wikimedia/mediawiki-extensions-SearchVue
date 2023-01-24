@@ -4,6 +4,9 @@
 			"Eleassar"
 		]
 	},
+	"searchvue-aria-button": "Odpri predogled tega članka.",
+	"searchvue-dialog-title": "Predogled iskanja",
+	"searchvue-dialog-aria-label": "Pogovorno okno za predogled je zdaj odprto. Prikazuje ključne informacije o tem članku in povezani vsebini.",
 	"searchvue-desc": "Vue.js vsebuje dodatke in izboljšave za Special:Search",
 	"searchvue-close": "Zapri",
 	"searchvue-next": "Naslednji",

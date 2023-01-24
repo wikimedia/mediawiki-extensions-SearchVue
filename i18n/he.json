@@ -4,6 +4,9 @@
 			"Amire80"
 		]
 	},
+	"searchvue-aria-button": "לפתוח את התצוגה המקדימה של הערך הזה.",
+	"searchvue-dialog-title": "תצוגה מקדימה של חיפוש",
+	"searchvue-dialog-aria-label": "תיבת הדו־שיח של תצוגה מקדימה פתוחה כעת. היא מציגה מידע חשוב על הערך הזה ועל תוכן קשור.",
 	"searchvue-desc": "תוספות ושיפורי אפשרויות לדף Special:Search באמצעות Vue.js",
 	"searchvue-close": "סגירה",
 	"searchvue-next": "הבאה",

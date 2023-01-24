@@ -1,7 +1,12 @@
 {
 	"@metadata": {
-		"authors": []
+		"authors": [
+			"Justman10000"
+		]
 	},
+	"searchvue-aria-button": "Öffne die Vorschau zu diesem Artikel.",
+	"searchvue-dialog-title": "Suchvorschau",
+	"searchvue-dialog-aria-label": "Der Vorschaudialog ist jetzt geöffnet. Er zeigt die wichtigsten Informationen zu diesem Artikel und zu verwandten Inhalten an.",
 	"searchvue-desc": "Vue.js-Ergänzungen und -Verbesserungen für Special:Search",
 	"searchvue-close": "Schließen",
 	"searchvue-next": "Nächste",

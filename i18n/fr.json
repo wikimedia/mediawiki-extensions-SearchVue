@@ -7,6 +7,9 @@
 			"Wladek92"
 		]
 	},
+	"searchvue-aria-button": "Ouvrir l’aperçu de cet article.",
+	"searchvue-dialog-title": "Aperçu de la recherche",
+	"searchvue-dialog-aria-label": "La boîte de dialogue d’aperçu est maintenant ouverte. Elle affiche des informations clés sur cet article et le contenu associé.",
 	"searchvue-desc": "Vue.js propose des ajouts et des améliorations à Special:Search.",
 	"searchvue-close": "Fermer",
 	"searchvue-next": "Suivant",
