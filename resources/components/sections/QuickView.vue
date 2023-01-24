@@ -7,7 +7,7 @@
 			v-if="!isMobile"
 			class="mw-search-quick-view__nav"
 		>
-			<button @click="closeQuickView">
+			<button @click="$emit( 'close', $event )">
 				<svg
 					width="30"
 					height="30"

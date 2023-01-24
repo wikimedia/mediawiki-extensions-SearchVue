@@ -2,6 +2,7 @@
 	<quick-view
 		v-if="visible"
 		class="mw-app-view-desktop"
+		@close="$emit('close', $event)"
 		:style="quickViewDynamicStyles"
 	>
 		<template #loading-icon="{ loading }">

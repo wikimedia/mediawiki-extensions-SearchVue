@@ -5,12 +5,14 @@
 		tabindex="-1"
 		:title="$i18n( 'searchvue-dialog-title' ).text()"
 		:aria-label="$i18n( 'searchvue-dialog-aria-label' ).text()"
+		@close="closeAndFocus"
 		class="mw-search-quick-view"
 	>
 	</component>
 </template>
 
 <script>
+
 /**
  * @file App.vue
  *
@@ -31,7 +33,8 @@ module.exports = exports = {
 	},
 	data: function () {
 		return {
-			queryQuickViewTitle: null
+			queryQuickViewTitle: null,
+			focusableElements: null
 		};
 	},
 	computed: $.extend(
@@ -42,6 +45,16 @@ module.exports = exports = {
 				} else {
 					return 'app-view-desktop';
 				}
+			},
+			firstFocusableElement() {
+				if ( this.focusableElements && this.focusableElements.length > 0 ) {
+					return this.focusableElements[ 0 ];
+				}
+			},
+			lastFocusableElement() {
+				if ( this.focusableElements && this.focusableElements.length > 0 ) {
+					return this.focusableElements[ this.focusableElements.length - 1 ];
+				}
 			}
 		},
 		mapState( [
@@ -49,7 +62,8 @@ module.exports = exports = {
 			'title'
 		] ),
 		mapGetters( [
-			'showOnMobile'
+			'showOnMobile',
+			'loading'
 		] )
 	),
 	methods: $.extend( {},
@@ -97,11 +111,16 @@ module.exports = exports = {
 				ariaButton.ariaLabel = this.$i18n( 'searchvue-aria-button' ).text();
 				container.insertBefore( ariaButton, null );
 			},
-			closeOnEscapeAndFocus( event ) {
-				if ( event.key === 'Escape' && this.title ) {
-					this.currentElement( this.title ).querySelector( '.quickView-aria-button' ).focus();
-					this.closeQuickView();
+			closeAndFocus( event ) {
+				if ( !this.title ) {
+					return;
 				}
+
+				// event.detail will be equal to 0 if triggered by keyboard
+				if ( event.detail === 0 ) {
+					this.currentElement( this.title ).querySelector( '.quickView-aria-button' ).focus();
+				}
+				this.closeQuickView();
 			},
 			handleResultEvent( event ) {
 				const searchResultLink = event.currentTarget.parentElement.getElementsByTagName( 'a' )[ 0 ];
@@ -124,6 +143,35 @@ module.exports = exports = {
 			},
 			focusDialog() {
 				this.$el.focus();
+			},
+			defineFocusableElements() {
+				return this.$el.querySelectorAll(
+					'a, button, input, textarea, select, details, [tabindex]:not([tabindex="-1"])'
+				);
+			},
+			handleTabTrap( event ) {
+				const activeElement = document.activeElement;
+
+				// Make sure search preview is selected and all variable are correct
+				if (
+					this.title &&
+					event.key === 'Tab' &&
+					this.lastFocusableElement &&
+					this.firstFocusableElement
+				) {
+					// If it is the last element, move focus back to the first
+					if ( !event.shiftKey && activeElement === this.lastFocusableElement ) {
+						this.firstFocusableElement.focus();
+						event.preventDefault();
+					}
+
+					// If it is the first element and going backward, go back to the last element
+					if ( event.shiftKey && activeElement === this.firstFocusableElement ) {
+						this.lastFocusableElement.focus();
+						event.preventDefault();
+					}
+
+				}
 			}
 		}
 	),
@@ -132,6 +180,15 @@ module.exports = exports = {
 			handler( title ) {
 				if ( title ) {
 					this.setQueryQuickViewTitle();
+				}
+			},
+			flush: 'post'
+		},
+		loading: {
+			handler( loading ) {
+				// We re-calculate the tabbable element everytime the loading is complete.
+				if ( !loading ) {
+					this.focusableElements = this.defineFocusableElements();
 				}
 			},
 			flush: 'post'
@@ -168,7 +225,7 @@ module.exports = exports = {
 			}.bind( this ) );
 
 		// Keyboard navigation
-		searchResultWithQuickView.find( '.quickView-aria-button' ).keyup( function ( event ) {
+		searchResultWithQuickView.find( '.quickView-aria-button' ).keydown( function ( event ) {
 			if ( event.key === 'Enter' ) {
 				this.handleResultEvent( event );
 				this.$nextTick( function () {
@@ -190,7 +247,15 @@ module.exports = exports = {
 		// that had a quickView open
 		this.restoreQuickViewOnNavigation();
 
-		window.addEventListener( 'keyup', this.closeOnEscapeAndFocus );
+		window.addEventListener( 'keydown', function ( event ) {
+			if ( event.key === 'Escape' ) {
+				this.closeAndFocus( event );
+			}
+			if ( event.key === 'Tab' ) {
+				this.handleTabTrap( event );
+			}
+
+		}.bind( this ) );
 	}
 };
 </script>
