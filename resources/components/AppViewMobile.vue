@@ -92,7 +92,6 @@ module.exports = exports = {
 
 .mw-app-view-mobile {
 	z-index: 1000;
-	width: 100%;
 	display: flex;
 	overflow: auto;
 	height: 174px;
