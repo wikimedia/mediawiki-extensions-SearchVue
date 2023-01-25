@@ -146,21 +146,29 @@ module.exports = exports = {
 
 		const searchResults = this.getSearchResults();
 		for ( const searchResultLi of searchResults ) {
-			searchResultLi.classList.add( 'searchresult-with-quickview' );
-			const title = searchResultLi.querySelector( '.mw-search-result-heading a' ).getAttribute( 'title' );
-			searchResultLi.dataset.title = title;
 
-			const searchResultContainer = searchResultLi.querySelector( '.searchresult' ).parentElement;
-			this.generateAndInsertAriaButton( searchResultContainer );
+			// This is a failsafe to just add the search preview in result that have a body
+			if ( searchResultLi.querySelector( '.searchresult' ) ) {
+				searchResultLi.classList.add( 'searchresult-with-quickview' );
+				const title = searchResultLi.querySelector( '.mw-search-result-heading a' ).getAttribute( 'title' );
+				searchResultLi.dataset.title = title;
+
+				const searchResultContainer = searchResultLi.querySelector( '.mw-search-result-heading' ).parentElement;
+				this.generateAndInsertAriaButton( searchResultContainer );
+			}
 		}
 
+		const searchResultWithQuickView = searchResults.filter( function ( resultIndex ) {
+			return searchResults[ resultIndex ].classList.contains( 'searchresult-with-quickview' );
+		} );
 		// Mouse click
-		searchResults.find( '.searchresult, .mw-search-result-data' ).click( function ( event ) {
-			this.handleResultEvent( event );
-		}.bind( this ) );
+		searchResultWithQuickView.find( '.searchresult, .mw-search-result-data' )
+			.click( function ( event ) {
+				this.handleResultEvent( event );
+			}.bind( this ) );
 
 		// Keyboard navigation
-		searchResults.find( '.quickView-aria-button' ).keyup( function ( event ) {
+		searchResultWithQuickView.find( '.quickView-aria-button' ).keyup( function ( event ) {
 			if ( event.key === 'Enter' ) {
 				this.handleResultEvent( event );
 				this.$nextTick( function () {
