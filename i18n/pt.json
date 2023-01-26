@@ -5,6 +5,9 @@
 			"Hamilton Abreu"
 		]
 	},
+	"searchvue-aria-button": "Abrir a antevisão deste artigo.",
+	"searchvue-dialog-title": "Antevisão da pesquisa",
+	"searchvue-dialog-aria-label": "O diálogo da antevisão está agora aberto. Mostra as principais informações sobre este artigo e conteúdos relacionados.",
 	"searchvue-desc": "Adições e melhoramentos da funcionalidade Vue.js a Especial:Pesquisa",
 	"searchvue-close": "Fechar",
 	"searchvue-next": "Próximo",

@@ -4,6 +4,9 @@
 			"Bjankuloski06"
 		]
 	},
+	"searchvue-aria-button": "Отвори преглед на статијава.",
+	"searchvue-dialog-title": "Преглед на пребарувањето",
+	"searchvue-dialog-aria-label": "Прегледниот дијалог сега е отворен. Прикажува клучни информации за оваа статија и поврзаната содржина.",
 	"searchvue-desc": "Vue.js има додатоци и подобрувања на Special:Search",
 	"searchvue-close": "Затвори",
 	"searchvue-next": "Следно",
@@ -19,9 +22,9 @@
 	"searchvue-commons-footnote": "На Ризницата",
 	"searchvue-commons-heading": "Поврзани слики",
 	"searchvue-commons-heading-mobile": "Поврзани слики од Ризницата",
-	"searchvue-article-sections-heading": "Поднаслови на страницата",
-	"searchvue-article-sections-heading-ns0": "Поднаслови во статијата",
-	"searchvue-more-sections": "+ уште {{PLURAL:$1|$1 поднаслов|$1 поднаслови}}",
+	"searchvue-article-sections-heading": "Оддели на страницата",
+	"searchvue-article-sections-heading-ns0": "Оддели во статијата",
+	"searchvue-more-sections": "+ уште {{PLURAL:$1|$1 оддел|$1 оддели}}",
 	"searchvue-help": "Преглед на содржините на страницата и поврзаните содржини.",
 	"tutorial-popup-title": "Преглед на исходот од пребараното",
 	"tutorial-popup-text1": "Стиснете на исечок од статија за да добиете преглед на најденото од пребарувањето и да погледате поврзани содржини.",
