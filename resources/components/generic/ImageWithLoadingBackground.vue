@@ -2,11 +2,12 @@
 	<div
 		class="ImageWithLoadingBackground"
 		:class="{ 'ImageWithLoadingBackground__loading': !loaded }"
-		:style="aspectratio !== null ? { 'aspect-ratio': aspectratio } : null"
+		:style="inlineStyles"
 	>
 		<img
 			:src="src"
 			:alt="alt"
+			:style="inlineStyles"
 			@load="onLoad"
 			@click="$emit('image-click')"
 		>
@@ -43,6 +44,17 @@ module.exports = exports = {
 		return {
 			loaded: false
 		};
+	},
+	computed: {
+		inlineStyles() {
+			if ( !this.aspectratio ) {
+				return null;
+			}
+
+			return {
+				'aspect-ratio': this.aspectratio
+			};
+		}
 	},
 	methods: {
 		onLoad() {
@@ -85,6 +97,7 @@ module.exports = exports = {
 		object-fit: cover;
 		max-height: 100%;
 		min-width: inherit;
+		max-width: ~'calc( 100vw - 50px )';
 		flex: 1;
 	}
 

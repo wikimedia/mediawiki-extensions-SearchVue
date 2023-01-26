@@ -89,7 +89,7 @@ module.exports = exports = {
 	}
 
 	img {
-		width: 100%;
+		width: auto;
 		height: auto;
 	}
 }

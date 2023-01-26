@@ -188,10 +188,6 @@ div.quickViewCommons {
 			a {
 				display: flex;
 				flex: 1;
-
-				img {
-					max-width: ~'calc( 100vw - 50px )';
-				}
 			}
 		}
 	}
