@@ -193,7 +193,7 @@ div.quickViewCommons {
 	}
 
 	.quickViewCommons__footNote,
-	.quickViewCommons__mobile h3 {
+	&.quickViewCommons__mobile h3 {
 		background-image: url( ../../assets/icons/commons.svg );
 		padding-left: 23px;
 		background-repeat: no-repeat;

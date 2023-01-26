@@ -63,7 +63,6 @@
 				v-if="!isMobile"
 				:text="textWithEllipsis"
 				:title="currentResult.prefixedText"
-				:is-mobile="isMobile"
 				@log-event="onLogEvent"
 			></quick-view-snippet>
 			<quick-view-sections
@@ -71,6 +70,7 @@
 				:title="currentResult.prefixedText"
 				:sections="currentResult.sections"
 				@log-event="onLogEvent"
+				:is-mobile="isMobile"
 			></quick-view-sections>
 		</template>
 		<quick-view-commons
