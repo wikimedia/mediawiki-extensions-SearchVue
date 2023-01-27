@@ -142,12 +142,28 @@ module.exports = exports = {
 				}
 			},
 			focusDialog() {
-				this.$el.focus();
+				// This ensure that the focus is just triggered if the element is visible
+				// On mobile loading is different and this may not always be the case
+				if ( this.$el &&
+					this.$el.focus &&
+					typeof this.$el.focus === 'function'
+				) {
+					this.$el.focus();
+				}
 			},
 			defineFocusableElements() {
+
+				// We make sure the element is actually visible.
+				// This may be due to different loading practices on mobile
+				// or due to client quick interaction with the preview
+				if ( !this.$el || !this.$el.querySelectorAll ) {
+					return;
+				}
+
 				return this.$el.querySelectorAll(
 					'a, button, input, textarea, select, details, [tabindex]:not([tabindex="-1"])'
 				);
+
 			},
 			handleTabTrap( event ) {
 				const activeElement = document.activeElement;
