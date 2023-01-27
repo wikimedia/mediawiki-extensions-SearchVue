@@ -99,7 +99,6 @@ module.exports = exports = {
 				return this.getSearchResults().find( `[title="${title}"]` ).closest( 'li' )[ 0 ];
 			},
 			leaving() {
-				this.handleEventTimeout( true );
 				// Emit QuickView closing event only if QuickView is present in url
 				if ( this.queryQuickViewTitle ) {
 					this.onPageClose();
