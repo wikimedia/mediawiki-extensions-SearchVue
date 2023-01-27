@@ -4,6 +4,9 @@
 			"McDutchie"
 		]
 	},
+	"searchvue-aria-button": "Aperir le previsualisation de iste articulo.",
+	"searchvue-dialog-title": "Previsualisation de recerca",
+	"searchvue-dialog-aria-label": "Le dialogo de previsualisation es ora aperte. Illo monstra information clave sur iste articulo e contento associate.",
 	"searchvue-desc": "Additiones e meliorationes de functionalitate de Vue.js pro Special:Recerca",
 	"searchvue-close": "Clauder",
 	"searchvue-next": "Sequente",
