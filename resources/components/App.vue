@@ -219,7 +219,7 @@ module.exports = exports = {
 			return searchResults[ resultIndex ].classList.contains( 'searchresult-with-quickview' );
 		} );
 		// Mouse click
-		searchResultWithQuickView.find( '.searchresult, .mw-search-result-data' )
+		searchResultWithQuickView.find( '.searchresult, .mw-search-result-data, .quickView-aria-button' )
 			.click( function ( event ) {
 				this.handleResultEvent( event );
 			}.bind( this ) );
