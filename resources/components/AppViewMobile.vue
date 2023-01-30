@@ -79,7 +79,7 @@ module.exports = exports = {
 					.not( '#mw-content-text .mw-search-interwiki-results .mw-search-result-ns-0' );
 			},
 			currentElement: function ( title ) {
-				return this.getSearchResults().find( `[title='${title}']` ).closest( 'li' )[ 0 ];
+				return this.getSearchResults().find( `[title="${title}"]` ).closest( 'li' )[ 0 ];
 			}
 		}
 	)
