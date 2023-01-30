@@ -304,7 +304,7 @@ module.exports = {
 		let destination = '.searchresults';
 		if ( context.state.isMobile ) {
 			// phpcs:disable Squiz.WhiteSpace.OperatorSpacing.NoSpaceBefore,Squiz.WhiteSpace.OperatorSpacing.NoSpaceAfter
-			const dataTitleSelector = `[data-title='${title}']`;
+			const dataTitleSelector = `[data-title="${title}"]`;
 			// phpcs:enable Squiz.WhiteSpace.OperatorSpacing.NoSpaceBefore,Squiz.WhiteSpace.OperatorSpacing.NoSpaceAfter
 			if ( force ) {
 				destination = title ? dataTitleSelector : false;
