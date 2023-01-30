@@ -17,7 +17,6 @@
 	"searchvue-no-content": "Used on mobile view to inform the user that there is not enought content to show the search preview.",
 	"searchvue-snippet-gotofullpage": "Button shown at the bottom of the result snippet to navigate to the full page",
 	"searchvue-snippet-gotofullpage-ns0": "Button shown at the bottom of the result snippet to navigate to the full article if it belongs to the Main namespace",
-	"searchvue-description-mobile": "Description paragraph for the search preview.\n* $1 - Page title\n* $2 - Page description",
 	"searchvue-commons-viewmore": "Link to see more results for commons images for the selected page",
 	"searchvue-commons-viewmore-mobile": "Link to see more results for commons images for the selected page for mobile",
 	"searchvue-commons-footnote": "Credits message to inform the user that the content displayed comes from Commons",

@@ -6,24 +6,17 @@
 			'quickViewDescription--small-font': showSmallFont
 		}"
 	>
-		<template v-if="!isMobile">
-			<h2>
-				<a
-					:href="url"
-					@click.prevent="onClick"
-				>
-					{{ title }}
-				</a>
-			</h2>
-			<p v-if="description">
-				{{ description }}
-			</p>
-		</template>
-		<template v-else>
-			<p ref="paragraph-container">
-				{{ mobileDescription }}
-			</p>
-		</template>
+		<h2 v-if="!isMobile">
+			<a
+				:href="url"
+				@click.prevent="onClick"
+			>
+				{{ title }}
+			</a>
+		</h2>
+		<p v-if="description" ref="paragraph-container">
+			{{ description }}
+		</p>
 	</div>
 </template>
 
@@ -54,21 +47,13 @@ module.exports = exports = {
 	},
 	data() {
 		return {
-			showSmallFont: false,
-			removeTitleOnMobile: false
+			showSmallFont: false
 		};
 	},
 	computed: {
 		url() {
 			const title = new mw.Title( this.title );
 			return title.getUrl();
-		},
-		mobileDescription() {
-			if ( this.removeTitleOnMobile ) {
-				return this.description;
-			} else {
-				return mw.message( 'searchvue-description-mobile', this.title, this.description );
-			}
 		}
 	},
 	methods: {
@@ -78,17 +63,10 @@ module.exports = exports = {
 			return textContainer && textContainer.scrollHeight > textContainer.clientHeight;
 		},
 		defineFontSizeAndOverflow() {
-			let textHasOverflow = this.textHasOverflow();
+			const textHasOverflow = this.textHasOverflow();
 			if ( textHasOverflow ) {
 				// If text overflowing we reduce the font
 				this.showSmallFont = true;
-				this.$nextTick( function () {
-					// If small font is still overflowing, we remove the title
-					textHasOverflow = this.textHasOverflow();
-					if ( textHasOverflow ) {
-						this.removeTitleOnMobile = true;
-					}
-				} );
 			}
 		},
 		onClick() {
@@ -101,7 +79,9 @@ module.exports = exports = {
 		}
 	},
 	mounted() {
-		this.defineFontSizeAndOverflow();
+		if ( this.isMobile ) {
+			this.defineFontSizeAndOverflow();
+		}
 	}
 };
 </script>
