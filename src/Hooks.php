@@ -35,7 +35,7 @@ class Hooks implements
 			return;
 		}
 		$services = MediaWikiServices::getInstance();
-		$searchPreviewEnabled = $this->searchPreviewIsEnabled( $special, $services );
+		$searchPreviewEnabled = $this->isSearchPreviewIsEnabled( $special, $services );
 
 		if ( $searchPreviewEnabled ) {
 			$special->getOutput()->addModuleStyles( [ 'searchVue.styles' ] );
@@ -149,45 +149,15 @@ class Hooks implements
 	}
 
 	/**
-	 * Define if the extension should be enabled. This consider the device type
-	 * and various configurations
+	 * Define if the extension should be enabled.
 	 *
 	 * @param SpecialPage $special
 	 * @param MediaWikiServices $services
 	 * @return bool|string
 	 */
-	private function searchPreviewIsEnabled( $special, $services ) {
+	private function isSearchPreviewIsEnabled( $special, $services ) {
 		$userConfig = $services->getUserOptionsLookup();
-		$enabledInUserConfig = $userConfig->getBoolOption( $special->getUser(), 'searchpreview' );
-		$isMobileView = $this->isMobileView( $special );
-		$enabledOnMobile = $this->enableExtensionOnMobile( $special, $services );
-
-		if ( !$enabledInUserConfig ) {
-			return false;
-		}
-		if ( !$isMobileView ) {
-			return true;
-		}
-
-		return $enabledOnMobile;
-	}
-
-	/**
-	 * Define if the extension should be loaded on mobile taking into consideration
-	 * query parameters and configuration setting
-	 *
-	 * @param SpecialPage $special
-	 * @param MediaWikiServices $services
-	 * @return string
-	 */
-	private static function enableExtensionOnMobile( $special, $services ) {
-		$enableMobileQueryParams = $special->getRequest()->getVal( 'quickViewEnableMobile' );
-
-		if ( $enableMobileQueryParams !== null ) {
-			return $enableMobileQueryParams;
-		} else {
-			return $services->getMainConfig()->get( 'QuickViewEnableMobile' );
-		}
+		return $userConfig->getBoolOption( $special->getUser(), 'searchpreview' );
 	}
 
 	/**
