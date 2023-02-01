@@ -149,10 +149,6 @@
 		"QuickViewSearchFilterForQID": {
 			"description": "The search parameter used to link the current page with a QID to ensure that the search result are relevant to your search.",
 			"value": "custommatch:depicts_or_linked_from=%s"
-		},
-		"QuickViewEnableMobile": {
-			"description": "True to enable mobile, false to disable.",
-			"value": false
 		}
 	},
 	"RestRoutes": [

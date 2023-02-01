@@ -1,6 +1,9 @@
 <template>
 	<div
 		class="QuickViewImage"
+		:class="{
+			'QuickViewImage__mobile': isMobile
+		}"
 		:style="dynamicSizingStyles"
 	>
 		<image-with-loading-background
@@ -8,7 +11,7 @@
 			:src="source"
 			:alt="alt"
 			class="QuickViewImage__container"
-			:aspectratio="Math.max( minAspectRatio, width / height )"
+			:aspectratio="aspectRatio"
 			@image-click="onImageClick"
 		></image-with-loading-background>
 	</div>
@@ -52,14 +55,22 @@ module.exports = exports = {
 	},
 	data() {
 		return {
-			minAspectRatio: 0.85
+			aspectRatio: Math.max( 0.85, this.width / this.height ),
+			mobileHeight: 174 // This is the height of the Search Preview in pixels
 		};
 	},
 	computed: {
 		dynamicSizingStyles() {
+			let width = '100%';
+			// We calculate the correct width of the image from the aspect ratio
+			if ( this.isMobile ) {
+				width = this.aspectRatio * this.mobileHeight + 'px';
+			}
+
 			return {
-				'--imageWidth': this.isMobile ? 'auto' : '100%',
-				'--imageHeight': this.isMobile ? '100%' : 'auto'
+				'--imageWidth': width,
+				'--imageHeight': this.isMobile ? '100%' : 'auto',
+				'--aspectRatio': this.aspectRatio
 			};
 		}
 	},
@@ -79,18 +90,18 @@ module.exports = exports = {
 	position: relative;
 	width: var( --imageWidth );
 	height: var( --imageHeight );
+	aspect-ratio: var( --aspectRatio );
 	margin-bottom: 10px;
 	overflow: hidden;
 	background-color: @colorGray15;
 
-	&__container {
-		width: var( --imageWidth );
-		height: var( --imageHeight );
+	&__mobile {
+		margin-bottom: 0;
 	}
 
-	img {
-		width: auto;
-		height: auto;
+	&__container {
+		width: inherit;
+		height: inherit;
 	}
 }
 </style>
