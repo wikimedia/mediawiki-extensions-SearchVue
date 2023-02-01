@@ -5,6 +5,9 @@
 			"McDutchie"
 		]
 	},
+	"searchvue-aria-button": "De voorvertoning van dit artikel openen.",
+	"searchvue-dialog-title": "Voorvertoning zoekopdracht",
+	"searchvue-dialog-aria-label": "Voorbeelddialoogvenster is nu geopend. Het toont belangrijke informatie over dit artikel en gerelateerde inhoud.",
 	"searchvue-close": "Sluiten",
 	"searchvue-next": "Volgende",
 	"searchvue-previous": "Vorige",

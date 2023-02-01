@@ -4,12 +4,16 @@
 			"Eduardoaddad"
 		]
 	},
+	"searchvue-aria-button": "Abrir a pré-visualização deste artigo.",
+	"searchvue-dialog-title": "Pré-visualização da pesquisa",
+	"searchvue-dialog-aria-label": "O diálogo da pré-visualização está agora aberto. Mostra as principais informações sobre este artigo e conteúdos relacionados.",
 	"searchvue-close": "Fechar",
 	"searchvue-next": "Próximo",
 	"searchvue-previous": "Anterior",
 	"searchvue-label": "Ativar pré-visualização do resultado da pesquisa",
+	"searchvue-loading": "Carregado pré-visualização",
+	"searchvue-no-content": "Não há conteúdo para pré-visualizar",
 	"searchvue-snippet-gotofullpage": "Ir para a página completa",
-	"searchvue-description-mobile": "$1 é um(a) $2",
 	"searchvue-commons-viewmore": "Ver mais",
 	"searchvue-commons-viewmore-mobile": "Ver mais imagens",
 	"searchvue-commons-footnote": "En Wikimedia Commons",
