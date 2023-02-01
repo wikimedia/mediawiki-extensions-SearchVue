@@ -26,6 +26,7 @@
 							:src="image.imageinfo[ 0 ].thumburl"
 							:alt="image.title"
 							:aspectratio="calculateAspectRatio( image )"
+							:height-constraints=" isMobile ? 142 : 100"
 							@load="onImgLoad"
 						></image-with-loading-background>
 					</a>
@@ -123,12 +124,10 @@ module.exports = exports = {
 				} );
 		},
 		calculateAspectRatio( image ) {
-			if ( !this.isMobile ) {
-				if ( image.imageinfo[ 0 ].thumbheight ) {
-					return image.imageinfo[ 0 ].thumbwidth / image.imageinfo[ 0 ].thumbheight;
-				} else {
-					return 0;
-				}
+			if ( image.imageinfo[ 0 ].thumbheight ) {
+				return image.imageinfo[ 0 ].thumbwidth / image.imageinfo[ 0 ].thumbheight;
+			} else {
+				return 0;
 			}
 		}
 	},

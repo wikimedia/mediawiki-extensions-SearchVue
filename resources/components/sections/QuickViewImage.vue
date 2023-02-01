@@ -4,7 +4,6 @@
 		:class="{
 			'QuickViewImage__mobile': isMobile
 		}"
-		:style="dynamicSizingStyles"
 	>
 		<image-with-loading-background
 			:key="source"
@@ -12,6 +11,7 @@
 			:alt="alt"
 			class="QuickViewImage__container"
 			:aspectratio="aspectRatio"
+			:height-constraints=" isMobile ? 172 : null"
 			@image-click="onImageClick"
 		></image-with-loading-background>
 	</div>
@@ -53,25 +53,9 @@ module.exports = exports = {
 			require: true
 		}
 	},
-	data() {
-		return {
-			aspectRatio: Math.max( 0.85, this.width / this.height ),
-			mobileHeight: 174 // This is the height of the Search Preview in pixels
-		};
-	},
 	computed: {
-		dynamicSizingStyles() {
-			let width = '100%';
-			// We calculate the correct width of the image from the aspect ratio
-			if ( this.isMobile ) {
-				width = this.aspectRatio * this.mobileHeight + 'px';
-			}
-
-			return {
-				'--imageWidth': width,
-				'--imageHeight': this.isMobile ? '100%' : 'auto',
-				'--aspectRatio': this.aspectRatio
-			};
+		aspectRatio() {
+			return Math.max( 0.85, this.width / this.height );
 		}
 	},
 	methods: {
@@ -88,20 +72,12 @@ module.exports = exports = {
 
 .QuickViewImage {
 	position: relative;
-	width: var( --imageWidth );
-	height: var( --imageHeight );
-	aspect-ratio: var( --aspectRatio );
 	margin-bottom: 10px;
 	overflow: hidden;
 	background-color: @colorGray15;
 
 	&__mobile {
 		margin-bottom: 0;
-	}
-
-	&__container {
-		width: inherit;
-		height: inherit;
 	}
 }
 </style>
