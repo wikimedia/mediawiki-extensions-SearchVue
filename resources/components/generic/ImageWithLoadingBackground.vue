@@ -1,5 +1,6 @@
 <template>
 	<div
+		ref="image-container"
 		class="ImageWithLoadingBackground"
 		:class="{ 'ImageWithLoadingBackground__loading': !loaded }"
 		:style="inlineStyles"
@@ -38,6 +39,11 @@ module.exports = exports = {
 			type: Number,
 			required: false,
 			default: null
+		},
+		heightConstraints: {
+			type: Number,
+			required: false,
+			default: null
 		}
 	},
 	data() {
@@ -50,10 +56,19 @@ module.exports = exports = {
 			if ( !this.aspectratio ) {
 				return null;
 			}
-
-			return {
-				'aspect-ratio': this.aspectratio
-			};
+			if ( !this.heightConstraints ) {
+				return {
+					'--aspect-ratio': this.aspectratio,
+					'--image-height': '100%',
+					'--image-width': '100%'
+				};
+			} else {
+				return {
+					'--aspect-ratio': this.aspectratio,
+					'--image-height': '100%',
+					'--image-width': this.heightConstraints * this.aspectratio + 'px'
+				};
+			}
 		}
 	},
 	methods: {
@@ -70,6 +85,9 @@ module.exports = exports = {
 .ImageWithLoadingBackground {
 	display: flex;
 	flex: 1;
+	aspect-ratio: var( --aspect-ratio );
+	width: var( --image-width );
+	height: var( --image-height );
 
 	&__loading {
 		background-color: #eaecf0;
@@ -99,6 +117,8 @@ module.exports = exports = {
 		min-width: inherit;
 		max-width: ~'calc( 100vw - 50px )';
 		flex: 1;
+		height: inherit;
+		width: inherit;
 	}
 
 	@keyframes shimmer {
