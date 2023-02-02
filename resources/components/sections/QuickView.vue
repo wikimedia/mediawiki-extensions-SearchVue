@@ -2,6 +2,10 @@
 	<!-- eslint-disable -->
 	<div
 		@click.stop
+		class="mw-search-quick-view"
+		:class="{
+			'mw-search-quick-view__mobile': isMobile,
+		}"
 	>
 		<nav 
 			v-if="!isMobile"
@@ -35,8 +39,7 @@
 		</nav>
 		<header :class="
 			{
-				'mw-search-quick-view__no-thumb': hideThumb,
-				'mw-search-quick-view__mobile': isMobile,
+				'mw-search-quick-view__no-thumb': hideThumb
 			}"
 		>
 			<quick-view-image
@@ -176,7 +179,16 @@ module.exports = exports = {
 </script>
 
 <style lang="less">
+@import '../../../lib/mediawiki-ui-base.less';
+
 .mw-search-quick-view {
+	background-color: @wmui-color-base100;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Lato', 'Helvetica', 'Arial', sans-serif;
+
+	&__mobile {
+		padding-right: 8px;
+	}
+
 	&__nav {
 		position: absolute;
 		left: 0;
@@ -210,10 +222,6 @@ module.exports = exports = {
 		& + div {
 			margin-left: 0;
 		}
-	}
-
-	& &__mobile {
-		padding-bottom: 0;
 	}
 }
 </style>

@@ -5,8 +5,8 @@
 		tabindex="-1"
 		:title="$i18n( 'searchvue-dialog-title' ).text()"
 		:aria-label="$i18n( 'searchvue-dialog-aria-label' ).text()"
-		@close="closeAndFocus"
 		class="mw-search-quick-view"
+		@close="closeAndFocus"
 	>
 	</component>
 </template>
@@ -276,13 +276,6 @@ module.exports = exports = {
 </script>
 
 <style lang="less">
-@import '../../lib/mediawiki-ui-base.less';
-
-.mw-search-quick-view {
-	background-color: @wmui-color-base100;
-	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Lato', 'Helvetica', 'Arial', sans-serif;
-}
-
 // This class is used by buttons that are dynamically added after the page loads.
 // These buttons are added on a part of the page that is not handled by vue (search result list)
 .quickView-aria-button {
