@@ -18,7 +18,6 @@
 				<li
 					v-for="image in images"
 					:key="image.index"
-					class="loading"
 				>
 					<a :href="image.imageinfo[ 0 ].descriptionurl"
 						@click.prevent="onCommonsClick( image.imageinfo[ 0 ].descriptionurl )">
@@ -111,7 +110,23 @@ module.exports = exports = {
 				return;
 			}
 
-			this.hasHiddenImages = imagesContainer.scrollHeight > imagesContainer.clientHeight;
+			this.hasHiddenImages = false;
+
+			const bottomOfContainer = imagesContainer.offsetTop + imagesContainer.offsetHeight;
+			const commonsImages = imagesContainer.querySelectorAll( 'li' );
+
+			// we loop through the nodelist array
+			Array.from( commonsImages ).forEach( ( image ) => {
+				if ( image.offsetTop >= bottomOfContainer ) {
+					// we set hidden images to true if any of the image out of the container
+					this.hiddenImages = true;
+
+					// we make sure hidden images are not accessible witht eh keyboard
+					image.querySelector( 'a' ).tabIndex = -1;
+				}
+
+			} );
+
 		},
 		onImgLoad() {
 			this.numberOfImagesLoaded++;
@@ -138,7 +153,9 @@ module.exports = exports = {
 					this.$nextTick()
 						.then(
 							() => {
-								this.setHasHiddenImages( this.$refs[ 'images-container' ] );
+								if ( !this.isMobile ) {
+									this.setHasHiddenImages( this.$refs[ 'images-container' ] );
+								}
 							}
 						);
 				}
