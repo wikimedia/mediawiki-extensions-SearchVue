@@ -134,78 +134,94 @@ const sortImagesArray = ( result ) => {
 };
 
 /**
- * Retrieved information from the Commons wiki using the foreignApi.
- * This method require two configuration settings to be set 'wgQuickViewMediaRepositoryApiBaseUri' and
- * 'wgQuickViewSearchFilterForQID'.
+ * Format the media information for usage within the search preview
+ *
+ * @param {Object} result
+ * @param {Object} page
+ * @param {Object} context
+ * @return {Object}
+ */
+const formatMediaInfo = ( result, page, context ) => {
+	let images = sortImagesArray( result );
+	images = images.filter( ( image ) => {
+		// drop the image if it's the same as the page image we're
+		// already showing at the top
+		return !image.imageinfo[ 0 ] ||
+			!page.original ||
+			page.original.source !== image.imageinfo[ 0 ].url;
+	} );
+
+	// API is always returning 7 images, but mobile only uses 3
+	const numberOfImagesToLoad = context.state.isMobile ? 3 : 7;
+	const hasMoreImages = images.length > numberOfImagesToLoad || !!result.continue;
+	images = images.slice( 0, numberOfImagesToLoad );
+
+	return {
+		images: images,
+		hasMoreImages: hasMoreImages,
+		searchLink: result.searchlink
+	};
+};
+
+/**
+ * Retrieved media information from the internal API.
  *
  * @param {Object} page
  * @param {Object} context
  * @param {Function} context.commit
  */
-const setCommonsInfo = ( page, context ) => {
+const setMediaInfo = ( page, context ) => {
 	const QID = getQID( page );
 
 	if ( !QID ) {
-		context.commit( 'SET_COMMONS' );
-		return;
-	}
-
-	if (
-		!mw.config.get( 'wgQuickViewMediaRepositoryApiBaseUri' ) ||
-		!mw.config.get( 'wgQuickViewSearchFilterForQID' ) ||
-		!mw.config.get( 'wgQuickViewMediaRepositorySearchUri' )
-	) {
+		context.commit( 'SET_MEDIA' );
 		return;
 	}
 
 	context.commit( 'SET_REQUEST_STATUS', {
-		type: 'commons',
+		type: 'media',
 		status: context.state.requestStatuses.inProgress
 	} );
 
 	restApi
 		.get( '/searchvue/v0/media/' + QID )
 		.done( ( result ) => {
-			if ( !result || !result.query || !result.query.pages || result.query.pages.length === 0 ) {
-
+			if (
+				!result ||
+				( !result.media && !result.links )
+			) {
 				context.commit( 'SET_REQUEST_STATUS', {
-					type: 'commons',
+					type: 'media',
 					status: context.state.requestStatuses.done
 				} );
 				return;
 			}
 
-			let images = sortImagesArray( result );
-			images = images.filter( ( image ) => {
-				// drop the image if it's the same as the page image we're
-				// already showing at the top
-				return !image.imageinfo[ 0 ] ||
-					!page.original ||
-					page.original.source !== image.imageinfo[ 0 ].url;
-			} );
+			if (
+				result.media &&
+				result.media.query &&
+				result.media.query.pages &&
+				Object.keys( result.media.query.pages ).length > 0
+			) {
+				const mediaInfo = formatMediaInfo( result.media, page, context );
+				context.commit( 'SET_MEDIA', mediaInfo );
+			}
 
-			// API is always returning 7 images, but mobile only uses 3
-			const numberOfImagesToLoad = context.state.isMobile ? 3 : 7;
-			const hasMoreImages = images.length > numberOfImagesToLoad || !!result.continue;
-			images = images.slice( 0, numberOfImagesToLoad );
+			if ( result.links && Object.keys( result.links ).length > 0 ) {
+				context.commit( 'SET_LINKS', result.links );
+			}
 
-			const commonsInfo = {
-				images: images,
-				hasMoreImages: hasMoreImages,
-				searchLink: result.searchlink
-			};
-
-			context.commit( 'SET_COMMONS', commonsInfo );
 			context.commit( 'SET_REQUEST_STATUS', {
-				type: 'commons',
+				type: 'media',
 				status: context.state.requestStatuses.done
 			} );
 		} )
 		.catch( () => {
-			context.commit( 'SET_COMMONS' );
+			context.commit( 'SET_MEDIA' );
+			context.commit( 'SET_LINKS' );
 
 			context.commit( 'SET_REQUEST_STATUS', {
-				type: 'commons',
+				type: 'media',
 				status: context.state.requestStatuses.error
 			} );
 		} );
@@ -243,7 +259,7 @@ const retrieveInfoFromQuery = ( context, title ) => {
 				thumbnail = result.thumbnail;
 			}
 			setThumbnail( thumbnail, result.pageimage || '', context );
-			setCommonsInfo( result, context );
+			setMediaInfo( result, context );
 			setDescription( result, context );
 			setArticleSections( result, context );
 
@@ -254,9 +270,10 @@ const retrieveInfoFromQuery = ( context, title ) => {
 		} )
 		.catch( () => {
 			context.commit( 'SET_THUMBNAIL' );
-			context.commit( 'SET_COMMONS' );
+			context.commit( 'SET_MEDIA' );
 			context.commit( 'SET_DESCRIPTION' );
 			context.commit( 'SET_SECTIONS' );
+			context.commit( 'SET_LINKS' );
 
 			context.commit( 'SET_REQUEST_STATUS', {
 				type: 'query',
@@ -375,9 +392,10 @@ module.exports = {
 		context.commit( 'SET_TITLE', null );
 		context.commit( 'SET_SELECTED_INDEX', -1 );
 		context.commit( 'SET_THUMBNAIL' );
-		context.commit( 'SET_COMMONS' );
+		context.commit( 'SET_MEDIA' );
 		context.commit( 'SET_DESCRIPTION' );
 		context.commit( 'SET_SECTIONS' );
+		context.commit( 'SET_LINKS' );
 		context.commit( 'SET_COMPONENT_READY' );
 		removeQuickViewFromHistoryState();
 		context.commit( 'RESET_REQUEST_STATUS' );

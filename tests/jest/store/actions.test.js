@@ -136,39 +136,6 @@ describe( 'Actions', () => {
 					expect( actions.commit ).toHaveBeenCalledWith( 'SET_DESCRIPTION', fakeDescription );
 
 				} );
-				it( 'it does not trigger a Rest API request when wgQuickViewMediaRepositoryApiBaseUri is not set', () => {
-
-					when( global.mw.config.get )
-						.calledWith( 'wgQuickViewMediaRepositoryApiBaseUri' )
-						.mockReturnValueOnce( null );
-					const title = 'dummy1';
-					actions.handleTitleChange( context, { newTitle: title, element: fakeElement } );
-
-					expect( global.mw.Rest.prototype.get ).toHaveBeenCalledTimes( 1 );
-
-				} );
-				it( 'it does not trigger a Rest API request when wgQuickViewSearchFilterForQID is not set', () => {
-
-					when( global.mw.config.get )
-						.calledWith( 'wgQuickViewSearchFilterForQID' )
-						.mockReturnValueOnce( null );
-					const title = 'dummy1';
-					actions.handleTitleChange( context, { newTitle: title, element: fakeElement } );
-
-					expect( global.mw.Rest.prototype.get ).toHaveBeenCalledTimes( 1 );
-
-				} );
-				it( 'it does not trigger a Rest API request when wgQuickViewMediaRepositorySearchUri is not set', () => {
-
-					when( global.mw.config.get )
-						.calledWith( 'wgQuickViewMediaRepositorySearchUri' )
-						.mockReturnValueOnce( null );
-					const title = 'dummy1';
-					actions.handleTitleChange( context, { newTitle: title, element: fakeElement } );
-
-					expect( global.mw.Rest.prototype.get ).toHaveBeenCalledTimes( 1 );
-
-				} );
 				it( 'it trigger a rest API request with the QID', () => {
 
 					const title = 'dummy1';
@@ -180,8 +147,10 @@ describe( 'Actions', () => {
 				} );
 				it( 'when commons API response has no pages, it does not update the store', () => {
 					const responseWithNoPages = {
-						query: {
-							pages: []
+						commons: {
+							query: {
+								pages: []
+							}
 						}
 					};
 					global.mw.Rest.prototype.get.mockReturnValue( $.Deferred().resolve( responseWithNoPages ).promise() );
@@ -203,7 +172,7 @@ describe( 'Actions', () => {
 						actions.handleTitleChange( context, { newTitle: title, element: fakeElement } );
 
 						const allSetCommonsRequest = actions.commit.mock.calls.filter( ( payload ) => {
-							return payload[ 0 ] === 'SET_COMMONS';
+							return payload[ 0 ] === 'SET_MEDIA';
 						} );
 
 						expect( allSetCommonsRequest.length ).toBe( 1 );
@@ -216,11 +185,37 @@ describe( 'Actions', () => {
 						actions.handleTitleChange( context, { newTitle: title, element: fakeElement } );
 
 						const allSetCommonsRequest = actions.commit.mock.calls.filter( ( payload ) => {
-							return payload[ 0 ] === 'SET_COMMONS';
+							return payload[ 0 ] === 'SET_MEDIA';
 						} );
 
 						expect( allSetCommonsRequest.length ).toBe( 1 );
 						expect( allSetCommonsRequest[ 0 ][ 1 ].hasMoreImages ).toBe( true );
+					} );
+				} );
+				it( 'when links object is not available within the response', () => {
+					const responseWithNoInterwikis = {
+						links: null
+					};
+					global.mw.Rest.prototype.get.mockReturnValue( $.Deferred().resolve( responseWithNoInterwikis ).promise() );
+
+					const title = 'dummy1';
+					actions.handleTitleChange( context, { newTitle: title, element: fakeElement } );
+
+					const allInterwikisCall = actions.commit.mock.calls.filter( ( payload ) => {
+						return payload[ 0 ] === 'SET_LINKS';
+					} );
+
+					expect( allInterwikisCall.length ).toBe( 0 );
+
+				} );
+				describe( 'when links object is available within the API response', () => {
+					it( 'Update links in the store', () => {
+						const title = 'dummy1';
+
+						actions.handleTitleChange( context, { newTitle: title, element: fakeElement } );
+
+						expect( actions.commit ).toHaveBeenCalled();
+						expect( actions.commit ).toHaveBeenCalledWith( 'SET_LINKS', commonsFakeResponse.links );
 					} );
 				} );
 			} );

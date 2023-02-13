@@ -29,6 +29,15 @@ module.exports = {
 		state.sections = sections || [];
 	},
 	/**
+	 * Set the value of links or reset to empty arrays
+	 *
+	 * @param {Object} state
+	 * @param {Object} links
+	 */
+	SET_LINKS: ( state, links ) => {
+		state.links = links || [];
+	},
+	/**
 	 * Set the thumbnail object of the selected item
 	 *
 	 * @param {Object} state
@@ -75,17 +84,17 @@ module.exports = {
 		state.description = description || null;
 	},
 	/**
-	 * Set the additional images retrieved from the commons API
+	 * Set the additional images retrieved from the media repository API
 	 *
 	 * @param {Object} state
-	 * @param {Object|undefined} commonsInfo
-	 * @param {Array} commonsInfo.images
-	 * @param {boolean} commonsInfo.continue
+	 * @param {Object|undefined} mediaInfo
+	 * @param {Array} mediaInfo.images
+	 * @param {boolean} mediaInfo.continue
 	 */
-	SET_COMMONS: ( state, commonsInfo ) => {
-		state.commons.images = !commonsInfo ? [] : commonsInfo.images;
-		state.commons.hasMoreImages = commonsInfo && commonsInfo.hasMoreImages;
-		state.commons.searchLink = !commonsInfo ? '' : commonsInfo.searchLink;
+	SET_MEDIA: ( state, mediaInfo ) => {
+		state.media.images = !mediaInfo ? [] : mediaInfo.images;
+		state.media.hasMoreImages = mediaInfo && mediaInfo.hasMoreImages;
+		state.media.searchLink = !mediaInfo ? '' : mediaInfo.searchLink;
 	},
 	/**
 	 * Updates the status of a current API requests
