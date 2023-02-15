@@ -26,6 +26,7 @@
 		</ul>
 		<a
 			v-if="hiddenSectionsLength > 1"
+			class="quickViewSections__footnote"
 			:href="firstHiddenSectionsUrl"
 			@click.prevent="onSectionClick( firstHiddenSectionsUrl )"
 		>
@@ -218,6 +219,10 @@ module.exports = exports = {
 		a {
 			color: @colorGray2;
 		}
+	}
+
+	& &__footnote {
+		font-size: 0.855em;
 	}
 
 	&__mobile {

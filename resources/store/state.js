@@ -34,5 +34,5 @@ module.exports = {
 		large: 1440,
 		small: 720
 	},
-	links: []
+	links: {}
 };
