@@ -7,7 +7,10 @@
 				v-for="(link, interwikiName) in links"
 				:key="interwikiName"
 			>
-				<a :href="link.url">
+				<a
+					:href="link.url"
+					@click.prevent="onClick( link.url )"
+				>
 					{{ link.title }}
 				</a>
 				<p
@@ -42,6 +45,14 @@ module.exports = exports = {
 		}
 	},
 	methods: {
+		onClick( url ) {
+			this.$emit(
+				'log-event',
+				{
+					action: 'click-interwiki-links',
+					goTo: url
+				} );
+		},
 		generateInterwikiNote( friendlyName ) {
 			return this.$i18n( 'searchvue-links-subheading', friendlyName ).parse();
 		},
