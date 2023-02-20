@@ -163,7 +163,7 @@ module.exports = exports = {
 	overflow: auto;
 
 	& > div {
-		margin: 0 auto 32px;
+		margin: 0 auto 20px;
 		padding: 0 16px;
 	}
 

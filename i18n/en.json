@@ -25,7 +25,6 @@
 	"searchvue-article-sections-heading-ns0": "Sections in the article",
 	"searchvue-more-sections": "+ $1 more {{PLURAL:$1|section|sections}}",
 	"searchvue-help": "Preview the contents of the page and related content.",
-	"searchvue-links-subheading": "In $1",
 	"tutorial-popup-title": "Search result previews",
 	"tutorial-popup-text1": "Click on the the article snippet to preview the search result and view related content.",
 	"tutorial-popup-text2": "You can turn previews on and off in the search",

@@ -44,7 +44,7 @@ describe( 'Getters', () => {
 					width: 400,
 					height: 700
 				};
-				dummyState.media = {
+				dummyState.commons = {
 					images: [ 'myDummyImage' ],
 					hasMoreImages: true,
 					searchLink: 'dummyLink'
@@ -71,11 +71,11 @@ describe( 'Getters', () => {
 					expect.objectContaining( { thumbnail: dummyState.thumbnail } )
 				);
 			} );
-			it( 'includes media object from state', () => {
+			it( 'includes commons object from state', () => {
 				const result = getters.currentResult( dummyState );
 
 				expect( result ).toEqual(
-					expect.objectContaining( { media: dummyState.media } )
+					expect.objectContaining( { commons: dummyState.commons } )
 				);
 			} );
 		} );
