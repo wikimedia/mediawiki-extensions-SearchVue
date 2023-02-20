@@ -17,7 +17,7 @@ module.exports = {
 	sections: [],
 	thumbnail: null,
 	description: null,
-	commons: {
+	media: {
 		images: [],
 		hasMoreImages: false,
 		searchLink: null
@@ -25,7 +25,7 @@ module.exports = {
 	requestStatuses: requestStatuses,
 	requestStatus: {
 		query: requestStatuses.notStarted,
-		commons: requestStatuses.notStarted
+		media: requestStatuses.notStarted
 	},
 	componentReady: false,
 	destination: '',
@@ -33,5 +33,6 @@ module.exports = {
 		medium: 1000,
 		large: 1440,
 		small: 720
-	}
+	},
+	links: []
 };
