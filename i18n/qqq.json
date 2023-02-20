@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Amire80",
 			"Joseph Seddon",
 			"Robby"
 		]
@@ -26,7 +27,7 @@
 	"searchvue-article-sections-heading-ns0": "Text that represent article sections heading if it belongs to the Main namespace",
 	"searchvue-more-sections": "Text indicating the remaining amount of sections. Parameters:\n* $1 - The number of remaining sections",
 	"searchvue-help": "Help text for user preference that offer the user the ability to enable or disable the search preview feature.",
-	"searchvue-links-subheading": "Credit message to inform that the user from which interwiki the showed resource is coming from. Parameters:\n* $1 - Name of the interwiki",
+	"searchvue-links-subheading": "A link in the search results sidebar. Points to a possibly relevant page in another wiki in the family. For example, in Wikipedia, this may say \"In Wikivoyage\", \"In Wikisource\", etc. Parameters:\n* $1 - Name of the other wiki site",
 	"tutorial-popup-title": "Heading of the tutorial popup",
 	"tutorial-popup-text1": "First paragraph in the tutorial popup",
 	"tutorial-popup-text2": "Second paragraph in the tutorial popup",
