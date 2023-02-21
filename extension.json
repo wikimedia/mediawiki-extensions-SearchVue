@@ -12,7 +12,10 @@
 	"descriptionmsg": "searchvue-desc",
 	"license-name": "GPL-2.0-or-later",
 	"requires": {
-		"MediaWiki": ">= 1.38.0"
+		"MediaWiki": ">= 1.38.0",
+		"extensions": {
+			"WikimediaMessages": "*"
+		}
 	},
 	"AutoloadNamespaces": {
 		"SearchVue\\": "src/"
@@ -56,6 +59,7 @@
 				"resources/components/sections/QuickViewSnippet.vue",
 				"resources/components/sections/QuickViewSections.vue",
 				"resources/components/sections/QuickViewCommons.vue",
+				"resources/components/sections/QuickViewLinks.vue",
 				"resources/composables/onDocumentResize.js",
 				"resources/composables/onDocumentScroll.js",
 				"resources/composables/onResizeObserver.js",
@@ -105,6 +109,7 @@
 				"searchvue-more-sections",
 				"searchvue-snippet-gotofullpage",
 				"searchvue-snippet-gotofullpage-ns0",
+				"searchvue-links-subheading",
 				"ellipsis",
 				"tutorial-popup-title",
 				"tutorial-popup-text1",
@@ -138,6 +143,10 @@
 			"description": "Url to API of Commons repository used to fetch images for the selected page. If not set, the 'related images' section will not appear.",
 			"value": "https://commons.wikimedia.org/w/api.php"
 		},
+		"QuickViewDataRepositoryApiBaseUri": {
+			"description": "Url to API of Wikidata repository used to links for the selected page. If not set, the 'interwiki links' section will not appear.",
+			"value": "https://www.wikidata.org/w/api.php"
+		},
 		"QuickViewMediaRepositorySearchUri": {
 			"description": "Url to Commons search page.",
 			"value": "https://commons.wikimedia.org/wiki/Special:MediaSearch?search=%s"
@@ -163,7 +172,9 @@
 			"class": "SearchVue\\Rest\\GetSearchVueMedia",
 			"services": [
 				"MainConfig",
-				"HttpRequestFactory"
+				"HttpRequestFactory",
+				"UrlUtils",
+				"ContentLanguage"
 			]
 		}
 	]

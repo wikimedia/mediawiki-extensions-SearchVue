@@ -3,7 +3,7 @@
 	<div
 		@click.stop
 	>
-		<nav 
+		<nav
 			v-if="!isMobile"
 			class="mw-search-quick-view__nav"
 		>
@@ -75,9 +75,15 @@
 		</template>
 		<quick-view-commons
 			v-if="hasCommonsImages"
-			v-bind="currentResult.commons"
+			v-bind="currentResult.media"
 			@log-event="onLogEvent"
 		></quick-view-commons>
+		<quick-view-links
+			v-if="hasLinks"
+			:links="currentResult.links"
+			:is-mobile="isMobile"
+			@log-event="onLogEvent"
+		></quick-view-links>
 		<slot
 			name="loading-icon"
 			:loading="loading"
@@ -97,6 +103,7 @@ const QuickViewImage = require( './QuickViewImage.vue' ),
 	QuickViewSnippet = require( './QuickViewSnippet.vue' ),
 	QuickViewSections = require( './QuickViewSections.vue' ),
 	QuickViewCommons = require( './QuickViewCommons.vue' ),
+	QuickViewLinks = require( './QuickViewLinks.vue' ),
 	ContentSkeleton = require( '../generic/ContentSkeleton.vue' ),
 	mapActions = require( 'vuex' ).mapActions,
 	mapGetters = require( 'vuex' ).mapGetters,
@@ -111,6 +118,7 @@ module.exports = exports = {
 		'quick-view-snippet': QuickViewSnippet,
 		'quick-view-sections': QuickViewSections,
 		'quick-view-commons': QuickViewCommons,
+		'quick-view-links': QuickViewLinks,
 		'content-skeleton': ContentSkeleton
 	},
 	data: function () {
@@ -129,12 +137,21 @@ module.exports = exports = {
 		] ),
 		{
 			hasCommonsImages() {
-				return this.currentResult.commons &&
-					this.currentResult.commons.images &&
-					this.currentResult.commons.images.length > 0;
+				return this.currentResult.media &&
+					this.currentResult.media.images &&
+					this.currentResult.media.images.length > 0;
 			},
 			hasSections() {
 				return this.currentResult.sections && this.currentResult.sections.length > 0;
+			},
+			hasLinks() {
+				// This section is going to be hidden until T327540
+				if ( this.isMobile ) {
+					return false;
+				}
+
+				return this.currentResult.links &&
+					Object.keys( this.currentResult.links ).length > 0;
 			},
 			textWithEllipsis() {
 				return this.currentResult.text + this.$i18n( 'ellipsis' ).text();
