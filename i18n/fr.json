@@ -28,7 +28,6 @@
 	"searchvue-article-sections-heading-ns0": "Sections dans l’article",
 	"searchvue-more-sections": "+ $1 autre{{PLURAL:$1||s}} section{{PLURAL:$1||s}}",
 	"searchvue-help": "Prévisualiser le contenu de la page et des contenus associées.",
-	"searchvue-links-subheading": "Dans $1",
 	"tutorial-popup-title": "Aperçus des résultats de recherche",
 	"tutorial-popup-text1": "Cliquez sur l’extrait d’article pour prévisualiser le résultat de la recherche et voir le contenu associé.",
 	"tutorial-popup-text2": "Vous pouvez activer ou désactiver les aperçus dans la recherche",
