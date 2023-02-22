@@ -18,5 +18,6 @@
 	"searchvue-commons-heading": "Gerelateerde afbeeldingen",
 	"searchvue-commons-heading-mobile": "Gerelateerde afbeeldingen van Wikimedia Commons",
 	"searchvue-more-sections": "+ nog $1 {{PLURAL:$1|sectie|secties}}",
-	"searchvue-help": "Bekijk een voorbeeld van de inhoud van de pagina en gerelateerde inhoud."
+	"searchvue-help": "Bekijk een voorbeeld van de inhoud van de pagina en gerelateerde inhoud.",
+	"searchvue-links-subheading": "In $1"
 }
