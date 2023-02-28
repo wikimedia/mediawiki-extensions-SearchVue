@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Tumbuka Arch"
+		]
+	},
+	"searchvue-commons-heading": "Vithuzi vyakulondezgelapo",
+	"searchvue-commons-heading-mobile": "Vithuzi vyakulondezgelapo vyakufumila ku Wikimedia Commons",
+	"searchvue-article-sections-heading": "Malo mu jani",
+	"searchvue-article-sections-heading-ns0": "Malo mu vyakulemba",
+	"searchvue-more-sections": "+ $1 {{PLURAL:$1|chigaŵa chinyake|vigaŵa vinyake}}",
+	"searchvue-help": "Longola mwapatali patali ivo vili mukati mwa jani na vinthu vinyake.",
+	"searchvue-links-subheading": "Mu $1"
+}
