@@ -59,7 +59,8 @@ module.exports = exports = {
 		},
 		mapState( [
 			'isMobile',
-			'title'
+			'title',
+			'results'
 		] ),
 		mapGetters( [
 			'showOnMobile',
@@ -187,6 +188,12 @@ module.exports = exports = {
 					}
 
 				}
+			},
+			resultHasInfoToDisplay( title ) {
+				const result = this.results.find( ( item ) => {
+					return item.prefixedText === title;
+				} );
+				return result && ( result.text || result.thumbnail );
 			}
 		}
 	),
@@ -219,10 +226,10 @@ module.exports = exports = {
 		const searchResults = this.getSearchResults();
 		for ( const searchResultLi of searchResults ) {
 
-			// This is a failsafe to just add the search preview in result that have a body
-			if ( searchResultLi.querySelector( '.searchresult' ) ) {
+			const title = searchResultLi.querySelector( '.mw-search-result-heading a' ).getAttribute( 'title' );
+
+			if ( this.resultHasInfoToDisplay( title ) ) {
 				searchResultLi.classList.add( 'searchresult-with-quickview' );
-				const title = searchResultLi.querySelector( '.mw-search-result-heading a' ).getAttribute( 'title' );
 				searchResultLi.dataset.title = title;
 
 				const searchResultContainer = searchResultLi.querySelector( '.mw-search-result-heading' ).parentElement;

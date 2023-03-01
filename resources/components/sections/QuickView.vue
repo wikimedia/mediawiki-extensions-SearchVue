@@ -154,7 +154,12 @@ module.exports = exports = {
 					Object.keys( this.currentResult.links ).length > 0;
 			},
 			textWithEllipsis() {
-				return this.currentResult.text + this.$i18n( 'ellipsis' ).text();
+
+				if ( !this.currentResult.text ) {
+					return '';
+				} else {
+					return this.currentResult.text + this.$i18n( 'ellipsis' ).text();
+				}
 			},
 			hideThumb() {
 				return !this.currentResult.thumbnail && this.isMobile;
