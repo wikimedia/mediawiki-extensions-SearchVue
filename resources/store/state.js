@@ -17,6 +17,7 @@ module.exports = {
 	sections: [],
 	thumbnail: null,
 	description: null,
+	expandedSnippet: null,
 	media: {
 		images: [],
 		hasMoreImages: false,

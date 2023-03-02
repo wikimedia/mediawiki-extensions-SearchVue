@@ -118,5 +118,15 @@ module.exports = {
 		for ( const property in state.requestStatus ) {
 			state.requestStatus[ property ] = state.requestStatuses.notStarted;
 		}
+	},
+	/**
+	 * Set an expanded snippet. This is returned as part of the first API call
+	 * and will replace the existing snippet included in the search results
+	 *
+	 * @param {Object} state
+	 * @param {string} snippet
+	 */
+	SET_EXPANDED_SNIPPET: ( state, snippet ) => {
+		state.expandedSnippet = snippet || null;
 	}
 };

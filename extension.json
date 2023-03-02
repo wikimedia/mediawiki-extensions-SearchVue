@@ -163,7 +163,7 @@
 	},
 	"RestRoutes": [
 		{
-			"path": "/searchvue/v0/page/{page_title}",
+			"path": "/searchvue/v0/page/{page_title}/{snippet_field}",
 			"method": "GET",
 			"class": "SearchVue\\Rest\\GetSearchVueResultInfo"
 		},

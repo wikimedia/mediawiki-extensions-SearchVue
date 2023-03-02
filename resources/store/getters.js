@@ -19,7 +19,8 @@ module.exports = {
 			thumbnail: state.thumbnail,
 			media: state.media,
 			description: state.description,
-			links: state.links
+			links: state.links,
+			expandedSnippet: state.expandedSnippet
 		};
 
 		return $.extend(

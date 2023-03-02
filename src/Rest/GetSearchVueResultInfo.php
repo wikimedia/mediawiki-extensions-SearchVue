@@ -16,22 +16,32 @@ use Wikimedia\ParamValidator\ParamValidator;
  */
 class GetSearchVueResultInfo extends SimpleHandler {
 
+	/** @var string */
+	private $snippetField;
+
+	/** @var string */
+	private $pageTitle;
+
 	/**
 	 * @param string $pageTitle
+	 * @param string $snippetField
 	 * @return Response
 	 */
-	public function run( $pageTitle ) {
-		$decodedTitle = rawurldecode( $pageTitle );
+	public function run( $pageTitle, $snippetField ) {
+		$decodedSnippetField = rawurldecode( $snippetField );
+		$this->pageTitle = rawurldecode( $pageTitle );
+		$this->snippetField = $decodedSnippetField;
+
 		$payload = new FauxRequest( [
 			'action' => 'query',
 			'format' => 'json',
-			'titles' => $decodedTitle,
+			'titles' => $this->pageTitle,
 			'prop' => 'pageimages|pageprops|pageterms|cirrusdoc',
 			'pithumbsize' => 400,
 			'pilicense' => 'free',
 			'piprop' => 'thumbnail|name|original',
 			'wbptterms' => 'description',
-			'cdincludes' => 'heading'
+			'cdincludes' => "heading|{$this->snippetField}"
 		] );
 		$api = new ApiMain( $payload );
 		$context = new DerivativeContext( RequestContext::getMain() );
@@ -39,8 +49,9 @@ class GetSearchVueResultInfo extends SimpleHandler {
 		$api->setContext( $context );
 		$api->execute();
 		$response = $api->getResult()->getResultData( [], [ 'Strip' => 'all' ] );
+		$formattedResponse = reset( $response[ 'query' ][ 'pages' ] );
 
-		return $this->getResponseFactory()->createJson( reset( $response[ 'query' ][ 'pages' ] ) );
+		return $this->getResponseFactory()->createJson( $formattedResponse );
 	}
 
 	public function needsWriteAccess() {
@@ -53,6 +64,11 @@ class GetSearchVueResultInfo extends SimpleHandler {
 	public function getParamSettings() {
 		return [
 			'page_title' => [
+				self::PARAM_SOURCE => 'path',
+				ParamValidator::PARAM_TYPE => 'string',
+				ParamValidator::PARAM_REQUIRED => true,
+			],
+			'snippet_field' => [
 				self::PARAM_SOURCE => 'path',
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_REQUIRED => true,
