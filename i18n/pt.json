@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"FDoria-WMF",
-			"Hamilton Abreu"
+			"Hamilton Abreu",
+			"Sannita"
 		]
 	},
 	"searchvue-aria-button": "Abrir a antevisão deste artigo.",
@@ -26,6 +27,7 @@
 	"searchvue-article-sections-heading-ns0": "Secções no artigo",
 	"searchvue-more-sections": "+ $1 {{PLURAL:$1|outra secção|outras secções}}",
 	"searchvue-help": "Antevisão do conteúdo da página e conteúdos relacionadas.",
+	"searchvue-links-subheading": "Na $1",
 	"tutorial-popup-title": "Antevisões dos resultados da pesquisa",
 	"tutorial-popup-text1": "Clique no trecho do artigo para antever o resultado da pesquisa e ver conteúdo relacionado.",
 	"tutorial-popup-text2": "Pode ligar e desligar as antevisões na pesquisa",
