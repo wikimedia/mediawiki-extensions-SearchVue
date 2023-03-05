@@ -29,6 +29,7 @@
 		"SpecialPageBeforeExecute": "main",
 		"SpecialSearchResults": "main",
 		"SpecialSearchResultsAppend": "main",
+		"ShowSearchHitTitle": "main",
 		"GetPreferences": [ "SearchVue\\Hooks::onGetPreferences" ]
 
 	},

@@ -97,7 +97,7 @@ module.exports = exports = {
 					.not( '#mw-content-text .mw-search-interwiki-results .mw-search-result-ns-0' );
 			},
 			currentElement: function ( title ) {
-				return this.getSearchResults().find( `[title="${title}"]` ).closest( 'li' )[ 0 ];
+				return this.getSearchResults().find( `[data-prefixedtext="${title}"]` ).closest( 'li' )[ 0 ];
 			},
 			leaving() {
 				// Emit QuickView closing event only if QuickView is present in url
@@ -126,9 +126,9 @@ module.exports = exports = {
 			handleResultEvent( event ) {
 				const searchResultLink = event.currentTarget.parentElement.getElementsByTagName( 'a' )[ 0 ];
 
-				if ( searchResultLink.hasAttribute( 'title' ) ) {
+				if ( searchResultLink.hasAttribute( 'data-prefixedtext' ) ) {
 					event.stopPropagation();
-					const resultTitle = searchResultLink.getAttribute( 'title' );
+					const resultTitle = searchResultLink.getAttribute( 'data-prefixedtext' );
 					const currentElement = this.currentElement( resultTitle );
 					const payload = { title: resultTitle, element: currentElement };
 
@@ -190,9 +190,9 @@ module.exports = exports = {
 
 				}
 			},
-			resultHasInfoToDisplay( title ) {
+			resultHasInfoToDisplay( prefixedText ) {
 				const result = this.results.find( ( item ) => {
-					return item.prefixedText === title;
+					return item.prefixedText === prefixedText;
 				} );
 				return result && ( result.text || result.thumbnail );
 			}
@@ -226,12 +226,11 @@ module.exports = exports = {
 
 		const searchResults = this.getSearchResults();
 		for ( const searchResultLi of searchResults ) {
+			const prefixedText = searchResultLi.querySelector( '.mw-search-result-heading a' ).getAttribute( 'data-prefixedtext' );
 
-			const title = searchResultLi.querySelector( '.mw-search-result-heading a' ).getAttribute( 'title' );
-
-			if ( this.resultHasInfoToDisplay( title ) ) {
+			if ( this.resultHasInfoToDisplay( prefixedText ) ) {
 				searchResultLi.classList.add( 'searchresult-with-quickview' );
-				searchResultLi.dataset.title = title;
+				searchResultLi.dataset.prefixedtext = prefixedText;
 
 				const searchResultContainer = searchResultLi.querySelector( '.mw-search-result-heading' ).parentElement;
 				this.generateAndInsertAriaButton( searchResultContainer );

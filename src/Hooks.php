@@ -2,13 +2,16 @@
 
 namespace SearchVue;
 
+use HtmlArmor;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Search\SearchWidgets\FullSearchResultWidget;
 use MediaWiki\SpecialPage\Hook\SpecialPageBeforeExecuteHook;
 use OutputPage;
+use SearchResult;
 use SearchResultSet;
 use SpecialPage;
 use SpecialSearch;
+use Title;
 use User;
 
 /**
@@ -146,6 +149,30 @@ class Hooks implements
 		$prefs['searchpreview-tutorial-enabled'] = [
 			'type' => 'api'
 		];
+	}
+
+	/**
+	 * Add data-prefixedText attribute to the search results
+	 *
+	 * @param Title &$title
+	 * @param string|HtmlArmor|null &$titleSnippet
+	 * @param SearchResult $result
+	 * @param array $terms
+	 * @param SpecialSearch $specialSearch
+	 * @param string[] &$query
+	 * @param string[] &$attributes
+	 * @return void
+	 */
+	public function onShowSearchHitTitle(
+		&$title,
+		&$titleSnippet,
+		$result,
+		$terms,
+		$specialSearch,
+		&$query,
+		&$attributes
+	): void {
+		$attributes[ 'data-prefixedtext' ] = $title->getPrefixedText();
 	}
 
 	/**

@@ -474,7 +474,7 @@ describe( 'Actions', () => {
 					actions.toggleVisibily( context, { title: 'dummy', force: true } );
 
 					expect( context.commit ).toHaveBeenCalled();
-					expect( context.commit ).toHaveBeenCalledWith( 'SET_DESTINATION', '[data-title="dummy"]' );
+					expect( context.commit ).toHaveBeenCalledWith( 'SET_DESTINATION', '[data-prefixedtext="dummy"]' );
 				} );
 				it( 'Set the NEXT_TITLE as null', () => {
 					actions.toggleVisibily( context, { force: true } );
@@ -488,7 +488,7 @@ describe( 'Actions', () => {
 					actions.toggleVisibily( context, { title: 'dummy' } );
 
 					expect( context.commit ).toHaveBeenCalled();
-					expect( context.commit ).toHaveBeenCalledWith( 'SET_DESTINATION', '[data-title="dummy"]' );
+					expect( context.commit ).toHaveBeenCalledWith( 'SET_DESTINATION', '[data-prefixedtext="dummy"]' );
 				} );
 			} );
 			describe( 'When called with force=false and title is set in the state', () => {
