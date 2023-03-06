@@ -73,9 +73,22 @@ module.exports = {
 	 * @return {Object}
 	 */
 	showOnMobile( _state, getters ) {
+		return getters.pageInfoAvailable;
+	},
+	/**
+	 * Determine if page information are available for the selected result.
+	 * This is used to determine when to display the extension
+	 *
+	 * @param {Object} _state
+	 * @param {Object} getters
+	 *
+	 * @return {Object}
+	 */
+	pageInfoAvailable( _state, getters ) {
 		const descriptionIsSet = !!getters.currentResult.description;
 		const sectionIsSet = getters.currentResult.sections && getters.currentResult.sections.length !== 0;
+		const thumbnailIsSet = !!getters.currentResult.thumbnail;
 
-		return descriptionIsSet || sectionIsSet;
+		return descriptionIsSet || sectionIsSet || thumbnailIsSet;
 	}
 };
