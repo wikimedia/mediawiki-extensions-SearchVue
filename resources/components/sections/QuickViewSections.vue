@@ -125,12 +125,17 @@ module.exports = exports = {
 			}
 			const bottomOfContainer = sectionsContainer.offsetTop + sectionsContainer.offsetHeight;
 
+			// We create an array of all sections that go beyond the visible area
 			const hiddenSections = sections.filter( ( section ) => {
 				return section.offsetTop >= bottomOfContainer;
 			} );
 
-			const hiddenSectionsAnchors = hiddenSections.map( ( section ) => {
-				return section.dataset.anchor;
+			// We create an array of anchor urls for this hidden sections
+			// and make them aria-hidden
+			const hiddenSectionsAnchors = [];
+			hiddenSections.forEach( ( section ) => {
+				hiddenSectionsAnchors.push( section.dataset.anchor );
+				section.querySelector( 'a' ).tabIndex = -1;
 			} );
 
 			this.hiddenSections = hiddenSectionsAnchors;

@@ -106,6 +106,7 @@ module.exports = exports = {
 			},
 			generateAndInsertAriaButton( container ) {
 				const ariaButton = document.createElement( 'BUTTON' );
+				ariaButton.type = 'button';
 				ariaButton.classList.add( 'quickView-aria-button' );
 				ariaButton.ariaLabel = this.$i18n( 'searchvue-aria-button' ).text();
 				container.insertBefore( ariaButton, null );
