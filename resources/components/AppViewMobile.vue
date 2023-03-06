@@ -137,7 +137,7 @@ module.exports = exports = {
 .v-enter-active {
 	transition: height 0.3s ease;
 
-	&.mw-search-quick-view {
+	&.mw-app-view-mobile {
 		visibility: hidden;
 	}
 }
@@ -145,7 +145,7 @@ module.exports = exports = {
 .v-leave-active {
 	transition: height 0.1s ease;
 
-	&.mw-search-quick-view {
+	&.mw-app-view-mobile {
 		visibility: hidden;
 	}
 }
@@ -154,7 +154,7 @@ module.exports = exports = {
 .v-leave-to {
 	height: 0;
 
-	&.mw-search-quick-view {
+	&.mw-app-view-mobile {
 		visibility: hidden;
 	}
 }
