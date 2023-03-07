@@ -75,6 +75,12 @@
 				@log-event="onLogEvent"
 				:is-mobile="isMobile"
 			></quick-view-sections>
+		    <quick-view-links
+			    v-if="hasLinks && isMobile"
+			    :links="currentResult.links"
+			    :is-mobile="isMobile"
+			    @log-event="onLogEvent"
+            ></quick-view-links>
 		</template>
 		<quick-view-commons
 			v-if="hasCommonsImages"
@@ -82,7 +88,7 @@
 			@log-event="onLogEvent"
 		></quick-view-commons>
 		<quick-view-links
-			v-if="hasLinks"
+			v-if="hasLinks && !isMobile"
 			:links="currentResult.links"
 			:is-mobile="isMobile"
 			@log-event="onLogEvent"
@@ -148,11 +154,6 @@ module.exports = exports = {
 				return this.currentResult.sections && this.currentResult.sections.length > 0;
 			},
 			hasLinks() {
-				// This section is going to be hidden until T327540
-				if ( this.isMobile ) {
-					return false;
-				}
-
 				return this.currentResult.links &&
 					Object.keys( this.currentResult.links ).length > 0;
 			},

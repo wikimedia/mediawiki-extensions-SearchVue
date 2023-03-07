@@ -35,7 +35,7 @@ module.exports = {
 	 * @param {Object} links
 	 */
 	SET_LINKS: ( state, links ) => {
-		state.links = links || [];
+		state.links = links || {};
 	},
 	/**
 	 * Set the thumbnail object of the selected item

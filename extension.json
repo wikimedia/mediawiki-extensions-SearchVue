@@ -70,7 +70,14 @@
 				"resources/store/mutations.js",
 				"resources/store/getters.js",
 				"resources/store/actions.js",
-				"resources/store/modules/Event.js"
+				"resources/store/modules/Event.js",
+				{
+					"name": "codex-icons.json",
+					"callback": "MediaWiki\\ResourceLoader\\CodexModule::getIcons",
+					"callbackParam": [
+						"cdxIconExpand"
+					]
+				}
 			],
 			"dependencies": [
 				"mediawiki.Uri",
@@ -84,7 +91,8 @@
 				"vue",
 				"@vue/composition-api",
 				"vuex",
-				"web2017-polyfills"
+				"web2017-polyfills",
+				"@wikimedia/codex"
 			],
 			"es6": true,
 			"targets": [
@@ -107,6 +115,8 @@
 				"searchvue-commons-heading-mobile",
 				"searchvue-article-sections-heading",
 				"searchvue-article-sections-heading-ns0",
+				"searchvue-links-heading",
+				"searchvue-links-showmore",
 				"searchvue-more-sections",
 				"searchvue-snippet-gotofullpage",
 				"searchvue-snippet-gotofullpage-ns0",
