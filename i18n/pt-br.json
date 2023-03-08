@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Eduardoaddad",
+			"Re demz",
 			"Trooper57"
 		]
 	},
@@ -21,6 +22,8 @@
 	"searchvue-commons-heading-mobile": "Imagens relacionadas na wiki Wikimedia Commons",
 	"searchvue-help": "Pré-visualize o conteúdo da página e conteúdos relacionadas.",
 	"searchvue-links-subheading": "Na $1",
+	"searchvue-links-heading": "Páginas relacionadas em outros projetos",
+	"searchvue-links-showmore": "mostrar outras páginas",
 	"tutorial-popup-preferences": "preferências",
 	"tutorial-popup-close": "Fechar"
 }

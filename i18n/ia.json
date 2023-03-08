@@ -26,6 +26,8 @@
 	"searchvue-more-sections": "+ $1 altere section{{PLURAL:$1||es}}",
 	"searchvue-help": "Previsualisar le contento del pagina e su contento associate.",
 	"searchvue-links-subheading": "In $1",
+	"searchvue-links-heading": "Paginas associate in altere projectos",
+	"searchvue-links-showmore": "vider altere paginas",
 	"tutorial-popup-title": "Previsualisationes de resultatos de recerca",
 	"tutorial-popup-text1": "Clicca sur le extracto de articulo pro previsualisar le resultato de recerca e vider le contento associate.",
 	"tutorial-popup-text2": "Tu pote activar e disactivar le previsualisationes in le recerca",

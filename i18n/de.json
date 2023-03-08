@@ -26,6 +26,8 @@
 	"searchvue-more-sections": "+ $1 {{PLURAL:$1|weiterer Abschnitt|weitere Abschnitte}}",
 	"searchvue-help": "Vorschau des Inhalts der Seite und zugehöriger Inhalte.",
 	"searchvue-links-subheading": "In $1",
+	"searchvue-links-heading": "Verwandte Seiten in anderen Projekten",
+	"searchvue-links-showmore": "andere Seiten ansehen",
 	"tutorial-popup-title": "Vorschau der Suchergebnisse",
 	"tutorial-popup-text1": "Klicke auf das Artikel-Snippet, um eine Vorschau des Suchergebnisses zu erhalten und verwandte Inhalte anzuzeigen.",
 	"tutorial-popup-text2": "Du kannst Vorschauen in der Suche ein- und ausschalten",
