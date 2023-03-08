@@ -153,7 +153,7 @@ const expandSnippet = ( snippet, fullContent ) => {
 	return expandedSnippet;
 };
 
-const setExpandedSnippet = ( page, context, currentResult ) => {
+const generateExpandedSnippet = ( page, context, currentResult ) => {
 	const cirrusField = getFieldFromSnippetField( currentResult.snippetField );
 
 	if ( !page ||
@@ -162,15 +162,17 @@ const setExpandedSnippet = ( page, context, currentResult ) => {
 		!page.cirrusdoc[ 0 ].source ||
 		!page.cirrusdoc[ 0 ].source[ cirrusField ]
 	) {
-		context.commit( 'SET_EXPANDED_SNIPPET' );
-		return;
+		return {
+			expandedSnippet: null
+		};
 	}
 
 	const snippet = stripHighlightsFromSnippet( currentResult.text );
 	if ( snippet.length === 0 ) {
 		// No snippet = nothing to expand
-		context.commit( 'SET_EXPANDED_SNIPPET' );
-		return;
+		return {
+			expandedSnippet: null
+		};
 	}
 
 	const cirrusFieldValue = page.cirrusdoc[ 0 ].source[ cirrusField ];
@@ -195,11 +197,13 @@ const setExpandedSnippet = ( page, context, currentResult ) => {
 	) {
 		// If the snippet matches the field's contents exactly, or if it can't be located in the
 		// field, there's nothing to expand
-		context.commit( 'SET_EXPANDED_SNIPPET' );
-		return;
+		return {
+			expandedSnippet: null
+		};
 	}
 
 	let expandedSnippet = expandSnippet( snippet, cirrusFieldContent );
+	const isBeginningOfText = cirrusFieldContent.startsWith( expandedSnippet );
 
 	// We add back the styling that is required to bold the highlighted text
 	const highlights = extractHighlightsFromSnippet( currentResult.text );
@@ -211,7 +215,10 @@ const setExpandedSnippet = ( page, context, currentResult ) => {
 		);
 	} );
 
-	context.commit( 'SET_EXPANDED_SNIPPET', expandedSnippet );
+	return {
+		expandedSnippet: expandedSnippet,
+		isBeginningOfText: isBeginningOfText && cirrusField === 'text'
+	};
 };
 
 /**
@@ -240,12 +247,29 @@ const setThumbnail = ( thumbnail, alt, context ) => {
  *
  * @param {Object} page
  * @param {Object} context
+ * @param {boolean} snippetIsBeginningOfText
  */
-const setDescription = ( page, context ) => {
-	if ( page.pageprops && page.pageprops[ 'wikibase-shortdesc' ] ) {
+const setDescription = ( page, context, snippetIsBeginningOfText ) => {
+	if (
+		page.pageprops &&
+		page.pageprops[ 'wikibase-shortdesc' ]
+	) {
 		context.commit( 'SET_DESCRIPTION', page.pageprops[ 'wikibase-shortdesc' ] );
-	} else if ( page.terms && page.terms.description && page.terms.description[ 0 ] ) {
+	} else if (
+		page.terms &&
+		page.terms.description &&
+		page.terms.description[ 0 ]
+	) {
 		context.commit( 'SET_DESCRIPTION', page.terms.description[ 0 ] );
+
+	// In the absence of wikidata description, we show the beginning of the text
+	// as long as it is not also the snippets
+	} else if (
+		!snippetIsBeginningOfText &&
+		page.extract &&
+		page.extract[ '*' ]
+	) {
+		context.commit( 'SET_DESCRIPTION', page.extract[ '*' ] );
 	} else {
 		context.commit( 'SET_DESCRIPTION' );
 	}
@@ -428,9 +452,10 @@ const retrieveInfoFromQuery = ( context, title, selectedIndex ) => {
 			}
 			setThumbnail( thumbnail, result.pageimage || '', context );
 			setMediaInfo( result, context );
-			setDescription( result, context );
 			setArticleSections( result, context );
-			setExpandedSnippet( result, context, currentSelectedResult );
+			const snippetObject = generateExpandedSnippet( result, context, currentSelectedResult );
+			context.commit( 'SET_EXPANDED_SNIPPET', snippetObject.expandedSnippet );
+			setDescription( result, context, snippetObject.isBeginningOfText );
 
 			context.commit( 'SET_REQUEST_STATUS', {
 				type: 'query',

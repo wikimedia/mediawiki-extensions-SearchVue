@@ -36,12 +36,14 @@ class GetSearchVueResultInfo extends SimpleHandler {
 			'action' => 'query',
 			'format' => 'json',
 			'titles' => $this->pageTitle,
-			'prop' => 'pageimages|pageprops|pageterms|cirrusdoc',
+			'prop' => 'pageimages|pageprops|pageterms|cirrusdoc|extracts',
 			'pithumbsize' => 400,
 			'pilicense' => 'free',
 			'piprop' => 'thumbnail|name|original',
 			'wbptterms' => 'description',
-			'cdincludes' => "heading|{$this->snippetField}"
+			'cdincludes' => "heading|{$this->snippetField}",
+			'exsentences' => 1,
+			'explaintext' => true
 		] );
 		$api = new ApiMain( $payload );
 		$context = new DerivativeContext( RequestContext::getMain() );

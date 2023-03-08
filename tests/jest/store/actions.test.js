@@ -180,7 +180,7 @@ describe( 'Actions', () => {
 						actions.handleTitleChange( context, { newTitle: title, element: fakeElement } );
 
 						expect( actions.commit ).toHaveBeenCalled();
-						expect( actions.commit ).toHaveBeenCalledWith( 'SET_EXPANDED_SNIPPET' );
+						expect( actions.commit ).toHaveBeenCalledWith( 'SET_EXPANDED_SNIPPET', null );
 					} );
 					it( 'when the snippet cannot be found', () => {
 						context.state.results[ 0 ].text = 'this will not be found';
@@ -189,7 +189,7 @@ describe( 'Actions', () => {
 						actions.handleTitleChange( context, { newTitle: title, element: fakeElement } );
 
 						expect( actions.commit ).toHaveBeenCalled();
-						expect( actions.commit ).toHaveBeenCalledWith( 'SET_EXPANDED_SNIPPET' );
+						expect( actions.commit ).toHaveBeenCalledWith( 'SET_EXPANDED_SNIPPET', null );
 					} );
 				} );
 
