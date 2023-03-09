@@ -2,11 +2,14 @@
 	"@metadata": {
 		"authors": [
 			"Fitoschido",
-			"La Mantis"
+			"La Mantis",
+			"MarcoAurelio"
 		]
 	},
 	"searchvue-close": "Cerrar",
 	"searchvue-next": "Siguiente",
 	"searchvue-commons-footnote": "En Wikimedia Commons",
-	"searchvue-commons-heading-mobile": "Imágenes relacionadas de Wikimedia Commons"
+	"searchvue-commons-heading-mobile": "Imágenes relacionadas de Wikimedia Commons",
+	"tutorial-popup-preferences": "preferencias",
+	"tutorial-popup-close": "Cerrar"
 }

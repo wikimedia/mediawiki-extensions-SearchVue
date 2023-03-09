@@ -26,6 +26,8 @@
 	"searchvue-more-sections": "+ $1 więcej {{PLURAL:$1|sekcja|sekcje|sekcji}}",
 	"searchvue-help": "Wyświetl podgląd zawartości strony i powiązanych treści.",
 	"searchvue-links-subheading": "W $1",
+	"searchvue-links-heading": "Powiązane strony w innych projektach",
+	"searchvue-links-showmore": "zobacz inne strony",
 	"tutorial-popup-title": "Podgląd wyników wyszukiwania",
 	"tutorial-popup-text1": "Kliknij fragment artykułu, aby wyświetlić podgląd wyników i zobaczyć powiązane treści.",
 	"tutorial-popup-text2": "Możesz włączać i wyłączać podgląd podczas wyszukiwania",
