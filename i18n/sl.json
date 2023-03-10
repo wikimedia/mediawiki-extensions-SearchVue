@@ -26,6 +26,8 @@
 	"searchvue-more-sections": "+ $1 {{PLURAL:$1|razdelek|razdelka|razdelki|razdelkov}}",
 	"searchvue-help": "Predogled vsebine strani in povezanih vsebin.",
 	"searchvue-links-subheading": "V $1",
+	"searchvue-links-heading": "Sorodne strani v drugih projektih",
+	"searchvue-links-showmore": "ogled drugih strani",
 	"tutorial-popup-title": "Predogled iskalnih zadetkov",
 	"tutorial-popup-text1": "Kliknite delček članka za predogled iskalnih zadetkov in prikaz povezane vsebine.",
 	"tutorial-popup-text2": "V iskanju lahko vklopite in izklopite predogled",
