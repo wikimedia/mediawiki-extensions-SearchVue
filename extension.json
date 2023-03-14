@@ -12,7 +12,7 @@
 	"descriptionmsg": "searchvue-desc",
 	"license-name": "GPL-2.0-or-later",
 	"requires": {
-		"MediaWiki": ">= 1.38.0",
+		"MediaWiki": ">= 1.40.0",
 		"extensions": {
 			"WikimediaMessages": "*"
 		}
@@ -30,8 +30,9 @@
 		"SpecialSearchResults": "main",
 		"SpecialSearchResultsAppend": "main",
 		"ShowSearchHitTitle": "main",
-		"GetPreferences": [ "SearchVue\\Hooks::onGetPreferences" ]
-
+		"GetPreferences": [
+			"SearchVue\\Hooks::onGetPreferences"
+		]
 	},
 	"MessagesDirs": {
 		"SearchVue": [
