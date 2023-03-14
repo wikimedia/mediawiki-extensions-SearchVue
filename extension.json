@@ -12,7 +12,7 @@
 	"descriptionmsg": "searchvue-desc",
 	"license-name": "GPL-2.0-or-later",
 	"requires": {
-		"MediaWiki": ">= 1.38.0"
+		"MediaWiki": ">= 1.39.0"
 	},
 	"AutoloadNamespaces": {
 		"SearchVue\\": "src/"
@@ -26,7 +26,6 @@
 		"SpecialPageBeforeExecute": "main",
 		"SpecialSearchResults": "main",
 		"SpecialSearchResultsAppend": "main"
-
 	},
 	"MessagesDirs": {
 		"SearchVue": [
