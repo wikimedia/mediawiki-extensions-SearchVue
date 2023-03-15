@@ -45,6 +45,7 @@ module.exports = exports = {
 	data: function () {
 		return {
 			pageContainer: document.querySelector( '#bodyContent' ),
+			searchContainer: document.querySelector( '.searchresults' ),
 			pageScrolled: false
 		};
 	},
@@ -70,9 +71,10 @@ module.exports = exports = {
 				// extend downward until either bottom of the search results,
 				// or bottom of the screen; whichever is smaller
 				const scrollBottom = this.scrollY + window.innerHeight;
-				const pageContainerBottom = this.pageContainer.offsetTop +
-					this.pageContainer.clientHeight;
-				return Math.max( 12, scrollBottom - pageContainerBottom );
+				const searchContainerBottom = window.scrollY +
+					this.searchContainer.getBoundingClientRect().bottom;
+
+				return Math.max( 12, scrollBottom - searchContainerBottom );
 			},
 			dynamicRightMargin() {
 				let rightMargin = 0;
