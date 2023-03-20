@@ -195,6 +195,12 @@ module.exports = exports = {
 					return item.prefixedText === prefixedText;
 				} );
 				return result && ( result.text || result.thumbnail );
+			},
+			multimediaViewerIsOpen() {
+				if ( mw.mmv && mw.mmv.viewer && !mw.mmv.viewer.isOpen ) {
+					return false;
+				}
+				return true;
 			}
 		}
 	),
@@ -257,8 +263,11 @@ module.exports = exports = {
 		}.bind( this ) );
 
 		// eslint-disable-next-line no-jquery/no-global-selector
-		$( 'body' ).click( function () {
-			if ( !this.isMobile ) {
+		$( 'body' ).click( function ( event ) {
+			// We make sure the click is not happening within the multimedia viewer
+			// We cannot use  multimediaViewerIsOpen as it return false in this instance.
+			const isInMultimediaViewer = event.target.closest( '.mw-mmv-wrapper' );
+			if ( !this.isMobile && !isInMultimediaViewer ) {
 				this.closeQuickView();
 			}
 		}.bind( this ) );
@@ -270,13 +279,14 @@ module.exports = exports = {
 		this.restoreQuickViewOnNavigation();
 
 		window.addEventListener( 'keydown', function ( event ) {
-			if ( event.key === 'Escape' ) {
-				this.closeAndFocus( event );
+			if ( !this.multimediaViewerIsOpen() ) {
+				if ( event.key === 'Escape' ) {
+					this.closeAndFocus( event );
+				}
+				if ( event.key === 'Tab' ) {
+					this.handleTabTrap( event );
+				}
 			}
-			if ( event.key === 'Tab' ) {
-				this.handleTabTrap( event );
-			}
-
 		}.bind( this ) );
 	}
 };

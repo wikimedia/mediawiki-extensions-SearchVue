@@ -19,9 +19,12 @@
 					v-for="image in images"
 					:key="image.index"
 				>
+					<!-- The class "image" is required for the multimedia viewer -->
 					<a
 						:href="image.imageinfo[ 0 ].descriptionurl"
-						@click.prevent="onCommonsClick( image.imageinfo[ 0 ].descriptionurl )">
+						class="image"
+						@click.prevent="onCommonsClick"
+					>
 						<image-with-loading-background
 							:src="image.imageinfo[ 0 ].thumburl"
 							:alt="image.title"
@@ -132,11 +135,10 @@ module.exports = exports = {
 		onImgLoad() {
 			this.numberOfImagesLoaded++;
 		},
-		onCommonsClick( url ) {
+		onCommonsClick() {
 			this.$emit( 'log-event',
 				{
-					action: 'click-interwiki-commons',
-					goTo: url
+					action: 'click-interwiki-commons'
 				} );
 		},
 		calculateAspectRatio( image ) {
@@ -157,6 +159,12 @@ module.exports = exports = {
 								if ( !this.isMobile ) {
 									this.setHasHiddenImages( this.$refs[ 'images-container' ] );
 								}
+
+								// trigger the content hook, used by the multimedia viewer
+								// eslint-disable-next-line no-jquery/no-global-selector
+								const contentTextElement = $( '#mw-content-text' );
+								mw.hook( 'wikipage.content' ).fire( contentTextElement );
+
 							}
 						);
 				}
