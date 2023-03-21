@@ -1,6 +1,9 @@
 'use strict';
 
 const restApi = new mw.Rest();
+
+const HIGHLIGHTS_REGEX = /<span class="searchmatch">(.+?)<\/span>/g;
+
 /**
  * Push the current provided title to the browser's session history stack
  *
@@ -21,6 +24,7 @@ const pushTitleToHistoryState = ( title ) => {
 	const queryString = '?' + mwUri.getQueryString();
 	window.history.pushState( mwUri.query, null, queryString );
 };
+
 /**
  * Remove the value of QuickView from the history State.
  */
@@ -51,6 +55,163 @@ const setArticleSections = ( page, context ) => {
 
 	context.commit( 'SET_SECTIONS', sections );
 
+};
+
+/**
+ * Returns the canonical name of the cirrus field where the snippet text is sourced from.
+ *
+ * @param {string} snippetField
+ * @return {string}
+ */
+const getFieldFromSnippetField = ( snippetField ) => {
+	// Cirrus Field can have mapping like .plain, .source that need removing
+	return snippetField ? snippetField.split( '.' )[ 0 ] : 'text';
+};
+
+/**
+ * Remove unwanted HTML from the text snippet returned by the search
+ *
+ * @param {string} snippet
+ * @return {string}
+ */
+const stripHighlightsFromSnippet = ( snippet ) => {
+	return snippet.replace( HIGHLIGHTS_REGEX, '$1' );
+};
+
+/**
+ * Extract highlighted words from a snippet
+ *
+ * @param {string} snippet
+ * @return {Array}
+ */
+const extractHighlightsFromSnippet = ( snippet ) => {
+	const highlights = [];
+	let match;
+	while ( ( match = HIGHLIGHTS_REGEX.exec( snippet ) ) !== null ) {
+		const highlight = match[ 1 ].toLowerCase();
+		if ( highlights.indexOf( highlight ) < 0 ) {
+			highlights.push( highlight );
+		}
+	}
+
+	return highlights;
+};
+
+/**
+ * Given an input snippet text and a source text where the snippet is sourced from,
+ * this will expand the snippet in both directions.
+ *
+ * @param {string} snippet
+ * @param {string} fullContent
+ * @return {string}
+ */
+const expandSnippet = ( snippet, fullContent ) => {
+	const SNIPPETS_EXTRA_CHARACTERS = 100;
+
+	const startSnippetsIndex = fullContent.indexOf( snippet );
+
+	// We calculate the expanding snippet by calculating the expected index value
+	// Note: on top of SNIPPETS_EXTRA_CHARACTERS, we're fetching 1 additional character on both
+	// sides to help us figure out whether the first/last characters are word boundaries
+	const expandedSnippetStartIndex = Math.max( 0, startSnippetsIndex - SNIPPETS_EXTRA_CHARACTERS - 1 );
+	const expandedSnippetEndIndex = startSnippetsIndex + snippet.length + SNIPPETS_EXTRA_CHARACTERS + 1;
+	let expandedSnippet = fullContent.substring(
+		expandedSnippetStartIndex,
+		expandedSnippetEndIndex
+	);
+
+	// Try to optimize word boundaries by snipping out the first & last words (which are expected to
+	// be partial), while making sure not to touch any of the original snippet.
+	// We over-fetched by 1 character on either side; if that first/last is a word character, the
+	// entire word should be trimmed (since it continues beyond the boundaries we've set); if,
+	// however, there's a word break between the first/last and the next/previous character, then
+	// that word can be kept (something we wouldn't otherwise have been able to determine without
+	// over-fetching)
+	const startExpansionLength = expandedSnippet.indexOf( snippet );
+	const endExpansionLength = expandedSnippet.length - snippet.length - startExpansionLength;
+	if ( startExpansionLength > SNIPPETS_EXTRA_CHARACTERS ) {
+		const regexOptimizeStart = new RegExp( '^.{1,' + startExpansionLength + '}?\\s*\\b' );
+		expandedSnippet = expandedSnippet.replace( regexOptimizeStart, '' );
+	}
+	if ( endExpansionLength > SNIPPETS_EXTRA_CHARACTERS ) {
+		const regexOptimizeEnd = new RegExp( '(.*)\\b.{1,' + endExpansionLength + '}$' );
+		expandedSnippet = expandedSnippet.replace( regexOptimizeEnd, '$1' );
+	}
+	expandedSnippet = expandedSnippet.trim();
+
+	// Figure out whether we need to add an ellipsis at the start/end to indicate that there
+	// is more known content available
+	const needsPrefixEllipsis = !fullContent.startsWith( expandedSnippet );
+	const needsSuffixEllipsis = !fullContent.endsWith( expandedSnippet );
+	if ( needsPrefixEllipsis ) {
+		expandedSnippet = mw.msg( 'ellipsis' ) + expandedSnippet;
+	}
+	if ( needsSuffixEllipsis ) {
+		expandedSnippet += mw.msg( 'ellipsis' );
+	}
+
+	return expandedSnippet;
+};
+
+const setExpandedSnippet = ( page, context, currentResult ) => {
+	const cirrusField = getFieldFromSnippetField( currentResult.snippetField );
+
+	if ( !page ||
+		!page.cirrusdoc ||
+		page.cirrusdoc.length === 0 ||
+		!page.cirrusdoc[ 0 ].source ||
+		!page.cirrusdoc[ 0 ].source[ cirrusField ]
+	) {
+		context.commit( 'SET_EXPANDED_SNIPPET' );
+		return;
+	}
+
+	const snippet = stripHighlightsFromSnippet( currentResult.text );
+	if ( snippet.length === 0 ) {
+		// No snippet = nothing to expand
+		context.commit( 'SET_EXPANDED_SNIPPET' );
+		return;
+	}
+
+	const cirrusFieldValue = page.cirrusdoc[ 0 ].source[ cirrusField ];
+	let cirrusFieldContent;
+
+	// Some fields like auxiliary_text can be arrays, so we need to extract its value
+	if ( Array.isArray( cirrusFieldValue ) && cirrusField.length > 0 ) {
+		for ( let index = 0; index < cirrusFieldValue.length; index++ ) {
+			const element = cirrusFieldValue[ index ];
+			if ( cirrusFieldValue.indexOf( snippet ) !== -1 ) {
+				cirrusFieldContent = element;
+				break;
+			}
+		}
+	} else {
+		cirrusFieldContent = cirrusFieldValue;
+	}
+
+	if (
+		snippet.length === cirrusFieldContent.length ||
+		cirrusFieldContent.indexOf( snippet ) === -1
+	) {
+		// If the snippet matches the field's contents exactly, or if it can't be located in the
+		// field, there's nothing to expand
+		context.commit( 'SET_EXPANDED_SNIPPET' );
+		return;
+	}
+
+	let expandedSnippet = expandSnippet( snippet, cirrusFieldContent );
+
+	// We add back the styling that is required to bold the highlighted text
+	const highlights = extractHighlightsFromSnippet( currentResult.text );
+	highlights.forEach( ( highlight ) => {
+		const regexFormatHighlight = new RegExp( `\\b(${highlight})\\b`, 'gi' );
+		expandedSnippet = expandedSnippet.replace(
+			regexFormatHighlight,
+			'<span class="searchmatch">$1</span>'
+		);
+	} );
+
+	context.commit( 'SET_EXPANDED_SNIPPET', expandedSnippet );
 };
 
 /**
@@ -233,17 +394,24 @@ const setMediaInfo = ( page, context ) => {
  *
  * @param {Object} context
  * @param {string} title
+ * @param {number} selectedIndex
  */
-const retrieveInfoFromQuery = ( context, title ) => {
+const retrieveInfoFromQuery = ( context, title, selectedIndex ) => {
 
 	context.commit( 'SET_REQUEST_STATUS', {
 		type: 'query',
 		status: context.state.requestStatuses.inProgress
 	} );
 
-	const encodedTitle = mw.internalWikiUrlencode( title );
+	// We need to do fetch the current result manually
+	// because the selected result index has not been changed yet.
+	const currentSelectedResult = context.state.results[ selectedIndex ];
+	const encodedTitle = encodeURIComponent( title );
+	const encodedSnippetField = encodeURIComponent( currentSelectedResult.snippetField );
 	restApi
-		.get( '/searchvue/v0/page/' + encodedTitle )
+		.get(
+			'/searchvue/v0/page/' + encodedTitle + '/' + encodedSnippetField
+		)
 		.done( ( result ) => {
 			if ( !result ) {
 
@@ -262,6 +430,7 @@ const retrieveInfoFromQuery = ( context, title ) => {
 			setMediaInfo( result, context );
 			setDescription( result, context );
 			setArticleSections( result, context );
+			setExpandedSnippet( result, context, currentSelectedResult );
 
 			context.commit( 'SET_REQUEST_STATUS', {
 				type: 'query',
@@ -274,6 +443,7 @@ const retrieveInfoFromQuery = ( context, title ) => {
 			context.commit( 'SET_DESCRIPTION' );
 			context.commit( 'SET_SECTIONS' );
 			context.commit( 'SET_LINKS' );
+			context.commit( 'SET_EXPANDED_SNIPPET' );
 
 			context.commit( 'SET_REQUEST_STATUS', {
 				type: 'query',
@@ -368,7 +538,7 @@ module.exports = {
 				thumbnail = context.state.results[ selectedTitleIndex ].thumbnail;
 			}
 			setThumbnail( thumbnail, '', context );
-			retrieveInfoFromQuery( context, newTitle );
+			retrieveInfoFromQuery( context, newTitle, selectedTitleIndex );
 			context.commit( 'SET_TITLE', newTitle );
 			context.commit( 'SET_COMPONENT_READY', true );
 			pushTitleToHistoryState( newTitle );
@@ -399,6 +569,7 @@ module.exports = {
 		context.commit( 'SET_COMPONENT_READY' );
 		removeQuickViewFromHistoryState();
 		context.commit( 'RESET_REQUEST_STATUS' );
+		context.commit( 'SET_EXPANDED_SNIPPET' );
 		restApi.abort();
 		handleClassesToggle( false );
 	},

@@ -161,6 +161,8 @@ module.exports = exports = {
 
 				if ( !this.currentResult.text ) {
 					return '';
+				} else if ( this.currentResult.expandedSnippet ) {
+					return this.currentResult.expandedSnippet;
 				} else {
 					return this.currentResult.text + this.$i18n( 'ellipsis' ).text();
 				}

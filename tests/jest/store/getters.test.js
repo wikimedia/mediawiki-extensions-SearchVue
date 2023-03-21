@@ -49,6 +49,9 @@ describe( 'Getters', () => {
 					hasMoreImages: true,
 					searchLink: 'dummyLink'
 				};
+				dummyState.description = 'DummyDescriptio ';
+				dummyState.links = [ 'dummyLink' ];
+				dummyState.expandedSnippet = 'dummyExpandedSnippet';
 			} );
 			it( 'includes the selected results', () => {
 				const result = getters.currentResult( dummyState );
@@ -76,6 +79,27 @@ describe( 'Getters', () => {
 
 				expect( result ).toEqual(
 					expect.objectContaining( { media: dummyState.media } )
+				);
+			} );
+			it( 'includes description from state', () => {
+				const result = getters.currentResult( dummyState );
+
+				expect( result ).toEqual(
+					expect.objectContaining( { description: dummyState.description } )
+				);
+			} );
+			it( 'includes links array from state', () => {
+				const result = getters.currentResult( dummyState );
+
+				expect( result ).toEqual(
+					expect.objectContaining( { links: dummyState.links } )
+				);
+			} );
+			it( 'includes expandedSnippet from state', () => {
+				const result = getters.currentResult( dummyState );
+
+				expect( result ).toEqual(
+					expect.objectContaining( { expandedSnippet: dummyState.expandedSnippet } )
 				);
 			} );
 		} );

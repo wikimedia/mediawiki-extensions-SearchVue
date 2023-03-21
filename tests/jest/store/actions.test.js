@@ -6,6 +6,15 @@ const initialState = require( '../../../resources/store/state.js' ),
 
 require( '../mocks/history.js' );
 
+/**
+ * Quick little helper function to escape contents for use in regular expressions;
+ * some characters (e.g. `.`, `?`, ...) otherwise have a special meaning in regular expressions.
+ *
+ * @param {string} text
+ * @return {string}
+ */
+const escapeForRegex = ( text ) => text.replace( /[.*+?^${}()|[\]\\]/g, '\\$&' );
+
 let context;
 let actions;
 
@@ -60,7 +69,7 @@ describe( 'Actions', () => {
 			} );
 		} );
 		describe( 'when title provided is the same as state.title', () => {
-			it( 'Dispacth a call to closeQuickView', () => {
+			it( 'Dispatch a call to closeQuickView', () => {
 				const title = 'dummy';
 				context.state.title = title;
 				actions.handleTitleChange( context, { newTitle: title } );
@@ -71,6 +80,43 @@ describe( 'Actions', () => {
 			} );
 		} );
 		describe( 'when called with a valid title', () => {
+			describe( 'when triggering an API endpoint to /search/v0/page', () => {
+				beforeEach( () => {
+					// We override the result defined on the root beforeEach
+					context.state.results[ 0 ].text = 'dummySnippet';
+					context.state.results[ 0 ].snippetField = 'text';
+				} );
+				it( 'pass a title to the API', () => {
+					const title = 'dummy1';
+					actions.handleTitleChange( context, { newTitle: title, element: fakeElement } );
+
+					expect( global.mw.Rest.prototype.get ).toHaveBeenCalled();
+					expect( global.mw.Rest.prototype.get ).toHaveBeenCalledWith( expect.stringContaining( title ) );
+				} );
+				it( 'pass a snippetField to the API', () => {
+					const title = 'dummy1';
+					actions.handleTitleChange( context, { newTitle: title, element: fakeElement } );
+
+					expect( global.mw.Rest.prototype.get ).toHaveBeenCalled();
+					expect( global.mw.Rest.prototype.get ).toHaveBeenCalledWith( expect.stringContaining( context.state.results[ 0 ].snippetField ) );
+				} );
+
+				// Needs to test edge case where title with a "/" and other special character break the search preview
+				it( 'it encodes API parameters', () => {
+					const titleWithSpecialCharacters = 'title/!@#$%^';
+					const snippetFieldWithSpecialCharacters = 'field/!@#$%^';
+					context.state.results[ 0 ].prefixedText = titleWithSpecialCharacters;
+					context.state.results[ 0 ].snippetField = snippetFieldWithSpecialCharacters;
+
+					actions.handleTitleChange( context, { newTitle: titleWithSpecialCharacters, element: fakeElement } );
+
+					expect( global.mw.Rest.prototype.get ).toHaveBeenCalled();
+					expect( global.mw.Rest.prototype.get ).toHaveBeenCalledWith(
+						expect.stringContaining( encodeURIComponent( titleWithSpecialCharacters ) ) );
+					expect( global.mw.Rest.prototype.get ).toHaveBeenCalledWith(
+						expect.stringContaining( encodeURIComponent( snippetFieldWithSpecialCharacters ) ) );
+				} );
+			} );
 			it( 'retrieves article sections', () => {
 				const mockSections = [ 'section1' ];
 				const dummyResponse = {
@@ -87,6 +133,187 @@ describe( 'Actions', () => {
 				expect( actions.commit ).toHaveBeenCalled();
 				expect( actions.commit ).toHaveBeenCalledWith( 'SET_SECTIONS', mockSections );
 
+			} );
+			it( 'it set the article description', () => {
+				const fakeDescription = 'Q146';
+				const dummyResponse = {
+					pageprops: {
+						'wikibase-shortdesc': fakeDescription
+					}
+				};
+				global.mw.Rest.prototype.get.mockReturnValueOnce( $.Deferred().resolve( dummyResponse ).promise() );
+				const title = 'dummy1';
+				actions.handleTitleChange( context, { newTitle: title, element: fakeElement } );
+
+				expect( actions.commit ).toHaveBeenCalled();
+				expect( actions.commit ).toHaveBeenCalledWith( 'SET_DESCRIPTION', fakeDescription );
+
+			} );
+
+			describe( 'when customSnippet is available in cirrusdoc', () => {
+				const dummyCirrusDocFieldContent = 'a23456789 b23456789 c23456789 d23456789 e23456789 ' +
+					'f23456789 g23456789 h23456789 i23456789 j23456789 k23456789 l23456789 m23456789 ' +
+					'n23456789 o23456789 p23456789 q23456789 r23456789 s23456789 t23456789 u23456789 ' +
+					'v23456789 w23456789 x23456789 y23456789 z23456789';
+				const dummyResponse = {
+					cirrusdoc: [ {
+						source: {
+							text: dummyCirrusDocFieldContent
+						}
+					} ]
+				};
+				beforeEach( () => {
+					global.mw.Rest.prototype.get.mockReturnValueOnce( $.Deferred().resolve( dummyResponse ).promise() );
+
+					context.state.results[ 0 ].text = 'a customSnippet';
+					context.state.results[ 0 ].snippetField = 'text';
+					when( global.mw.msg )
+						.calledWith( 'ellipsis' )
+						.mockReturnValueOnce( '...' );
+				} );
+
+				describe( 'it does not set expanded snippets', () => {
+					it( 'when snippet is empty', () => {
+						context.state.results[ 0 ].text = '';
+
+						const title = 'dummy1';
+						actions.handleTitleChange( context, { newTitle: title, element: fakeElement } );
+
+						expect( actions.commit ).toHaveBeenCalled();
+						expect( actions.commit ).toHaveBeenCalledWith( 'SET_EXPANDED_SNIPPET' );
+					} );
+					it( 'when the snippet cannot be found', () => {
+						context.state.results[ 0 ].text = 'this will not be found';
+
+						const title = 'dummy1';
+						actions.handleTitleChange( context, { newTitle: title, element: fakeElement } );
+
+						expect( actions.commit ).toHaveBeenCalled();
+						expect( actions.commit ).toHaveBeenCalledWith( 'SET_EXPANDED_SNIPPET' );
+					} );
+				} );
+
+				describe( 'it sets expanded snippets', () => {
+					describe( 'snippet at the start of source text', () => {
+						it( 'not expanded to the front if there is no additional content that way', () => {
+							context.state.results[ 0 ].text = 'a23456789 b2345';
+
+							const title = 'dummy1';
+							actions.handleTitleChange( context, { newTitle: title, element: fakeElement } );
+
+							expect( actions.commit ).toHaveBeenCalled();
+							const expectRegex = new RegExp( '^' + escapeForRegex( context.state.results[ 0 ].text ) );
+							expect( actions.commit ).toHaveBeenCalledWith( 'SET_EXPANDED_SNIPPET', expect.stringMatching( expectRegex ) );
+						} );
+
+						it( 'expanded to the back, with ellipsis, respecting word boundaries', () => {
+							context.state.results[ 0 ].text = 'a23456789 b2345';
+
+							const title = 'dummy1';
+							actions.handleTitleChange( context, { newTitle: title, element: fakeElement } );
+
+							expect( actions.commit ).toHaveBeenCalled();
+							const expectRegex = new RegExp( escapeForRegex( context.state.results[ 0 ].text ) + '.*([a-z]23456789)\\.\\.\\.$' );
+							expect( actions.commit ).toHaveBeenCalledWith( 'SET_EXPANDED_SNIPPET', expect.stringMatching( expectRegex ) );
+						} );
+					} );
+
+					describe( 'snippet early in source text (can expand all the way to start)', () => {
+						it( 'expanded to the front, without ellipsis, respecting word boundaries', () => {
+							context.state.results[ 0 ].text = '56789 d2345';
+
+							const title = 'dummy1';
+							actions.handleTitleChange( context, { newTitle: title, element: fakeElement } );
+
+							expect( actions.commit ).toHaveBeenCalled();
+							const expectRegex = new RegExp( '^([a-z]23456789).*' + escapeForRegex( context.state.results[ 0 ].text ) );
+							expect( actions.commit ).toHaveBeenCalledWith( 'SET_EXPANDED_SNIPPET', expect.stringMatching( expectRegex ) );
+						} );
+
+						it( 'expanded to the back, with ellipsis, respecting word boundaries', () => {
+							context.state.results[ 0 ].text = '56789 d2345';
+
+							const title = 'dummy1';
+							actions.handleTitleChange( context, { newTitle: title, element: fakeElement } );
+
+							expect( actions.commit ).toHaveBeenCalled();
+							const expectRegex = new RegExp( escapeForRegex( context.state.results[ 0 ].text ) + '.*([a-z]23456789)\\.\\.\\.$' );
+							expect( actions.commit ).toHaveBeenCalledWith( 'SET_EXPANDED_SNIPPET', expect.stringMatching( expectRegex ) );
+						} );
+					} );
+
+					describe( 'snippet in the middle of source text (can expand in both directions without reaching start/end)', () => {
+						it( 'expanded to the front, with ellipsis, respecting word boundaries', () => {
+							context.state.results[ 0 ].text = '56789 n2345';
+
+							const title = 'dummy1';
+							actions.handleTitleChange( context, { newTitle: title, element: fakeElement } );
+
+							expect( actions.commit ).toHaveBeenCalled();
+							const expectRegex = new RegExp( '^\\.\\.\\.([a-z]23456789).*' + escapeForRegex( context.state.results[ 0 ].text ) );
+							expect( actions.commit ).toHaveBeenCalledWith( 'SET_EXPANDED_SNIPPET', expect.stringMatching( expectRegex ) );
+						} );
+
+						it( 'expanded to the back, with ellipsis, respecting word boundaries', () => {
+							context.state.results[ 0 ].text = '56789 n2345';
+
+							const title = 'dummy1';
+							actions.handleTitleChange( context, { newTitle: title, element: fakeElement } );
+
+							expect( actions.commit ).toHaveBeenCalled();
+							const expectRegex = new RegExp( escapeForRegex( context.state.results[ 0 ].text ) + '.*([a-z]23456789)\\.\\.\\.$' );
+							expect( actions.commit ).toHaveBeenCalledWith( 'SET_EXPANDED_SNIPPET', expect.stringMatching( expectRegex ) );
+						} );
+					} );
+
+					describe( 'snippet late in source text (can expand all the way to end)', () => {
+						it( 'expanded to the front, with ellipsis, respecting word boundaries', () => {
+							context.state.results[ 0 ].text = '56789 x2345';
+
+							const title = 'dummy1';
+							actions.handleTitleChange( context, { newTitle: title, element: fakeElement } );
+
+							expect( actions.commit ).toHaveBeenCalled();
+							const expectRegex = new RegExp( '^\\.\\.\\.([a-z]23456789).*' + escapeForRegex( context.state.results[ 0 ].text ) );
+							expect( actions.commit ).toHaveBeenCalledWith( 'SET_EXPANDED_SNIPPET', expect.stringMatching( expectRegex ) );
+						} );
+
+						it( 'expanded to the back, without ellipsis, respecting word boundaries', () => {
+							context.state.results[ 0 ].text = '56789 x2345';
+
+							const title = 'dummy1';
+							actions.handleTitleChange( context, { newTitle: title, element: fakeElement } );
+
+							expect( actions.commit ).toHaveBeenCalled();
+							const expectRegex = new RegExp( escapeForRegex( context.state.results[ 0 ].text ) + '.*([a-z]23456789)$' );
+							expect( actions.commit ).toHaveBeenCalledWith( 'SET_EXPANDED_SNIPPET', expect.stringMatching( expectRegex ) );
+						} );
+					} );
+
+					describe( 'snippet at the end of source text', () => {
+						it( 'expanded to the front, with ellipsis, respecting word boundaries', () => {
+							context.state.results[ 0 ].text = '56789 z23456789';
+
+							const title = 'dummy1';
+							actions.handleTitleChange( context, { newTitle: title, element: fakeElement } );
+
+							expect( actions.commit ).toHaveBeenCalled();
+							const expectRegex = new RegExp( '^\\.\\.\\.([a-z]23456789).*' + escapeForRegex( context.state.results[ 0 ].text ) );
+							expect( actions.commit ).toHaveBeenCalledWith( 'SET_EXPANDED_SNIPPET', expect.stringMatching( expectRegex ) );
+						} );
+
+						it( 'not expanded to the back if there is no additional content that way', () => {
+							context.state.results[ 0 ].text = '56789 z23456789';
+
+							const title = 'dummy1';
+							actions.handleTitleChange( context, { newTitle: title, element: fakeElement } );
+
+							expect( actions.commit ).toHaveBeenCalled();
+							const expectRegex = new RegExp( escapeForRegex( context.state.results[ 0 ].text ) + '$' );
+							expect( actions.commit ).toHaveBeenCalledWith( 'SET_EXPANDED_SNIPPET', expect.stringMatching( expectRegex ) );
+						} );
+					} );
+				} );
 			} );
 			it( 'Setup article thumbnail height and width from the info available in the result', () => {
 
@@ -115,26 +342,15 @@ describe( 'Actions', () => {
 			} );
 			describe( 'when a QID is available in API response', () => {
 				const fakeQID = 'Q146';
-				const fakeDescription = 'Q146';
 				const dummyReponseWithQid = {
 					pageprops: {
 						// eslint-disable-next-line camelcase
-						wikibase_item: fakeQID,
-						'wikibase-shortdesc': fakeDescription
+						wikibase_item: fakeQID
 					}
 				};
 				beforeEach( () => {
 					global.mw.Rest.prototype.get.mockReturnValueOnce( $.Deferred().resolve( dummyReponseWithQid ).promise() );
 					global.mw.Rest.prototype.get.mockReturnValue( $.Deferred().resolve( commonsFakeResponse ).promise() );
-				} );
-				it( 'it set the article description', () => {
-
-					const title = 'dummy1';
-					actions.handleTitleChange( context, { newTitle: title, element: fakeElement } );
-
-					expect( actions.commit ).toHaveBeenCalled();
-					expect( actions.commit ).toHaveBeenCalledWith( 'SET_DESCRIPTION', fakeDescription );
-
 				} );
 				it( 'it trigger a rest API request with the QID', () => {
 
@@ -440,6 +656,16 @@ describe( 'Actions', () => {
 
 			expect( actions.commit ).toHaveBeenCalled();
 			expect( actions.commit ).toHaveBeenCalledWith( 'SET_DESCRIPTION' );
+
+		} );
+
+		it( 'Set expandedSnippets to null', () => {
+			const title = 'dummy';
+			context.state.title = title;
+			actions.closeQuickView( context, title );
+
+			expect( actions.commit ).toHaveBeenCalled();
+			expect( actions.commit ).toHaveBeenCalledWith( 'SET_EXPANDED_SNIPPET' );
 
 		} );
 

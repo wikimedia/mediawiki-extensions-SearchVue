@@ -118,6 +118,13 @@ class Hooks implements
 
 				$formattedResult = $result->getTitle();
 				$formattedResult->text = $result->getTextSnippet();
+
+				// TODO: This is just required as a fallback until the following patch is merged:
+				// https://gerrit.wikimedia.org/r/c/mediawiki/extensions/CirrusSearch/+/838165/
+				if ( method_exists( $result, 'getTextSnippetField' ) ) {
+					$formattedResult->snippetField = $result->getTextSnippetField();
+				}
+
 				if ( $thumbnails ) {
 					$thumbnail = reset( $thumbnails );
 					$formattedResult->thumbnail = [
