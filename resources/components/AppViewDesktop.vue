@@ -64,15 +64,23 @@ module.exports = exports = {
 				if ( this.pageScrolled ) {
 					return 12;
 				} else {
-					return this.pageContainer.offsetTop + 50;
+					// Page container could be null while navigating away from the page
+					const pageContainerOffset = this.pageContainer ?
+						this.pageContainer.offsetTop :
+						0;
+					return pageContainerOffset + 50;
 				}
 			},
 			dynamicBottom() {
 				// extend downward until either bottom of the search results,
 				// or bottom of the screen; whichever is smaller
 				const scrollBottom = this.scrollY + window.innerHeight;
-				const searchContainerBottom = window.scrollY +
-					this.searchContainer.getBoundingClientRect().bottom;
+
+				// SearchContainer could be null while navigating away from the page
+				const searchResultBottom = this.searchContainer ?
+					this.searchContainer.getBoundingClientRect().bottom :
+					0;
+				const searchContainerBottom = window.scrollY + searchResultBottom;
 
 				return Math.max( 12, scrollBottom - searchContainerBottom );
 			},
@@ -81,8 +89,12 @@ module.exports = exports = {
 				if ( this.width <= this.breakpoints.small ) {
 					return rightMargin;
 				}
+				// Page container could be null while navigating away from the page
+				const pageConteinerRight = this.pageContainer ?
+					this.pageContainer.getBoundingClientRect().right :
+					0;
 				// we calculate the main container margin
-				rightMargin = this.width - this.pageContainer.getBoundingClientRect().right;
+				rightMargin = this.width - pageConteinerRight;
 
 				if ( this.width >= this.breakpoints.large ) {
 					// We then set margin to be 1 column + container margin
@@ -130,7 +142,7 @@ module.exports = exports = {
 				}
 
 				// we apply a specific class to reduce the position top if the page is scrolled
-				if ( this.pageContainer.offsetTop >= scrollValue ) {
+				if ( this.pageContainer && this.pageContainer.offsetTop >= scrollValue ) {
 					this.pageScrolled = false;
 				} else {
 					this.pageScrolled = true;
