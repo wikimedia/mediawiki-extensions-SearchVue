@@ -407,8 +407,9 @@ const retrieveInfoFromQuery = ( context, title, selectedIndex ) => {
 	// because the selected result index has not been changed yet.
 	const currentSelectedResult = context.state.results[ selectedIndex ];
 	const encodedTitle = encodeURIComponent( title );
-	const encodedSnippetField = currentSelectedResult.snippetField ?
-		encodeURIComponent( currentSelectedResult.snippetField ) : 'text';
+	const snippetField = getFieldFromSnippetField( currentSelectedResult.snippetField );
+	const encodedSnippetField = encodeURIComponent( snippetField );
+
 	restApi
 		.get(
 			'/searchvue/v0/page/' + encodedTitle + '/' + encodedSnippetField
