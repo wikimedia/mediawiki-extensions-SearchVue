@@ -98,7 +98,8 @@ module.exports = exports = {
 	}
 
 	&__mobile {
-		min-width: 174px;
+		width: 174px;
+		flex-shrink: 0;
 
 		p {
 			height: 144px;
