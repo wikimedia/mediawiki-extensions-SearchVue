@@ -92,9 +92,14 @@ module.exports = exports = {
 				return rightMargin;
 			},
 			dynamicWidth() {
-				// We set the quickview to 4 column, but shrink it a little for the arrow to display
-				// by the search result
-				return ( this.columnWidth * 4 ) - 50;
+				let numberOfColumn = 4;
+				if ( this.width <= this.breakpoints.large ) {
+					numberOfColumn = 5;
+				}
+
+				// We remove a few pixels (50) from the QuickView width
+				// this is done to show the arrow from the searchResult
+				return ( this.columnWidth * numberOfColumn ) - 50;
 			},
 			quickViewDynamicStyles() {
 				return {
