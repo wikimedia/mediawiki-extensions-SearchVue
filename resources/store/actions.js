@@ -192,6 +192,7 @@ const generateExpandedSnippet = ( page, context, currentResult ) => {
 	}
 
 	if (
+		!cirrusFieldContent ||
 		snippet.length === cirrusFieldContent.length ||
 		cirrusFieldContent.indexOf( snippet ) === -1
 	) {
