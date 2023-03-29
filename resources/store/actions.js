@@ -182,7 +182,7 @@ const generateExpandedSnippet = ( page, context, currentResult ) => {
 	if ( Array.isArray( cirrusFieldValue ) && cirrusField.length > 0 ) {
 		for ( let index = 0; index < cirrusFieldValue.length; index++ ) {
 			const element = cirrusFieldValue[ index ];
-			if ( cirrusFieldValue.indexOf( snippet ) !== -1 ) {
+			if ( element.indexOf( snippet ) !== -1 ) {
 				cirrusFieldContent = element;
 				break;
 			}
