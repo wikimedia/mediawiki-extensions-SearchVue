@@ -47,25 +47,6 @@ module.exports = {
 		state.thumbnail = thumbnail || null;
 	},
 	/**
-	 * Variable used to inform us that the component is ready to be shown.
-	 * This is used to control the animation timing.
-	 *
-	 * @param {Object} state
-	 * @param {boolean} show
-	 */
-	SET_COMPONENT_READY: ( state, show ) => {
-		state.componentReady = show;
-	},
-	/**
-	 * Set the next title. This value is used when transitioning between different Search Previews on mobile
-	 *
-	 * @param {Object} state
-	 * @param {string} title
-	 */
-	SET_NEXT_TITLE: ( state, title ) => {
-		state.nextTitle = title;
-	},
-	/**
 	 * Set the destination for the app container, used by the teleport
 	 *
 	 * @param {Object} state

@@ -3,48 +3,46 @@
 		v-if="destination"
 		:to="destination">
 		<p
-			v-if="!visible && loading"
-			v-spinner
-			class="mw-app-view-mobile__info-text"
-		>
-			{{ $i18n( 'searchvue-loading' ).text() }}
-		</p>
-		<p
-			v-else-if="( !showOnMobile && visible )"
+			v-if="( !showOnMobile && !loading && visible )"
 			class="mw-app-view-mobile__info-text"
 		>
 			{{ $i18n( 'searchvue-no-content' ).text() }}
 		</p>
-		<Transition
-			@after-leave="() => toggleVisibily( {
-				title: nextTitle,
-				element: currentElement( nextTitle ),
-				force: true
-			} )">
-			<quick-view
-				v-if="visible && showOnMobile"
-				ref="quick-view"
-				class="mw-app-view-mobile"
-			>
-				<template #loading-icon="{ loading }">
-					<div
-						v-if="loading"
-						v-spinner
-						class="mw-app-view-mobile__loading-block"
-					></div>
-				</template>
-			</quick-view>
-		</Transition>
+		<quick-view
+			v-else-if="visible"
+			:transitioning="transitioning"
+			class="mw-app-view-mobile"
+			@close="$emit( 'close', $event )"
+		>
+			<template #loading-icon="{ loading }">
+				<div
+					v-if="loading"
+					v-spinner
+					class="mw-app-view-mobile__loading-block"
+				></div>
+			</template>
+			<template #loading-skeleton="{ show }">
+				<Transition
+					@leave="transitioning = true"
+					@after-leave="transitioning = false"
+				>
+					<content-skeleton
+						v-show="show"
+						:lines="4"
+					></content-skeleton>
+				</Transition>
+			</template>
+		</quick-view>
 	</Teleport>
 </template>
 
 <script>
-const mapGetters = require( 'vuex' ).mapGetters;
-
 const QuickView = require( './sections/QuickView.vue' ),
 	spinner = require( '../directives/spinner.js' ),
+	ContentSkeleton = require( './generic/ContentSkeleton.vue' ),
 	mapActions = require( 'vuex' ).mapActions,
-	mapState = require( 'vuex' ).mapState;
+	mapState = require( 'vuex' ).mapState,
+	mapGetters = require( 'vuex' ).mapGetters;
 
 // @vue/component
 module.exports = exports = {
@@ -53,13 +51,18 @@ module.exports = exports = {
 		spinner
 	},
 	components: {
-		'quick-view': QuickView
+		'quick-view': QuickView,
+		'content-skeleton': ContentSkeleton
+	},
+	data() {
+		return {
+			transitioning: false
+		};
 	},
 	computed: $.extend(
 		{},
 		mapState( [
 			'title',
-			'nextTitle',
 			'destination'
 		] ),
 		mapGetters( [
@@ -132,30 +135,14 @@ module.exports = exports = {
 		margin: 0;
 	}
 }
-
-// Vue transition classes.
-.v-enter-active {
-	transition: height 0.3s ease;
-
-	&.mw-app-view-mobile {
-		visibility: hidden;
-	}
-}
-
+// skeleton animation
+.v-enter-active,
 .v-leave-active {
-	transition: height 0.1s ease;
-
-	&.mw-app-view-mobile {
-		visibility: hidden;
-	}
+	transition: opacity 0.2s ease;
 }
 
 .v-enter-from,
 .v-leave-to {
-	height: 0;
-
-	&.mw-app-view-mobile {
-		visibility: hidden;
-	}
+	opacity: 0;
 }
 </style>

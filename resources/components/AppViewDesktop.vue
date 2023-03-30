@@ -10,12 +10,22 @@
 				:loading="loading"
 			></loading-dots>
 		</template>
+		<template #loading-skeleton="{ show }">
+			<content-skeleton
+				v-show="show"
+				:lines="4"
+			></content-skeleton>
+			<content-skeleton
+				v-show="show"
+			></content-skeleton>
+		</template>
 	</quick-view>
 </template>
 
 <script>
 
 const QuickView = require( './sections/QuickView.vue' ),
+	ContentSkeleton = require( './generic/ContentSkeleton.vue' ),
 	mapActions = require( 'vuex' ).mapActions,
 	mapState = require( 'vuex' ).mapState,
 	mapGetters = require( 'vuex' ).mapGetters,
@@ -29,7 +39,8 @@ module.exports = exports = {
 	name: 'SearchVue',
 	components: {
 		'quick-view': QuickView,
-		'loading-dots': LoadingDots
+		'loading-dots': LoadingDots,
+		'content-skeleton': ContentSkeleton
 	},
 	setup() {
 		const { scrollY } = onDocumentScroll();

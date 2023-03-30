@@ -54,15 +54,7 @@ module.exports = {
 	 * @return {Object}
 	 */
 	visible: ( state ) => {
-		const searchResultSelected = !!state.title;
-
-		if ( !searchResultSelected ) {
-			return false;
-		} else if ( state.isMobile ) {
-			return state.componentReady && state.requestStatus.query === state.requestStatuses.done;
-		} else {
-			return state.componentReady;
-		}
+		return !!state.title;
 	},
 	/**
 	 * Determine if there is enough data to show the search preview.

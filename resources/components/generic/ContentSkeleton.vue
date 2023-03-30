@@ -32,6 +32,8 @@ module.exports = exports = {
 <style lang="less">
 .content-skeleton {
 	margin: 0 20px;
+	flex-shrink: 0;
+	min-width: 174px;
 
 	&__block {
 		margin-bottom: 32px;

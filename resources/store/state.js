@@ -9,7 +9,6 @@ const requestStatuses = {
 
 module.exports = {
 	title: null,
-	nextTitle: null,
 	selectedIndex: -1,
 	prevSelectedIndex: null,
 	isMobile: mw.config.get( 'skin' ) === 'minerva',
@@ -28,7 +27,6 @@ module.exports = {
 		query: requestStatuses.notStarted,
 		media: requestStatuses.notStarted
 	},
-	componentReady: false,
 	destination: '',
 	breakpoints: {
 		medium: 1000,
