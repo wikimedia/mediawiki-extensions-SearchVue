@@ -204,7 +204,8 @@ const generateExpandedSnippet = ( page, context, currentResult ) => {
 	}
 
 	let expandedSnippet = expandSnippet( snippet, cirrusFieldContent );
-	const isBeginningOfText = cirrusFieldContent.startsWith( expandedSnippet );
+	// we remove the ellippsis that are at the end of the expanded snippets before comparing
+	const isBeginningOfText = cirrusFieldContent.startsWith( expandedSnippet.slice( 0, -3 ) );
 
 	// We add back the styling that is required to bold the highlighted text
 	const highlights = extractHighlightsFromSnippet( currentResult.text );
@@ -264,8 +265,9 @@ const setDescription = ( page, context, snippetIsBeginningOfText ) => {
 		context.commit( 'SET_DESCRIPTION', page.terms.description[ 0 ] );
 
 	// In the absence of wikidata description, we show the beginning of the text
-	// as long as it is not also the snippets
+	// as long as it is not also the snippets. This just apply to desktop
 	} else if (
+		!context.state.isMobile &&
 		!snippetIsBeginningOfText &&
 		page.extract &&
 		page.extract[ '*' ]
