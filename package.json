@@ -14,7 +14,7 @@
 		"@vue/test-utils": "2.0.0-rc.18",
 		"@vue/vue3-jest": "27.0.0-alpha.4",
 		"babel-core": "^6.26.3",
-		"eslint-config-wikimedia": "0.20.0",
+		"eslint-config-wikimedia": "0.24.0",
 		"grunt": "1.5.3",
 		"grunt-banana-checker": "0.10.0",
 		"grunt-eslint": "24.0.0",

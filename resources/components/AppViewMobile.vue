@@ -10,7 +10,7 @@
 			{{ $i18n( 'searchvue-loading' ).text() }}
 		</p>
 		<p
-			v-else-if="(!showOnMobile && visible)"
+			v-else-if="( !showOnMobile && visible )"
 			class="mw-app-view-mobile__info-text"
 		>
 			{{ $i18n( 'searchvue-no-content' ).text() }}

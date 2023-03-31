@@ -115,7 +115,7 @@ const expandSnippet = ( snippet, fullContent ) => {
 	// sides to help us figure out whether the first/last characters are word boundaries
 	const expandedSnippetStartIndex = Math.max( 0, startSnippetsIndex - SNIPPETS_EXTRA_CHARACTERS - 1 );
 	const expandedSnippetEndIndex = startSnippetsIndex + snippet.length + SNIPPETS_EXTRA_CHARACTERS + 1;
-	let expandedSnippet = fullContent.substring(
+	let expandedSnippet = fullContent.slice(
 		expandedSnippetStartIndex,
 		expandedSnippetEndIndex
 	);

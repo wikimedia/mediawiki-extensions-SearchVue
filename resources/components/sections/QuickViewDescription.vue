@@ -2,7 +2,7 @@
 	<div
 		class="quickViewDescription"
 		:class="{
-			'quickViewDescription__mobile': isMobile,
+			quickViewDescription__mobile: isMobile,
 			'quickViewDescription--small-font': showSmallFont
 		}"
 	>

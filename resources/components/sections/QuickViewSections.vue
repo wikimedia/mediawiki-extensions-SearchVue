@@ -1,7 +1,8 @@
 <template>
-	<div class="quickViewSections"
+	<div
+		class="quickViewSections"
 		:class="{
-			'quickViewSections__mobile': isMobile
+			quickViewSections__mobile: isMobile
 		}"
 	>
 		<h3>{{ headingText }}</h3>
@@ -11,13 +12,14 @@
 			:class="{ 'quickViewSections__list--expanded': hiddenSectionsLength === 1 }"
 		>
 			<li
-				v-for="(section, i) in sections"
+				v-for="( section, i ) in sections"
 				:key="section"
 				ref="sections"
 				class="quickViewSections__pill"
 				:data-anchor="section"
 			>
-				<a :href="getSectionsUri( section, i )"
+				<a
+					:href="getSectionsUri( section, i )"
 					@click.prevent="onSectionClick( getSectionsUri( section, i ) )"
 				>
 					{{ section }}

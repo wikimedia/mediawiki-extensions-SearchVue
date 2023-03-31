@@ -6,7 +6,7 @@
 			<div class="QuickViewTutorialPopup__article--icon">
 			</div>
 			<div class="QuickViewTutorialPopup__title">
-				<h4>{{ $i18n('tutorial-popup-title').text() }}</h4>
+				<h4>{{ $i18n( 'tutorial-popup-title' ).text() }}</h4>
 			</div>
 			<div
 				class="QuickViewTutorialPopup__close--icon"
@@ -34,16 +34,16 @@
 		<div class="QuickViewTutorialPopup__content">
 			<template v-if="isMobile">
 				<p>
-					{{ $i18n('tutorial-popup-text-mobile').text() }}
+					{{ $i18n( 'tutorial-popup-text-mobile' ).text() }}
 				</p>
 			</template>
 			<template v-else>
 				<p>
-					{{ $i18n('tutorial-popup-text1').text() }}
+					{{ $i18n( 'tutorial-popup-text1' ).text() }}
 				</p>
 				<p>
-					{{ $i18n('tutorial-popup-text2').text() }} <a :href="url" target="_blank">
-						{{ $i18n('tutorial-popup-preferences').text() }}
+					{{ $i18n( 'tutorial-popup-text2' ).text() }} <a :href="url" target="_blank">
+						{{ $i18n( 'tutorial-popup-preferences' ).text() }}
 					</a>.
 				</p>
 			</template>

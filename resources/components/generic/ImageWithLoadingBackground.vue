@@ -2,7 +2,7 @@
 	<div
 		ref="image-container"
 		class="ImageWithLoadingBackground"
-		:class="{ 'ImageWithLoadingBackground__loading': !loaded }"
+		:class="{ ImageWithLoadingBackground__loading: !loaded }"
 		:style="inlineStyles"
 	>
 		<img
@@ -10,7 +10,7 @@
 			:alt="alt"
 			:style="inlineStyles"
 			@load="onLoad"
-			@click="$emit('image-click')"
+			@click="$emit( 'image-click' )"
 		>
 	</div>
 </template>

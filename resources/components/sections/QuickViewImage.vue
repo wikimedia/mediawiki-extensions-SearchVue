@@ -2,7 +2,7 @@
 	<div
 		class="QuickViewImage"
 		:class="{
-			'QuickViewImage__mobile': isMobile
+			QuickViewImage__mobile: isMobile
 		}"
 	>
 		<image-with-loading-background

@@ -4,7 +4,7 @@
 			v-if="tutorialPopupVisible"
 			:url="preferencesUrl"
 			:is-mobile="isMobile"
-			:style="{ 'top': firstSectionContentHeight / 2 + firstSectionHeadingHeight + topPositionAdjuster + 'px' }"
+			:style="{ top: firstSectionContentHeight / 2 + firstSectionHeadingHeight + topPositionAdjuster + 'px' }"
 			@close="onCloseTutorialPopup"
 		>
 		</quick-view-tutorial-popup>

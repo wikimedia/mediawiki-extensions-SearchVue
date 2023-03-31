@@ -1,7 +1,8 @@
 <template>
-	<div class="QuickViewLinks"
+	<div
+		class="QuickViewLinks"
 		:class="{
-			'QuickViewLinks__mobile': isMobile
+			QuickViewLinks__mobile: isMobile
 		}"
 	>
 		<h3 v-if="isMobile">
@@ -11,7 +12,7 @@
 			class="QuickViewLinks__list"
 		>
 			<li
-				v-for="(link, interwikiName) in linksToShow"
+				v-for="( link, interwikiName ) in linksToShow"
 				:key="interwikiName"
 			>
 				<a

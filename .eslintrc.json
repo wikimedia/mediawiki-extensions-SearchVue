@@ -40,7 +40,11 @@
 				"vue/v-slot-style": [
 					"warn",
 					"shorthand"
-				]
+				],
+				"vue/multi-word-component-names": "warn",
+				"vue/no-undef-properties": "warn",
+				"vue/no-unused-refs": "warn",
+				"vue/camelcase": "warn"
 			}
 		}
 	]

@@ -2,7 +2,7 @@
 	<div
 		class="quickViewCommons"
 		:class="{
-			'quickViewCommons__mobile': isMobile
+			quickViewCommons__mobile: isMobile
 		}"
 	>
 		<h3 v-if="isMobile">
@@ -19,7 +19,8 @@
 					v-for="image in images"
 					:key="image.index"
 				>
-					<a :href="image.imageinfo[ 0 ].descriptionurl"
+					<a
+						:href="image.imageinfo[ 0 ].descriptionurl"
 						@click.prevent="onCommonsClick( image.imageinfo[ 0 ].descriptionurl )">
 						<image-with-loading-background
 							:src="image.imageinfo[ 0 ].thumburl"
