@@ -34,8 +34,8 @@ module.exports = exports = {
 	margin: 0 auto;
 
 	&__bounce,
-	&:before,
-	&:after {
+	&::before,
+	&::after {
 		content: '';
 		background-color: @wmui-color-accent50;
 		display: inline-block;
@@ -46,12 +46,12 @@ module.exports = exports = {
 		animation-delay: -160ms;
 	}
 
-	&:before {
+	&::before {
 		margin-right: @margin-bounce-dot;
 		animation-delay: -330ms;
 	}
 
-	&:after {
+	&::after {
 		margin-left: @margin-bounce-dot;
 		animation-delay: 0ms;
 	}

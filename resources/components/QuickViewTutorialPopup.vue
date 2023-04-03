@@ -124,7 +124,7 @@ module.exports = exports = {
 		border-left: 8px solid transparent;
 		position: absolute;
 
-		&:after {
+		&::after {
 			content: '';
 			width: 0;
 			height: 0;
@@ -137,7 +137,7 @@ module.exports = exports = {
 			left: -8px;
 		}
 
-		&:before {
+		&::before {
 			top: -8px;
 			left: -6px;
 			position: absolute;

@@ -14,7 +14,7 @@
 		li.searchresult-with-quickview .quickView-aria-button {
 			cursor: pointer;
 
-			&:after {
+			&::after {
 				content: ' ';
 				position: absolute;
 				width: 24px;
@@ -30,7 +30,7 @@
 		li.searchresult-with-quickview .mw-search-result-data:hover,
 		li.searchresult-with-quickview .quickView-aria-button:hover,
 		li.searchresult-with-quickview .quickView-aria-button:focus {
-			&:after {
+			&::after {
 				background-image: url( ../assets/icons/arrow-forward.svg );
 				background-repeat: no-repeat;
 				background-position-y: center;
@@ -42,7 +42,7 @@
 			li.searchresult-with-quickview--hover .searchresult,
 			li.searchresult-with-quickview .searchresult:hover,
 			li.searchresult-with-quickview .mw-search-result-data:hover {
-				&:after {
+				&::after {
 					transform: scaleX( -1 );
 				}
 			}

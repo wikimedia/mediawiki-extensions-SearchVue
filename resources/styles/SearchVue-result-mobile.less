@@ -1,7 +1,7 @@
 .skin-minerva {
 	.searchresult-with-quickview,
 	.quickView-aria-button {
-		&:after {
+		&::after {
 			content: '';
 			position: absolute;
 			width: 24px;
@@ -16,7 +16,7 @@
 	.searchresult-with-quickview {
 		position: relative;
 
-		&:after {
+		&::after {
 			background-image: url( ../assets/icons/arrow-down.svg );
 			background-repeat: no-repeat;
 			background-position-y: center;
@@ -25,7 +25,7 @@
 
 	&.search-preview-open {
 		.searchresult-with-quickview--open {
-			&:after {
+			&::after {
 				transform: scaleY( -1 );
 			}
 		}
