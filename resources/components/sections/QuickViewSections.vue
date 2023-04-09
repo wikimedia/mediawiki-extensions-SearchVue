@@ -176,7 +176,7 @@ module.exports = exports = {
 </script>
 
 <style lang="less">
-@import 'mediawiki.ui/variables.less';
+@import 'mediawiki.skin.variables.less';
 
 .quickViewSections {
 	& &__list {
@@ -213,8 +213,8 @@ module.exports = exports = {
 
 	& &__pill {
 		padding: 2px 8px;
-		border-radius: 12px;
-		border: 1px solid @colorGray10;
+		border-radius: @border-radius-pill;
+		border: @border-width-base @border-style-base @border-color-base;
 		font-size: 0.9285em;
 		line-height: 1.385em;
 		margin-bottom: 0;
@@ -224,7 +224,7 @@ module.exports = exports = {
 		}
 
 		a {
-			color: @colorGray2;
+			color: @color-base;
 		}
 	}
 

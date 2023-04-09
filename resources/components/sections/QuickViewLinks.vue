@@ -128,7 +128,7 @@ module.exports = exports = {
 </script>
 
 <style lang="less">
-@import 'mediawiki.ui/variables.less';
+@import 'mediawiki.skin.variables.less';
 
 .QuickViewLinks {
 	& &__list {
@@ -187,7 +187,7 @@ module.exports = exports = {
 				height: 11px;
 				margin: 0;
 				margin-top: 7px;
-				fill: #36c;
+				fill: @color-progressive;
 			}
 		}
 	}

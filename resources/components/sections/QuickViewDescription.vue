@@ -87,7 +87,7 @@ module.exports = exports = {
 </script>
 
 <style lang="less">
-@import 'mediawiki.ui/variables.less';
+@import 'mediawiki.skin.variables.less';
 
 .quickViewDescription {
 	h2 {

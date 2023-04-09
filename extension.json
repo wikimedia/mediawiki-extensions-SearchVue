@@ -6,13 +6,14 @@
 		"Joseph Seddon",
 		"Marco Fossati",
 		"Matthias Mullie",
-		"Mark Shenoda"
+		"Mark Shenoda",
+		"Volker E."
 	],
 	"url": "https://www.mediawiki.org/wiki/Extension:SearchVue",
 	"descriptionmsg": "searchvue-desc",
 	"license-name": "GPL-2.0-or-later",
 	"requires": {
-		"MediaWiki": ">= 1.38.0",
+		"MediaWiki": ">= 1.41.0",
 		"extensions": {
 			"WikimediaMessages": "*"
 		}

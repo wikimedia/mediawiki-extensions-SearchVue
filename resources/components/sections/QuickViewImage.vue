@@ -68,13 +68,15 @@ module.exports = exports = {
 </script>
 
 <style lang="less">
-@import 'mediawiki.ui/variables.less';
+@import 'mediawiki.skin.variables.less';
 
 .QuickViewImage {
 	position: relative;
 	margin-bottom: 10px;
 	overflow: hidden;
-	background-color: @colorGray15;
+	// TODO: Remove this when we have an equivalent design token in near-future Codex release
+	// via skin variables. See T334790.
+	background-color: #f8f9fa;
 
 	&__mobile {
 		margin-bottom: 0;
