@@ -10,6 +10,7 @@
 			:alt="alt"
 			:style="inlineStyles"
 			@load="onLoad"
+			@error="onError"
 			@click="$emit( 'image-click' )"
 		>
 	</div>
@@ -74,8 +75,11 @@ module.exports = exports = {
 	methods: {
 		onLoad() {
 			this.loaded = true;
-			this.$emit( 'load' );
-
+			this.$emit( 'load', true );
+		},
+		onError() {
+			this.loaded = true;
+			this.$emit( 'load', false );
 		}
 	}
 };

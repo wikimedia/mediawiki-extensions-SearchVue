@@ -17,6 +17,7 @@
 			>
 				<li
 					v-for="image in images"
+					v-show="failedImages.indexOf( image.pageid ) === -1"
 					:key="image.index"
 				>
 					<!-- The class "image" is required for the multimedia viewer -->
@@ -30,7 +31,7 @@
 							:alt="image.title"
 							:aspectratio="calculateAspectRatio( image )"
 							:height-constraints=" isMobile ? 142 : 100"
-							@load="onImgLoad"
+							@load="onImgLoad( $event, image.pageid )"
 						></image-with-loading-background>
 					</a>
 				</li>
@@ -93,7 +94,8 @@ module.exports = exports = {
 		return {
 			repoLink: mw.config.get( 'wgQuickViewMediaRepositoryUri' ),
 			numberOfImagesLoaded: 0,
-			hasHiddenImages: false
+			hasHiddenImages: false,
+			failedImages: []
 		};
 	},
 	computed: $.extend(
@@ -132,7 +134,10 @@ module.exports = exports = {
 			} );
 
 		},
-		onImgLoad() {
+		onImgLoad( loaded, pageid ) {
+			if ( !loaded ) {
+				this.failedImages.push( pageid );
+			}
 			this.numberOfImagesLoaded++;
 		},
 		onCommonsClick() {
