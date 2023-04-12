@@ -97,8 +97,8 @@ const extractHighlightsFromSnippet = ( snippet ) => {
 	return highlights;
 };
 
-const addEllipsisIfNeeded = ( fullContent, snippet ) => {
-	const needsPrefixEllipsis = !fullContent.startsWith( snippet );
+const addEllipsisIfNeeded = ( fullContent, snippet, isMobile ) => {
+	const needsPrefixEllipsis = !fullContent.startsWith( snippet ) && !isMobile;
 	const needsSuffixEllipsis = !fullContent.endsWith( snippet );
 	let snippetWithEllipsis = '';
 	if ( needsPrefixEllipsis ) {
@@ -118,9 +118,10 @@ const addEllipsisIfNeeded = ( fullContent, snippet ) => {
  *
  * @param {string} snippet
  * @param {string} fullContent
+ * @param {boolean} isMobile
  * @return {string}
  */
-const expandSnippet = ( snippet, fullContent ) => {
+const expandSnippet = ( snippet, fullContent, isMobile ) => {
 	const SNIPPETS_EXTRA_CHARACTERS = 100;
 
 	const startSnippetsIndex = fullContent.indexOf( snippet );
@@ -128,7 +129,10 @@ const expandSnippet = ( snippet, fullContent ) => {
 	// We calculate the expanding snippet by calculating the expected index value
 	// Note: on top of SNIPPETS_EXTRA_CHARACTERS, we're fetching 1 additional character on both
 	// sides to help us figure out whether the first/last characters are word boundaries
-	const expandedSnippetStartIndex = Math.max( 0, startSnippetsIndex - SNIPPETS_EXTRA_CHARACTERS - 1 );
+	// On Mobile we just expand the end of the snippet
+	const expandedSnippetStartIndex = isMobile ?
+		startSnippetsIndex :
+		Math.max( 0, startSnippetsIndex - SNIPPETS_EXTRA_CHARACTERS - 1 );
 	const expandedSnippetEndIndex = startSnippetsIndex + snippet.length + SNIPPETS_EXTRA_CHARACTERS + 1;
 	let expandedSnippet = fullContent.slice(
 		expandedSnippetStartIndex,
@@ -156,7 +160,7 @@ const expandSnippet = ( snippet, fullContent ) => {
 
 	// Figure out whether we need to add an ellipsis at the start/end to indicate that there
 	// is more known content available
-	expandedSnippet = addEllipsisIfNeeded( fullContent, expandedSnippet );
+	expandedSnippet = addEllipsisIfNeeded( fullContent, expandedSnippet, isMobile );
 
 	return expandedSnippet;
 };
@@ -211,7 +215,7 @@ const generateExpandedSnippet = ( page, context, currentResult ) => {
 
 	// We just attempt to expand if the two string are different
 	let expandedSnippet = ( cirrusFieldContent !== snippet ) ?
-		expandSnippet( snippet, cirrusFieldContent ) :
+		expandSnippet( snippet, cirrusFieldContent, context.state.isMobile ) :
 		snippet;
 	// we remove the ellippsis that are at the end of the expanded snippets before comparing
 	const isBeginningOfText = cirrusFieldContent.startsWith( expandedSnippet.slice( 0, -3 ) );
@@ -230,6 +234,34 @@ const generateExpandedSnippet = ( page, context, currentResult ) => {
 		expandedSnippet: expandedSnippet,
 		isBeginningOfText: isBeginningOfText && cirrusField === 'text'
 	};
+};
+
+/**
+ * handled the modification of the main text snippets shown in the search result page.
+ *
+ * @param {string} title
+ * @param {string} snippet
+ * @param {boolean} isMobile
+ */
+const updateMainSearchResultSnippets = ( title, snippet, isMobile ) => {
+	if ( !title || !snippet || !isMobile ) {
+		return;
+	}
+
+	const selector = '[data-prefixedtext="' + title + '"] .searchresult';
+	document.querySelector( selector ).innerHTML = snippet;
+};
+
+/**
+ * Restore the main text snippets to its original value.
+ *
+ * @param {object} currentResult
+ * @param {boolean} isMobile
+ */
+const restoreMainSearchResultSnippets = ( currentResult, isMobile ) => {
+	// The original snippet does not have ellipsis at the end of it
+	const snippet = currentResult.text + mw.msg( 'ellipsis' );
+	updateMainSearchResultSnippets( currentResult.prefixedText, snippet, isMobile );
 };
 
 /**
@@ -471,6 +503,7 @@ const retrieveInfoFromQuery = ( context, title, selectedIndex ) => {
 			setMediaInfo( result, context );
 			setArticleSections( result, context );
 			const snippetObject = generateExpandedSnippet( result, context, currentSelectedResult );
+			updateMainSearchResultSnippets( title, snippetObject.expandedSnippet, context.state.isMobile );
 			context.commit( 'SET_EXPANDED_SNIPPET', snippetObject.expandedSnippet );
 			setDescription( result, context, snippetObject.isBeginningOfText );
 
@@ -490,6 +523,7 @@ const retrieveInfoFromQuery = ( context, title, selectedIndex ) => {
 			context.commit( 'SET_SECTIONS' );
 			context.commit( 'SET_LINKS' );
 			context.commit( 'SET_EXPANDED_SNIPPET' );
+			restoreMainSearchResultSnippets( currentSelectedResult, context.state.isMobile );
 
 			context.commit( 'SET_REQUEST_STATUS', {
 				type: 'query',
@@ -591,6 +625,7 @@ module.exports = {
 	closeQuickView: ( context ) => {
 		if ( context.state.title !== null ) {
 			context.dispatch( 'events/logQuickViewEvent', { action: 'close-searchpreview', selectedIndex: context.state.selectedIndex }, { root: true } );
+			restoreMainSearchResultSnippets( context.getters.currentResult, context.state.isMobile );
 		}
 		context.commit( 'SET_TITLE', null );
 		context.commit( 'SET_SELECTED_INDEX', -1 );

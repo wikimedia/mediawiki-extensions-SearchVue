@@ -5,6 +5,7 @@ const initialState = require( '../../../resources/store/state.js' ),
 	fakeElement = require( '../mocks/element.js' );
 
 require( '../mocks/history.js' );
+require( '../mocks/querySelector.js' );
 
 /**
  * Quick little helper function to escape contents for use in regular expressions;
@@ -197,6 +198,18 @@ describe( 'Actions', () => {
 					describe( 'snippet at the start of source text', () => {
 						it( 'not expanded to the front if there is no additional content that way', () => {
 							context.state.results[ 0 ].text = 'a23456789 b2345';
+
+							const title = 'dummy1';
+							actions.handleTitleChange( context, { newTitle: title, element: fakeElement } );
+
+							expect( actions.commit ).toHaveBeenCalled();
+							const expectRegex = new RegExp( '^' + escapeForRegex( context.state.results[ 0 ].text ) );
+							expect( actions.commit ).toHaveBeenCalledWith( 'SET_EXPANDED_SNIPPET', expect.stringMatching( expectRegex ) );
+						} );
+
+						it( 'not expanded to the front if on mobile', () => {
+							context.state.results[ 0 ].text = '56789 d2345';
+							context.state.isMobile = true;
 
 							const title = 'dummy1';
 							actions.handleTitleChange( context, { newTitle: title, element: fakeElement } );
@@ -574,9 +587,16 @@ describe( 'Actions', () => {
 	} );
 
 	describe( 'closeQuickView', () => {
-		it( 'Set title to null', () => {
-			const title = 'dummy';
+		const title = 'dummy';
+		beforeEach( () => {
 			context.state.title = title;
+			context.getters.currentResult = {
+				prefixedText: title,
+				text: 'dummy snippets'
+			};
+			context.state.isMobile = true;
+		} );
+		it( 'Set title to null', () => {
 			actions.closeQuickView( context, title );
 
 			expect( actions.commit ).toHaveBeenCalled();
@@ -585,8 +605,6 @@ describe( 'Actions', () => {
 		} );
 
 		it( 'Set selected index to -1', () => {
-			const title = 'dummy';
-			context.state.title = title;
 			actions.closeQuickView( context, title );
 
 			expect( actions.commit ).toHaveBeenCalled();
@@ -594,8 +612,6 @@ describe( 'Actions', () => {
 
 		} );
 		it( 'Set sections to an empty array', () => {
-			const title = 'dummy';
-			context.state.title = title;
 			actions.closeQuickView( context, title );
 
 			expect( actions.commit ).toHaveBeenCalled();
@@ -604,8 +620,6 @@ describe( 'Actions', () => {
 		} );
 
 		it( 'Set thumbnail to null', () => {
-			const title = 'dummy';
-			context.state.title = title;
 			actions.closeQuickView( context, title );
 
 			expect( actions.commit ).toHaveBeenCalled();
@@ -614,8 +628,6 @@ describe( 'Actions', () => {
 		} );
 
 		it( 'Set description to null', () => {
-			const title = 'dummy';
-			context.state.title = title;
 			actions.closeQuickView( context, title );
 
 			expect( actions.commit ).toHaveBeenCalled();
@@ -624,8 +636,6 @@ describe( 'Actions', () => {
 		} );
 
 		it( 'Removes QuickView to history state', () => {
-			const title = 'dummy';
-			context.state.title = title;
 			actions.closeQuickView( context, title );
 
 			expect( window.history.pushState ).toHaveBeenCalled();
@@ -639,8 +649,6 @@ describe( 'Actions', () => {
 		} );
 
 		it( 'Set close-searchpreview event', () => {
-			const title = 'dummy';
-			context.state.title = title;
 			const eventName = 'close-searchpreview';
 
 			actions.closeQuickView( context, title );
@@ -650,8 +658,6 @@ describe( 'Actions', () => {
 		} );
 
 		it( 'Reset request statuses from the store', () => {
-			const title = 'dummy';
-			context.state.title = title;
 			actions.closeQuickView( context, title );
 
 			expect( actions.commit ).toHaveBeenCalled();
@@ -660,8 +666,6 @@ describe( 'Actions', () => {
 		} );
 
 		it( 'Set expandedSnippets to null', () => {
-			const title = 'dummy';
-			context.state.title = title;
 			actions.closeQuickView( context, title );
 
 			expect( actions.commit ).toHaveBeenCalled();
@@ -670,11 +674,22 @@ describe( 'Actions', () => {
 		} );
 
 		it( 'Aborts all current Rest API request', () => {
-			const title = 'dummy';
-			context.state.title = title;
 			actions.closeQuickView( context, title );
 
 			expect( global.mw.Rest.prototype.abort ).toHaveBeenCalled();
+		} );
+
+		it( 'Aborts all current Rest API request', () => {
+			actions.closeQuickView( context, title );
+
+			expect( global.mw.Rest.prototype.abort ).toHaveBeenCalled();
+		} );
+
+		it( 'Restore the search result text', () => {
+			actions.closeQuickView( context, title );
+
+			expect( document.querySelector ).toHaveBeenCalled();
+			expect( document.querySelector ).toHaveBeenCalledWith( expect.stringContaining( title ) );
 		} );
 	} );
 
