@@ -224,8 +224,8 @@ module.exports = exports = {
 		z-index: 10;
 
 		button {
-			padding: 14px;
-			padding-inline-start: 20px;
+			padding: 12px;
+			padding-inline-start: 12px;
 			background-color: transparent;
 			border: none;
 			cursor: pointer;
