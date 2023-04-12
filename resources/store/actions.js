@@ -97,6 +97,21 @@ const extractHighlightsFromSnippet = ( snippet ) => {
 	return highlights;
 };
 
+const addEllipsisIfNeeded = ( fullContent, snippet ) => {
+	const needsPrefixEllipsis = !fullContent.startsWith( snippet );
+	const needsSuffixEllipsis = !fullContent.endsWith( snippet );
+	let snippetWithEllipsis = '';
+	if ( needsPrefixEllipsis ) {
+		snippetWithEllipsis = mw.msg( 'ellipsis' );
+	}
+	snippetWithEllipsis += snippet;
+	if ( needsSuffixEllipsis ) {
+		snippetWithEllipsis += mw.msg( 'ellipsis' );
+	}
+
+	return snippetWithEllipsis;
+};
+
 /**
  * Given an input snippet text and a source text where the snippet is sourced from,
  * this will expand the snippet in both directions.
@@ -141,14 +156,7 @@ const expandSnippet = ( snippet, fullContent ) => {
 
 	// Figure out whether we need to add an ellipsis at the start/end to indicate that there
 	// is more known content available
-	const needsPrefixEllipsis = !fullContent.startsWith( expandedSnippet );
-	const needsSuffixEllipsis = !fullContent.endsWith( expandedSnippet );
-	if ( needsPrefixEllipsis ) {
-		expandedSnippet = mw.msg( 'ellipsis' ) + expandedSnippet;
-	}
-	if ( needsSuffixEllipsis ) {
-		expandedSnippet += mw.msg( 'ellipsis' );
-	}
+	expandedSnippet = addEllipsisIfNeeded( fullContent, expandedSnippet );
 
 	return expandedSnippet;
 };
@@ -193,17 +201,18 @@ const generateExpandedSnippet = ( page, context, currentResult ) => {
 
 	if (
 		!cirrusFieldContent ||
-		snippet.length === cirrusFieldContent.length ||
 		cirrusFieldContent.indexOf( snippet ) === -1
 	) {
-		// If the snippet matches the field's contents exactly, or if it can't be located in the
-		// field, there's nothing to expand
+		// Snippets is empty or cannot be found. Do no change anything
 		return {
 			expandedSnippet: null
 		};
 	}
 
-	let expandedSnippet = expandSnippet( snippet, cirrusFieldContent );
+	// We just attempt to expand if the two string are different
+	let expandedSnippet = ( cirrusFieldContent !== snippet ) ?
+		expandSnippet( snippet, cirrusFieldContent ) :
+		snippet;
 	// we remove the ellippsis that are at the end of the expanded snippets before comparing
 	const isBeginningOfText = cirrusFieldContent.startsWith( expandedSnippet.slice( 0, -3 ) );
 
