@@ -1,11 +1,10 @@
 <template>
-	<!-- eslint-disable -->
 	<div
-		@click.stop
 		class="mw-search-quick-view"
 		:class="{
-			'mw-search-quick-view__mobile': isMobile,
+			'mw-search-quick-view__mobile': isMobile
 		}"
+		@click.stop
 	>
 		<nav
 			v-if="!isMobile"
@@ -37,10 +36,11 @@
 				</svg>
 			</button>
 		</nav>
-		<header :class="
-			{
-				'mw-search-quick-view__no-thumb': hideThumb
-			}"
+		<header
+			:class="
+				{
+					'mw-search-quick-view__no-thumb': hideThumb
+				}"
 		>
 			<quick-view-image
 				v-if="currentResult.thumbnail"
@@ -66,18 +66,19 @@
 			></quick-view-snippet>
 			<quick-view-sections
 				v-if="hasSections"
+				:key="currentResult.prefixedText"
 				:title="currentResult.prefixedText"
 				:sections="currentResult.sections"
-				@log-event="onLogEvent"
 				:is-mobile="isMobile"
+				@log-event="onLogEvent"
 			></quick-view-sections>
 			<!-- This is the desktop instance of links-->
-		    <quick-view-links
-			    v-if="hasLinks && isMobile"
-			    :links="currentResult.links"
-			    :is-mobile="isMobile"
-			    @log-event="onLogEvent"
-            ></quick-view-links>
+			<quick-view-links
+				v-if="hasLinks && isMobile"
+				:links="currentResult.links"
+				:is-mobile="isMobile"
+				@log-event="onLogEvent"
+			></quick-view-links>
 		</template>
 		<template v-if="showMediaData">
 			<quick-view-commons

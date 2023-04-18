@@ -81,7 +81,10 @@ module.exports = exports = {
 				return;
 			}
 
-			return this.getSectionsUri( this.sections[ firstHiddenSectionIndex ], firstHiddenSectionIndex );
+			return this.getSectionsUri(
+				this.sections[ firstHiddenSectionIndex ],
+				firstHiddenSectionIndex
+			);
 		},
 		headingText() {
 			const namespace = new mw.Title( this.title ).getNamespaceId();
@@ -152,25 +155,15 @@ module.exports = exports = {
 				} );
 		}
 	},
-	watch: {
-		sections: {
-			handler( newSections ) {
-				if ( newSections.length === 0 ) {
-					return;
-				}
-
-				this.$nextTick()
-					.then(
-						() => {
-							this.defineHiddenSection( this.$refs.sections, this.$refs[ 'sections-container' ] );
-						}
-					);
-			},
-			immediate: true,
-			flush: 'post'
-		}
-	},
 	mounted() {
+		if ( this.sections.length !== 0 ) {
+			this.$nextTick()
+				.then(
+					() => {
+						this.defineHiddenSection( this.$refs.sections, this.$refs[ 'sections-container' ] );
+					}
+				);
+		}
 	}
 };
 </script>

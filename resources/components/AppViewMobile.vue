@@ -10,6 +10,7 @@
 		</p>
 		<quick-view
 			v-else-if="visible"
+			v-bind="$attrs"
 			:transitioning="transitioning"
 			class="mw-app-view-mobile"
 			@close="$emit( 'close', $event )"
@@ -54,6 +55,7 @@ module.exports = exports = {
 		'quick-view': QuickView,
 		'content-skeleton': ContentSkeleton
 	},
+	inheritAttrs: false,
 	data() {
 		return {
 			transitioning: false
