@@ -119,9 +119,12 @@ const QuickViewImage = require( './QuickViewImage.vue' ),
 	QuickViewSections = require( './QuickViewSections.vue' ),
 	QuickViewCommons = require( './QuickViewCommons.vue' ),
 	QuickViewLinks = require( './QuickViewLinks.vue' ),
-	mapActions = require( 'vuex' ).mapActions,
-	mapGetters = require( 'vuex' ).mapGetters,
-	mapState = require( 'vuex' ).mapState;
+	mapVuexActions = require( 'vuex' ).mapActions,
+	mapVuexGetters = require( 'vuex' ).mapGetters,
+	mapVuexState = require( 'vuex' ).mapState,
+	mapPiniaActions = require( 'pinia' ).mapActions,
+	mapPiniaState = require( 'pinia' ).mapState,
+	useEventStore = require( '../../stores/Event.js' );
 
 // @vue/component
 module.exports = exports = {
@@ -143,16 +146,17 @@ module.exports = exports = {
 		return {};
 	},
 	computed: $.extend( {},
-		mapState( [
+		mapVuexState( [
 			'isMobile',
 			'requestStatus',
 			'requestStatuses',
 			'selectedIndex'
 		] ),
-		mapGetters( [
+		mapVuexGetters( [
 			'currentResult',
 			'loading'
 		] ),
+		mapPiniaState( useEventStore, [ 'sessionId' ] ),
 		{
 			hasCommonsImages() {
 				return this.currentResult.media &&
@@ -216,11 +220,11 @@ module.exports = exports = {
 				} );
 			}
 		},
-		mapActions( [
+		mapVuexActions( [
 			'closeQuickView',
 			'navigate'
 		] ),
-		mapActions( 'events', [ 'logQuickViewEvent' ] )
+		mapPiniaActions( useEventStore, [ 'logQuickViewEvent' ] )
 	)
 };
 </script>

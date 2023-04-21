@@ -26,9 +26,9 @@
 
 const QuickView = require( './sections/QuickView.vue' ),
 	ContentSkeleton = require( './generic/ContentSkeleton.vue' ),
-	mapActions = require( 'vuex' ).mapActions,
-	mapState = require( 'vuex' ).mapState,
-	mapGetters = require( 'vuex' ).mapGetters,
+	mapVuexActions = require( 'vuex' ).mapActions,
+	mapVuexState = require( 'vuex' ).mapState,
+	mapVuexGetters = require( 'vuex' ).mapGetters,
 	LoadingDots = require( './generic/LoadingDots.vue' ),
 	onDocumentScroll = require( '../composables/onDocumentScroll.js' ),
 	onResizeObserver = require( '../composables/onResizeObserver.js' ),
@@ -133,10 +133,10 @@ module.exports = exports = {
 				};
 			}
 		},
-		mapState( [
+		mapVuexState( [
 			'breakpoints'
 		] ),
-		mapGetters( [
+		mapVuexGetters( [
 			'visible'
 		] )
 	),
@@ -146,7 +146,7 @@ module.exports = exports = {
 				return `${value}px`;
 			}
 		},
-		mapActions( [
+		mapVuexActions( [
 			'closeQuickView'
 		] )
 	),

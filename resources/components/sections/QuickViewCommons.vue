@@ -68,7 +68,7 @@
  * Placeholder
  */
 const ImageWithLoadingBackground = require( '../generic/ImageWithLoadingBackground.vue' ),
-	mapState = require( 'vuex' ).mapState;
+	mapVuexState = require( 'vuex' ).mapState;
 
 // @vue/component
 module.exports = exports = {
@@ -106,7 +106,7 @@ module.exports = exports = {
 				return this.numberOfImagesLoaded === imageNumber;
 			}
 		},
-		mapState( [
+		mapVuexState( [
 			'isMobile'
 		] )
 	),

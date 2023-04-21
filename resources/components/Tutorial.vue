@@ -18,7 +18,7 @@
  * Placeholder
  */
 const QuickViewTutorialPopup = require( './QuickViewTutorialPopup.vue' ),
-	mapState = require( 'vuex' ).mapState;
+	mapVuexState = require( 'vuex' ).mapState;
 
 // @vue/component
 module.exports = exports = {
@@ -38,7 +38,7 @@ module.exports = exports = {
 		};
 	},
 	computed: $.extend( {},
-		mapState( [
+		mapVuexState( [
 			'selectedIndex',
 			'isMobile'
 		] ),
