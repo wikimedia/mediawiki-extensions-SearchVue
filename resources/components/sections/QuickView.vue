@@ -204,10 +204,10 @@ module.exports = exports = {
 </script>
 
 <style lang="less">
-@import '../../../lib/mediawiki-ui-base.less';
+@import 'mediawiki.skin.variables.less';
 
 .mw-search-quick-view {
-	background-color: @wmui-color-base100;
+	background-color: @background-color-base;
 	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Lato', 'Helvetica', 'Arial', sans-serif;
 
 	&__mobile {

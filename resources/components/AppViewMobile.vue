@@ -87,8 +87,8 @@ module.exports = exports = {
 </script>
 
 <style lang="less">
+@import 'mediawiki.skin.variables.less';
 @import '../styles/SearchVue-result-mobile.less';
-@import '../../lib/mediawiki-ui-base.less';
 
 .mw-app-view-mobile {
 	z-index: 1000;
@@ -104,15 +104,15 @@ module.exports = exports = {
 	& > div {
 		margin-left: 8px;
 		margin-bottom: 0;
-		border-radius: 2px;
-		border: 1px solid @wmui-color-base70;
+		border-radius: @border-radius-base;
+		border: @border-subtle;
 		padding: 12px;
 	}
 
 	&__info-text {
 		position: relative;
 		margin: 0;
-		color: @wmui-color-base30;
+		color: @color-subtle;
 
 		// we set some spacing between text and loading icon
 		& .mw-spinner {

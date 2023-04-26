@@ -80,8 +80,9 @@ module.exports = exports = {
 </script>
 
 <style lang="less">
+@import 'mediawiki.skin.variables.less';
 
-@pulse-dot-color: #3366cc;
+@pulse-dot-color: @background-color-progressive;
 @pulse-dot-fading: fade(@pulse-dot-color, 40%);
 @pulse-dot-transparent: fade(@pulse-dot-color, 0);
 
@@ -106,8 +107,8 @@ module.exports = exports = {
 	position: absolute;
 	box-sizing: border-box;
 	background: #fff;
-	border: 1px solid #a2a9b1;
-	border-radius: 2px;
+	border: @border-base;
+	border-radius: @border-radius-base;
 	padding: 12px;
 	width: 320px;
 
@@ -119,7 +120,7 @@ module.exports = exports = {
 		width: 0;
 		height: 0;
 		border-top: 8px solid transparent;
-		border-bottom: 8px solid #a2a9b1;
+		border-bottom: 8px solid @border-color-base;
 		border-right: 8px solid transparent;
 		border-left: 8px solid transparent;
 		position: absolute;
@@ -145,7 +146,7 @@ module.exports = exports = {
 			width: 12px;
 			height: 12px;
 			background: @pulse-dot-color;
-			border-radius: 50%;
+			border-radius: @border-radius-circle;
 			box-shadow: 0 0 0 @pulse-dot-fading;
 			animation: pulse 2s infinite;
 			z-index: 10;

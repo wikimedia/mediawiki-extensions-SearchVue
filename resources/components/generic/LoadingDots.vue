@@ -21,7 +21,7 @@ module.exports = exports = {
 </script>
 
 <style lang="less">
-@import '../../../lib/mediawiki-ui-base.less';
+@import 'mediawiki.skin.variables.less';
 
 .loading-dots {
 	// The following code has been inspired by https://codepen.io/Volker_E/pen/yqNXMe
@@ -37,11 +37,11 @@ module.exports = exports = {
 	&::before,
 	&::after {
 		content: '';
-		background-color: @wmui-color-accent50;
+		background-color: @background-color-progressive;
 		display: inline-block;
 		width: @width-bounce-dot;
 		height: @width-bounce-dot;
-		border-radius: 100%;
+		border-radius: @border-radius-circle;
 		animation: bounce-delay 1600ms infinite ease-in-out both;
 		animation-delay: -160ms;
 	}

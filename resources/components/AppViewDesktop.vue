@@ -166,12 +166,12 @@ module.exports = exports = {
 </script>
 
 <style lang="less">
+@import 'mediawiki.skin.variables.less';
 @import '../styles/SearchVue-result-hover.less';
-@import '../../lib/mediawiki-ui-base.less';
 
 .mw-app-view-desktop {
 	position: fixed;
-	border: solid 1px @wmui-color-base70;
+	border: @border-subtle;
 	right: 0;
 	width: var( --dynamicWidth );
 	display: inline-block;
