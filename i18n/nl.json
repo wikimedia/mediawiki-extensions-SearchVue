@@ -2,24 +2,38 @@
 	"@metadata": {
 		"authors": [
 			"Mainframe98",
-			"McDutchie"
+			"McDutchie",
+			"Sjoerddebruin"
 		]
 	},
 	"searchvue-aria-button": "De voorvertoning van dit artikel openen.",
 	"searchvue-dialog-title": "Voorvertoning zoekopdracht",
 	"searchvue-dialog-aria-label": "Voorbeelddialoogvenster is nu geopend. Het toont belangrijke informatie over dit artikel en gerelateerde inhoud.",
+	"searchvue-desc": "Vue.js bevat nieuwe functies en verbeteringen voor Speciaal:Zoeken",
 	"searchvue-close": "Sluiten",
 	"searchvue-next": "Volgende",
 	"searchvue-previous": "Vorige",
+	"searchvue-label": "Voorbeelden van zoekresultaten inschakelen",
 	"searchvue-loading": "Voorbeeld laden",
 	"searchvue-no-content": "Geen inhoud om te bekijken",
+	"searchvue-snippet-gotofullpage": "Volledige pagina bekijken",
+	"searchvue-snippet-gotofullpage-ns0": "Volledig artikel bekijken",
 	"searchvue-commons-viewmore": "Meer weergeven",
+	"searchvue-commons-viewmore-mobile": "Meer afbeeldingen bekijken",
 	"searchvue-commons-footnote": "Van Wikimedia Commons",
 	"searchvue-commons-heading": "Gerelateerde afbeeldingen",
 	"searchvue-commons-heading-mobile": "Gerelateerde afbeeldingen van Wikimedia Commons",
+	"searchvue-article-sections-heading": "Kopjes in de pagina",
+	"searchvue-article-sections-heading-ns0": "Kopjes in het artikel",
 	"searchvue-more-sections": "+ nog $1 {{PLURAL:$1|sectie|secties}}",
 	"searchvue-help": "Bekijk een voorbeeld van de inhoud van de pagina en gerelateerde inhoud.",
 	"searchvue-links-subheading": "In $1",
 	"searchvue-links-heading": "Gerelateerde pagina's in andere projecten",
-	"searchvue-links-showmore": "andere pagina's bekijken"
+	"searchvue-links-showmore": "andere pagina's bekijken",
+	"tutorial-popup-title": "Voorbeelden van zoekresultaten",
+	"tutorial-popup-text1": "Klik op de artikelomschrijving om een zoekvoorbeeld en relevante inhoud te tonen.",
+	"tutorial-popup-text2": "U kunt voorbeelden in- of uitschakelen",
+	"tutorial-popup-text-mobile": "Druk op de artikelomschrijving of het pijltje om een zoekvoorbeeld en relevante inhoud te tonen.",
+	"tutorial-popup-preferences": "voorkeuren",
+	"tutorial-popup-close": "Sluiten"
 }
