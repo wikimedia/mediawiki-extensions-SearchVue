@@ -413,7 +413,10 @@ const setMediaInfo = ( page, context ) => {
 				status: context.state.requestStatuses.done
 			} );
 		} )
-		.catch( () => {
+		.catch( ( _error, reason ) => {
+			if ( reason && reason.exception === 'abort' ) {
+				return;
+			}
 			context.commit( 'SET_MEDIA' );
 			context.commit( 'SET_LINKS' );
 
@@ -476,7 +479,11 @@ const retrieveInfoFromQuery = ( context, title, selectedIndex ) => {
 				status: context.state.requestStatuses.done
 			} );
 		} )
-		.catch( () => {
+		.catch( ( _error, reason ) => {
+
+			if ( reason && reason.exception === 'abort' ) {
+				return;
+			}
 			context.commit( 'SET_THUMBNAIL' );
 			context.commit( 'SET_MEDIA' );
 			context.commit( 'SET_DESCRIPTION' );
@@ -514,9 +521,7 @@ const handleClassesToggle = ( open, currentElement ) => {
 module.exports = {
 
 	/**
-	 * Handles the visibility of the Search Preview definiting title, destination and visibility state.
-	 * This action is most used on mobile where toggling between Search Previews has an animation transition
-	 * and visibility need to be handled around its timing.
+	 * Handles the visibility of the Search Preview definiting title.
 	 *
 	 * @param {Object} context
 	 * @param {Object} context.state
@@ -524,24 +529,14 @@ module.exports = {
 	 * @param {Object} payload
 	 * @param {string} payload.title
 	 * @param {Element} payload.element
-	 * @param {boolean} payload.force
 	 */
-	toggleVisibily: ( context, { title, element, force } ) => {
+	toggleVisibily: ( context, { title, element } ) => {
 		let destination = '.searchresults';
 		if ( context.state.isMobile ) {
 			// phpcs:disable Squiz.WhiteSpace.OperatorSpacing.NoSpaceBefore,Squiz.WhiteSpace.OperatorSpacing.NoSpaceAfter
 			const dataTitleSelector = `[data-prefixedtext="${title}"]`;
 			// phpcs:enable Squiz.WhiteSpace.OperatorSpacing.NoSpaceBefore,Squiz.WhiteSpace.OperatorSpacing.NoSpaceAfter
-			if ( force ) {
-				destination = title ? dataTitleSelector : false;
-				context.commit( 'SET_NEXT_TITLE', null );
-			} else if ( !context.state.title ) {
-				destination = dataTitleSelector;
-			} else if ( context.state.title && context.state.title !== title ) {
-				context.commit( 'SET_NEXT_TITLE', title );
-				context.commit( 'SET_COMPONENT_READY', false );
-				return;
-			}
+			destination = title ? dataTitleSelector : false;
 		}
 		context.commit( 'SET_DESTINATION', destination );
 		context.dispatch( 'handleTitleChange', { newTitle: title, element: element } );
@@ -579,7 +574,6 @@ module.exports = {
 			setThumbnail( thumbnail, '', context );
 			retrieveInfoFromQuery( context, newTitle, selectedTitleIndex );
 			context.commit( 'SET_TITLE', newTitle );
-			context.commit( 'SET_COMPONENT_READY', true );
 			pushTitleToHistoryState( newTitle );
 			handleClassesToggle( true, element );
 
@@ -605,7 +599,6 @@ module.exports = {
 		context.commit( 'SET_DESCRIPTION' );
 		context.commit( 'SET_SECTIONS' );
 		context.commit( 'SET_LINKS' );
-		context.commit( 'SET_COMPONENT_READY' );
 		removeQuickViewFromHistoryState();
 		context.commit( 'RESET_REQUEST_STATUS' );
 		context.commit( 'SET_EXPANDED_SNIPPET' );

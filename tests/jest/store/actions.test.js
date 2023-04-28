@@ -62,7 +62,7 @@ describe( 'Actions', () => {
 	describe( 'handleTitleChange', () => {
 		describe( 'when called with empty title', () => {
 			it( 'Nothing is committed', () => {
-				actions.handleTitleChange( context, { nextTitle: undefined } );
+				actions.handleTitleChange( context, {} );
 
 				expect( context.commit ).not.toHaveBeenCalled();
 
@@ -688,66 +688,17 @@ describe( 'Actions', () => {
 			afterEach( () => {
 				context = null;
 			} );
+			it( 'Set destination to false, if title is not passed', () => {
+				actions.toggleVisibily( context, { force: true } );
 
-			describe( 'When called with force=true', () => {
-				it( 'Set destination to false, if title is not passed', () => {
-					actions.toggleVisibily( context, { force: true } );
-
-					expect( context.commit ).toHaveBeenCalled();
-					expect( context.commit ).toHaveBeenCalledWith( 'SET_DESTINATION', false );
-				} );
-				it( 'Set destination to title provided', () => {
-					actions.toggleVisibily( context, { title: 'dummy', force: true } );
-
-					expect( context.commit ).toHaveBeenCalled();
-					expect( context.commit ).toHaveBeenCalledWith( 'SET_DESTINATION', '[data-prefixedtext="dummy"]' );
-				} );
-				it( 'Set the NEXT_TITLE as null', () => {
-					actions.toggleVisibily( context, { force: true } );
-
-					expect( context.commit ).toHaveBeenCalled();
-					expect( context.commit ).toHaveBeenCalledWith( 'SET_NEXT_TITLE', null );
-				} );
+				expect( context.commit ).toHaveBeenCalled();
+				expect( context.commit ).toHaveBeenCalledWith( 'SET_DESTINATION', false );
 			} );
-			describe( 'When called with force=false and title is not set in the state', () => {
-				it( 'Set destination to title provided', () => {
-					actions.toggleVisibily( context, { title: 'dummy' } );
+			it( 'Set destination to title provided', () => {
+				actions.toggleVisibily( context, { title: 'dummy', force: true } );
 
-					expect( context.commit ).toHaveBeenCalled();
-					expect( context.commit ).toHaveBeenCalledWith( 'SET_DESTINATION', '[data-prefixedtext="dummy"]' );
-				} );
-			} );
-			describe( 'When called with force=false and title is set in the state', () => {
-				beforeEach( () => {
-					context.state.title = 'titleExist';
-				} );
-
-				afterEach( () => {
-					context = null;
-				} );
-
-				it( 'Set new title as NEXT_TITLE', () => {
-					actions.toggleVisibily( context, { title: 'dummy' } );
-
-					expect( context.commit ).toHaveBeenCalled();
-					expect( context.commit ).toHaveBeenCalledWith( 'SET_NEXT_TITLE', 'dummy' );
-				} );
-				it( 'Set VISIBLE to false', () => {
-					actions.toggleVisibily( context, { title: 'dummy' } );
-
-					expect( context.commit ).toHaveBeenCalled();
-					expect( context.commit ).toHaveBeenCalledWith( 'SET_COMPONENT_READY', false );
-				} );
-				it( 'Does not set DESTINATION', () => {
-					actions.toggleVisibily( context, { title: 'dummy' } );
-
-					expect( context.commit ).not.toHaveBeenCalledWith( 'SET_DESTINATION' );
-				} );
-				it( 'Does not dispatch handleTitleChange', () => {
-					actions.toggleVisibily( context, { title: 'dummy' } );
-
-					expect( context.dispatch ).not.toHaveBeenCalled();
-				} );
+				expect( context.commit ).toHaveBeenCalled();
+				expect( context.commit ).toHaveBeenCalledWith( 'SET_DESTINATION', '[data-prefixedtext="dummy"]' );
 			} );
 		} );
 		describe( 'on desktop', () => {

@@ -63,7 +63,6 @@ module.exports = exports = {
 			'results'
 		] ),
 		mapGetters( [
-			'showOnMobile',
 			'loading'
 		] )
 	),
@@ -86,8 +85,7 @@ module.exports = exports = {
 					const currentElement = this.currentElement( this.queryQuickViewTitle );
 					this.toggleVisibily( {
 						title: this.queryQuickViewTitle,
-						element: currentElement,
-						force: true
+						element: currentElement
 					} );
 				}
 			},
@@ -131,14 +129,6 @@ module.exports = exports = {
 					const resultTitle = searchResultLink.getAttribute( 'data-prefixedtext' );
 					const currentElement = this.currentElement( resultTitle );
 					const payload = { title: resultTitle, element: currentElement };
-
-					// If the previous result did not have enough data to be shown
-					// (showOnMobile = false) Then we have to force toggleVisibility.
-					// Because the transition effect is not going to be called.
-					if ( this.isMobile ) {
-						payload.force = !this.showOnMobile;
-					}
-
 					this.toggleVisibily( payload );
 				}
 			},

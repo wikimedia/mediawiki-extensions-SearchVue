@@ -50,11 +50,7 @@
 				@log-event="onLogEvent"
 			></quick-view-image>
 		</header>
-		<template v-if="requestStatus.query === requestStatuses.inProgress" >
-			<content-skeleton></content-skeleton>
-			<content-skeleton :lines="4"></content-skeleton>
-		</template>
-		<template v-if="requestStatus.query === requestStatuses.done" >
+		<template v-if="showQueryData">
 			<quick-view-description
 				v-if="showDescription"
 				:title="currentResult.prefixedText"
@@ -75,6 +71,7 @@
 				@log-event="onLogEvent"
 				:is-mobile="isMobile"
 			></quick-view-sections>
+			<!-- This is the desktop instance of links-->
 		    <quick-view-links
 			    v-if="hasLinks && isMobile"
 			    :links="currentResult.links"
@@ -82,17 +79,25 @@
 			    @log-event="onLogEvent"
             ></quick-view-links>
 		</template>
-		<quick-view-commons
-			v-if="hasCommonsImages"
-			v-bind="currentResult.media"
-			@log-event="onLogEvent"
-		></quick-view-commons>
-		<quick-view-links
-			v-if="hasLinks && !isMobile"
-			:links="currentResult.links"
-			:is-mobile="isMobile"
-			@log-event="onLogEvent"
-		></quick-view-links>
+		<template v-if="showMediaData">
+			<quick-view-commons
+				v-if="hasCommonsImages"
+				v-bind="currentResult.media"
+				@log-event="onLogEvent"
+			></quick-view-commons>
+			<!-- This is the mobile instance of links-->
+			<quick-view-links
+				v-if="hasLinks && !isMobile"
+				:links="currentResult.links"
+				:is-mobile="isMobile"
+				@log-event="onLogEvent"
+			></quick-view-links>
+		</template>
+		<slot
+			name="loading-skeleton"
+			:show="queryRequestInProgress"
+		>
+		</slot>
 		<slot
 			name="loading-icon"
 			:loading="loading"
@@ -113,7 +118,6 @@ const QuickViewImage = require( './QuickViewImage.vue' ),
 	QuickViewSections = require( './QuickViewSections.vue' ),
 	QuickViewCommons = require( './QuickViewCommons.vue' ),
 	QuickViewLinks = require( './QuickViewLinks.vue' ),
-	ContentSkeleton = require( '../generic/ContentSkeleton.vue' ),
 	mapActions = require( 'vuex' ).mapActions,
 	mapGetters = require( 'vuex' ).mapGetters,
 	mapState = require( 'vuex' ).mapState;
@@ -127,8 +131,12 @@ module.exports = exports = {
 		'quick-view-snippet': QuickViewSnippet,
 		'quick-view-sections': QuickViewSections,
 		'quick-view-commons': QuickViewCommons,
-		'quick-view-links': QuickViewLinks,
-		'content-skeleton': ContentSkeleton
+		'quick-view-links': QuickViewLinks
+	},
+	props: {
+		transitioning: {
+			type: Boolean
+		}
 	},
 	data: function () {
 		return {};
@@ -178,7 +186,20 @@ module.exports = exports = {
 					// On desktop we show it even just with title
 					return !!this.currentResult.prefixedText;
 				}
+			},
+			queryRequestInProgress() {
+				return this.requestStatus.query === this.requestStatuses.inProgress;
+			},
+			showQueryData() {
+				return !this.queryRequestInProgress && !this.transitioning;
+			},
+			mediaRequestInProgress() {
+				return this.requestStatus.media === this.requestStatuses.inProgress;
+			},
+			showMediaData() {
+				return !this.mediaRequestInProgress && !this.transitioning;
 			}
+
 		}
 	),
 	methods: $.extend(
