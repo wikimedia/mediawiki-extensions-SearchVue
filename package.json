@@ -17,7 +17,7 @@
 		"eslint-config-wikimedia": "0.24.0",
 		"grunt": "1.6.1",
 		"grunt-banana-checker": "0.10.0",
-		"grunt-eslint": "24.0.0",
+		"grunt-eslint": "24.0.1",
 		"grunt-stylelint": "0.18.0",
 		"jest-when": "^3.5.1",
 		"jquery": "3.6.1",
