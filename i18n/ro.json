@@ -1,0 +1,37 @@
+{
+	"@metadata": {
+		"authors": [
+			"NGC 54"
+		]
+	},
+	"searchvue-aria-button": "Deschideți previzualizarea acestui articol.",
+	"searchvue-dialog-title": "Previzualizarea căutării",
+	"searchvue-dialog-aria-label": "Dialogul previzualizării este acum deschis. Acesta afișează informații cheie despre acest articol și conținut asociat.",
+	"searchvue-desc": "Adăugiri și îmbunătățiri de funcții Vue.js la Special:Căutare",
+	"searchvue-close": "Închide",
+	"searchvue-next": "Înainte",
+	"searchvue-previous": "Înapoi",
+	"searchvue-label": "Activează previzualizarea rezultatelor căutării",
+	"searchvue-loading": "Se încarcă previzualizarea",
+	"searchvue-no-content": "Nu există conținut de previzualizat",
+	"searchvue-snippet-gotofullpage": "Mergi la pagina întreagă",
+	"searchvue-snippet-gotofullpage-ns0": "Mergi la pagina întreagă",
+	"searchvue-commons-viewmore": "Vezi mai mult",
+	"searchvue-commons-viewmore-mobile": "Vezi mai multe imagini",
+	"searchvue-commons-footnote": "La Wikimedia Commons",
+	"searchvue-commons-heading": "Imagini asociate",
+	"searchvue-commons-heading-mobile": "Imagini asociate de la Wikimedia Commons",
+	"searchvue-article-sections-heading": "Secțiuni din pagină",
+	"searchvue-article-sections-heading-ns0": "Secțiunile din articol",
+	"searchvue-more-sections": "+ încă $1 {{PLURAL:$1|secțiune|secțiuni}}",
+	"searchvue-help": "Previzualizați conținutul paginii și conținut asociat.",
+	"searchvue-links-subheading": "La $1",
+	"searchvue-links-heading": "Pagini asociate din alte proiecte",
+	"searchvue-links-showmore": "vezi alte pagini",
+	"tutorial-popup-title": "Previzualizări ale rezultatelor căutării",
+	"tutorial-popup-text1": "Apăsați pe fragmentul articolului pentru a previzualiza rezultatul căutării și a vedea conținut asociat.",
+	"tutorial-popup-text2": "Puteți activa și dezactiva previzualizările în căutare",
+	"tutorial-popup-text-mobile": "Apăsați pe fragmentul articolului sau pe săgeată pentru a previzualiza rezultatul căutării și a vedea conținut asociat.",
+	"tutorial-popup-preferences": "preferinte",
+	"tutorial-popup-close": "Închide"
+}
