@@ -12,7 +12,8 @@
 		"max-len": "off",
 		"no-jquery/variable-pattern": "off",
 		"no-jquery/no-event-shorthand": "off",
-		"compat/compat": "warn"
+		"compat/compat": "warn",
+		"mediawiki/msg-doc": "warn"
 	},
 	"overrides": [
 		{
