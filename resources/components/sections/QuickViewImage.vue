@@ -2,6 +2,7 @@
 	<div
 		class="QuickViewImage"
 		:class="{
+			// eslint-disable-next-line vue/camelcase
 			QuickViewImage__mobile: isMobile
 		}"
 	>
@@ -54,6 +55,9 @@ module.exports = exports = {
 			require: true
 		}
 	},
+	emits: [
+		'log-event'
+	],
 	computed: {
 		aspectRatio() {
 			return Math.max( 0.85, this.width / this.height );

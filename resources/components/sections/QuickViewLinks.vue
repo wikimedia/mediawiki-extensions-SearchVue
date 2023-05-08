@@ -2,6 +2,7 @@
 	<div
 		class="QuickViewLinks"
 		:class="{
+			// eslint-disable-next-line vue/camelcase
 			QuickViewLinks__mobile: isMobile
 		}"
 	>
@@ -66,6 +67,9 @@ module.exports = exports = {
 			required: true
 		}
 	},
+	emits: [
+		'log-event'
+	],
 	data() {
 		return {
 			currentShownLinkIndex: 0,

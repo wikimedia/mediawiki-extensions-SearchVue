@@ -20,11 +20,11 @@
  */
 const AppViewMobile = require( './AppViewMobile.vue' ),
 	AppViewDesktop = require( './AppViewDesktop.vue' ),
-	mapVuexActions = require( 'vuex' ).mapActions,
-	mapVuexGetters = require( 'vuex' ).mapGetters,
-	mapVuexState = require( 'vuex' ).mapState,
-	mapPiniaActions = require( 'pinia' ).mapActions,
-	useEventStore = require( '../stores/Event.js' );
+	mapActions = require( 'pinia' ).mapActions,
+	mapState = require( 'pinia' ).mapState,
+	useEventStore = require( '../stores/Event.js' ),
+	useRootStore = require( '../stores/Root.js' ),
+	useRequestStatusStore = require( '../stores/RequestStatus.js' );
 
 // @vue/component
 module.exports = exports = {
@@ -59,22 +59,22 @@ module.exports = exports = {
 				}
 			}
 		},
-		mapVuexState( [
+		mapState( useRootStore, [
 			'isMobile',
 			'title',
 			'results'
 		] ),
-		mapVuexGetters( [
+		mapState( useRequestStatusStore, [
 			'loading'
 		] )
 	),
 	methods: $.extend( {},
-		mapVuexActions( [
+		mapActions( useRootStore, [
 			'toggleVisibily',
 			'closeQuickView',
 			'onPageClose'
 		] ),
-		mapPiniaActions( useEventStore, [ 'initEventLoggingSession' ] ),
+		mapActions( useEventStore, [ 'initEventLoggingSession' ] ),
 		{
 			setQueryQuickViewTitle: function () {
 				const mwUri = new mw.Uri();
@@ -189,7 +189,7 @@ module.exports = exports = {
 				return result && ( result.text || result.thumbnail );
 			},
 			multimediaViewerIsOpen() {
-				if ( mw.mmv && mw.mmv.viewer && !mw.mmv.viewer.isOpen ) {
+				if ( !mw.mmv || !mw.mmv.viewer || !mw.mmv.viewer.isOpen ) {
 					return false;
 				}
 				return true;

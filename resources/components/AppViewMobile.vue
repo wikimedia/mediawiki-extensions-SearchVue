@@ -41,9 +41,9 @@
 const QuickView = require( './sections/QuickView.vue' ),
 	spinner = require( '../directives/spinner.js' ),
 	ContentSkeleton = require( './generic/ContentSkeleton.vue' ),
-	mapVuexActions = require( 'vuex' ).mapActions,
-	mapVuexGetters = require( 'vuex' ).mapGetters,
-	mapVuexState = require( 'vuex' ).mapState;
+	mapState = require( 'pinia' ).mapState,
+	useRootStore = require( '../stores/Root.js' ),
+	useRequestStatusStore = require( '../stores/RequestStatus.js' );
 
 // @vue/component
 module.exports = exports = {
@@ -63,31 +63,26 @@ module.exports = exports = {
 	},
 	computed: $.extend(
 		{},
-		mapVuexState( [
+		mapState( useRootStore, [
 			'title',
-			'destination'
-		] ),
-		mapVuexGetters( [
+			'destination',
 			'visible',
-			'loading',
 			'showOnMobile'
+		] ),
+		mapState( useRequestStatusStore, [
+			'loading'
 		] )
 	),
-	methods: $.extend( {},
-		mapVuexActions( [
-			'toggleVisibily'
-		] ),
-		{
-			getSearchResults() {
-				// eslint-disable-next-line no-jquery/no-global-selector
-				return $( '#mw-content-text .mw-search-result-ns-0' )
-					.not( '#mw-content-text .mw-search-interwiki-results .mw-search-result-ns-0' );
-			},
-			currentElement: function ( title ) {
-				return this.getSearchResults().find( `[data-prefixedtext="${title}"]` ).closest( 'li' )[ 0 ];
-			}
+	methods: $.extend( {
+		getSearchResults() {
+			// eslint-disable-next-line no-jquery/no-global-selector
+			return $( '#mw-content-text .mw-search-result-ns-0' )
+				.not( '#mw-content-text .mw-search-interwiki-results .mw-search-result-ns-0' );
+		},
+		currentElement: function ( title ) {
+			return this.getSearchResults().find( `[data-prefixedtext="${title}"]` ).closest( 'li' )[ 0 ];
 		}
-	)
+	} )
 };
 </script>
 

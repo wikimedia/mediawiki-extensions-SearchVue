@@ -18,7 +18,8 @@
  * Placeholder
  */
 const QuickViewTutorialPopup = require( './QuickViewTutorialPopup.vue' ),
-	mapVuexState = require( 'vuex' ).mapState;
+	mapState = require( 'pinia' ).mapState,
+	useRootStore = require( '../stores/Root.js' );
 
 // @vue/component
 module.exports = exports = {
@@ -38,7 +39,7 @@ module.exports = exports = {
 		};
 	},
 	computed: $.extend( {},
-		mapVuexState( [
+		mapState( useRootStore, [
 			'selectedIndex',
 			'isMobile'
 		] ),

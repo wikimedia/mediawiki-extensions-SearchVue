@@ -26,6 +26,9 @@ module.exports = exports = {
 			required: true
 		}
 	},
+	emits: [
+		'log-event'
+	],
 	computed: {
 		url() {
 			const title = new mw.Title( this.title );

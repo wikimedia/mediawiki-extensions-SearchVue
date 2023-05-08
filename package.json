@@ -23,7 +23,6 @@
 		"jquery": "3.6.1",
 		"stylelint-config-wikimedia": "0.14.0",
 		"vue": "3.2.37",
-		"vuex": "4.0.2",
 		"pinia": "2.0.16"
 	},
 	"eslintIgnore": [

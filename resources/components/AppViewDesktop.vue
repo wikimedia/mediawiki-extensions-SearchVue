@@ -26,13 +26,13 @@
 
 const QuickView = require( './sections/QuickView.vue' ),
 	ContentSkeleton = require( './generic/ContentSkeleton.vue' ),
-	mapVuexActions = require( 'vuex' ).mapActions,
-	mapVuexState = require( 'vuex' ).mapState,
-	mapVuexGetters = require( 'vuex' ).mapGetters,
+	mapActions = require( 'pinia' ).mapActions,
+	mapState = require( 'pinia' ).mapState,
 	LoadingDots = require( './generic/LoadingDots.vue' ),
 	onDocumentScroll = require( '../composables/onDocumentScroll.js' ),
 	onResizeObserver = require( '../composables/onResizeObserver.js' ),
-	onDocumentResize = require( '../composables/onDocumentResize.js' );
+	onDocumentResize = require( '../composables/onDocumentResize.js' ),
+	useRootStore = require( '../stores/Root.js' );
 
 // @vue/component
 module.exports = exports = {
@@ -133,10 +133,8 @@ module.exports = exports = {
 				};
 			}
 		},
-		mapVuexState( [
-			'breakpoints'
-		] ),
-		mapVuexGetters( [
+		mapState( useRootStore, [
+			'breakpoints',
 			'visible'
 		] )
 	),
@@ -146,7 +144,7 @@ module.exports = exports = {
 				return `${value}px`;
 			}
 		},
-		mapVuexActions( [
+		mapActions( useRootStore, [
 			'closeQuickView'
 		] )
 	),
