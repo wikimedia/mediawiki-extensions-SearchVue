@@ -6,6 +6,7 @@
 		:style="inlineStyles"
 	>
 		<img
+			v-if="src"
 			:src="src"
 			:alt="alt"
 			:style="inlineStyles"
@@ -29,7 +30,8 @@ module.exports = exports = {
 	props: {
 		src: {
 			type: String,
-			required: true
+			required: false,
+			default: null
 		},
 		alt: {
 			type: String,

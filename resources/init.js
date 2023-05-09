@@ -13,12 +13,16 @@ $( function () {
 
 	$( '.searchresults' ).append( $vueContainer );
 
-	Vue.config.compilerOptions.whitespace = 'preserve';
-	Vue.createMwApp( App )
-		.use( store )
-		.mount( $vueContainer.get( 0 ) );
+	const searchPreviewApp = Vue.createMwApp( App )
+		.use( store );
 
-	Vue.createMwApp( Tutorial )
-		.use( store )
-		.mount( $tutorialPopupContainer.get( 0 ) );
+	const tutorialVueApp = Vue.createMwApp( Tutorial )
+		.use( store );
+
+	// we define the whitespace option, which default have been deprecated in Vue 3
+	searchPreviewApp.config.compilerOptions.whitespace = 'preserve';
+	tutorialVueApp.config.compilerOptions.whitespace = 'preserve';
+
+	searchPreviewApp.mount( $vueContainer.get( 0 ) );
+	tutorialVueApp.mount( $tutorialPopupContainer.get( 0 ) );
 } );

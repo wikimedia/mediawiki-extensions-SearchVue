@@ -33,7 +33,8 @@ module.exports = exports = {
 	props: {
 		source: {
 			type: String,
-			required: true
+			required: false,
+			default: null
 		},
 		height: {
 			type: Number,

@@ -86,7 +86,7 @@ module.exports = exports = {
 			required: true
 		},
 		searchLink: {
-			type: Object,
+			type: String,
 			required: true
 		}
 	},
