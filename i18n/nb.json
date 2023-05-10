@@ -5,6 +5,9 @@
 			"Telaneo"
 		]
 	},
+	"searchvue-aria-button": "Åpne forhåndsvisningen av denne artikkelen.",
+	"searchvue-dialog-title": "Forhåndsvisning av søk",
+	"searchvue-dialog-aria-label": "Forhåndsvisningsdialogen er nå åpen. Den viser nøkkelinformasjon om denne artikkelen og tilknyttet innhold.",
 	"searchvue-close": "Lukk",
 	"searchvue-next": "Neste",
 	"searchvue-previous": "Forrige",
