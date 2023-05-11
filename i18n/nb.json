@@ -1,11 +1,37 @@
 {
 	"@metadata": {
 		"authors": [
-			"Telaneo"
+			"Telaneo",
+			"Jon Harald Søby"
 		]
 	},
+	"searchvue-aria-button": "Åpne forhåndsvisningen av denne artikkelen.",
+	"searchvue-dialog-title": "Forhåndsvisning av søk",
+	"searchvue-dialog-aria-label": "Forhåndsvisningsdialogen er nå åpen. Den viser nøkkelinformasjon om denne artikkelen og tilknyttet innhold.",
+	"searchvue-close": "Lukk",
+	"searchvue-next": "Neste",
+	"searchvue-previous": "Forrige",
+	"searchvue-label": "Aktiver forhåndsvisninger i søkeresultater",
+	"searchvue-loading": "Laster forhåndsvisning",
+	"searchvue-no-content": "Intet innhold som kan forhåndsvises",
+	"searchvue-snippet-gotofullpage": "Gå til hele siden",
+	"searchvue-snippet-gotofullpage-ns0": "Gå til hele artikkelen",
+	"searchvue-commons-viewmore": "Vis mer",
+	"searchvue-commons-viewmore-mobile": "Vis flere bilder",
+	"searchvue-commons-footnote": "På Wikimedia Commons",
+	"searchvue-commons-heading": "Relaterte bilder",
+	"searchvue-commons-heading-mobile": "Relaterte bilder fra Wikimedia Commons",
 	"searchvue-article-sections-heading": "Avsnitt på siden",
 	"searchvue-article-sections-heading-ns0": "Avsnitt i artikkelen",
+	"searchvue-more-sections": "+ $1 {{PLURAL:$1|seksjon|seksjoner}} til",
+	"searchvue-help": "Forhåndsvis innholdet til siden og relatert innhold.",
+	"searchvue-links-subheading": "På $1",
+	"searchvue-links-heading": "Relaterte sider på andre prosjekter",
+	"searchvue-links-showmore": "vis andre sider",
+	"tutorial-popup-title": "Vis forhåndsvisninger av resultater",
+	"tutorial-popup-text1": "Trykk på artikkelutdraget for å forhåndsvise søkeresultatet og vise relatert innhold.",
+	"tutorial-popup-text2": "Du kan slå forhåndsvisninger av og på i søket",
+	"tutorial-popup-text-mobile": "Trykk på artikkelutdraget eller pila for å forhåndsvise søkeresultatet og se relatert innhold.",
 	"tutorial-popup-preferences": "innstillinger",
 	"tutorial-popup-close": "Lukk"
 }
