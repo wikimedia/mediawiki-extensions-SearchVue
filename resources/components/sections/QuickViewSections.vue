@@ -63,7 +63,8 @@ module.exports = exports = {
 		}
 	},
 	emits: [
-		'log-event'
+		'log-event',
+		'dom-updated'
 	],
 	data() {
 		return {
@@ -149,6 +150,7 @@ module.exports = exports = {
 			} );
 
 			this.hiddenSections = hiddenSectionsAnchors;
+			this.$emit( 'dom-updated' );
 		},
 		onSectionClick( url ) {
 			this.$emit(

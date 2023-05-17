@@ -24,6 +24,7 @@ const AppViewMobile = require( './AppViewMobile.vue' ),
 	mapState = require( 'pinia' ).mapState,
 	useEventStore = require( '../stores/Event.js' ),
 	useRootStore = require( '../stores/Root.js' ),
+	useDomStore = require( '../stores/Dom.js' ),
 	useRequestStatusStore = require( '../stores/RequestStatus.js' );
 
 // @vue/component
@@ -35,8 +36,7 @@ module.exports = exports = {
 	},
 	data: function () {
 		return {
-			queryQuickViewTitle: null,
-			focusableElements: null
+			queryQuickViewTitle: null
 		};
 	},
 	computed: $.extend(
@@ -47,16 +47,6 @@ module.exports = exports = {
 				} else {
 					return 'app-view-desktop';
 				}
-			},
-			firstFocusableElement() {
-				if ( this.focusableElements && this.focusableElements.length > 0 ) {
-					return this.focusableElements[ 0 ];
-				}
-			},
-			lastFocusableElement() {
-				if ( this.focusableElements && this.focusableElements.length > 0 ) {
-					return this.focusableElements[ this.focusableElements.length - 1 ];
-				}
 			}
 		},
 		mapState( useRootStore, [
@@ -66,6 +56,10 @@ module.exports = exports = {
 		] ),
 		mapState( useRequestStatusStore, [
 			'loading'
+		] ),
+		mapState( useDomStore, [
+			'firstFocusableElement',
+			'lastFocusableElement'
 		] )
 	),
 	methods: $.extend( {},
@@ -73,6 +67,11 @@ module.exports = exports = {
 			'toggleVisibily',
 			'closeQuickView',
 			'onPageClose'
+		] ),
+		mapActions( useDomStore, [
+			'focusDialog',
+			'handleTabTrap',
+			'updateTabbableElements'
 		] ),
 		mapActions( useEventStore, [ 'initEventLoggingSession' ] ),
 		{
@@ -134,54 +133,6 @@ module.exports = exports = {
 					this.toggleVisibily( payload );
 				}
 			},
-			focusDialog() {
-				// This ensure that the focus is just triggered if the element is visible
-				// On mobile loading is different and this may not always be the case
-				if ( this.$el &&
-					this.$el.focus &&
-					typeof this.$el.focus === 'function'
-				) {
-					this.$el.focus();
-				}
-			},
-			defineFocusableElements() {
-
-				// We make sure the element is actually visible.
-				// This may be due to different loading practices on mobile
-				// or due to client quick interaction with the preview
-				if ( !this.$el || !this.$el.querySelectorAll ) {
-					return;
-				}
-
-				return this.$el.querySelectorAll(
-					'a, button, input, textarea, select, details, [tabindex]:not([tabindex="-1"])'
-				);
-
-			},
-			handleTabTrap( event ) {
-				const activeElement = document.activeElement;
-
-				// Make sure search preview is selected and all variable are correct
-				if (
-					this.title &&
-					event.key === 'Tab' &&
-					this.lastFocusableElement &&
-					this.firstFocusableElement
-				) {
-					// If it is the last element, move focus back to the first
-					if ( !event.shiftKey && activeElement === this.lastFocusableElement ) {
-						this.firstFocusableElement.focus();
-						event.preventDefault();
-					}
-
-					// If it is the first element and going backward, go back to the last element
-					if ( event.shiftKey && activeElement === this.firstFocusableElement ) {
-						this.lastFocusableElement.focus();
-						event.preventDefault();
-					}
-
-				}
-			},
 			resultHasInfoToDisplay( prefixedText ) {
 				const result = this.results.find( ( item ) => {
 					return item.prefixedText === prefixedText;
@@ -209,7 +160,7 @@ module.exports = exports = {
 			handler( loading ) {
 				// We re-calculate the tabbable element everytime the loading is complete.
 				if ( !loading ) {
-					this.focusableElements = this.defineFocusableElements();
+					this.updateTabbableElements();
 				}
 			},
 			flush: 'post'
@@ -283,8 +234,8 @@ module.exports = exports = {
 				if ( event.key === 'Escape' ) {
 					this.closeAndFocus( event );
 				}
-				if ( event.key === 'Tab' ) {
-					this.handleTabTrap( event );
+				if ( event.key === 'Tab' && this.title ) {
+					this.handleTabTrap( event, document.activeElement );
 				}
 			}
 		}.bind( this ) );
