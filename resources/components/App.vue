@@ -222,13 +222,21 @@ module.exports = exports = {
 
 		const searchResults = this.getSearchResults();
 		for ( const searchResultLi of searchResults ) {
-			const prefixedText = searchResultLi.querySelector( '.mw-search-result-heading a' ).getAttribute( 'data-prefixedtext' );
+			const searchResult = searchResultLi.querySelector( '.mw-search-result-heading' );
+
+			// Search Result will ne undefined if an user would type in the searchbox quickly
+			// before the results are fully mapped. Quite probably triggered by a BOT.
+			if ( !searchResult ) {
+				return;
+			}
+
+			const prefixedText = searchResult.querySelector( 'a' ).getAttribute( 'data-prefixedtext' );
 
 			if ( this.resultHasInfoToDisplay( prefixedText ) ) {
 				searchResultLi.classList.add( 'searchresult-with-quickview' );
 				searchResultLi.dataset.prefixedtext = prefixedText;
 
-				const searchResultContainer = searchResultLi.querySelector( '.mw-search-result-heading' ).parentElement;
+				const searchResultContainer = searchResult.parentElement;
 				this.generateAndInsertAriaButton( searchResultContainer );
 			}
 		}
