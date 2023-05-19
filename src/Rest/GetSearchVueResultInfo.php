@@ -4,7 +4,7 @@ namespace SearchVue\Rest;
 
 use ApiMain;
 use DerivativeContext;
-use FauxRequest;
+use MediaWiki\Request\FauxRequest;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
 use RequestContext;
