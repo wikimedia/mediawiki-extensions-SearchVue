@@ -1,8 +1,38 @@
 {
 	"@metadata": {
 		"authors": [
-			"محمد أحمد عبد الفتاح"
+			"محمد أحمد عبد الفتاح",
+			"Alshamiri1"
 		]
 	},
-	"searchvue-commons-footnote": "في ويكيميديا كومنز"
+	"searchvue-aria-button": "افتح معاينة هذه المقالة.",
+	"searchvue-dialog-title": "معاينة البحث",
+	"searchvue-dialog-aria-label": "مربع حوار المعاينة مفتوح الآن. يعرض معلومات أساسية عن هذه المقالة والمحتوى ذي الصلة.",
+	"searchvue-desc": "إضافات وتحسينات لميزة Vue.js إلى Special: Search",
+	"searchvue-close": "أغلق",
+	"searchvue-next": "التالي",
+	"searchvue-previous": "السابق",
+	"searchvue-label": "تمكين معاينة نتيجة البحث",
+	"searchvue-loading": "معاينة التحميل",
+	"searchvue-no-content": "لا يوجد محتوى للمعاينة",
+	"searchvue-snippet-gotofullpage": "اذهب إلى الصفحة الكاملة",
+	"searchvue-snippet-gotofullpage-ns0": "انتقل إلى المقال كاملاً",
+	"searchvue-commons-viewmore": "عرض المزيد",
+	"searchvue-commons-viewmore-mobile": "شاهد المزيد من الصور",
+	"searchvue-commons-footnote": "في ويكيميديا كومنز",
+	"searchvue-commons-heading": "الصور ذات الصلة",
+	"searchvue-commons-heading-mobile": "الصور ذات الصلة من ويكيميديا كومنز",
+	"searchvue-article-sections-heading": "أقسام في الصفحة",
+	"searchvue-article-sections-heading-ns0": "أقسام في المقال",
+	"searchvue-more-sections": "+ $1 آخر {{PLURAL:$1| قسم | أقسام}}",
+	"searchvue-help": "قم بمعاينة محتويات الصفحة والمحتوى ذي الصلة.",
+	"searchvue-links-subheading": "في $1",
+	"searchvue-links-heading": "الصفحات ذات الصلة في مشاريع أخرى",
+	"searchvue-links-showmore": "عرض الصفحات الأخرى",
+	"tutorial-popup-title": "معاينات نتائج البحث",
+	"tutorial-popup-text1": "انقر فوق مقتطف المقالة لمعاينة نتيجة البحث وعرض المحتوى ذي الصلة.",
+	"tutorial-popup-text2": "يمكنك تشغيل المعاينات وإيقاف تشغيلها في البحث",
+	"tutorial-popup-text-mobile": "اضغط على مقتطف المقالة أو السهم لمعاينة نتيجة البحث والاطلاع على المحتوى ذي الصلة.",
+	"tutorial-popup-preferences": "تفضيلات",
+	"tutorial-popup-close": "أغلق"
 }
