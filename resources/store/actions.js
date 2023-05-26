@@ -1,5 +1,7 @@
 'use strict';
 
+const useEventStore = require( '../stores/Event.js' );
+
 const restApi = new mw.Rest();
 
 const HIGHLIGHTS_REGEX = /<span class="searchmatch">(.+?)<\/span>/g;
@@ -593,6 +595,7 @@ module.exports = {
 		}
 
 		const currentTitle = context.state.title;
+		const eventStore = useEventStore();
 
 		// This invokes on each title change
 		context.dispatch( 'closeQuickView' );
@@ -613,7 +616,7 @@ module.exports = {
 
 			context.commit( 'SET_SELECTED_INDEX', selectedTitleIndex );
 
-			context.dispatch( 'events/logQuickViewEvent', { action: 'open-searchpreview', selectedIndex: context.state.selectedIndex }, { root: true } );
+			eventStore.logQuickViewEvent( { action: 'open-searchpreview', selectedIndex: context.state.selectedIndex }, { root: true } );
 		}
 	},
 	/**
@@ -624,9 +627,11 @@ module.exports = {
 	 */
 	closeQuickView: ( context ) => {
 		if ( context.state.title !== null ) {
-			context.dispatch( 'events/logQuickViewEvent', { action: 'close-searchpreview', selectedIndex: context.state.selectedIndex }, { root: true } );
+			const eventStore = useEventStore();
+			eventStore.logQuickViewEvent( { action: 'close-searchpreview', selectedIndex: context.state.selectedIndex } );
 			restoreMainSearchResultSnippets( context.getters.currentResult, context.state.isMobile );
 		}
+
 		context.commit( 'SET_TITLE', null );
 		context.commit( 'SET_SELECTED_INDEX', -1 );
 		context.commit( 'SET_THUMBNAIL' );
@@ -648,7 +653,8 @@ module.exports = {
 	 */
 	onPageClose: ( context ) => {
 		if ( context.state.selectedIndex !== -1 ) {
-			context.dispatch( 'events/logQuickViewEvent', { action: 'close-searchpreview', selectedIndex: context.state.selectedIndex }, { root: true } );
+			const eventStore = useEventStore();
+			eventStore.logQuickViewEvent( { action: 'close-searchpreview', selectedIndex: context.state.selectedIndex } );
 		}
 	},
 	/**

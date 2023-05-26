@@ -20,9 +20,11 @@
  */
 const AppViewMobile = require( './AppViewMobile.vue' ),
 	AppViewDesktop = require( './AppViewDesktop.vue' ),
-	mapActions = require( 'vuex' ).mapActions,
-	mapGetters = require( 'vuex' ).mapGetters,
-	mapState = require( 'vuex' ).mapState;
+	mapVuexActions = require( 'vuex' ).mapActions,
+	mapVuexGetters = require( 'vuex' ).mapGetters,
+	mapVuexState = require( 'vuex' ).mapState,
+	mapPiniaActions = require( 'pinia' ).mapActions,
+	useEventStore = require( '../stores/Event.js' );
 
 // @vue/component
 module.exports = exports = {
@@ -57,22 +59,22 @@ module.exports = exports = {
 				}
 			}
 		},
-		mapState( [
+		mapVuexState( [
 			'isMobile',
 			'title',
 			'results'
 		] ),
-		mapGetters( [
+		mapVuexGetters( [
 			'loading'
 		] )
 	),
 	methods: $.extend( {},
-		mapActions( [
+		mapVuexActions( [
 			'toggleVisibily',
 			'closeQuickView',
 			'onPageClose'
 		] ),
-		mapActions( 'events', [ 'initEventLoggingSession' ] ),
+		mapPiniaActions( useEventStore, [ 'initEventLoggingSession' ] ),
 		{
 			setQueryQuickViewTitle: function () {
 				const mwUri = new mw.Uri();

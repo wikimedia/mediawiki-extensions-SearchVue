@@ -1,8 +1,8 @@
 const initialState = require( '../../../resources/store/state.js' ),
-	events = require( '../../../resources/store/modules/Event.js' ),
 	when = require( 'jest-when' ).when,
 	commonsFakeResponse = require( '../fixtures/commonsApiResponse.js' ),
-	fakeElement = require( '../mocks/element.js' );
+	fakeElement = require( '../mocks/element.js' ),
+	mockEventStore = require( '../mocks/eventsStore.js' );
 
 require( '../mocks/history.js' );
 require( '../mocks/querySelector.js' );
@@ -27,7 +27,6 @@ beforeEach( () => {
 	// (see: https://vuex.vuejs.org/api/#actions)
 	context = {
 		state: JSON.parse( JSON.stringify( initialState ) ),
-		eventsState: JSON.parse( JSON.stringify( events.state() ) ),
 		getters: jest.fn(),
 		commit: jest.fn(),
 		dispatch: jest.fn()
@@ -493,9 +492,8 @@ describe( 'Actions', () => {
 				const eventName = 'open-searchpreview';
 
 				actions.handleTitleChange( context, { newTitle: title, element: fakeElement } );
-				expect( context.dispatch ).toHaveBeenCalledTimes( 2 );
-				expect( context.dispatch.mock.calls[ 1 ][ 0 ] ).toBe( 'events/logQuickViewEvent' );
-				expect( context.dispatch.mock.calls[ 1 ][ 1 ].action ).toBe( eventName );
+				expect( mockEventStore.logQuickViewEvent ).toHaveBeenCalled();
+				expect( mockEventStore.logQuickViewEvent.mock.calls[ 0 ][ 0 ].action ).toBe( eventName );
 			} );
 		} );
 	} );
@@ -652,8 +650,8 @@ describe( 'Actions', () => {
 			const eventName = 'close-searchpreview';
 
 			actions.closeQuickView( context, title );
-			expect( context.dispatch.mock.calls[ 0 ][ 0 ] ).toBe( 'events/logQuickViewEvent' );
-			expect( context.dispatch.mock.calls[ 0 ][ 1 ].action ).toBe( eventName );
+			expect( mockEventStore.logQuickViewEvent ).toHaveBeenCalled();
+			expect( mockEventStore.logQuickViewEvent.mock.calls[ 0 ][ 0 ].action ).toBe( eventName );
 
 		} );
 

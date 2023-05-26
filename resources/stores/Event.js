@@ -1,3 +1,7 @@
+'use strict';
+
+const Pinia = require( 'pinia' );
+
 const SESSION_STORAGE_KEY = 'searchvue-session-id';
 const SESSION_EXPIRATION = 10 * 60;
 
@@ -68,8 +72,11 @@ function loadEventLoggingAndSendEvent( event ) {
 	} );
 }
 
-const events = {
-	namespaced: true,
+function expandSessionExpiration( sessionId ) {
+	mw.storage.set( SESSION_STORAGE_KEY, sessionId, SESSION_EXPIRATION );
+}
+
+const useEventStore = Pinia.defineStore( 'event', {
 	state: () => ( {
 		sessionId: mw.storage.get( SESSION_STORAGE_KEY ),
 		schema: '/analytics/mediawiki/searchpreview/3.0.0',
@@ -77,12 +84,6 @@ const events = {
 		platform: mw.config.get( 'skin' ) === 'minerva' ? 'mobile' : 'desktop',
 		isAnon: mw.user.isAnon()
 	} ),
-	mutations: {
-		SET_SESSION_ID: ( state, sessionId ) => {
-			mw.storage.set( SESSION_STORAGE_KEY, sessionId, SESSION_EXPIRATION );
-			state.sessionId = sessionId;
-		}
-	},
 	actions: {
 		/**
 		 * A "search session" comprises all searches happening within
@@ -97,32 +98,26 @@ const events = {
 		 * After a hiatus of 10 minutes where no new searches have been
 		 * initiated, a new search will be regarded as a new session.
 		 *
-		 * @param {Object} context
-		 * @param {Function} context.commit
-		 * @param {Function} context.dispatch
 		 */
-		initEventLoggingSession: ( context ) => {
+		initEventLoggingSession() {
 			// If we already have a session, we're fine!
 			// We just need to commit the existing session id once more;
 			// since this is another new search, the existing search session
 			// is to be extended for another 10 minutes, and we need to
 			// update the TTL of the session ID
-			if ( context.state.sessionId ) {
-				context.commit( 'SET_SESSION_ID', context.state.sessionId );
+			if ( this.sessionId ) {
+				expandSessionExpiration( this.sessionId );
 				return;
 			}
 
-			context.dispatch( 'startNewEventLoggingSession' );
+			this.startNewEventLoggingSession();
 		},
 
 		/**
-		 * @param {Object} context
-		 * @param {Function} context.commit
-		 * @param {Function} context.dispatch
 		 * @return {Promise|undefined}
 		 */
-		startNewEventLoggingSession: ( context ) => {
-			if ( context.state.sessionId ) {
+		startNewEventLoggingSession() {
+			if ( this.sessionId ) {
 				// Failsafe in case a freak race condition lands us here despite
 				// having an active session
 				return;
@@ -131,24 +126,22 @@ const events = {
 			// Upon invoking this, it must have become clear that there was no
 			// active session, and we must initiate a new one
 			const newSessionId = randomToken();
-			context.commit( 'SET_SESSION_ID', newSessionId );
+			expandSessionExpiration( newSessionId );
+			this.sessionId = newSessionId;
 
 			// Log the session initialization so that we're able to track how many
 			// search sessions there have been, even if there is no other interaction
 			// with SearchVue
 			const eventData = { action: 'new-session', selectedIndex: -1 };
-			const event = createEvent( context.state, eventData );
+			const event = createEvent( this, eventData );
 			return loadEventLoggingAndSendEvent( event );
 		},
 
-		/**
-		 * @param {Object} context
-		 * @param {Function} context.commit
-		 * @param {Function} context.dispatch
+		/*
 		 * @param {VariableEventData} payload
 		 * @return {Promise|undefined}
 		 */
-		logQuickViewEvent: ( context, payload ) => {
+		logQuickViewEvent( payload ) {
 			if ( !payload || !payload.action ) {
 				return;
 			}
@@ -157,22 +150,22 @@ const events = {
 			// this should always be the case since it's explicitly called right
 			// after startup, but we're still going to add it here once more to
 			// prevent against perfectly-timed race conditions
-			if ( !context.state.sessionId ) {
-				context.dispatch( 'startNewEventLoggingSession' );
+			if ( !this.sessionId ) {
+				this.startNewEventLoggingSession();
 				// Since we're lacking the session ID (which will not be available
 				// until startNewEventLoggingSession ends up being executed,
 				// asynchronously), we can't log the event straight away.
 				// Instead, we'll just dispatch this exact same call again: once
 				// the dispatcher gets around to invoking it the next time, the
 				// session will be available, and we can log it then
-				context.dispatch( 'logQuickViewEvent', payload );
+				this.logQuickViewEvent( payload );
 				return;
 			}
 
-			const event = createEvent( context.state, payload );
+			const event = createEvent( this, payload );
 			return loadEventLoggingAndSendEvent( event );
 		}
 	}
-};
+} );
 
-module.exports = events;
+module.exports = useEventStore;

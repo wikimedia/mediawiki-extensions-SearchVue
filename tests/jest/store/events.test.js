@@ -1,8 +1,6 @@
-const events = require( '../../../resources/store/modules/Event.js' ),
+const useEventStore = require( '../../../resources/stores/Event.js' ),
+	Pinia = require( 'pinia' ),
 	when = require( 'jest-when' ).when;
-
-let dummyState;
-const initialState = events.state();
 
 when( global.mw.config.get )
 	.calledWith( 'wgDBname' )
@@ -12,66 +10,56 @@ when( global.mw.config.get )
 	.mockReturnValue( 'minerva' );
 
 beforeEach( () => {
-	dummyState = JSON.parse( JSON.stringify( initialState ) );
+	Pinia.setActivePinia( Pinia.createPinia() );
 } );
 
 describe( 'Events store', () => {
 	describe( 'Actions', () => {
-		let context;
+		let events;
 		beforeEach( () => {
-			context = {
-				commit: jest.fn(),
-				dispatch: jest.fn(),
-				state: JSON.parse( JSON.stringify( initialState ) )
-			};
+			events = useEventStore();
 		} );
 		describe( 'initEventLoggingSession', () => {
+			beforeEach( () => {
+				events.startNewEventLoggingSession = jest.fn();
+			} );
 			describe( 'when eventLogging is not initialized', () => {
-				it( 'Creates a new session', () => {
-					events.actions.initEventLoggingSession( context );
+				it( 'Triggers a startNewEventLoggingSession action', () => {
+					events.initEventLoggingSession();
 
-					expect( context.dispatch ).toHaveBeenCalled();
-					expect( context.dispatch ).toHaveBeenCalledWith( 'startNewEventLoggingSession' );
+					expect( events.startNewEventLoggingSession ).toHaveBeenCalled();
+				} );
+				it( 'Does not expand session expiration', () => {
+					events.initEventLoggingSession();
+
+					expect( global.mw.storage.set ).not.toHaveBeenCalled();
 				} );
 			} );
-			describe( 'when eventLogging is already initialized', () => {
+			describe( 'when sessionId is already initialized', () => {
 				beforeEach( () => {
-					context.state = Object.assign(
-						dummyState,
-						{
-							sessionId: 'dummySessionId'
-						}
-					);
+					events.sessionId = 'dummySessionId';
 				} );
-				it( 'Should commit the same session ID', () => {
-					events.actions.initEventLoggingSession( context );
+				it( 'Does not triggers a startNewEventLoggingSession action', () => {
+					events.initEventLoggingSession();
 
-					expect( context.commit ).toHaveBeenCalled();
-					expect( context.commit ).toHaveBeenCalledWith(
-						'SET_SESSION_ID',
-						expect.stringContaining( 'dummySessionId' )
-					);
+					expect( events.startNewEventLoggingSession ).not.toHaveBeenCalled();
 				} );
-				it( 'Should not create a new session', () => {
-					events.actions.initEventLoggingSession( context );
+				it( 'Expand the session expiration', () => {
+					events.initEventLoggingSession();
 
-					expect( context.dispatch ).not.toHaveBeenCalled();
+					expect( global.mw.storage.set ).toHaveBeenCalled();
 				} );
 			} );
 		} );
 		describe( 'startNewEventLoggingSession', () => {
 			describe( 'when eventLogging is not initialized', () => {
 				it( 'Creates a new session', () => {
-					events.actions.startNewEventLoggingSession( context );
+					events.startNewEventLoggingSession();
 
-					expect( context.commit ).toHaveBeenCalled();
-					expect( context.commit ).toHaveBeenCalledWith(
-						'SET_SESSION_ID',
-						expect.stringContaining( 'fakeRandomSession' )
-					);
+					expect( events.sessionId ).toContain( 'fakeRandomSession' );
 				} );
 				it( 'Logs "new-session" event', ( done ) => {
-					events.actions.startNewEventLoggingSession( context )
+					events.startNewEventLoggingSession()
 						.then( () => {
 							expect( mw.eventLog.submit ).toHaveBeenCalled();
 							expect( mw.eventLog.submit ).toHaveBeenCalledWith(
@@ -88,23 +76,16 @@ describe( 'Events store', () => {
 			} );
 			describe( 'when eventLogging is already initialized', () => {
 				beforeEach( () => {
-					context.state = Object.assign(
-						dummyState,
-						{
-							sessionId: 'dummySessionId'
-						}
-					);
+					events.sessionId = 'dummySessionId';
 				} );
 				it( 'Should not create a new session', () => {
-					events.actions.startNewEventLoggingSession( context );
+					events.startNewEventLoggingSession();
 
-					expect( context.commit ).not.toHaveBeenCalled();
+					expect( events.sessionId ).toBe( 'dummySessionId' );
 				} );
 				it( 'Should not logs "new-session" event', () => {
-					const actionResult = events.actions.startNewEventLoggingSession( context );
+					events.startNewEventLoggingSession();
 
-					// If undefined it means that there is no promise and the action has returned
-					expect( actionResult ).toBeFalsy();
 					expect( mw.eventLog.submit ).not.toHaveBeenCalled();
 				} );
 			} );
@@ -116,45 +97,35 @@ describe( 'Events store', () => {
 					action: 'dummy-action',
 					selectedIndex: 10
 				};
+				events.startNewEventLoggingSession = jest.fn().mockImplementationOnce( () => {
+					events.sessionId = 'dummySessionId';
+				} );
 			} );
 			describe( 'when the "action" parameter is missing', () => {
 				it( 'Does not perform any action', () => {
-					dummyPayload.action = null;
-					const result = events.actions.logQuickViewEvent( context, dummyPayload );
+					events.logQuickViewEvent( dummyPayload );
 
-					expect( result ).toBeFalsy();
+					expect( mw.eventLog.submit ).not.toHaveBeenCalled();
 				} );
 			} );
 			describe( 'when sessionId is missing', () => {
 				it( 'Creates a new session', () => {
-					events.actions.logQuickViewEvent( context, dummyPayload );
+					events.logQuickViewEvent( dummyPayload );
 
-					expect( context.dispatch ).toHaveBeenCalled();
-					expect( context.dispatch ).toHaveBeenCalledWith( 'startNewEventLoggingSession' );
-				} );
-				it( 'Re-dispatches log action with same data', () => {
-					events.actions.logQuickViewEvent( context, dummyPayload );
-
-					expect( context.dispatch ).toHaveBeenCalled();
-					expect( context.dispatch ).toHaveBeenCalledWith( 'logQuickViewEvent', dummyPayload );
+					expect( events.startNewEventLoggingSession ).toHaveBeenCalled();
 				} );
 			} );
 			describe( 'when all parameters are set and session exist', () => {
 				beforeEach( () => {
-					context.state = Object.assign(
-						dummyState,
-						{
-							sessionId: 'dummySessionId'
-						}
-					);
+					events.sessionId = 'dummySessionId';
 				} );
 				it( 'Should not create a new session', () => {
-					events.actions.logQuickViewEvent( context, dummyPayload );
+					events.logQuickViewEvent( dummyPayload );
 
-					expect( context.commit ).not.toHaveBeenCalled();
+					expect( events.startNewEventLoggingSession ).not.toHaveBeenCalled();
 				} );
 				it( 'Should log a "dummy-action" event', ( done ) => {
-					events.actions.logQuickViewEvent( context, dummyPayload )
+					events.logQuickViewEvent( dummyPayload )
 						.then( () => {
 							expect( mw.eventLog.submit ).toHaveBeenCalled();
 							expect( mw.eventLog.submit ).toHaveBeenCalledWith(
@@ -168,20 +139,6 @@ describe( 'Events store', () => {
 							done();
 						} );
 				} );
-			} );
-		} );
-	} );
-	describe( 'Mutation', () => {
-		describe( 'SET_SESSION_ID', () => {
-			it( 'changes the sessionId in state', () => {
-				const dummySessionId = 'dummySessionId';
-				events.mutations.SET_SESSION_ID( dummyState, dummySessionId );
-				expect( dummyState.sessionId ).toEqual( dummySessionId );
-			} );
-			it( 'set the SessionId in session Storage', () => {
-				const dummySessionId = 'dummySessionId';
-				events.mutations.SET_SESSION_ID( dummyState, dummySessionId );
-				expect( global.mw.storage.set ).toHaveBeenCalled();
 			} );
 		} );
 	} );

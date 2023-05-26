@@ -41,9 +41,9 @@
 const QuickView = require( './sections/QuickView.vue' ),
 	spinner = require( '../directives/spinner.js' ),
 	ContentSkeleton = require( './generic/ContentSkeleton.vue' ),
-	mapActions = require( 'vuex' ).mapActions,
-	mapState = require( 'vuex' ).mapState,
-	mapGetters = require( 'vuex' ).mapGetters;
+	mapVuexActions = require( 'vuex' ).mapActions,
+	mapVuexGetters = require( 'vuex' ).mapGetters,
+	mapVuexState = require( 'vuex' ).mapState;
 
 // @vue/component
 module.exports = exports = {
@@ -63,18 +63,18 @@ module.exports = exports = {
 	},
 	computed: $.extend(
 		{},
-		mapState( [
+		mapVuexState( [
 			'title',
 			'destination'
 		] ),
-		mapGetters( [
+		mapVuexGetters( [
 			'visible',
 			'loading',
 			'showOnMobile'
 		] )
 	),
 	methods: $.extend( {},
-		mapActions( [
+		mapVuexActions( [
 			'toggleVisibily'
 		] ),
 		{

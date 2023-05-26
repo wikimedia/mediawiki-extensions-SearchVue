@@ -72,7 +72,7 @@
 				"resources/store/mutations.js",
 				"resources/store/getters.js",
 				"resources/store/actions.js",
-				"resources/store/modules/Event.js",
+				"resources/stores/Event.js",
 				{
 					"name": "codex-icons.json",
 					"callback": "MediaWiki\\ResourceLoader\\CodexModule::getIcons",
@@ -93,6 +93,7 @@
 				"vue",
 				"@vue/composition-api",
 				"vuex",
+				"pinia",
 				"web2017-polyfills",
 				"@wikimedia/codex"
 			],
