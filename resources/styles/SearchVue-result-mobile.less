@@ -27,6 +27,13 @@
 		.searchresult-with-quickview--open {
 			&::after {
 				transform: scaleY( -1 );
+				// This calculation handle different searchResult height and prevent the arrow from moving
+				// The values are set as follow:
+				// - min( 100%, 342px): We get the min height or a max of 342px (this will cover small result and will prevent
+				// the arrow from moving when the snippets expand)
+				// - calc( X - 180px ) - we remove the search Preview height
+				// - max( 58px, X ) - We set a minimum height. This cover the case in which there is 'no content to preview'
+				height: ~'max( 58px, calc( min( 100%, 342px ) - 180px ) )';
 			}
 		}
 	}
