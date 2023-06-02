@@ -75,10 +75,14 @@ module.exports = exports = {
 				if ( this.pageScrolled ) {
 					return 12;
 				} else {
+					let pageContainerOffset = 0;
+
 					// Page container could be null while navigating away from the page
-					const pageContainerOffset = this.pageContainer ?
-						this.pageContainer.offsetTop :
-						0;
+					if ( this.pageContainer ) {
+						// Due to the position absolute of the heading we cannot use offsetTop
+						pageContainerOffset =
+							this.pageContainer.getBoundingClientRect().top + window.scrollY;
+					}
 					return pageContainerOffset + 50;
 				}
 			},
