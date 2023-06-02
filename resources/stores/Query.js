@@ -238,7 +238,11 @@ const updateMainSearchResultSnippets = ( title, snippet, isMobile ) => {
 	}
 
 	const selector = '[data-prefixedtext="' + title + '"] .searchresult';
-	document.querySelector( selector ).innerHTML = snippet;
+
+	// Edge case in which the search result has no text within it (empty page)
+	if ( document.querySelector( selector ) ) {
+		document.querySelector( selector ).innerHTML = snippet;
+	}
 };
 
 /**
