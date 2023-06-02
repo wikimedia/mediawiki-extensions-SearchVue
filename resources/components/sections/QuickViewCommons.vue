@@ -2,6 +2,7 @@
 	<div
 		class="quickViewCommons"
 		:class="{
+			// eslint-disable-next-line vue/camelcase
 			quickViewCommons__mobile: isMobile
 		}"
 	>
@@ -68,7 +69,8 @@
  * Placeholder
  */
 const ImageWithLoadingBackground = require( '../generic/ImageWithLoadingBackground.vue' ),
-	mapVuexState = require( 'vuex' ).mapState;
+	mapState = require( 'pinia' ).mapState,
+	useRootStore = require( '../../stores/Root.js' );
 
 // @vue/component
 module.exports = exports = {
@@ -106,7 +108,7 @@ module.exports = exports = {
 				return this.numberOfImagesLoaded === imageNumber;
 			}
 		},
-		mapVuexState( [
+		mapState( useRootStore, [
 			'isMobile'
 		] )
 	),
@@ -125,7 +127,7 @@ module.exports = exports = {
 			Array.from( commonsImages ).forEach( ( image ) => {
 				if ( image.offsetTop >= bottomOfContainer ) {
 					// we set hidden images to true if any of the image out of the container
-					this.hiddenImages = true;
+					this.hasHiddenImages = true;
 
 					// we make sure hidden images are not accessible witht eh keyboard
 					image.querySelector( 'a' ).tabIndex = -1;

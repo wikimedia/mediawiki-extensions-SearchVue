@@ -119,12 +119,11 @@ const QuickViewImage = require( './QuickViewImage.vue' ),
 	QuickViewSections = require( './QuickViewSections.vue' ),
 	QuickViewCommons = require( './QuickViewCommons.vue' ),
 	QuickViewLinks = require( './QuickViewLinks.vue' ),
-	mapVuexActions = require( 'vuex' ).mapActions,
-	mapVuexGetters = require( 'vuex' ).mapGetters,
-	mapVuexState = require( 'vuex' ).mapState,
-	mapPiniaActions = require( 'pinia' ).mapActions,
-	mapPiniaState = require( 'pinia' ).mapState,
-	useEventStore = require( '../../stores/Event.js' );
+	mapActions = require( 'pinia' ).mapActions,
+	mapState = require( 'pinia' ).mapState,
+	useEventStore = require( '../../stores/Event.js' ),
+	useRootStore = require( '../../stores/Root.js' ),
+	useRequestStatusStore = require( '../../stores/RequestStatus.js' );
 
 // @vue/component
 module.exports = exports = {
@@ -146,17 +145,19 @@ module.exports = exports = {
 		return {};
 	},
 	computed: $.extend( {},
-		mapVuexState( [
+		mapState( useRootStore, [
 			'isMobile',
 			'requestStatus',
 			'requestStatuses',
-			'selectedIndex'
+			'selectedIndex',
+			'currentResult'
 		] ),
-		mapVuexGetters( [
-			'currentResult',
+		mapState( useRequestStatusStore, [
+			'requestStatus',
+			'requestStatuses',
 			'loading'
 		] ),
-		mapPiniaState( useEventStore, [ 'sessionId' ] ),
+		mapState( useEventStore, [ 'sessionId' ] ),
 		{
 			hasCommonsImages() {
 				return this.currentResult.media &&
@@ -220,11 +221,11 @@ module.exports = exports = {
 				} );
 			}
 		},
-		mapVuexActions( [
+		mapActions( useRootStore, [
 			'closeQuickView',
 			'navigate'
 		] ),
-		mapPiniaActions( useEventStore, [ 'logQuickViewEvent' ] )
+		mapActions( useEventStore, [ 'logQuickViewEvent' ] )
 	)
 };
 </script>

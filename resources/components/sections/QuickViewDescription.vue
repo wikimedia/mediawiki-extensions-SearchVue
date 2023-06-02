@@ -2,6 +2,7 @@
 	<div
 		class="quickViewDescription"
 		:class="{
+			// eslint-disable-next-line vue/camelcase
 			quickViewDescription__mobile: isMobile,
 			'quickViewDescription--small-font': showSmallFont
 		}"
@@ -45,6 +46,9 @@ module.exports = exports = {
 			required: true
 		}
 	},
+	emits: [
+		'log-event'
+	],
 	data() {
 		return {
 			showSmallFont: false

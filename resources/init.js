@@ -5,7 +5,6 @@ $( function () {
 	const Vue = require( 'vue' ),
 		App = require( './components/App.vue' ),
 		Tutorial = require( './components/Tutorial.vue' ),
-		store = require( './store/index.js' ),
 		/* eslint-disable no-jquery/no-global-selector */
 		$vueContainer = $( '<div>' ).addClass( 'sdsv-container' ),
 		$tutorialPopupContainer = $( '<div>' ).addClass( 'tutorial-popup' );
@@ -17,11 +16,10 @@ $( function () {
 	$( '.searchresults' ).append( $vueContainer );
 
 	const searchPreviewApp = Vue.createMwApp( App )
-		.use( store )
 		.use( pinia );
 
 	const tutorialVueApp = Vue.createMwApp( Tutorial )
-		.use( store );
+		.use( pinia );
 	// we define the whitespace option, which default have been deprecated in Vue 3
 	searchPreviewApp.config.compilerOptions.whitespace = 'preserve';
 	tutorialVueApp.config.compilerOptions.whitespace = 'preserve';

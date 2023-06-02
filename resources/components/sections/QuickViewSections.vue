@@ -2,6 +2,7 @@
 	<div
 		class="quickViewSections"
 		:class="{
+			// eslint-disable-next-line vue/camelcase
 			quickViewSections__mobile: isMobile
 		}"
 	>
@@ -61,6 +62,9 @@ module.exports = exports = {
 			required: true
 		}
 	},
+	emits: [
+		'log-event'
+	],
 	data() {
 		return {
 			hiddenSections: []
