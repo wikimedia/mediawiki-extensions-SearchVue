@@ -178,7 +178,6 @@ module.exports = exports = {
 			margin-left: 11px;
 			padding-top: 0;
 			line-height: 1.2;
-			text-transform: capitalize;
 		}
 	}
 
