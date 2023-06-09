@@ -97,10 +97,6 @@
 				"@wikimedia/codex"
 			],
 			"es6": true,
-			"targets": [
-				"desktop",
-				"mobile"
-			],
 			"messages": [
 				"searchvue-aria-button",
 				"searchvue-dialog-title",
