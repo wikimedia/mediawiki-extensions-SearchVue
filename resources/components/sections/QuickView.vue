@@ -4,7 +4,6 @@
 		:class="{
 			'mw-search-quick-view__mobile': isMobile
 		}"
-		@click.stop
 	>
 		<nav
 			v-if="!isMobile"

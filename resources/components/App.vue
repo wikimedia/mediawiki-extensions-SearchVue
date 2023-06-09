@@ -139,11 +139,9 @@ module.exports = exports = {
 				} );
 				return result && ( result.text || result.thumbnail );
 			},
-			multimediaViewerIsOpen() {
-				if ( !mw.mmv || !mw.mmv.viewer || !mw.mmv.viewer.isOpen ) {
-					return false;
-				}
-				return true;
+			multiMediaViewerIsOpen() {
+				const urlFragment = mw.Uri().fragment;
+				return urlFragment && urlFragment.indexOf( '/media/' ) !== -1;
 			}
 		}
 	),
@@ -215,10 +213,9 @@ module.exports = exports = {
 
 		// eslint-disable-next-line no-jquery/no-global-selector
 		$( 'body' ).click( function ( event ) {
-			// We make sure the click is not happening within the multimedia viewer
-			// We cannot use  multimediaViewerIsOpen as it return false in this instance.
-			const isInMultimediaViewer = event.target.closest( '.mw-mmv-wrapper' );
-			if ( !this.isMobile && !isInMultimediaViewer ) {
+			const isInMultimediaViewer = this.multiMediaViewerIsOpen();
+			const isQuickView = event.target.closest( '.mw-search-quick-view' );
+			if ( !this.isMobile && !isInMultimediaViewer && !isQuickView ) {
 				this.closeQuickView();
 			}
 		}.bind( this ) );
@@ -230,7 +227,8 @@ module.exports = exports = {
 		this.restoreQuickViewOnNavigation();
 
 		window.addEventListener( 'keydown', function ( event ) {
-			if ( !this.multimediaViewerIsOpen() ) {
+			const mmvOpen = this.multiMediaViewerIsOpen();
+			if ( !mmvOpen ) {
 				if ( event.key === 'Escape' ) {
 					this.closeAndFocus( event );
 				}
