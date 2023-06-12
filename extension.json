@@ -137,9 +137,6 @@
 			]
 		},
 		"searchVue.mobile.styles": {
-			"targets": [
-				"mobile"
-			],
 			"styles": [
 				"resources/styles/SearchVue-result-mobile-immediate.less"
 			]
