@@ -10,12 +10,17 @@ const HIGHLIGHTS_REGEX = /<span class="searchmatch">(.+?)<\/span>/g;
 /**
  * Returns the canonical name of the cirrus field where the snippet text is sourced from.
  *
- * @param {string} snippetField
+ * @param {Object} currentResult
  * @return {string}
  */
-const getFieldFromSnippetField = ( snippetField ) => {
+const getFieldFromSnippetField = ( currentResult ) => {
+	// There is an edge case that produces an undefined currentResult
+	if ( !currentResult || !currentResult.snippetField ) {
+		return 'text';
+	}
+
 	// Cirrus Field can have mapping like .plain, .source that need removing
-	return snippetField ? snippetField.split( '.' )[ 0 ] : 'text';
+	return currentResult.snippetField.split( '.' )[ 0 ];
 };
 
 /**
@@ -155,13 +160,14 @@ const expandSnippet = ( snippet, fullContent, isMobile ) => {
  * @return {Object}
  */
 const generateExpandedSnippet = ( page, currentResult, isMobile ) => {
-	const cirrusField = getFieldFromSnippetField( currentResult.snippetField );
+	const cirrusField = getFieldFromSnippetField( currentResult );
 
 	if ( !page ||
 		!page.cirrusdoc ||
 		page.cirrusdoc.length === 0 ||
 		!page.cirrusdoc[ 0 ].source ||
-		!page.cirrusdoc[ 0 ].source[ cirrusField ]
+		!page.cirrusdoc[ 0 ].source[ cirrusField ] ||
+		!currentResult
 	) {
 		return {
 			expandedSnippet: null
@@ -350,7 +356,7 @@ const useQueryStore = Pinia.defineStore( 'query', {
 			// because the selected result index has not been changed yet.
 			const currentSelectedResult = results[ selectedIndex ];
 			const encodedTitle = encodeURIComponent( title );
-			const snippetField = getFieldFromSnippetField( currentSelectedResult.snippetField );
+			const snippetField = getFieldFromSnippetField( currentSelectedResult );
 			const encodedSnippetField = encodeURIComponent( snippetField );
 
 			restApi
