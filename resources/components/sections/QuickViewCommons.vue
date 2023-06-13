@@ -92,6 +92,10 @@ module.exports = exports = {
 			required: true
 		}
 	},
+	emits: [
+		'log-event',
+		'dom-updated'
+	],
 	data() {
 		return {
 			repoLink: mw.config.get( 'wgQuickViewMediaRepositoryUri' ),
@@ -171,6 +175,7 @@ module.exports = exports = {
 								// eslint-disable-next-line no-jquery/no-global-selector
 								const contentTextElement = $( '#mw-content-text' );
 								mw.hook( 'wikipage.content' ).fire( contentTextElement );
+								this.$emit( 'dom-updated' );
 
 							}
 						);

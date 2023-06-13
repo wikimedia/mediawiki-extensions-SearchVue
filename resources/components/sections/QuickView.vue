@@ -71,6 +71,7 @@
 				:sections="currentResult.sections"
 				:is-mobile="isMobile"
 				@log-event="onLogEvent"
+				@dom-updated="onDomUpdated"
 			></quick-view-sections>
 			<!-- This is the desktop instance of links-->
 			<quick-view-links
@@ -85,6 +86,7 @@
 				v-if="hasCommonsImages"
 				v-bind="currentResult.media"
 				@log-event="onLogEvent"
+				@dom-updated="onDomUpdated"
 			></quick-view-commons>
 			<!-- This is the mobile instance of links-->
 			<quick-view-links
@@ -123,6 +125,7 @@ const QuickViewImage = require( './QuickViewImage.vue' ),
 	mapState = require( 'pinia' ).mapState,
 	useEventStore = require( '../../stores/Event.js' ),
 	useRootStore = require( '../../stores/Root.js' ),
+	useDomStore = require( '../../stores/Dom.js' ),
 	useRequestStatusStore = require( '../../stores/RequestStatus.js' );
 
 // @vue/component
@@ -219,13 +222,20 @@ module.exports = exports = {
 						window.location.href = goTo;
 					}
 				} );
+			},
+			onDomUpdated() {
+				// We need to wait the next tick to make sure that the DOM update has been rendered
+				this.$nextTick( function () {
+					this.updateTabbableElements();
+				} );
 			}
 		},
 		mapActions( useRootStore, [
 			'closeQuickView',
 			'navigate'
 		] ),
-		mapActions( useEventStore, [ 'logQuickViewEvent' ] )
+		mapActions( useEventStore, [ 'logQuickViewEvent' ] ),
+		mapActions( useDomStore, [ 'updateTabbableElements' ] )
 	)
 };
 </script>
