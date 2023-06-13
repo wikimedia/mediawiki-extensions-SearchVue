@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Jon Harald Søby",
+			"Telaneo"
+		]
+	},
+	"searchvue-desc": "Vue.js-tillegg og -forbedringer til {{#Special:Search}}"
+}
