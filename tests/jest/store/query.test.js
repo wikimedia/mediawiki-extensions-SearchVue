@@ -3,7 +3,7 @@ const useStore = require( '../../../resources/stores/Query.js' ),
 	when = require( 'jest-when' ).when,
 	useRequestStatusStore = require( '../../../resources/stores/RequestStatus.js' );
 
-require( '../mocks/querySelector.js' );
+require( '../mocks/domSelector.js' );
 
 /**
  * Quick little helper function to escape contents for use in regular expressions;

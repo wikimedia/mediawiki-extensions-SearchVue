@@ -3,6 +3,7 @@
 const Pinia = require( 'pinia' );
 const useRequestStatusStore = require( './RequestStatus.js' );
 const useMediaStore = require( './Media.js' );
+const useDomStore = require( './Dom.js' );
 
 const restApi = new mw.Rest();
 
@@ -240,26 +241,6 @@ const generateExpandedSnippet = ( page, currentResult, isMobile ) => {
 };
 
 /**
- * handled the modification of the main text snippets shown in the search result page.
- *
- * @param {string} title
- * @param {string} snippet
- * @param {boolean} isMobile
- */
-const updateMainSearchResultSnippets = ( title, snippet, isMobile ) => {
-	if ( !title || !snippet || !isMobile ) {
-		return;
-	}
-
-	const selector = '[data-prefixedtext="' + title + '"] .searchresult';
-
-	// Edge case in which the search result has no text within it (empty page)
-	if ( document.querySelector( selector ) ) {
-		document.querySelector( selector ).innerHTML = snippet;
-	}
-};
-
-/**
  * Restore the main text snippets to its original value.
  *
  * @param {Object} currentResult
@@ -269,9 +250,10 @@ const restoreMainSearchResultSnippets = ( currentResult, isMobile ) => {
 	if ( !currentResult ) {
 		return;
 	}
+	const domStore = useDomStore();
 	// The original snippet does not have ellipsis at the end of it
 	const snippet = currentResult.text + mw.msg( 'ellipsis' );
-	updateMainSearchResultSnippets( currentResult.prefixedText, snippet, isMobile );
+	domStore.updateMainSearchResultSnippets( currentResult.prefixedText, snippet, isMobile );
 };
 
 /**
@@ -356,6 +338,7 @@ const useQueryStore = Pinia.defineStore( 'query', {
 
 			const requestStatusStore = useRequestStatusStore();
 			const mediaStore = useMediaStore();
+			const domStore = useDomStore();
 			requestStatusStore.setRequestStatus( {
 				type: 'query',
 				status: requestStatusStore.requestStatuses.inProgress
@@ -384,7 +367,7 @@ const useQueryStore = Pinia.defineStore( 'query', {
 					mediaStore.setMediaInfo( result, isMobile );
 					const sections = getArticleSections( result );
 					const snippetObject = generateExpandedSnippet( result, currentSelectedResult, isMobile );
-					updateMainSearchResultSnippets( title, snippetObject.expandedSnippet, isMobile );
+					domStore.updateMainSearchResultSnippets( title, snippetObject.expandedSnippet, isMobile );
 					const description = getDescription( result, snippetObject.isBeginningOfText, isMobile );
 
 					this.$patch( {

@@ -4,6 +4,7 @@ const Pinia = require( 'pinia' );
 const useEventStore = require( './Event.js' );
 const useQueryStore = require( './Query.js' );
 const useMediaStore = require( './Media.js' );
+const useDomStore = require( './Dom.js' );
 const useRequestStatusStore = require( './RequestStatus.js' );
 
 /**
@@ -40,26 +41,6 @@ const removeQuickViewFromHistoryState = () => {
 	delete mwUri.query.quickView;
 	const queryString = '?' + mwUri.getQueryString();
 	window.history.pushState( mwUri.query, null, queryString );
-};
-
-/**
- * Handle the addition and removal of classes to the body and other element to define
- * when the Search Preview is open. This classes are used to apply specific CSS properties.
- *
- * @param {boolean} open
- * @param {Element} currentElement
- */
-const handleClassesToggle = ( open, currentElement ) => {
-	if ( open ) {
-		document.getElementsByTagName( 'body' )[ 0 ].classList.add( 'search-preview-open' );
-		currentElement.classList.add( 'searchresult-with-quickview--open' );
-	} else {
-		document.getElementsByTagName( 'body' )[ 0 ].classList.remove( 'search-preview-open' );
-		const openElement = document.getElementsByClassName( 'searchresult-with-quickview--open' )[ 0 ];
-		if ( openElement ) {
-			openElement.classList.remove( 'searchresult-with-quickview--open' );
-		}
-	}
 };
 
 const useRootStore = Pinia.defineStore( 'root', {
@@ -144,11 +125,9 @@ const useRootStore = Pinia.defineStore( 'root', {
 		/**
 		 * Handles the visibility of the Search Preview definiting title.
 		 *
-		 * @param {Object} payload
-		 * @param {string} payload.title
-		 * @param {Element} payload.element
+		 * @param {string} title
 		 */
-		toggleVisibily( { title, element } ) {
+		toggleVisibily( title ) {
 			let destination = '.searchresults';
 			if ( this.isMobile ) {
 				// phpcs:disable Squiz.WhiteSpace.OperatorSpacing.NoSpaceBefore,Squiz.WhiteSpace.OperatorSpacing.NoSpaceAfter
@@ -158,17 +137,15 @@ const useRootStore = Pinia.defineStore( 'root', {
 			}
 			this.destination = destination;
 
-			this.handleTitleChange( { newTitle: title, element: element } );
+			this.handleTitleChange( title );
 		},
 		/**
 		 * Handle the change in title by retrieving the information from server
 		 * and managing the visibility of the panel
 		 *
-		 * @param {Object} payload
-		 * @param {?string} payload.newTitle
-		 * @param {?Element} payload.element
+		 * @param {?string} newTitle
 		 */
-		handleTitleChange( { newTitle: newTitle, element: element } ) {
+		handleTitleChange( newTitle ) {
 			if ( !newTitle ) {
 				return;
 			}
@@ -176,6 +153,7 @@ const useRootStore = Pinia.defineStore( 'root', {
 			const currentTitle = this.title;
 			const eventStore = useEventStore();
 			const queryStore = useQueryStore();
+			const domStore = useDomStore();
 
 			// This invokes on each title change
 			this.closeQuickView();
@@ -192,7 +170,7 @@ const useRootStore = Pinia.defineStore( 'root', {
 				queryStore.retrieveInfoFromQuery( newTitle, selectedTitleIndex, this.results, this.isMobile );
 				this.title = newTitle;
 				pushTitleToHistoryState( newTitle );
-				handleClassesToggle( true, element );
+				domStore.handleClassesToggle( newTitle );
 
 				this.selectedIndex = selectedTitleIndex;
 
@@ -206,6 +184,7 @@ const useRootStore = Pinia.defineStore( 'root', {
 
 			const mediaStore = useMediaStore();
 			const queryStore = useQueryStore();
+			const domStore = useDomStore();
 			const requestStatusStore = useRequestStatusStore();
 
 			if ( this.title !== null ) {
@@ -225,7 +204,7 @@ const useRootStore = Pinia.defineStore( 'root', {
 			mediaStore.abort();
 			queryStore.abort();
 			mediaStore.$reset();
-			handleClassesToggle( false );
+			domStore.handleClassesToggle();
 		},
 		/**
 		 * Emit close event when page is closing/refreshing while QuickView is open

@@ -32,7 +32,8 @@ const QuickView = require( './sections/QuickView.vue' ),
 	onDocumentScroll = require( '../composables/onDocumentScroll.js' ),
 	onResizeObserver = require( '../composables/onResizeObserver.js' ),
 	onDocumentResize = require( '../composables/onDocumentResize.js' ),
-	useRootStore = require( '../stores/Root.js' );
+	useRootStore = require( '../stores/Root.js' ),
+	useDomStore = require( '../stores/Dom.js' );
 
 // @vue/component
 module.exports = exports = {
@@ -43,8 +44,9 @@ module.exports = exports = {
 		'content-skeleton': ContentSkeleton
 	},
 	setup() {
+		const domStore = useDomStore();
 		const { scrollY } = onDocumentScroll();
-		const { elementWidth } = onResizeObserver( document.querySelector( '#bodyContent' ) );
+		const { elementWidth } = onResizeObserver( domStore.pageContainer );
 		const { width } = onDocumentResize();
 
 		return {
@@ -55,8 +57,6 @@ module.exports = exports = {
 	},
 	data: function () {
 		return {
-			pageContainer: document.querySelector( '#bodyContent' ),
-			searchContainer: document.querySelector( '.searchresults' ),
 			pageScrolled: false
 		};
 	},
@@ -140,6 +140,10 @@ module.exports = exports = {
 		mapState( useRootStore, [
 			'breakpoints',
 			'visible'
+		] ),
+		mapState( useDomStore, [
+			'pageContainer',
+			'searchContainer'
 		] )
 	),
 	methods: $.extend(

@@ -58,8 +58,7 @@ module.exports = exports = {
 			'loading'
 		] ),
 		mapState( useDomStore, [
-			'firstFocusableElement',
-			'lastFocusableElement'
+			'searchResults'
 		] )
 	),
 	methods: $.extend( {},
@@ -71,7 +70,9 @@ module.exports = exports = {
 		mapActions( useDomStore, [
 			'focusDialog',
 			'handleTabTrap',
-			'updateTabbableElements'
+			'updateTabbableElements',
+			'focusCurrentResult',
+			'generateAndInsertAriaButton'
 		] ),
 		mapActions( useEventStore, [ 'initEventLoggingSession' ] ),
 		{
@@ -83,33 +84,14 @@ module.exports = exports = {
 			},
 			restoreQuickViewOnNavigation() {
 				if ( this.queryQuickViewTitle ) {
-					const currentElement = this.currentElement( this.queryQuickViewTitle );
-					this.toggleVisibily( {
-						title: this.queryQuickViewTitle,
-						element: currentElement
-					} );
+					this.toggleVisibily( this.queryQuickViewTitle );
 				}
-			},
-			getSearchResults() {
-				// eslint-disable-next-line no-jquery/no-global-selector
-				return $( '#mw-content-text .mw-search-result-ns-0' )
-					.not( '#mw-content-text .mw-search-interwiki-results .mw-search-result-ns-0' );
-			},
-			currentElement: function ( title ) {
-				return this.getSearchResults().find( `[data-prefixedtext="${title}"]` ).closest( 'li' )[ 0 ];
 			},
 			leaving() {
 				// Emit QuickView closing event only if QuickView is present in url
 				if ( this.queryQuickViewTitle ) {
 					this.onPageClose();
 				}
-			},
-			generateAndInsertAriaButton( container ) {
-				const ariaButton = document.createElement( 'BUTTON' );
-				ariaButton.type = 'button';
-				ariaButton.classList.add( 'quickView-aria-button' );
-				ariaButton.ariaLabel = this.$i18n( 'searchvue-aria-button' ).text();
-				container.insertBefore( ariaButton, null );
 			},
 			closeAndFocus( event ) {
 				if ( !this.title ) {
@@ -118,7 +100,7 @@ module.exports = exports = {
 
 				// event.detail will be equal to 0 if triggered by keyboard
 				if ( event.detail === 0 ) {
-					this.currentElement( this.title ).querySelector( '.quickView-aria-button' ).focus();
+					this.focusCurrentResult( this.title );
 				}
 				this.closeQuickView();
 			},
@@ -128,9 +110,7 @@ module.exports = exports = {
 				if ( searchResultLink.hasAttribute( 'data-prefixedtext' ) ) {
 					event.stopPropagation();
 					const resultTitle = searchResultLink.getAttribute( 'data-prefixedtext' );
-					const currentElement = this.currentElement( resultTitle );
-					const payload = { title: resultTitle, element: currentElement };
-					this.toggleVisibily( payload );
+					this.toggleVisibily( resultTitle );
 				}
 			},
 			resultHasInfoToDisplay( prefixedText ) {
@@ -171,11 +151,10 @@ module.exports = exports = {
 	},
 	mounted: function () {
 
-		const searchResults = this.getSearchResults();
-		for ( const searchResultLi of searchResults ) {
+		for ( const searchResultLi of this.searchResults ) {
 			const searchResult = searchResultLi.querySelector( '.mw-search-result-heading' );
 
-			// Search Result will ne undefined if an user would type in the searchbox quickly
+			// Search Result will be undefined if an user would type in the searchbox quickly
 			// before the results are fully mapped. Quite probably triggered by a BOT.
 			if ( !searchResult ) {
 				return;
@@ -188,13 +167,13 @@ module.exports = exports = {
 				searchResultLi.dataset.prefixedtext = prefixedText;
 
 				const searchResultContainer = searchResult.parentElement;
-				this.generateAndInsertAriaButton( searchResultContainer );
+				this.generateAndInsertAriaButton( searchResultContainer, this.$i18n( 'searchvue-aria-button' ).text() );
 			}
 		}
 
-		const searchResultWithQuickView = searchResults.filter( function ( resultIndex ) {
-			return searchResults[ resultIndex ].classList.contains( 'searchresult-with-quickview' );
-		} );
+		const searchResultWithQuickView = this.searchResults.filter( function ( resultIndex ) {
+			return this.searchResults[ resultIndex ].classList.contains( 'searchresult-with-quickview' );
+		}.bind( this ) );
 		// Mouse click
 		searchResultWithQuickView.find( '.searchresult, .mw-search-result-data, .quickView-aria-button' )
 			.click( function ( event ) {

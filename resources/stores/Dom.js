@@ -5,18 +5,32 @@ const Pinia = require( 'pinia' );
 const useDomStore = Pinia.defineStore( 'dom', {
 	state: () => ( {
 		container: '.mw-search-quick-view',
-		focusableElements: null
+		focusableElements: null,
+		pageContainer: document.querySelector( '#bodyContent' ),
+		searchContainer: document.querySelector( '.searchresults' ),
+		// eslint-disable-next-line no-jquery/no-global-selector
+		searchResults: $( '#mw-content-text .mw-search-result-ns-0' )
+			.not( '#mw-content-text .mw-search-interwiki-results .mw-search-result-ns-0' )
 	} ),
 	getters: {
-		firstFocusableElement() {
-			if ( this.focusableElements && this.focusableElements.length > 0 ) {
-				return this.focusableElements[ 0 ];
+		firstFocusableElement( state ) {
+			if ( state.focusableElements && state.focusableElements.length > 0 ) {
+				return state.focusableElements[ 0 ];
 			}
 		},
-		lastFocusableElement() {
-			if ( this.focusableElements && this.focusableElements.length > 0 ) {
-				return this.focusableElements[ this.focusableElements.length - 1 ];
+		lastFocusableElement( state ) {
+			if ( state.focusableElements && state.focusableElements.length > 0 ) {
+				return state.focusableElements[ state.focusableElements.length - 1 ];
 			}
+		},
+		currentSelectedResults( state ) {
+			return ( title ) => {
+				if ( title ) {
+					// phpcs:disable Squiz.WhiteSpace.OperatorSpacing.NoSpaceBefore,Squiz.WhiteSpace.OperatorSpacing.NoSpaceAfter
+					return state.searchResults.find( `[data-prefixedtext="${title}"]` ).closest( 'li' )[ 0 ];
+					// phpcs:enable Squiz.WhiteSpace.OperatorSpacing.NoSpaceBefore,Squiz.WhiteSpace.OperatorSpacing.NoSpaceAfter
+				}
+			};
 		}
 	},
 	actions: {
@@ -76,6 +90,59 @@ const useDomStore = Pinia.defineStore( 'dom', {
 				}
 
 			}
+		},
+		/**
+		 * Handle the addition and removal of classes to the body and other element to define
+		 * when the Search Preview is open. This classes are used to apply specific CSS properties.
+		 *
+		 * @param {string} title
+		 */
+		handleClassesToggle( title ) {
+			if ( title ) {
+				document.getElementsByTagName( 'body' )[ 0 ].classList.add( 'search-preview-open' );
+				this.currentSelectedResults( title ).classList.add( 'searchresult-with-quickview--open' );
+			} else {
+				document.getElementsByTagName( 'body' )[ 0 ].classList.remove( 'search-preview-open' );
+				const openElement = document.getElementsByClassName( 'searchresult-with-quickview--open' )[ 0 ];
+				if ( openElement ) {
+					openElement.classList.remove( 'searchresult-with-quickview--open' );
+				}
+			}
+		},
+		/**
+		 * Moves the focus to the main search result element. This action is usually triggered after
+		 * the search view container is closed using keyboard navigation.
+		 *
+		 * @param {string} title
+		 */
+		focusCurrentResult( title ) {
+			this.currentSelectedResults( title ).querySelector( '.quickView-aria-button' ).focus();
+		},
+		/**
+		 * handled the modification of the main text snippets shown in the search result page.
+		 *
+		 * @param {string} title
+		 * @param {string} snippet
+		 * @param {boolean} isMobile
+		 */
+		updateMainSearchResultSnippets: ( title, snippet, isMobile ) => {
+			if ( !title || !snippet || !isMobile ) {
+				return;
+			}
+
+			const selector = '[data-prefixedtext="' + title + '"] .searchresult';
+
+			// Edge case in which the search result has no text within it (empty page)
+			if ( document.querySelector( selector ) ) {
+				document.querySelector( selector ).innerHTML = snippet;
+			}
+		},
+		generateAndInsertAriaButton( container, ariaLabel ) {
+			const ariaButton = document.createElement( 'BUTTON' );
+			ariaButton.type = 'button';
+			ariaButton.classList.add( 'quickView-aria-button' );
+			ariaButton.ariaLabel = ariaLabel;
+			container.insertBefore( ariaButton, null );
 		}
 	}
 } );

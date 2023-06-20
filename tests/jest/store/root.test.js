@@ -1,9 +1,9 @@
 const useStore = require( '../../../resources/stores/Root.js' ),
 	Pinia = require( 'pinia' ),
-	fakeElement = require( '../mocks/element.js' ),
 	useMediaStore = require( '../../../resources/stores/Media.js' ),
 	useQueryStore = require( '../../../resources/stores/Query.js' ),
-	useEventStore = require( '../../../resources/stores/Event.js' );
+	useEventStore = require( '../../../resources/stores/Event.js' ),
+	useDomStore = require( '../../../resources/stores/Dom.js' );
 require( '../mocks/history.js' );
 
 beforeEach( () => {
@@ -15,6 +15,7 @@ describe( 'Root store', () => {
 	let media;
 	let query;
 	let event;
+	let dom;
 	beforeEach( () => {
 		store = useStore();
 	} );
@@ -130,14 +131,14 @@ describe( 'Root store', () => {
 					store.handleTitleChange = jest.fn();
 				} );
 				it( 'Set destination to false, if title is not passed', () => {
-					store.toggleVisibily( {} );
+					store.toggleVisibily();
 
 					expect( store.destination ).toBeFalsy();
 				} );
 				it( 'Set destination to title provided', () => {
 					const title = 'dummy';
 
-					store.toggleVisibily( { title: title } );
+					store.toggleVisibily( title );
 					expect( store.destination ).toContain( title );
 				} );
 			} );
@@ -164,15 +165,17 @@ describe( 'Root store', () => {
 				query = useQueryStore();
 				media = useMediaStore();
 				event = useEventStore();
+				dom = useDomStore();
 				store.results = [
 					{ prefixedText: 'dummy1', thumbnail: { width: 1, height: 2 } },
 					{ prefixedText: 'dummy2' }
 				];
 				store.closeQuickView = jest.fn();
+				dom.handleClassesToggle = jest.fn();
 			} );
 			describe( 'when called with empty title', () => {
 				it( 'Nothing is committed', () => {
-					store.handleTitleChange( {} );
+					store.handleTitleChange();
 
 					expect( store.closeQuickView ).not.toHaveBeenCalled();
 
@@ -183,7 +186,7 @@ describe( 'Root store', () => {
 					const title = 'dummy';
 					store.title = title;
 					store.closeQuickView = jest.fn();
-					store.handleTitleChange( { newTitle: title } );
+					store.handleTitleChange( title );
 
 					expect( store.closeQuickView ).toHaveBeenCalled();
 
@@ -194,7 +197,7 @@ describe( 'Root store', () => {
 				it( 'Setup article thumbnail height and width from the info available in the result', () => {
 
 					const title = 'dummy1';
-					store.handleTitleChange( { newTitle: title, element: fakeElement } );
+					store.handleTitleChange( title );
 
 					expect( query.thumbnail ).toEqual( store.results[ 0 ].thumbnail );
 
@@ -203,21 +206,21 @@ describe( 'Root store', () => {
 					query.retrieveInfoFromQuery = jest.fn();
 
 					const title = 'dummy1';
-					store.handleTitleChange( { newTitle: title, element: fakeElement } );
+					store.handleTitleChange( title );
 
 					expect( query.retrieveInfoFromQuery ).toHaveBeenCalled();
 
 				} );
 				it( 'and current title had no value, update the title', () => {
 					const title = 'dummy1';
-					store.handleTitleChange( { newTitle: title, element: fakeElement } );
+					store.handleTitleChange( title );
 
 					expect( store.title ).toEqual( title );
 
 				} );
 				it( 'and value differs from existing title, update the title', () => {
 					const title = 'dummy1';
-					store.handleTitleChange( { newTitle: title, element: fakeElement } );
+					store.handleTitleChange( title );
 
 					expect( store.title ).toEqual( title );
 
@@ -225,7 +228,7 @@ describe( 'Root store', () => {
 
 				it( 'Adds QuickView to history state', () => {
 					const title = 'dummy1';
-					store.handleTitleChange( { newTitle: title, element: fakeElement } );
+					store.handleTitleChange( title );
 
 					expect( window.history.pushState ).toHaveBeenCalled();
 					expect( window.history.pushState ).toHaveBeenCalledWith(
@@ -243,7 +246,7 @@ describe( 'Root store', () => {
 					const title = 'dummy2';
 					const eventName = 'open-searchpreview';
 
-					store.handleTitleChange( { newTitle: title, element: fakeElement } );
+					store.handleTitleChange( title );
 					expect( event.logQuickViewEvent.mock.calls[ 0 ][ 0 ].action ).toBe( eventName );
 				} );
 			} );

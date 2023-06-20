@@ -1,16 +1,37 @@
 const useDomStore = require( '../../../resources/stores/Dom.js' ),
-	Pinia = require( 'pinia' );
+	Pinia = require( 'pinia' ),
+	mockElement = require( '../mocks/element.js' );
 
-require( '../mocks/querySelector.js' );
-
+require( '../mocks/domSelector.js' );
 beforeEach( () => {
 	Pinia.setActivePinia( Pinia.createPinia() );
 } );
+
+const createMockElement = ( name ) => {
+	const fakeElement = document.createElement( 'div' );
+	fakeElement.textContent = name;
+	fakeElement.focus = jest.fn();
+
+	return fakeElement;
+};
 
 describe( 'Dom store', () => {
 	let domStore;
 	beforeEach( () => {
 		domStore = useDomStore();
+		domStore.searchResults = {
+			find: jest.fn().mockReturnValueOnce( {
+				closest: jest.fn().mockReturnValueOnce( [
+					Object.assign(
+						{
+							// We cannot add this directly in the MockElement otherwise it will trigger a circular dependencies
+							querySelector: document.querySelector
+						},
+						mockElement
+					)
+				] )
+			} )
+		};
 	} );
 	describe( 'Getters', () => {
 		describe( 'firstFocusableElement', () => {
@@ -36,6 +57,14 @@ describe( 'Dom store', () => {
 					'third'
 				];
 				expect( domStore.lastFocusableElement ).toEqual( 'third' );
+			} );
+		} );
+		describe( 'currentSelectedResults', () => {
+			it( 'Return null if no title is passed', () => {
+				expect( domStore.currentSelectedResults() ).toBeFalsy();
+			} );
+			it( 'Return the result element if a title is passed', () => {
+				expect( domStore.currentSelectedResults( 'dummy' ).innerHTML ).toEqual( 'dummyElement' );
 			} );
 		} );
 	} );
@@ -75,13 +104,6 @@ describe( 'Dom store', () => {
 		describe( 'handleTabTrap', () => {
 			let mockEvent;
 			beforeEach( () => {
-				const createMockElement = ( name ) => {
-					const fakeElement = document.createElement( 'div' );
-					fakeElement.textContent = name;
-					fakeElement.focus = jest.fn();
-
-					return fakeElement;
-				};
 				domStore.focusableElements = [
 					createMockElement( 'firstElement' ),
 					createMockElement( 'secondElement' )
@@ -123,6 +145,103 @@ describe( 'Dom store', () => {
 				domStore.handleTabTrap( mockEvent, activeElement );
 				expect( domStore.focusableElements[ 1 ].focus ).toHaveBeenCalled();
 				expect( mockEvent.preventDefault ).toHaveBeenCalled();
+			} );
+		} );
+		describe( 'handleClassesToggle', () => {
+			describe( 'When no title is passed', () => {
+				it( 'remove class "search-preview-open" from body', () => {
+
+					domStore.handleClassesToggle();
+					expect( document.getElementsByTagName ).toHaveBeenCalled();
+					expect( mockElement.classList.remove ).toHaveBeenCalledWith( 'search-preview-open' );
+				} );
+				it( 'remove class "searchresult-with-quickview--open" from search result', () => {
+					// We mock the currentSelectedResult getter
+					domStore.currentSelectedResults = mockElement;
+
+					domStore.handleClassesToggle();
+					expect( document.getElementsByClassName ).toHaveBeenCalled();
+					expect( mockElement.classList.remove ).toHaveBeenCalledWith( 'searchresult-with-quickview--open' );
+
+				} );
+			} );
+			describe( 'When title is passed', () => {
+				it( 'add class "search-preview-open" from body', () => {
+
+					domStore.handleClassesToggle( 'dummy' );
+					expect( document.getElementsByTagName ).toHaveBeenCalled();
+					expect( mockElement.classList.add ).toHaveBeenCalledWith( 'search-preview-open' );
+				} );
+				it( 'add class "searchresult-with-quickview--open" from search result', () => {
+
+					domStore.handleClassesToggle( 'dummy' );
+					expect( mockElement.classList.add ).toHaveBeenCalledWith( 'searchresult-with-quickview--open' );
+
+				} );
+			} );
+		} );
+		describe( 'focusCurrentResult', () => {
+			it( 'Calls focus on the current element', () => {
+				domStore.focusCurrentResult( 'dummy' );
+				expect( mockElement.focus ).toHaveBeenCalled();
+			} );
+		} );
+		describe( 'updateMainSearchResultSnippets', () => {
+			beforeEach( () => {
+
+			} );
+			describe( 'does not update dom when the following argument is missing', () => {
+				it( 'title', () => {
+					domStore.updateMainSearchResultSnippets( false, 'dummySnippet', true );
+					expect( document.querySelector ).not.toHaveBeenCalledWith( expect.stringContaining( 'data-prefixedtext' ) );
+				} );
+				it( 'snippet', () => {
+					domStore.updateMainSearchResultSnippets( 'dummyTitle', undefined, true );
+					expect( document.querySelector ).not.toHaveBeenCalledWith( expect.stringContaining( 'data-prefixedtext' ) );
+				} );
+				it( 'isMobile', () => {
+					domStore.updateMainSearchResultSnippets( 'dummyTitle', 'dummySnippet' );
+					expect( document.querySelector ).not.toHaveBeenCalledWith( expect.stringContaining( 'data-prefixedtext' ) );
+				} );
+			} );
+			describe( 'when all paramethers are passed correctly', () => {
+				it( 'update the element with the provided snippet', () => {
+					const dummyElement = createMockElement( 'dummyElement' );
+					document.querySelector.mockReturnValue( dummyElement );
+
+					domStore.updateMainSearchResultSnippets( 'dummyTitle', 'dummySnippet', true );
+
+					expect( document.querySelector ).toHaveBeenCalledWith( expect.stringContaining( 'data-prefixedtext' ) );
+					expect( dummyElement.innerHTML ).toEqual( 'dummySnippet' );
+				} );
+			} );
+		} );
+
+		describe( 'generateAndInsertAriaButton', () => {
+			let container;
+			let insertBefore;
+			beforeEach( () => {
+				insertBefore = jest.fn();
+				container = {
+					insertBefore: insertBefore
+				};
+			} );
+			it( 'Attach a button to the provided container', () => {
+				domStore.generateAndInsertAriaButton( container );
+
+				expect( insertBefore ).toHaveBeenCalled();
+				// we check the first argument that should be the button itself
+				expect( insertBefore.mock.calls[ 0 ][ 0 ] ).toBeTruthy();
+				expect( insertBefore.mock.calls[ 0 ][ 0 ].type ).toBe( 'button' );
+			} );
+			it( 'Set the button aria label', () => {
+				const dummyAriaLabel = 'dummyAriaLabel';
+				domStore.generateAndInsertAriaButton( container, dummyAriaLabel );
+
+				expect( insertBefore ).toHaveBeenCalled();
+				// we check the first argument that should be the button itself
+				expect( insertBefore.mock.calls[ 0 ][ 0 ] ).toBeTruthy();
+				expect( insertBefore.mock.calls[ 0 ][ 0 ].ariaLabel ).toBe( dummyAriaLabel );
 			} );
 		} );
 	} );

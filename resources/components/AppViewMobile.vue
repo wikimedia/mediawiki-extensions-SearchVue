@@ -72,17 +72,7 @@ module.exports = exports = {
 		mapState( useRequestStatusStore, [
 			'loading'
 		] )
-	),
-	methods: $.extend( {
-		getSearchResults() {
-			// eslint-disable-next-line no-jquery/no-global-selector
-			return $( '#mw-content-text .mw-search-result-ns-0' )
-				.not( '#mw-content-text .mw-search-interwiki-results .mw-search-result-ns-0' );
-		},
-		currentElement: function ( title ) {
-			return this.getSearchResults().find( `[data-prefixedtext="${title}"]` ).closest( 'li' )[ 0 ];
-		}
-	} )
+	)
 };
 </script>
 
