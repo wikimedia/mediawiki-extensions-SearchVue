@@ -25,7 +25,7 @@
 					<a
 						:href="image.imageinfo[ 0 ].descriptionurl"
 						class="image"
-						@click.prevent="onCommonsClick"
+						@click.prevent="onCommonsClick()"
 					>
 						<image-with-loading-background
 							:src="image.imageinfo[ 0 ].thumburl"
@@ -146,10 +146,11 @@ module.exports = exports = {
 			}
 			this.numberOfImagesLoaded++;
 		},
-		onCommonsClick() {
+		onCommonsClick( url ) {
 			this.$emit( 'log-event',
 				{
-					action: 'click-interwiki-commons'
+					action: 'click-interwiki-commons',
+					goTo: url
 				} );
 		},
 		calculateAspectRatio( image ) {
