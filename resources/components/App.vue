@@ -1,10 +1,12 @@
 <template>
+	<!-- A dialog component require a label (that acts as the title) and a description.
+	https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/dialog_role -->
 	<component
 		:is="quickViewComponent"
 		role="dialog"
 		tabindex="-1"
-		:title="$i18n( 'searchvue-dialog-title' ).text()"
-		:aria-label="$i18n( 'searchvue-dialog-aria-label' ).text()"
+		:aria-label="$i18n( 'searchvue-dialog-title' ).text()"
+		:aria-description="$i18n( 'searchvue-dialog-aria-label' ).text()"
 		class="mw-search-quick-view"
 		@close="closeAndFocus"
 	>
