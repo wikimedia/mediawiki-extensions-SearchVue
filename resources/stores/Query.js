@@ -338,7 +338,6 @@ const useQueryStore = Pinia.defineStore( 'query', {
 
 			const requestStatusStore = useRequestStatusStore();
 			const mediaStore = useMediaStore();
-			const domStore = useDomStore();
 			requestStatusStore.setRequestStatus( {
 				type: 'query',
 				status: requestStatusStore.requestStatuses.inProgress
@@ -367,7 +366,11 @@ const useQueryStore = Pinia.defineStore( 'query', {
 					mediaStore.setMediaInfo( result, isMobile );
 					const sections = getArticleSections( result );
 					const snippetObject = generateExpandedSnippet( result, currentSelectedResult, isMobile );
-					domStore.updateMainSearchResultSnippets( title, snippetObject.expandedSnippet, isMobile );
+
+					// This functionality was temporary removed on mobile
+					// but the code was left untouched purposely on T340577
+					// domStore.updateMainSearchResultSnippets( title, snippetObject.expandedSnippet, isMobile );
+
 					const description = getDescription( result, snippetObject.isBeginningOfText, isMobile );
 
 					this.$patch( {
