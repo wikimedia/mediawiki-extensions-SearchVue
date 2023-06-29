@@ -41,11 +41,8 @@
 				<p>
 					{{ $i18n( 'tutorial-popup-text1' ).text() }}
 				</p>
-				<p>
-					{{ $i18n( 'tutorial-popup-text2' ).text() }} <a :href="url" target="_blank">
-						{{ $i18n( 'tutorial-popup-preferences' ).text() }}
-					</a>.
-				</p>
+				<!-- eslint-disable vue/no-v-html -->
+				<p v-html="$i18n( 'tutorial-popup-text3', url ).text()"></p>
 			</template>
 		</div>
 	</section>
