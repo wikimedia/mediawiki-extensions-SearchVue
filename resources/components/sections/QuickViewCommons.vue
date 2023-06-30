@@ -172,12 +172,14 @@ module.exports = exports = {
 									this.setHasHiddenImages( this.$refs[ 'images-container' ] );
 								}
 
-								// trigger the content hook, used by the multimedia viewer
-								// eslint-disable-next-line no-jquery/no-global-selector
-								const contentTextElement = $( '#mw-content-text' );
-								mw.hook( 'wikipage.content' ).fire( contentTextElement );
-								this.$emit( 'dom-updated' );
+								mw.loader.using( 'mmv.bootstrap.autostart', function () {
+									// trigger the content hook, used by the multimedia viewer
+									// eslint-disable-next-line no-jquery/no-global-selector
+									const contentTextElement = $( '#mw-content-text' );
+									mw.hook( 'wikipage.content' ).fire( contentTextElement );
+								} );
 
+								this.$emit( 'dom-updated' );
 							}
 						);
 				}
