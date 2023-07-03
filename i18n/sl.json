@@ -30,8 +30,7 @@
 	"searchvue-links-showmore": "ogled drugih strani",
 	"tutorial-popup-title": "Predogled iskalnih zadetkov",
 	"tutorial-popup-text1": "Kliknite delček članka za predogled iskalnih zadetkov in prikaz povezane vsebine.",
-	"tutorial-popup-text2": "V iskanju lahko vklopite in izklopite predogled",
+	"tutorial-popup-text3": "Predogled lahko vklopite ali izklopite v <a href=\"$1\" target=\"_blank\">nastavitvah iskanja</a>.",
 	"tutorial-popup-text-mobile": "Tapnite delček članka za predogled iskalnih zadetkov in prikaz povezane vsebine.",
-	"tutorial-popup-preferences": "nastavitve",
 	"tutorial-popup-close": "Zapri"
 }

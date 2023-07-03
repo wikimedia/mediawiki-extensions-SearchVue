@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Gomoko",
 			"SleaY",
 			"Thibaut120094",
 			"Verdy p",
@@ -33,8 +34,7 @@
 	"searchvue-links-showmore": "afficher d’autres pages",
 	"tutorial-popup-title": "Aperçus des résultats de recherche",
 	"tutorial-popup-text1": "Cliquez sur l’extrait d’article pour prévisualiser le résultat de la recherche et voir le contenu associé.",
-	"tutorial-popup-text2": "Vous pouvez activer ou désactiver les aperçus dans la recherche",
+	"tutorial-popup-text3": "Vous pouvez activer ou désactiver les aperçus dans les <a href=\"$1\" target=\"_blank\">préférences de recherche</a>.",
 	"tutorial-popup-text-mobile": "Appuyez sur l’extrait d’article ou sur la flèche pour prévisualiser le résultat de la recherche et voir le contenu associé.",
-	"tutorial-popup-preferences": "préférences",
 	"tutorial-popup-close": "Fermer"
 }

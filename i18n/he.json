@@ -30,8 +30,7 @@
 	"searchvue-links-showmore": "צפייה בדפים אחרים",
 	"tutorial-popup-title": "תצוגות מקדימות של תוצאות חיפוש",
 	"tutorial-popup-text1": "לחיצה על קטע של ערך תראה תצוגה מקדימה של תוצאת החיפוש כדי לאפשר לך לצפות בתוכן קשור.",
-	"tutorial-popup-text2": "אפשר להפעיל ולכבות תצוגה מקדימה בחיפוש",
+	"tutorial-popup-text3": "באפשרות להפעיל או לכבות את התצוגה המקדימה ב<a href=\"$1\" target=\"_blank\">העדפות חיפוש</a>.",
 	"tutorial-popup-text-mobile": "הקשה על קטע של ערך תראה תצוגה מקדימה של תוצאת החיפוש כדי לאפשר לך לצפות בתוכן קשור.",
-	"tutorial-popup-preferences": "העדפות",
 	"tutorial-popup-close": "סגירה"
 }
