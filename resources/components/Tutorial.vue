@@ -53,7 +53,7 @@ module.exports = exports = {
 		setTutorialPopupVisibility() {
 			// If enabled mobile preview, temporary disable tutorial popup
 			if (
-				mw.user.isAnon() ||
+				!mw.user.isNamed() ||
 				!this.tutorialPopPref ||
 				this.selectedIndex !== -1
 			) {
