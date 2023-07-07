@@ -91,7 +91,6 @@
 				"mediawiki.user",
 				"jquery.spinner",
 				"vue",
-				"@vue/composition-api",
 				"pinia",
 				"web2017-polyfills",
 				"@wikimedia/codex"
