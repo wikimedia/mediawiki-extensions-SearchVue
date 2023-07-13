@@ -31,6 +31,7 @@
 	"searchvue-links-showmore": "vis andre sider",
 	"tutorial-popup-title": "Vis forhåndsvisninger av resultater",
 	"tutorial-popup-text1": "Trykk på artikkelutdraget for å forhåndsvise søkeresultatet og vise relatert innhold.",
+	"tutorial-popup-text3": "Du kan slå forhåndsvisninger av og på i <a href=\"$1\" target=\"_blank\">søkeinnstillingene</a>.",
 	"tutorial-popup-text-mobile": "Trykk på artikkelutdraget eller pila for å forhåndsvise søkeresultatet og se relatert innhold.",
 	"tutorial-popup-close": "Lukk"
 }
