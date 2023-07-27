@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Winston Sung"
+		]
+	},
+	"searchvue-aria-button": "Otvori pregled ovog članka.",
+	"searchvue-dialog-aria-label": "Dijalog za pregled sada je otvoren. Prikazuje ključne informacije o ovom članku i povezani sadržaj.",
+	"searchvue-desc": "Vue.js sadrži dodatke i poboljšanja za Special:Search",
+	"searchvue-close": "Zatvori",
+	"searchvue-next": "Sljedeće",
+	"searchvue-previous": "Prethodno",
+	"searchvue-commons-footnote": "Na Ostavi",
+	"searchvue-links-subheading": "Na $1",
+	"tutorial-popup-close": "Zatvori"
+}
