@@ -6,12 +6,12 @@ use HtmlArmor;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Search\SearchWidgets\FullSearchResultWidget;
 use MediaWiki\SpecialPage\Hook\SpecialPageBeforeExecuteHook;
+use MediaWiki\Title\Title;
 use OutputPage;
 use SearchResult;
 use SearchResultSet;
 use SpecialPage;
 use SpecialSearch;
-use Title;
 use User;
 
 /**
