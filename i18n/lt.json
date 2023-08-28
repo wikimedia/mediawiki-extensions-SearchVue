@@ -1,9 +1,37 @@
 {
 	"@metadata": {
 		"authors": [
+			"Nokeoo",
 			"Pavel1513"
 		]
 	},
+	"searchvue-aria-button": "Atidaryti šio straipsnio peržiūrą.",
+	"searchvue-dialog-title": "Paieškos peržiūra",
+	"searchvue-dialog-aria-label": "Dabar atidarytas peržiūros dialogo langas. Jame rodoma pagrindinė informacija apie šį straipsnį ir susijusį turinį.",
+	"searchvue-desc": "Vue.js funkcijų priedai ir patobulinimai, skirti paieškai",
+	"searchvue-close": "Uždaryti",
+	"searchvue-next": "Kitas",
+	"searchvue-previous": "Ankstesnis",
+	"searchvue-label": "Įjungti paieškos rezultatų peržiūrą",
+	"searchvue-loading": "Įkeliama peržiūra",
+	"searchvue-no-content": "Nėra peržiūrėtino turinio",
+	"searchvue-snippet-gotofullpage": "Eiti į visą puslapį",
+	"searchvue-snippet-gotofullpage-ns0": "Eiti į visą straipsnį",
+	"searchvue-commons-viewmore": "Žiūrėti daugiau",
+	"searchvue-commons-viewmore-mobile": "Žiūrėti daugiau paveikslėlių",
+	"searchvue-commons-footnote": "Vikitekoje",
+	"searchvue-commons-heading": "Susiję paveikslėliai",
+	"searchvue-commons-heading-mobile": "Susiję paveikslėliai iš Vikitekos",
 	"searchvue-article-sections-heading": "Puslapio skyriai",
-	"searchvue-article-sections-heading-ns0": "Straipsnio skyriai"
+	"searchvue-article-sections-heading-ns0": "Straipsnio skyriai",
+	"searchvue-more-sections": "+ dar $1 {{PLURAL:$1|skyrius|skyriai}}",
+	"searchvue-help": "Peržiūrėkite puslapio turinį ir susijusį turinį.",
+	"searchvue-links-subheading": "$1",
+	"searchvue-links-heading": "Susiję puslapiai kituose projektuose",
+	"searchvue-links-showmore": "peržiūrėti kitus puslapius",
+	"tutorial-popup-title": "Paieškos rezultatų peržiūros",
+	"tutorial-popup-text1": "Spustelėkite straipsnio fragmentą, kad peržiūrėtumėte paieškos rezultatą ir susijusį turinį.",
+	"tutorial-popup-text3": "Peržiūras galite įjungti ir išjungti  <a href=\"$1\" target=\"_blank\">paieškos nuostatose</a>.",
+	"tutorial-popup-text-mobile": "Spustelėkite straipsnio fragmentą arba rodyklę, kad peržiūrėtumėte paieškos rezultatą ir susijusį turinį.",
+	"tutorial-popup-close": "Uždaryti"
 }
