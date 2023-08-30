@@ -20,7 +20,7 @@
 		"grunt-eslint": "24.0.1",
 		"grunt-stylelint": "0.18.0",
 		"jest-when": "^3.5.1",
-		"jquery": "3.6.1",
+		"jquery": "3.7.1",
 		"stylelint-config-wikimedia": "0.15.0",
 		"vue": "3.2.37",
 		"pinia": "2.0.16"
