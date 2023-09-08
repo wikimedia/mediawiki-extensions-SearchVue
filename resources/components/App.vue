@@ -27,7 +27,8 @@ const AppViewMobile = require( './AppViewMobile.vue' ),
 	useEventStore = require( '../stores/Event.js' ),
 	useRootStore = require( '../stores/Root.js' ),
 	useDomStore = require( '../stores/Dom.js' ),
-	useRequestStatusStore = require( '../stores/RequestStatus.js' );
+	useRequestStatusStore = require( '../stores/RequestStatus.js' ),
+	useTimingStore = require( '../stores/Timing.js' );
 
 // @vue/component
 module.exports = exports = {
@@ -54,7 +55,8 @@ module.exports = exports = {
 		mapState( useRootStore, [
 			'isMobile',
 			'title',
-			'results'
+			'results',
+			'visible'
 		] ),
 		mapState( useRequestStatusStore, [
 			'loading'
@@ -130,6 +132,8 @@ module.exports = exports = {
 	watch: {
 		title: {
 			handler( title ) {
+				const timingStore = useTimingStore();
+				timingStore.reset();
 				if ( title ) {
 					this.setQueryQuickViewTitle();
 				}
@@ -138,12 +142,22 @@ module.exports = exports = {
 		},
 		loading: {
 			handler( loading ) {
-				// We re-calculate the tabbable element everytime the loading is complete.
-				if ( !loading ) {
+				if ( loading ) {
+					useTimingStore().start();
+				} else {
+					// We re-calculate the tabbable element everytime the loading is complete.
 					this.updateTabbableElements();
+					useTimingStore().complete();
 				}
 			},
 			flush: 'post'
+		},
+		visible: {
+			handler( visible ) {
+				if ( !visible ) {
+					useTimingStore().reset();
+				}
+			}
 		}
 	},
 	created() {

@@ -73,6 +73,7 @@
 				"resources/stores/Query.js",
 				"resources/stores/Root.js",
 				"resources/stores/Dom.js",
+				"resources/stores/Timing.js",
 				{
 					"name": "codex-icons.json",
 					"callback": "MediaWiki\\ResourceLoader\\CodexModule::getIcons",
