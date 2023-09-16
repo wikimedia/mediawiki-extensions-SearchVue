@@ -3,13 +3,16 @@
 namespace SearchVue;
 
 use HtmlArmor;
+use ISearchResultSet;
+use MediaWiki\Hook\SpecialSearchResultsAppendHook;
+use MediaWiki\Hook\SpecialSearchResultsHook;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Search\Hook\ShowSearchHitTitleHook;
 use MediaWiki\Search\SearchWidgets\FullSearchResultWidget;
 use MediaWiki\SpecialPage\Hook\SpecialPageBeforeExecuteHook;
 use MediaWiki\Title\Title;
 use OutputPage;
 use SearchResult;
-use SearchResultSet;
 use SpecialPage;
 use SpecialSearch;
 use User;
@@ -19,7 +22,10 @@ use User;
  */
 
 class Hooks implements
-	SpecialPageBeforeExecuteHook
+	SpecialPageBeforeExecuteHook,
+	SpecialSearchResultsHook,
+	SpecialSearchResultsAppendHook,
+	ShowSearchHitTitleHook
 {
 	/**
 	 * @var array holding the search result object.
@@ -65,11 +71,11 @@ class Hooks implements
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/SpecialSearchResults
 	 *
 	 * @param string $term Search term
-	 * @param SearchResultSet|null $titleMatches
-	 * @param SearchResultSet|null $textMatches
+	 * @param ISearchResultSet|null &$titleMatches
+	 * @param ISearchResultSet|null &$textMatches
 	 * @return bool|void True or no return value to continue or false to abort
 	 */
-	public function onSpecialSearchResults( $term, $titleMatches, $textMatches ) {
+	public function onSpecialSearchResults( $term, &$titleMatches, &$textMatches ) {
 		$this->textMatches = $this->formatResult( $textMatches );
 	}
 
@@ -96,7 +102,7 @@ class Hooks implements
 	/**
 	 * Extract the searchResult information required by the extension UI
 	 *
-	 * @param SearchResultSet|null $resultSet
+	 * @param ISearchResultSet|null $resultSet
 	 * @return array
 	 */
 	private function formatResult( $resultSet ) {
@@ -168,7 +174,6 @@ class Hooks implements
 	 * @param SpecialSearch $specialSearch
 	 * @param string[] &$query
 	 * @param string[] &$attributes
-	 * @return void
 	 */
 	public function onShowSearchHitTitle(
 		&$title,
@@ -178,7 +183,7 @@ class Hooks implements
 		$specialSearch,
 		&$query,
 		&$attributes
-	): void {
+	) {
 		$attributes[ 'data-prefixedtext' ] = $title->getPrefixedText();
 	}
 
