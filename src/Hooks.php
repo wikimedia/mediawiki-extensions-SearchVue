@@ -7,6 +7,7 @@ use ISearchResultSet;
 use MediaWiki\Hook\SpecialSearchResultsAppendHook;
 use MediaWiki\Hook\SpecialSearchResultsHook;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Preferences\Hook\GetPreferencesHook;
 use MediaWiki\Search\Hook\ShowSearchHitTitleHook;
 use MediaWiki\Search\SearchWidgets\FullSearchResultWidget;
 use MediaWiki\SpecialPage\Hook\SpecialPageBeforeExecuteHook;
@@ -25,7 +26,8 @@ class Hooks implements
 	SpecialPageBeforeExecuteHook,
 	SpecialSearchResultsHook,
 	SpecialSearchResultsAppendHook,
-	ShowSearchHitTitleHook
+	ShowSearchHitTitleHook,
+	GetPreferencesHook
 {
 	/**
 	 * @var array holding the search result object.
@@ -151,7 +153,7 @@ class Hooks implements
 	 * @param User $user
 	 * @param array &$prefs
 	 */
-	public static function onGetPreferences( $user, &$prefs ) {
+	public function onGetPreferences( $user, &$prefs ) {
 		$prefs['searchpreview'] = [
 			'type' => 'toggle',
 			'section' => 'searchoptions/searchmisc',

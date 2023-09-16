@@ -31,9 +31,7 @@
 		"SpecialSearchResults": "main",
 		"SpecialSearchResultsAppend": "main",
 		"ShowSearchHitTitle": "main",
-		"GetPreferences": [
-			"SearchVue\\Hooks::onGetPreferences"
-		]
+		"GetPreferences": "main"
 	},
 	"MessagesDirs": {
 		"SearchVue": [
