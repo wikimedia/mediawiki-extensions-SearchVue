@@ -3,11 +3,13 @@
 		"authors": [
 			"Fitoschido",
 			"La Mantis",
-			"MarcoAurelio"
+			"MarcoAurelio",
+			"No se"
 		]
 	},
 	"searchvue-close": "Cerrar",
 	"searchvue-next": "Siguiente",
+	"searchvue-previous": "Anteriores",
 	"searchvue-commons-footnote": "En Wikimedia Commons",
 	"searchvue-commons-heading-mobile": "Imágenes relacionadas de Wikimedia Commons",
 	"searchvue-links-heading": "Páginas relacionadas en otros proyectos",
