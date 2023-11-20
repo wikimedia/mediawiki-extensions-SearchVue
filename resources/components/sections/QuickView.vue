@@ -130,6 +130,8 @@ const QuickViewImage = require( './QuickViewImage.vue' ),
 // @vue/component
 module.exports = exports = {
 	name: 'QuickView',
+	compatConfig: { MODE: 3 },
+	compilerOptions: { whitespace: 'condense' },
 	components: {
 		'quick-view-image': QuickViewImage,
 		'quick-view-description': QuickViewDescription,

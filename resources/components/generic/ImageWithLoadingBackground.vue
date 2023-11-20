@@ -27,6 +27,8 @@
 // @vue/component
 module.exports = exports = {
 	name: 'ImageWithLoadingBackground',
+	compatConfig: { MODE: 3 },
+	compilerOptions: { whitespace: 'condense' },
 	props: {
 		src: {
 			type: String,

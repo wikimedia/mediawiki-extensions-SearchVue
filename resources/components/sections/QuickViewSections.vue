@@ -48,6 +48,8 @@
 // @vue/component
 module.exports = exports = {
 	name: 'QuickViewSections',
+	compatConfig: { MODE: 3 },
+	compilerOptions: { whitespace: 'condense' },
 	props: {
 		title: {
 			type: String,

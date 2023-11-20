@@ -11,6 +11,8 @@
 // @vue/component
 module.exports = exports = {
 	name: 'LoadingDots',
+	compatConfig: { MODE: 3 },
+	compilerOptions: { whitespace: 'condense' },
 	props: {
 		loading: {
 			type: Boolean

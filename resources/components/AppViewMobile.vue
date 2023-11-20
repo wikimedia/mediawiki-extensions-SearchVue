@@ -48,6 +48,8 @@ const QuickView = require( './sections/QuickView.vue' ),
 // @vue/component
 module.exports = exports = {
 	name: 'SearchVue',
+	compatConfig: { MODE: 3 },
+	compilerOptions: { whitespace: 'condense' },
 	directives: {
 		spinner
 	},

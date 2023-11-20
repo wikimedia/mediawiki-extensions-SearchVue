@@ -58,6 +58,8 @@
 // @vue/component
 module.exports = exports = {
 	name: 'QuickViewTutorialPopup',
+	compatConfig: { MODE: 3 },
+	compilerOptions: { whitespace: 'condense' },
 	props: {
 		url: {
 			type: String,

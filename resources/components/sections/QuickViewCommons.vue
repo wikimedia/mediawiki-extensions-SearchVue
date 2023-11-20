@@ -75,6 +75,8 @@ const ImageWithLoadingBackground = require( '../generic/ImageWithLoadingBackgrou
 // @vue/component
 module.exports = exports = {
 	name: 'QuickViewCommons',
+	compatConfig: { MODE: 3 },
+	compilerOptions: { whitespace: 'condense' },
 	components: {
 		'image-with-loading-background': ImageWithLoadingBackground
 	},

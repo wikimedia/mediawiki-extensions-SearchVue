@@ -54,6 +54,8 @@ const { cdxIconExpand } = require( '../../../codex-icons.json' ),
 // @vue/component
 module.exports = exports = {
 	name: 'QuickViewLinks',
+	compatConfig: { MODE: 3 },
+	compilerOptions: { whitespace: 'condense' },
 	components: {
 		'cdx-icon': CdxIcon
 	},

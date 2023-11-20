@@ -33,6 +33,8 @@ const AppViewMobile = require( './AppViewMobile.vue' ),
 // @vue/component
 module.exports = exports = {
 	name: 'SearchVue',
+	compatConfig: { MODE: 3 },
+	compilerOptions: { whitespace: 'condense' },
 	components: {
 		'app-view-mobile': AppViewMobile,
 		'app-view-desktop': AppViewDesktop

@@ -14,6 +14,8 @@
 // @vue/component
 module.exports = exports = {
 	name: 'ContentSkeleton',
+	compatConfig: { MODE: 3 },
+	compilerOptions: { whitespace: 'condense' },
 	props: {
 		lines: {
 			type: Number,

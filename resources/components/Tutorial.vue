@@ -24,6 +24,8 @@ const QuickViewTutorialPopup = require( './QuickViewTutorialPopup.vue' ),
 // @vue/component
 module.exports = exports = {
 	name: 'Tutorial',
+	compatConfig: { MODE: 3 },
+	compilerOptions: { whitespace: 'condense' },
 	components: {
 		'quick-view-tutorial-popup': QuickViewTutorialPopup
 	},

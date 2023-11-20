@@ -16,6 +16,8 @@
 // @vue/component
 module.exports = exports = {
 	name: 'QuickViewSnippet',
+	compatConfig: { MODE: 3 },
+	compilerOptions: { whitespace: 'condense' },
 	props: {
 		title: {
 			type: String,
