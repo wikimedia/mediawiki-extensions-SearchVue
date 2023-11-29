@@ -32,6 +32,7 @@
 	"searchvue-links-showmore": "andere pagina's bekijken",
 	"tutorial-popup-title": "Voorbeelden van zoekresultaten",
 	"tutorial-popup-text1": "Klik op de artikelomschrijving om een zoekvoorbeeld en relevante inhoud te tonen.",
+	"tutorial-popup-text3": "U kunt voorvertoningen in- en uitschakelen in de <a href=\"$1\" target=\"_blank\">zoekvoorkeuren</a>.",
 	"tutorial-popup-text-mobile": "Druk op de artikelomschrijving of het pijltje om een zoekvoorbeeld en relevante inhoud te tonen.",
 	"tutorial-popup-close": "Sluiten"
 }
