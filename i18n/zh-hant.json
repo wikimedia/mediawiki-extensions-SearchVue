@@ -28,6 +28,8 @@
 	"searchvue-more-sections": "+ 還有 $1 {{PLURAL:$1|個章節}}",
 	"searchvue-help": "預覽頁面內容和相關內容。",
 	"searchvue-links-subheading": "在$1",
+	"searchvue-links-heading": "其他專案中的相關頁面",
+	"searchvue-links-showmore": "檢視其他頁面",
 	"tutorial-popup-title": "搜尋結果預覽",
 	"tutorial-popup-text1": "點擊條目片段來預覽搜尋結果，並查看相關內容。",
 	"tutorial-popup-text2": "您可以在搜尋開啟與關閉預覽",
