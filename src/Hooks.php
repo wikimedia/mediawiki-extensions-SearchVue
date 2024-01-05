@@ -7,16 +7,16 @@ use ISearchResultSet;
 use MediaWiki\Hook\SpecialSearchResultsAppendHook;
 use MediaWiki\Hook\SpecialSearchResultsHook;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Output\OutputPage;
 use MediaWiki\Preferences\Hook\GetPreferencesHook;
 use MediaWiki\Search\Hook\ShowSearchHitTitleHook;
 use MediaWiki\Search\SearchWidgets\FullSearchResultWidget;
 use MediaWiki\SpecialPage\Hook\SpecialPageBeforeExecuteHook;
+use MediaWiki\SpecialPage\SpecialPage;
+use MediaWiki\Specials\SpecialSearch;
 use MediaWiki\Title\Title;
-use OutputPage;
+use MediaWiki\User\User;
 use SearchResult;
-use SpecialPage;
-use SpecialSearch;
-use User;
 
 /**
  * @license GPL-2.0-or-later

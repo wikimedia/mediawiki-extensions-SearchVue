@@ -2,8 +2,8 @@
 
 namespace SearchVue\Rest;
 
-use Config;
 use Language;
+use MediaWiki\Config\Config;
 use MediaWiki\Http\HttpRequestFactory;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
