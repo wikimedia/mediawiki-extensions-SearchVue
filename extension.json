@@ -94,7 +94,6 @@
 				"web2017-polyfills",
 				"@wikimedia/codex"
 			],
-			"es6": true,
 			"messages": [
 				"searchvue-aria-button",
 				"searchvue-dialog-title",
