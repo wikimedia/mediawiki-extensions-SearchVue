@@ -81,7 +81,9 @@ module.exports = exports = {
 <style lang="less">
 @import 'mediawiki.skin.variables.less';
 
-@pulse-dot-color: @background-color-progressive;
+// LESS mixins are not compatible with CSS variables (see T357740)
+// This color corresponds to @background-color-progressive.
+@pulse-dot-color: #0645ad;
 @pulse-dot-fading: fade(@pulse-dot-color, 40%);
 @pulse-dot-transparent: fade(@pulse-dot-color, 0);
 
