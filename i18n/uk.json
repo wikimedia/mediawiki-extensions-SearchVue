@@ -1,9 +1,36 @@
 {
 	"@metadata": {
 		"authors": [
-			"Andriy.v"
+			"Andriy.v",
+			"Ата"
 		]
 	},
+	"searchvue-aria-button": "Відкрити попередній перегляд цієї статті.",
+	"searchvue-dialog-title": "Попередній перегляд результатів пошуку",
+	"searchvue-dialog-aria-label": "Відкрито діалогове вікно попереднього перегляду. У ньому показано ключову інформацію про цю статтю та пов'язаний вміст.",
+	"searchvue-desc": "Vue.js містить додаткові функції й покращення сторінки Спеціальна:Пошук",
+	"searchvue-close": "Закрити",
+	"searchvue-next": "Далі",
+	"searchvue-previous": "Попередній",
 	"searchvue-label": "Увімкнути попередній перегляд результатів пошуку",
-	"searchvue-help": "Попередній перегляд вмісту сторінки та пов’язаного тексту"
+	"searchvue-loading": "Завантаження попереднього перегляду",
+	"searchvue-no-content": "Немає вмісту для попереднього перегляду",
+	"searchvue-snippet-gotofullpage": "Перейти на повну сторінку",
+	"searchvue-snippet-gotofullpage-ns0": "Перейти до повної статті",
+	"searchvue-commons-viewmore": "Показати більше",
+	"searchvue-commons-viewmore-mobile": "Переглянути більше зображень",
+	"searchvue-commons-footnote": "У Вікісховищі",
+	"searchvue-commons-heading": "Пов'язані зображення",
+	"searchvue-commons-heading-mobile": "Пов'язані зображення з Вікісховища",
+	"searchvue-article-sections-heading": "Розділи на сторінці",
+	"searchvue-article-sections-heading-ns0": "Розділи в статті",
+	"searchvue-more-sections": "+ ще $1 {{PLURAL:$1|розділ|розділи|розділів}}",
+	"searchvue-help": "Попередній перегляд вмісту сторінки та пов’язаного тексту",
+	"searchvue-links-subheading": "У $1",
+	"searchvue-links-heading": "Пов'язані сторінки в інших проектах",
+	"searchvue-links-showmore": "переглянути інші сторінки",
+	"tutorial-popup-title": "Попередній перегляд результатів пошуку",
+	"tutorial-popup-text1": "Натисніть на фрагмент статті, щоб переглянути результат пошуку і побачити відповідний вміст.",
+	"tutorial-popup-text-mobile": "Натисніть на фрагмент статті або стрілку, щоб переглянути результат пошуку і побачити відповідний вміст.",
+	"tutorial-popup-close": "Закрити"
 }
