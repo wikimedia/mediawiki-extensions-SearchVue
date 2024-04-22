@@ -32,7 +32,7 @@
 	"searchvue-links-showmore": "Button text used to toggle between interwiki links on mobile view.",
 	"tutorial-popup-title": "Heading of the tutorial popup",
 	"tutorial-popup-text1": "First paragraph in the tutorial popup",
-	"tutorial-popup-text3": "Second paragraph in the tutorial popup. Parameters:\n* $1 - The URL of the search preferences",
+	"tutorial-popup-text2": "Second paragraph in the tutorial popup, instructing users to enable/disable previous in the Search preferences.",
 	"tutorial-popup-text-mobile": "Tutorial popup text for mobile devices",
 	"tutorial-popup-close": "Title for the svg used to close tutorial popup\n{{identical|Close}}"
 }
