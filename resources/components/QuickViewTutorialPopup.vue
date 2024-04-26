@@ -42,7 +42,7 @@
 					{{ $i18n( 'tutorial-popup-text1' ).text() }}
 				</p>
 				<!-- eslint-disable vue/no-v-html -->
-				<p v-html="$i18n( 'tutorial-popup-text3', url ).text()"></p>
+				<p v-html="preferencesMessage"></p>
 			</template>
 		</div>
 	</section>
@@ -61,10 +61,6 @@ module.exports = exports = {
 	compatConfig: { MODE: 3 },
 	compilerOptions: { whitespace: 'condense' },
 	props: {
-		url: {
-			type: String,
-			required: true
-		},
 		isMobile: {
 			type: Boolean,
 			required: true
@@ -73,6 +69,11 @@ module.exports = exports = {
 	computed: {
 		QuickViewTutorialPopupClass() {
 			return this.isMobile ? 'QuickViewTutorialPopup__mobile' : 'QuickViewTutorialPopup';
+		},
+		preferencesMessage() {
+			const $msg = $( '<p>' ).append( this.$i18n( 'tutorial-popup-text2' ).parseDom() );
+			$msg.find( 'a' ).attr( 'target', '_blank' );
+			return $msg.html();
 		}
 	}
 };

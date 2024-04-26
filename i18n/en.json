@@ -30,7 +30,7 @@
 	"searchvue-links-showmore": "view other pages",
 	"tutorial-popup-title": "Search result previews",
 	"tutorial-popup-text1": "Click on the the article snippet to preview the search result and view related content.",
-	"tutorial-popup-text3": "You can turn previews on and off in the <a href=\"$1\" target=\"_blank\">search preferences</a>.",
+	"tutorial-popup-text2": "You can turn previews on and off in the [[Special:Preferences#mw-prefsection-searchoptions|search preferences]].",
 	"tutorial-popup-text-mobile": "Tap on the the article snippet or the arrow to preview the search result and see related content.",
 	"tutorial-popup-close": "Close"
 }

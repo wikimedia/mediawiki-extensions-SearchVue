@@ -2,7 +2,6 @@
 	<div>
 		<quick-view-tutorial-popup
 			v-if="tutorialPopupVisible"
-			:url="preferencesUrl"
 			:is-mobile="isMobile"
 			:style="{ top: firstSectionContentHeight / 2 + firstSectionHeadingHeight + topPositionAdjuster + 'px' }"
 			@close="onCloseTutorialPopup"
@@ -44,12 +43,7 @@ module.exports = exports = {
 		mapState( useRootStore, [
 			'selectedIndex',
 			'isMobile'
-		] ),
-		{
-			preferencesUrl() {
-				return new mw.Title( 'Preferences#mw-prefsection-searchoptions', -1 ).getUrl();
-			}
-		}
+		] )
 	),
 	methods: {
 		setTutorialPopupVisibility() {
