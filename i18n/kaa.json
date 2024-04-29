@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Ajiniyaz",
-			"Ajiniyaz Nurniyazov"
+			"Ajiniyaz Nurniyazov",
+			"Amire80"
 		]
 	},
 	"searchvue-close": "Jabıw",
@@ -20,5 +21,6 @@
 	"searchvue-help": "Bettiń mazmunın hám baylanısqan kontentti aldın ala kórip shıǵıń.",
 	"tutorial-popup-title": "Izlew nátiyjelerin aldınnan kóriw",
 	"tutorial-popup-text1": "Izlew nátiyjesin hám oǵan tiyisli quramdı aldınnan kóriw ushın maqala úzindisine basıń.",
+	"tutorial-popup-text2": "[[Special:Preferences#mw-prefsection-searchoptions|Izlew sazlawlarda]] aldınnan kóriwdi qosıw hám óshiriw múmkin.",
 	"tutorial-popup-close": "Jabıw"
 }

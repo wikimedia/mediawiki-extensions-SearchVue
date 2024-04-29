@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Amire80",
 			"Rail"
 		]
 	},
@@ -30,7 +31,7 @@
 	"searchvue-links-showmore": "zobacz inne strony",
 	"tutorial-popup-title": "Podgląd wyników wyszukiwania",
 	"tutorial-popup-text1": "Kliknij fragment artykułu, aby wyświetlić podgląd wyników i zobaczyć powiązane treści.",
-	"tutorial-popup-text3": "Możesz włączać oraz wyłączać podgląd w <a href=\"$1\" target=\"_blank\">preferencjach wyszukiwania</a>.",
+	"tutorial-popup-text2": "Możesz włączać i wyłączać podgląd w [[Special:Preferences#mw-prefsection-searchoptions|preferencjach wyszukiwania]].",
 	"tutorial-popup-text-mobile": "Stuknij fragment artykułu lub strzałkę, aby wyświetlić podgląd wyników i zobaczyć powiązane treści.",
 	"tutorial-popup-close": "Zamknij"
 }

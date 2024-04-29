@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Amire80",
 			"Nokeoo",
 			"Pavel1513"
 		]
@@ -31,7 +32,7 @@
 	"searchvue-links-showmore": "peržiūrėti kitus puslapius",
 	"tutorial-popup-title": "Paieškos rezultatų peržiūros",
 	"tutorial-popup-text1": "Spustelėkite straipsnio fragmentą, kad peržiūrėtumėte paieškos rezultatą ir susijusį turinį.",
-	"tutorial-popup-text3": "Peržiūras galite įjungti ir išjungti  <a href=\"$1\" target=\"_blank\">paieškos nuostatose</a>.",
+	"tutorial-popup-text2": "Peržiūras galite įjungti ir išjungti [[Special:Preferences#mw-prefsection-searchoptions|paieškos nuostatose]].",
 	"tutorial-popup-text-mobile": "Spustelėkite straipsnio fragmentą arba rodyklę, kad peržiūrėtumėte paieškos rezultatą ir susijusį turinį.",
 	"tutorial-popup-close": "Uždaryti"
 }

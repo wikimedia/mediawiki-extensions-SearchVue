@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Amire80",
 			"Andriy.v",
 			"Ата"
 		]
@@ -31,7 +32,7 @@
 	"searchvue-links-showmore": "переглянути інші сторінки",
 	"tutorial-popup-title": "Попередній перегляд результатів пошуку",
 	"tutorial-popup-text1": "Натисніть на фрагмент статті, щоб переглянути результат пошуку і побачити відповідний вміст.",
-	"tutorial-popup-text3": "Ви можете вмикати та вимикати попередній перегляд у <a href=\"$1\" target=\"_blank\">налаштуваннях пошуку</a>.",
+	"tutorial-popup-text2": "Ви можете вмикати та вимикати попередній перегляд у [[Special:Preferences#mw-prefsection-searchoptions|налаштуваннях пошуку]]",
 	"tutorial-popup-text-mobile": "Натисніть на фрагмент статті або стрілку, щоб переглянути результат пошуку і побачити відповідний вміст.",
 	"tutorial-popup-close": "Закрити"
 }

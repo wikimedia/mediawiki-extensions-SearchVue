@@ -9,7 +9,7 @@
 	"searchvue-aria-button": "Aria label used to inform non visual user of the search preview extension",
 	"searchvue-dialog-title": "Title for the Search Preview dialog",
 	"searchvue-dialog-aria-label": "Aria label used to explain the non visual user what the intent to inform user the content of the search preview",
-	"searchvue-desc": "{{desc|name=SearchVue|url=https://www.mediawiki.org/wiki/Extension:SearchVue}}",
+	"searchvue-desc": "{{desc|name=SearchVue|url=https://www.mediawiki.org/wiki/Extension:SearchVue}}\n\n\"Vue.js\" is a name of a technology using which the extension was developed.",
 	"searchvue-close": "Title for the svg used to close the Quick View on mobile view",
 	"searchvue-next": "Title of the svg used to move to the next result",
 	"searchvue-previous": "Title of the svg used to move to the previous result\n{{identical|Previous}}",

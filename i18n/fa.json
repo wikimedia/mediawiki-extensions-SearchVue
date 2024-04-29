@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
+			"Amire80",
 			"Jeeputer"
 		]
 	},
 	"tutorial-popup-title": "پیش‌نمایش‌های نتایج جستجو",
+	"tutorial-popup-text2": "می‌توانید پیش‌نمایش‌ها در [[Special:Preferences#mw-prefsection-searchoptions|تنظیمات جستجو]] را روشن و خاموش کنید.",
 	"tutorial-popup-close": "بستن"
 }

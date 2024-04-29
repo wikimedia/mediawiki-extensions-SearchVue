@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Amire80",
 			"Sabelöga",
 			"Tore"
 		]
@@ -21,6 +22,7 @@
 	"searchvue-help": "Förhandsgranska sidans innehåll och relaterat innehåll.",
 	"tutorial-popup-title": "Förhandsgranskningar av sökresultat",
 	"tutorial-popup-text1": "Klicka på artikelfragmentet för att förhandsgranska sökresultatet och se relaterat innehåll.",
+	"tutorial-popup-text2": "Du kan aktivera och inaktivera förhandsgranskningar i [[Special:Preferences#mw-prefsection-searchoptions|sökinställningarna]].",
 	"tutorial-popup-text-mobile": "Tryck på artikelutdraget eller pilen för att förhandsgranska sökresultatet och se relaterat innehåll.",
 	"tutorial-popup-close": "Stäng"
 }

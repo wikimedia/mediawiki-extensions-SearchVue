@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Amire80",
 			"Kareyac",
 			"Mehman (WMF)",
 			"Okras",
@@ -9,12 +10,17 @@
 			"UniCollab"
 		]
 	},
-	"searchvue-desc": "Добавления и улучшения для функции Vue.js в Special:Search",
+	"searchvue-aria-button": "Открыть предпросмотр этой статьи.",
+	"searchvue-dialog-title": "Предварительный просмотр поиска",
+	"searchvue-dialog-aria-label": "Диалоговое окно предварительного просмотра теперь открыто. Оно показывает ключевую информацию об этой статье и связанном с ней содержании.",
+	"searchvue-desc": "Добавления и улучшения для функции в Special:Search с использованием технологии Vue.js",
 	"searchvue-close": "Закрыть",
 	"searchvue-next": "Далее",
 	"searchvue-previous": "Назад",
 	"searchvue-label": "Включить предварительный просмотр результатов поиска",
-	"searchvue-snippet-gotofullpage": "Перейти на страницу",
+	"searchvue-loading": "Загрузка предварительного просмотра",
+	"searchvue-no-content": "Нет содержания, которое можно предварительно показать",
+	"searchvue-snippet-gotofullpage": "Перейти к полной странице",
 	"searchvue-snippet-gotofullpage-ns0": "Перейти к полной статье",
 	"searchvue-commons-viewmore": "Показать больше",
 	"searchvue-commons-viewmore-mobile": "Показать больше изображений",
@@ -27,8 +33,10 @@
 	"searchvue-help": "Предпросмотр содержимого страницы и связанного содержимого.",
 	"searchvue-links-subheading": "В $1",
 	"searchvue-links-heading": "Связанные страницы в других проектах",
+	"searchvue-links-showmore": "показать другие страницы",
 	"tutorial-popup-title": "Предпросмотр результатов поиска",
 	"tutorial-popup-text1": "Нажмите на сниппет статьи, чтобы предпросмотреть результат поиска и схожие материалы.",
+	"tutorial-popup-text2": "Вы можете включать и выключать предпросмотр в [[Special:Preferences#mw-prefsection-searchoptions|настройках поиска]]",
 	"tutorial-popup-text-mobile": "Нажмите на сниппет статьи или на стрелку, чтобы предпросмотреть результат поиска и схожие материалы.",
 	"tutorial-popup-close": "Закрыть"
 }

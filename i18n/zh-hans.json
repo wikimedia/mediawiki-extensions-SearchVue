@@ -33,6 +33,7 @@
 	"searchvue-links-showmore": "查看其他页面",
 	"tutorial-popup-title": "搜索结果预览",
 	"tutorial-popup-text1": "点击条目片段来预览搜索结果并查看相关内容。",
+	"tutorial-popup-text2": "您可以在[[Special:Preferences#mw-prefsection-searchoptions|搜索参数设置]]中打开或关闭预览。",
 	"tutorial-popup-text-mobile": "点击文章开头或箭头来预览搜索结果并查看相关内容。",
 	"tutorial-popup-close": "关闭"
 }

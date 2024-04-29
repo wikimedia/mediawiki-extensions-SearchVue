@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Eulalio",
 			"Fitoschido",
 			"La Mantis",
 			"MarcoAurelio",
@@ -14,5 +15,7 @@
 	"searchvue-commons-heading-mobile": "Imágenes relacionadas de Wikimedia Commons",
 	"searchvue-links-heading": "Páginas relacionadas en otros proyectos",
 	"searchvue-links-showmore": "ver otras páginas",
+	"tutorial-popup-text1": "Clic en el fragmento del artículo para obtener una vista previa del resultado de la búsqueda y ver el contenido relacionado.",
+	"tutorial-popup-text2": "Puedes activar y desactivar las vistas previas en las [[Special:Preferences#mw-prefsection-searchoptions|preferencias de búsqueda]].",
 	"tutorial-popup-close": "Cerrar"
 }

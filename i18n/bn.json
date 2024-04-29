@@ -30,7 +30,7 @@
 	"searchvue-links-showmore": "অন্যান্য পাতা দেখুন",
 	"tutorial-popup-title": "অনুসন্ধান ফলাফলের পূর্বরূপ",
 	"tutorial-popup-text1": "অনুসন্ধান ফলাফলের পূর্বরূপ দেখতে এবং সম্পর্কিত বিষয়বস্তু দেখতে নিবন্ধের স্নিপেটে ক্লিক করুন।",
-	"tutorial-popup-text3": "আপনি <a href=\"$1\" target=\"_blank\">অনুসন্ধান পছন্দে</a> পূর্বরূপ চালু ও বন্ধ করতে পারেন।",
+	"tutorial-popup-text2": "আপনি [[Special:Preferences#mw-prefsection-searchoptions|অনুসন্ধান পছন্দে]] পূর্বরূপ চালু ও বন্ধ করতে পারেন।",
 	"tutorial-popup-text-mobile": "অনুসন্ধান ফলাফলের পূর্বরূপ দেখতে এবং সম্পর্কিত বিষয়বস্তু দেখতে নিবন্ধের স্নিপেটে বা তীরচিহ্নে ক্লিক করুন।",
 	"tutorial-popup-close": "বন্ধ করুন"
 }

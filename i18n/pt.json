@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Amire80",
 			"FDoria-WMF",
 			"Hamilton Abreu",
 			"Sannita"
@@ -28,8 +29,11 @@
 	"searchvue-more-sections": "+ $1 {{PLURAL:$1|outra secção|outras secções}}",
 	"searchvue-help": "Antevisão do conteúdo da página e conteúdos relacionadas.",
 	"searchvue-links-subheading": "Na $1",
+	"searchvue-links-heading": "Páginas relacionadas em outros projetos",
+	"searchvue-links-showmore": "mostrar outras páginas",
 	"tutorial-popup-title": "Antevisões dos resultados da pesquisa",
 	"tutorial-popup-text1": "Clique no trecho do artigo para antever o resultado da pesquisa e ver conteúdo relacionado.",
+	"tutorial-popup-text2": "Pode ligar e desligar as antevisões nas [[Special:Preferences#mw-prefsection-searchoptions|preferências de pesquisa]].",
 	"tutorial-popup-text-mobile": "Toque no trecho do artigo ou na seta para antever o resultado da pesquisa e ver conteúdo relacionado.",
 	"tutorial-popup-close": "Fechar"
 }

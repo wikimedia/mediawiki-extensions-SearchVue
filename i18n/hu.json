@@ -7,6 +7,8 @@
 		]
 	},
 	"searchvue-aria-button": "Nyisd meg a cikk előnézetét.",
+	"searchvue-dialog-title": "Keresési előnézet",
+	"searchvue-dialog-aria-label": "Az előnézetablak most nyitva van, ami a szócikk és kapcsolódó tartalmak legfontosabb információit jeleníti meg.",
 	"searchvue-close": "Bezárás",
 	"searchvue-next": "Következő",
 	"searchvue-previous": "Előző",
@@ -15,12 +17,19 @@
 	"searchvue-no-content": "Nincs tartalom, amit meg lehetne tekinteni",
 	"searchvue-snippet-gotofullpage": "Ugrás a teljes lapra",
 	"searchvue-snippet-gotofullpage-ns0": "Ugrás a teljes szócikkre",
+	"searchvue-commons-viewmore": "Több",
+	"searchvue-commons-viewmore-mobile": "Több kép",
+	"searchvue-commons-footnote": "A Wikimédia Commonsban",
 	"searchvue-commons-heading": "Kapcsolódó képek",
 	"searchvue-commons-heading-mobile": "Kapcsolódó képek a Wikimédia Commonsból",
 	"searchvue-article-sections-heading": "Szakaszok a lapon",
 	"searchvue-article-sections-heading-ns0": "Szakaszok a szócikkben",
 	"searchvue-more-sections": "+ $1 további {{PLURAL:$1|szakasz}}",
 	"searchvue-help": "A lap és kapcsolódó tartalmak előnézetének megjelenítése.",
+	"searchvue-links-heading": "Kapcsolódó lapok más projektekben",
 	"tutorial-popup-title": "Keresési találatok előnézetei",
+	"tutorial-popup-text1": "Kattints a cikk részletére a keresési találat előnézetéhez és kapcsolódó tartalom megtekintéséhez.",
+	"tutorial-popup-text2": "A keresési előnézeteket a [[Special:Preferences#mw-prefsection-searchoptions|keresési beállításokban]] kapcsolhatod ki/be.",
+	"tutorial-popup-text-mobile": "Koppints a cikk részletére vagy a nyílra a keresési találat előnézetéhez és kapcsolódó tartalom megtekintéséhez.",
 	"tutorial-popup-close": "Bezárás"
 }
