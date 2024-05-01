@@ -1,0 +1,34 @@
+{
+	"@metadata": {
+		"authors": [
+			"Amire80"
+		]
+	},
+	"searchvue-aria-button": "Obre la previsualització d'aquest article.",
+	"searchvue-dialog-title": "Previsualització de cerca",
+	"searchvue-dialog-aria-label": "El diàleg de previsualització ara està obert. Ell mostra informació clau sobre aquest article i el contingut relacionat.",
+	"searchvue-desc": "Addicions i millores de funcionalitats a Special:Search amb Vue.js",
+	"searchvue-close": "Tanca",
+	"searchvue-next": "Següent",
+	"searchvue-previous": "Anterior",
+	"searchvue-label": "Activa la previsualització dels resultats de la cerca",
+	"searchvue-loading": "S'està carregant la previsualització",
+	"searchvue-no-content": "No hi ha contingut per a previsualitzar",
+	"searchvue-snippet-gotofullpage": "Vés a la pàgina completa",
+	"searchvue-snippet-gotofullpage-ns0": "Vés a l'article complet",
+	"searchvue-commons-viewmore": "Mostra'n més",
+	"searchvue-commons-viewmore-mobile": "Mostra més imatges",
+	"searchvue-commons-footnote": "A Wikimedia Commons",
+	"searchvue-commons-heading": "Imatges relacionades",
+	"searchvue-commons-heading-mobile": "Imatges relacionades de Wikimedia Commons",
+	"searchvue-article-sections-heading": "Seccions a la pàgina",
+	"searchvue-article-sections-heading-ns0": "Seccions a l'article",
+	"searchvue-more-sections": "+ {{PLURAL:$1|una secció|$1 seccions}} més",
+	"searchvue-help": "Previsualitza el contingut de la pàgina i el contingut relacionat.",
+	"searchvue-links-subheading": "En $1",
+	"searchvue-links-heading": "Pàgines relacionades en altres projectes",
+	"searchvue-links-showmore": "mostra altres pàgines",
+	"tutorial-popup-title": "Previsualitzacions dels resultats de la cerca",
+	"tutorial-popup-text-mobile": "Toca el fragment de l'article o la fletxa per a previsualitzar el resultat de la cerca i veure el contingut relacionat.",
+	"tutorial-popup-close": "Tanca"
+}
