@@ -4,8 +4,11 @@
 			"Mehman (WMF)",
 			"Okras",
 			"Pacha Tchernof",
-			"UniCollab"
+			"UniCollab",
+			"Amire80",
+			"Kareyac",
+			"Sannita"
 		]
 	},
-	"searchvue-desc": "Добавления и улучшения для функции Vue.js в Special:Search"
+	"searchvue-desc": "Добавления и улучшения для функции в Special:Search с использованием технологии Vue.js"
 }
