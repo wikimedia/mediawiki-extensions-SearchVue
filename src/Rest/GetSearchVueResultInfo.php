@@ -3,11 +3,11 @@
 namespace SearchVue\Rest;
 
 use ApiMain;
-use DerivativeContext;
+use MediaWiki\Context\DerivativeContext;
+use MediaWiki\Context\RequestContext;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
-use RequestContext;
 use Wikimedia\ParamValidator\ParamValidator;
 
 /**
