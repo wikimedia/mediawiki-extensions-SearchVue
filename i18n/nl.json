@@ -4,6 +4,7 @@
 			"Amire80",
 			"Mainframe98",
 			"McDutchie",
+			"Siebrand",
 			"Sjoerddebruin"
 		]
 	},
@@ -32,8 +33,8 @@
 	"searchvue-links-heading": "Gerelateerde pagina's in andere projecten",
 	"searchvue-links-showmore": "andere pagina's bekijken",
 	"tutorial-popup-title": "Voorbeelden van zoekresultaten",
-	"tutorial-popup-text1": "Klik op de artikelomschrijving om een zoekvoorbeeld en relevante inhoud te tonen.",
+	"tutorial-popup-text1": "Klik op de paginaomschrijving om een zoekvoorbeeld en relevante inhoud weer te geven.",
 	"tutorial-popup-text2": "U kunt voorvertoningen in- en uitschakelen in de [[Special:Preferences#mw-prefsection-searchoptions|zoekvoorkeuren]].",
-	"tutorial-popup-text-mobile": "Druk op de artikelomschrijving of het pijltje om een zoekvoorbeeld en relevante inhoud te tonen.",
+	"tutorial-popup-text-mobile": "Druk op de paginaomschrijving of het pijltje om een zoekvoorbeeld en relevante inhoud weer te geven.",
 	"tutorial-popup-close": "Sluiten"
 }

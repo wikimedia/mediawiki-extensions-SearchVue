@@ -1,0 +1,36 @@
+{
+	"@metadata": {
+		"authors": [
+			"Умар"
+		]
+	},
+	"searchvue-aria-button": "ХӀокху йаззаман хьалххе хьажар схьаделла.",
+	"searchvue-dialog-title": "Лехаме хьалххе хьажар",
+	"searchvue-dialog-aria-label": "ХӀинца хьалххе хьажаран диалог схьайиллина йу. Цу тӀехь гойту оцу йаззамах лаьцна коьрта информаци а, цуьнца боьзна чулацам а.",
+	"searchvue-desc": "Special:Search функцина тӀетохарш а, тодарш а Vue.js технологица",
+	"searchvue-close": "ДӀачӀагӀа",
+	"searchvue-next": "Кхин дӀа",
+	"searchvue-previous": "Хьалхара",
+	"searchvue-label": "Лехаман жамӀаш хьалха хьажар дӀахӀоттаде",
+	"searchvue-loading": "Хьалххе хьажар чудоккхуш",
+	"searchvue-no-content": "Хьалххе хьажа чулацам бац",
+	"searchvue-snippet-gotofullpage": "Йуьззина агӀонна тӀегӀо",
+	"searchvue-snippet-gotofullpage-ns0": "Буьззина йаззамна тӀегӀо",
+	"searchvue-commons-viewmore": "Гайта кхин",
+	"searchvue-commons-viewmore-mobile": "Кхин а суьрташ гайта",
+	"searchvue-commons-footnote": "Викилармехь",
+	"searchvue-commons-heading": "Доьзна суьрташ",
+	"searchvue-commons-heading-mobile": "Доьзна суьрташ Викилармин тӀехь",
+	"searchvue-article-sections-heading": "АгӀонан тӀехь дакъош",
+	"searchvue-article-sections-heading-ns0": "Йаззаман тӀехь дакъош",
+	"searchvue-more-sections": "+ $1 кхин а {{PLURAL:$1|секци}}",
+	"searchvue-help": "АгӀонан чулацам а, цуьнца боьзна чулацам а хьалххе хьажар.",
+	"searchvue-links-subheading": "$1 чохь",
+	"searchvue-links-heading": "Кхечу проекташкахь гергара агӀонаш",
+	"searchvue-links-showmore": "кхин агӀонаш гайта",
+	"tutorial-popup-title": "Лехаман жамӀашка хьалххе хьажар",
+	"tutorial-popup-text1": "Йаззаман сниппет тӀетаӀайе, лехаман жамӀ а, тӀера материалаш а хьалххе хьажархьама.",
+	"tutorial-popup-text2": "Хьалххе хьажар лато а, дӀайайъа а йиш йу [[Special:Preferences#mw-prefsection-searchoptions|лехаман нисдаран гӀирсашкахь]].",
+	"tutorial-popup-text-mobile": "Йаззаман сниппетан йа цхьамза тӀетаӀайе, лехаман жамӀ а, тера материалаш а хьалххе хьажархьама.",
+	"tutorial-popup-close": "ДӀачӀагӀа"
+}
