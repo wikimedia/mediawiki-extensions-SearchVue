@@ -3,7 +3,9 @@
 		"authors": [
 			"Mainframe98",
 			"McDutchie",
-			"Sjoerddebruin"
+			"Sjoerddebruin",
+			"Amire80",
+			"Siebrand"
 		]
 	},
 	"searchvue-aria-button": "De voorvertoning van dit artikel openen.",
@@ -33,6 +35,6 @@
 	"tutorial-popup-title": "Voorbeelden van zoekresultaten",
 	"tutorial-popup-text1": "Klik op de artikelomschrijving om een zoekvoorbeeld en relevante inhoud te tonen.",
 	"tutorial-popup-text3": "U kunt voorvertoningen in- en uitschakelen in de <a href=\"$1\" target=\"_blank\">zoekvoorkeuren</a>.",
-	"tutorial-popup-text-mobile": "Druk op de artikelomschrijving of het pijltje om een zoekvoorbeeld en relevante inhoud te tonen.",
+	"tutorial-popup-text-mobile": "Druk op de paginaomschrijving of het pijltje om een zoekvoorbeeld en relevante inhoud weer te geven.",
 	"tutorial-popup-close": "Sluiten"
 }
