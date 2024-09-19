@@ -1,0 +1,24 @@
+{
+	"@metadata": {
+		"authors": [
+			"Samoasambia"
+		]
+	},
+	"searchvue-aria-button": "Avaa tämän artikkelin esikatselu.",
+	"searchvue-close": "Sulje",
+	"searchvue-next": "Seuraava",
+	"searchvue-previous": "Edellinen",
+	"searchvue-label": "Ota käyttöön hakutulosten esikatselu",
+	"searchvue-loading": "Ladataan esikatselua",
+	"searchvue-no-content": "Ei sisältöä esikatseltavaksi",
+	"searchvue-snippet-gotofullpage": "Siirry koko sivulle",
+	"searchvue-snippet-gotofullpage-ns0": "Siirry koko artikkeliin",
+	"searchvue-commons-viewmore": "Näytä lisää",
+	"searchvue-commons-viewmore-mobile": "Näytä lisää kuvia",
+	"searchvue-commons-footnote": "Wikimedia Commonsissa",
+	"searchvue-commons-heading": "Aiheeseen liittyviä kuvia",
+	"searchvue-commons-heading-mobile": "Aiheeseen liittyviä kuvia Wikimedia Commonsista",
+	"searchvue-article-sections-heading": "Sivun osiot",
+	"searchvue-article-sections-heading-ns0": "Artikkelin osiot",
+	"tutorial-popup-close": "Sulje"
+}
