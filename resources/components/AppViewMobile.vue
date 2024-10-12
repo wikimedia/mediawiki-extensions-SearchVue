@@ -66,7 +66,6 @@ module.exports = exports = {
 	computed: $.extend(
 		{},
 		mapState( useRootStore, [
-			'title',
 			'destination',
 			'visible',
 			'showOnMobile'
