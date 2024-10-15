@@ -109,7 +109,8 @@ class GetSearchVueMedia extends SimpleHandler {
 			$requests['links'] = $this->getSitelinksRequest( $qid, $sitesList );
 			$handlers['links'] = function ( $response ) use ( $sitesList ) {
 				$data = json_decode( $response['response']['body'], true ) ?: [];
-				$entities = reset( $data[ 'entities' ] );
+				$allEntities = $data[ 'entities' ] ?? [];
+				$entities = reset( $allEntities );
 				if ( !isset( $entities ) ) {
 					return [];
 				}
