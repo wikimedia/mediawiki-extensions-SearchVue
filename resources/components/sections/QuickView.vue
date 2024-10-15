@@ -161,7 +161,7 @@ module.exports = exports = {
 			'requestStatuses',
 			'loading'
 		] ),
-		mapState( useEventStore, [ 'sessionId' ] ),
+		mapState( useEventStore ),
 		{
 			hasCommonsImages() {
 				return this.currentResult.media &&
@@ -232,8 +232,7 @@ module.exports = exports = {
 			}
 		},
 		mapActions( useRootStore, [
-			'closeQuickView',
-			'navigate'
+			'closeQuickView'
 		] ),
 		mapActions( useEventStore, [ 'logQuickViewEvent' ] ),
 		mapActions( useDomStore, [ 'updateTabbableElements' ] )
