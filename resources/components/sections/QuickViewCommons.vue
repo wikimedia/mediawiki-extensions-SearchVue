@@ -174,7 +174,7 @@ module.exports = exports = {
 									this.setHasHiddenImages( this.$refs[ 'images-container' ] );
 								}
 
-								mw.loader.using( 'mmv.bootstrap.autostart', function () {
+								mw.loader.using( 'mmv.bootstrap', function () {
 									// trigger the content hook, used by the multimedia viewer
 									// eslint-disable-next-line no-jquery/no-global-selector
 									const contentTextElement = $( '#mw-content-text' );
