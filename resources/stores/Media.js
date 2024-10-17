@@ -55,13 +55,13 @@ const sortImagesArray = ( result ) => {
  */
 const formatMediaInfo = ( result, page, isMobile ) => {
 	let images = sortImagesArray( result );
-	images = images.filter( ( image ) => {
+	images = images.filter( ( image ) =>
 		// drop the image if it's the same as the page image we're
 		// already showing at the top
-		return !image.imageinfo[ 0 ] ||
+		 !image.imageinfo[ 0 ] ||
 			!page.original ||
-			page.original.source !== image.imageinfo[ 0 ].url;
-	} );
+			page.original.source !== image.imageinfo[ 0 ].url
+	 );
 
 	// API is always returning 7 images, but mobile only uses 3
 	const numberOfImagesToLoad = isMobile ? 3 : 7;

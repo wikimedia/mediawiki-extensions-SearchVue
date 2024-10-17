@@ -44,7 +44,7 @@ module.exports = exports = {
 			queryQuickViewTitle: null
 		};
 	},
-	computed: $.extend(
+	computed: Object.assign(
 		{
 			quickViewComponent() {
 				if ( this.isMobile ) {
@@ -67,7 +67,7 @@ module.exports = exports = {
 			'searchResults'
 		] )
 	),
-	methods: $.extend( {},
+	methods: Object.assign( {},
 		mapActions( useRootStore, [
 			'toggleVisibily',
 			'closeQuickView',
@@ -120,9 +120,7 @@ module.exports = exports = {
 				}
 			},
 			resultHasInfoToDisplay( prefixedText ) {
-				const result = this.results.find( ( item ) => {
-					return item.prefixedText === prefixedText;
-				} );
+				const result = this.results.find( ( item ) => item.prefixedText === prefixedText );
 				return result && ( result.text || result.thumbnail );
 			},
 			multiMediaViewerIsOpen() {
@@ -189,33 +187,31 @@ module.exports = exports = {
 			}
 		}
 
-		const searchResultWithQuickView = this.searchResults.filter( function ( resultIndex ) {
-			return this.searchResults[ resultIndex ].classList.contains( 'searchresult-with-quickview' );
-		}.bind( this ) );
+		const searchResultWithQuickView = this.searchResults.filter( ( resultIndex ) => this.searchResults[ resultIndex ].classList.contains( 'searchresult-with-quickview' ) );
 		// Mouse click
 		searchResultWithQuickView.find( '.searchresult, .mw-search-result-data, .quickView-aria-button' )
-			.click( function ( event ) {
+			.click( ( event ) => {
 				this.handleResultEvent( event );
-			}.bind( this ) );
+			} );
 
 		// Keyboard navigation
-		searchResultWithQuickView.find( '.quickView-aria-button' ).keydown( function ( event ) {
+		searchResultWithQuickView.find( '.quickView-aria-button' ).keydown( ( event ) => {
 			if ( event.key === 'Enter' ) {
 				this.handleResultEvent( event );
 				this.$nextTick( function () {
 					this.focusDialog();
 				} );
 			}
-		}.bind( this ) );
+		} );
 
 		// eslint-disable-next-line no-jquery/no-global-selector
-		$( 'body' ).click( function ( event ) {
+		$( 'body' ).click( ( event ) => {
 			const isInMultimediaViewer = this.multiMediaViewerIsOpen();
 			const isQuickView = event.target.closest( '.mw-search-quick-view' );
 			if ( !this.isMobile && !isInMultimediaViewer && !isQuickView ) {
 				this.closeQuickView();
 			}
-		}.bind( this ) );
+		} );
 
 		this.setQueryQuickViewTitle();
 
@@ -223,7 +219,7 @@ module.exports = exports = {
 		// that had a quickView open
 		this.restoreQuickViewOnNavigation();
 
-		window.addEventListener( 'keydown', function ( event ) {
+		window.addEventListener( 'keydown', ( event ) => {
 			const mmvOpen = this.multiMediaViewerIsOpen();
 			if ( !mmvOpen ) {
 				if ( event.key === 'Escape' ) {
@@ -233,7 +229,7 @@ module.exports = exports = {
 					this.handleTabTrap( event, document.activeElement );
 				}
 			}
-		}.bind( this ) );
+		} );
 	}
 };
 </script>

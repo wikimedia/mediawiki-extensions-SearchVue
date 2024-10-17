@@ -62,7 +62,7 @@ module.exports = exports = {
 			pageScrolled: false
 		};
 	},
-	computed: $.extend(
+	computed: Object.assign(
 		{
 			isLargeScreen() {
 				return this.width >= this.breakpoints.small;
@@ -148,10 +148,10 @@ module.exports = exports = {
 			'searchContainer'
 		] )
 	),
-	methods: $.extend(
+	methods: Object.assign(
 		{
 			numberToPixel( value ) {
-				return `${value}px`;
+				return `${ value }px`;
 			}
 		},
 		mapActions( useRootStore, [

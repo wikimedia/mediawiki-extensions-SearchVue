@@ -25,7 +25,7 @@ module.exports = function onDocumentResize() {
 				// not currently throttled; execute, and use timeout as lock
 				invalidatingCallback( ...args );
 				timeout = setTimeout(
-					function () {
+					() => {
 						timeout = null;
 						if ( latest !== null ) {
 							invalidatingCallback( ...latest );
@@ -43,17 +43,17 @@ module.exports = function onDocumentResize() {
 	};
 
 	const getThrottledResize = throttle(
-		function () {
+		() => {
 			updateValues( mainContainer.clientWidth, mainContainer.clientHeight );
 		},
 		200
 	);
 
-	onMounted( function () {
+	onMounted( () => {
 		window.addEventListener( 'resize', getThrottledResize );
 	} );
 
-	onUnmounted( function () {
+	onUnmounted( () => {
 		window.addEventListener( 'resize', getThrottledResize );
 	} );
 

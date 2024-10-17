@@ -30,9 +30,7 @@ const getFieldFromSnippetField = ( currentResult ) => {
  * @param {string} snippet
  * @return {string}
  */
-const stripHighlightsFromSnippet = ( snippet ) => {
-	return snippet.replace( HIGHLIGHTS_REGEX, '$1' );
-};
+const stripHighlightsFromSnippet = ( snippet ) => snippet.replace( HIGHLIGHTS_REGEX, '$1' );
 
 /**
  * Returns the sections array from cirrusDoc.
@@ -226,7 +224,7 @@ const generateExpandedSnippet = ( page, currentResult, isMobile ) => {
 		const separators = '[\\p{P}\\p{Z}\\p{C}]';
 
 		// phpcs:disable
-		const regexFormatHighlight = new RegExp( `(^|${separators})(${highlight})($|${separators})`, 'giu' );
+		const regexFormatHighlight = new RegExp( `(^|${ separators })(${ highlight })($|${ separators })`, 'giu' );
 		// phpcs:enable
 		expandedSnippet = expandedSnippet.replace(
 			regexFormatHighlight,

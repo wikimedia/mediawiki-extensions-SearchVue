@@ -67,7 +67,7 @@ function createEvent( staticData, variableData ) {
  * @return {Promise}
  */
 function loadEventLoggingAndSendEvent( event ) {
-	return mw.loader.using( [ 'ext.eventLogging' ] ).then( function () {
+	return mw.loader.using( [ 'ext.eventLogging' ] ).then( () => {
 		mw.eventLog.submit( 'mediawiki.searchpreview', event );
 	} );
 }

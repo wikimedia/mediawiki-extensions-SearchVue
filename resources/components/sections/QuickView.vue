@@ -148,7 +148,7 @@ module.exports = exports = {
 	data: function () {
 		return {};
 	},
-	computed: $.extend( {},
+	computed: Object.assign( {},
 		mapState( useRootStore, [
 			'isMobile',
 			'requestStatus',
@@ -162,6 +162,7 @@ module.exports = exports = {
 			'loading'
 		] ),
 		mapState( useEventStore, [
+			// eslint-disable-next-line vue/no-unused-properties -- T378204
 			'sessionId'
 		] ),
 		{
@@ -214,13 +215,13 @@ module.exports = exports = {
 
 		}
 	),
-	methods: $.extend(
+	methods: Object.assign(
 		{
 			onLogEvent( { action, goTo } ) {
 				this.logQuickViewEvent( {
 					action: action,
 					selectedIndex: this.selectedIndex
-				} ).then( function () {
+				} ).then( () => {
 					if ( goTo ) {
 						window.location.href = goTo;
 					}

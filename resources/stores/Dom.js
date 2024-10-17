@@ -27,7 +27,7 @@ const useDomStore = Pinia.defineStore( 'dom', {
 			return ( title ) => {
 				if ( title ) {
 					// phpcs:disable Squiz.WhiteSpace.OperatorSpacing.NoSpaceBefore,Squiz.WhiteSpace.OperatorSpacing.NoSpaceAfter
-					return state.searchResults.find( `[data-prefixedtext="${title}"]` ).closest( 'li' )[ 0 ];
+					return state.searchResults.find( `[data-prefixedtext="${ title }"]` ).closest( 'li' )[ 0 ];
 					// phpcs:enable Squiz.WhiteSpace.OperatorSpacing.NoSpaceBefore,Squiz.WhiteSpace.OperatorSpacing.NoSpaceAfter
 				}
 			};

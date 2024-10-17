@@ -80,9 +80,7 @@ module.exports = exports = {
 		firstHiddenSectionsUrl() {
 			// Props sections and Refs may have a different order
 			// So we find the section using the sections props
-			const firstHiddenSectionIndex = this.sections.findIndex( ( section ) => {
-				return this.hiddenSections.indexOf( section ) !== -1;
-			} );
+			const firstHiddenSectionIndex = this.sections.findIndex( ( section ) => this.hiddenSections.indexOf( section ) !== -1 );
 
 			if ( firstHiddenSectionIndex < 0 ) {
 				return;
@@ -139,9 +137,7 @@ module.exports = exports = {
 			const bottomOfContainer = sectionsContainer.offsetTop + sectionsContainer.offsetHeight;
 
 			// We create an array of all sections that go beyond the visible area
-			const hiddenSections = sections.filter( ( section ) => {
-				return section.offsetTop >= bottomOfContainer;
-			} );
+			const hiddenSections = sections.filter( ( section ) => section.offsetTop >= bottomOfContainer );
 
 			// We create an array of anchor urls for this hidden sections
 			// and make them aria-hidden

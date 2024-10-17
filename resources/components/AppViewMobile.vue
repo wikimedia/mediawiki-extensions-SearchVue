@@ -63,7 +63,7 @@ module.exports = exports = {
 			transitioning: false
 		};
 	},
-	computed: $.extend(
+	computed: Object.assign(
 		{},
 		mapState( useRootStore, [
 			'destination',

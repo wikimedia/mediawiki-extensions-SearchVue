@@ -90,9 +90,7 @@ module.exports = exports = {
 					this.currentShownLinkIndex,
 					this.currentShownLinkIndex + 2
 				).map(
-					( linkKey ) => {
-						return this.links[ linkKey ];
-					}
+					( linkKey ) => this.links[ linkKey ]
 				);
 			}
 		},
@@ -116,7 +114,7 @@ module.exports = exports = {
 		},
 		generateStyles( url ) {
 			return {
-				'background-image': `url('${url}')`
+				'background-image': `url('${ url }')`
 			};
 		},
 		onShowMoreClick() {

@@ -78,11 +78,9 @@ describe( 'Dom store', () => {
 			} );
 			it( 'update focusable elements when container is present', () => {
 				const dummyReturn = [ 'one', 'two' ];
-				document.querySelector.mockImplementationOnce( () => {
-					return {
-						querySelectorAll: jest.fn().mockReturnValueOnce( dummyReturn )
-					};
-				} );
+				document.querySelector.mockImplementationOnce( () => ( {
+					querySelectorAll: jest.fn().mockReturnValueOnce( dummyReturn )
+				} ) );
 
 				domStore.updateTabbableElements();
 				expect( domStore.focusableElements ).toEqual( dummyReturn );
@@ -91,11 +89,9 @@ describe( 'Dom store', () => {
 		describe( 'focusDialog', () => {
 			it( 'Trigger a focus event if container is available', () => {
 				const focusMock = jest.fn();
-				document.querySelector.mockImplementationOnce( () => {
-					return {
-						focus: focusMock
-					};
-				} );
+				document.querySelector.mockImplementationOnce( () => ( {
+					focus: focusMock
+				} ) );
 				domStore.focusDialog();
 
 				expect( focusMock ).toHaveBeenCalled();

@@ -19,7 +19,7 @@ const pushTitleToHistoryState = ( title ) => {
 	// causes an error saying it can't be cloned. Work around this by cloning the uriQuery
 	// object ourselves, using JSON.parse( JSON.stringify() ) to convert the Proxy to Object.
 	const existingQuery = JSON.parse( JSON.stringify( mwUri.query ) );
-	mwUri.query = $.extend(
+	mwUri.query = Object.assign(
 		{},
 		existingQuery,
 		{ quickView: title }
@@ -81,7 +81,7 @@ const useRootStore = Pinia.defineStore( 'root', {
 				expandedSnippet: queryStore.expandedSnippet
 			};
 
-			return $.extend(
+			return Object.assign(
 				state.results[ state.selectedIndex ],
 				additionalInfo
 			);
@@ -95,9 +95,7 @@ const useRootStore = Pinia.defineStore( 'root', {
 		 *
 		 * @return {boolean}
 		 */
-		visible: ( state ) => {
-			return !!state.title;
-		},
+		visible: ( state ) => !!state.title,
 		/**
 		 * Determine if there is enough data to show the search preview.
 		 * This is used on mobile view only.
@@ -131,7 +129,7 @@ const useRootStore = Pinia.defineStore( 'root', {
 			let destination = '.searchresults';
 			if ( this.isMobile ) {
 				// phpcs:disable Squiz.WhiteSpace.OperatorSpacing.NoSpaceBefore,Squiz.WhiteSpace.OperatorSpacing.NoSpaceAfter
-				const dataTitleSelector = `[data-prefixedtext="${title}"]`;
+				const dataTitleSelector = `[data-prefixedtext="${ title }"]`;
 				// phpcs:enable Squiz.WhiteSpace.OperatorSpacing.NoSpaceBefore,Squiz.WhiteSpace.OperatorSpacing.NoSpaceAfter
 				destination = title ? dataTitleSelector : false;
 			}
@@ -159,9 +157,7 @@ const useRootStore = Pinia.defineStore( 'root', {
 			this.closeQuickView();
 
 			if ( currentTitle !== newTitle ) {
-				const selectedTitleIndex = this.results.findIndex( ( result ) => {
-					return result.prefixedText === newTitle;
-				} );
+				const selectedTitleIndex = this.results.findIndex( ( result ) => result.prefixedText === newTitle );
 				let thumbnail = null;
 				if ( this.results[ selectedTitleIndex ] && this.results[ selectedTitleIndex ].thumbnail ) {
 					thumbnail = this.results[ selectedTitleIndex ].thumbnail;

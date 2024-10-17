@@ -12,7 +12,7 @@ module.exports = function onResizeObserver( element ) {
 	const setDebounceValues = function ( event ) {
 		clearTimeout( timeout );
 		timeout = setTimeout(
-			function () {
+			() => {
 				updateValues( event );
 			},
 			100
@@ -21,11 +21,11 @@ module.exports = function onResizeObserver( element ) {
 
 	const resizeObserver = new ResizeObserver( setDebounceValues );
 
-	onMounted( function () {
+	onMounted( () => {
 		resizeObserver.observe( elementToObserve.value );
 	} );
 
-	onUnmounted( function () {
+	onUnmounted( () => {
 		resizeObserver.unobserve( elementToObserve.value );
 	} );
 

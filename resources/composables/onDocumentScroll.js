@@ -24,7 +24,7 @@ module.exports = function onDocumentScoll() {
 				// not currently throttled; execute, and use timeout as lock
 				invalidatingCallback( ...args );
 				timeout = setTimeout(
-					function () {
+					() => {
 						timeout = null;
 						if ( latest !== null ) {
 							invalidatingCallback( ...latest );
@@ -42,17 +42,17 @@ module.exports = function onDocumentScoll() {
 	};
 
 	const getThrottledScroll = throttle(
-		function () {
+		() => {
 			updateValues( window.scrollX, window.scrollY );
 		},
 		100
 	);
 
-	onMounted( function () {
+	onMounted( () => {
 		window.addEventListener( 'scroll', getThrottledScroll );
 	} );
 
-	onUnmounted( function () {
+	onUnmounted( () => {
 		window.removeEventListener( 'scroll', getThrottledScroll );
 	} );
 

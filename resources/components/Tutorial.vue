@@ -39,7 +39,7 @@ module.exports = exports = {
 			tutorialPopupVisible: false
 		};
 	},
-	computed: $.extend( {},
+	computed: Object.assign( {},
 		mapState( useRootStore, [
 			'selectedIndex',
 			'isMobile'

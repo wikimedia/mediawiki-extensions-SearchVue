@@ -13,7 +13,9 @@
 		"no-jquery/variable-pattern": "off",
 		"no-jquery/no-event-shorthand": "off",
 		"compat/compat": "warn",
-		"mediawiki/msg-doc": "warn"
+		"mediawiki/msg-doc": "warn",
+		"implicit-arrow-linebreak": "warn",
+		"no-mixed-spaces-and-tabs": "warn"
 	},
 	"overrides": [
 		{

@@ -89,9 +89,7 @@ const mw = {
 		isAnon: jest.fn().mockReturnValue( false ),
 		generateRandomSessionId: jest.fn().mockReturnValue( 'fakeRandomSession' )
 	},
-	internalWikiUrlencode: jest.fn( ( value ) => {
-		return value;
-	} ),
+	internalWikiUrlencode: jest.fn( ( value ) => value ),
 	eventLog: {
 		submit: jest.fn()
 	}
