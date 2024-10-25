@@ -161,7 +161,9 @@ module.exports = exports = {
 			'requestStatuses',
 			'loading'
 		] ),
-		mapState( useEventStore ),
+		mapState( useEventStore, [
+			'sessionId'
+		] ),
 		{
 			hasCommonsImages() {
 				return this.currentResult.media &&
