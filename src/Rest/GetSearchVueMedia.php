@@ -19,16 +19,16 @@ class GetSearchVueMedia extends SimpleHandler {
 	/** @var HttpRequestFactory */
 	private $httpRequestFactory;
 
-	/** @var string */
+	/** @var string|null */
 	private $externalMediaSearchUri;
 
-	/** @var string */
+	/** @var string|null */
 	private $externalInterwikiSearchUri;
 
-	/** @var string */
+	/** @var string|null */
 	private $searchFilterForQID;
 
-	/** @var string */
+	/** @var string|null */
 	private $mediaRepositorySearchUri;
 
 	/** @var UrlUtils */
@@ -89,9 +89,9 @@ class GetSearchVueMedia extends SimpleHandler {
 		$handlers = [];
 
 		if (
-			isset( $this->externalMediaSearchUri ) &&
-			isset( $this->mediaRepositorySearchUri ) &&
-			isset( $this->searchFilterForQID )
+			$this->externalMediaSearchUri !== null &&
+			$this->mediaRepositorySearchUri !== null &&
+			$this->searchFilterForQID !== null
 		) {
 			$searchTerm = $this->generateSearchTerm( $qid );
 			$requests['media'] = $this->getMediaRequest( $searchTerm );
@@ -104,14 +104,14 @@ class GetSearchVueMedia extends SimpleHandler {
 			};
 		}
 
-		if ( isset( $this->externalInterwikiSearchUri ) ) {
+		if ( $this->externalInterwikiSearchUri !== null ) {
 			$sitesList = $this->getFilteredSites( $this->language->getCode(), $this->dbName );
 			$requests['links'] = $this->getSitelinksRequest( $qid, $sitesList );
 			$handlers['links'] = function ( $response ) use ( $sitesList ) {
 				$data = json_decode( $response['response']['body'], true ) ?: [];
 				$allEntities = $data[ 'entities' ] ?? [];
 				$entities = reset( $allEntities );
-				if ( !isset( $entities ) ) {
+				if ( $entities === null ) {
 					return [];
 				}
 
