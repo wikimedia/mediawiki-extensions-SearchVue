@@ -111,7 +111,7 @@ class GetSearchVueMedia extends SimpleHandler {
 				$data = json_decode( $response['response']['body'], true ) ?: [];
 				$allEntities = $data[ 'entities' ] ?? [];
 				$entities = reset( $allEntities );
-				if ( $entities === null ) {
+				if ( !$entities ) {
 					return [];
 				}
 
