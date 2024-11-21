@@ -4,7 +4,6 @@
 			"Mainframe98",
 			"McDutchie",
 			"Sjoerddebruin",
-			"Amire80",
 			"Siebrand"
 		]
 	},
@@ -35,6 +34,6 @@
 	"tutorial-popup-title": "Voorbeelden van zoekresultaten",
 	"tutorial-popup-text1": "Klik op de artikelomschrijving om een zoekvoorbeeld en relevante inhoud te tonen.",
 	"tutorial-popup-text3": "U kunt voorvertoningen in- en uitschakelen in de <a href=\"$1\" target=\"_blank\">zoekvoorkeuren</a>.",
-	"tutorial-popup-text-mobile": "Druk op de paginaomschrijving of het pijltje om een zoekvoorbeeld en relevante inhoud weer te geven.",
+	"tutorial-popup-text-mobile": "Druk op het artikelknipsel of het pijltje om een voorvertoning van het zoekresultaat weer te geven en andere relevante inhoud te bekijken.",
 	"tutorial-popup-close": "Sluiten"
 }
