@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Alshamiri1",
-			"محمد أحمد عبد الفتاح"
+			"محمد أحمد عبد الفتاح",
+			"Meno25"
 		]
 	},
 	"searchvue-aria-button": "افتح معاينة هذه المقالة.",
@@ -16,7 +17,7 @@
 	"searchvue-loading": "معاينة التحميل",
 	"searchvue-no-content": "لا يوجد محتوى للمعاينة",
 	"searchvue-snippet-gotofullpage": "اذهب إلى الصفحة الكاملة",
-	"searchvue-snippet-gotofullpage-ns0": "انتقل إلى المقال كاملاً",
+	"searchvue-snippet-gotofullpage-ns0": "انتقل إلى المقال كاملا",
 	"searchvue-commons-viewmore": "عرض المزيد",
 	"searchvue-commons-viewmore-mobile": "شاهد المزيد من الصور",
 	"searchvue-commons-footnote": "في ويكيميديا كومنز",
