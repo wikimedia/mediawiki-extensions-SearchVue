@@ -5,6 +5,8 @@
 		]
 	},
 	"searchvue-aria-button": "Avaa tämän artikkelin esikatselu.",
+	"searchvue-dialog-title": "Haun esikatselu",
+	"searchvue-dialog-aria-label": "Esikatseluikkuna on nyt auki. Se näyttää tämän artikkelin tärkeimpiä tietoja ja muuta aiheeseen liittyvää sisältöä.",
 	"searchvue-close": "Sulje",
 	"searchvue-next": "Seuraava",
 	"searchvue-previous": "Edellinen",
@@ -20,5 +22,13 @@
 	"searchvue-commons-heading-mobile": "Aiheeseen liittyviä kuvia Wikimedia Commonsista",
 	"searchvue-article-sections-heading": "Sivun osiot",
 	"searchvue-article-sections-heading-ns0": "Artikkelin osiot",
+	"searchvue-more-sections": "+ $1 {{PLURAL:$2|muu osio|muuta osiota}}",
+	"searchvue-help": "Esikatsele sivun sisältöä ja muita aiheeseen liittyviä sisältöjä.",
+	"searchvue-links-heading": "Aiheeseen liittyvät sivut muissa hankkeissa",
+	"searchvue-links-showmore": "katsele muita sivuja",
+	"tutorial-popup-title": "Hakutulosten esikatselut",
+	"tutorial-popup-text1": "Klikkaa artikkelipalasta esikatsellaksesi hakutulosta ja nähdäksesi aiheeseen liittyvää sisältöä.",
+	"tutorial-popup-text2": "Voit ottaa esikatselut käyttöön tai poistaa ne käytöstä [[Special:Preferences#mw-prefsection-searchoptions|hakuasetuksissa]].",
+	"tutorial-popup-text-mobile": "Klikkaa artikkelipalasta tai nuolta esikatsellaksesi hakutulosta ja nähdäksesi aiheeseen liittyvää sisältöä.",
 	"tutorial-popup-close": "Sulje"
 }
