@@ -22,7 +22,7 @@
 	"searchvue-commons-heading-mobile": "Aiheeseen liittyviä kuvia Wikimedia Commonsista",
 	"searchvue-article-sections-heading": "Sivun osiot",
 	"searchvue-article-sections-heading-ns0": "Artikkelin osiot",
-	"searchvue-more-sections": "+ $1 {{PLURAL:$2|muu osio|muuta osiota}}",
+	"searchvue-more-sections": "+ $1 {{PLURAL:$1|muu osio|muuta osiota}}",
 	"searchvue-help": "Esikatsele sivun sisältöä ja muita aiheeseen liittyviä sisältöjä.",
 	"searchvue-links-heading": "Aiheeseen liittyvät sivut muissa hankkeissa",
 	"searchvue-links-showmore": "katsele muita sivuja",
