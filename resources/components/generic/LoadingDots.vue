@@ -29,7 +29,7 @@ module.exports = exports = {
 	// The following code has been inspired by https://codepen.io/Volker_E/pen/yqNXMe
 	// Re-usable LESS project code.
 	@width-bounce-dot: 0.858em;
-	@margin-bounce-dot: @width-bounce-dot / 4;
+	@margin-bounce-dot: ( @width-bounce-dot / 4 );
 	white-space: nowrap;
 	display: block;
 	width: 3 * @width-bounce-dot + 2 * @margin-bounce-dot;
