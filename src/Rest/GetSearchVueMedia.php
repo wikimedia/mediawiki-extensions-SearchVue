@@ -128,6 +128,7 @@ class GetSearchVueMedia extends SimpleHandler {
 		return $this->getResponseFactory()->createJson( $results );
 	}
 
+	/** @inheritDoc */
 	public function needsWriteAccess() {
 		return false;
 	}

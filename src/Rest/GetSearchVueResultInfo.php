@@ -56,6 +56,7 @@ class GetSearchVueResultInfo extends SimpleHandler {
 		return $this->getResponseFactory()->createJson( $formattedResponse );
 	}
 
+	/** @inheritDoc */
 	public function needsWriteAccess() {
 		return false;
 	}
