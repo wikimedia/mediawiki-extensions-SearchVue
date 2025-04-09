@@ -1,0 +1,34 @@
+{
+	"@metadata": {
+		"authors": [
+			"Toliño"
+		]
+	},
+	"searchvue-aria-button": "Abrir a vista previa deste artigo.",
+	"searchvue-dialog-title": "Vista previa da procura",
+	"searchvue-dialog-aria-label": "O diálogo da vista previa está aberto. Amosa información clave deste artigo e contido relacionado.",
+	"searchvue-desc": "Adicións e melloras de Vue.js para Special:Search",
+	"searchvue-close": "Pechar",
+	"searchvue-next": "Seguinte",
+	"searchvue-previous": "Anterior",
+	"searchvue-label": "Activar a vista previa dos resultados da procura",
+	"searchvue-loading": "A cargar a vista previa",
+	"searchvue-no-content": "Non hai contido para previsualizar",
+	"searchvue-snippet-gotofullpage": "Vai á páxina completa",
+	"searchvue-snippet-gotofullpage-ns0": "Vai ao artigo completo",
+	"searchvue-commons-viewmore": "Ollar máis",
+	"searchvue-commons-viewmore-mobile": "Ollar máis imaxes",
+	"searchvue-commons-footnote": "De Wikimedia Commons",
+	"searchvue-commons-heading": "Imaxes relacionadas",
+	"searchvue-commons-heading-mobile": "Imaxes relacionadas de Wikimedia Commons",
+	"searchvue-article-sections-heading": "Seccións da páxina",
+	"searchvue-article-sections-heading-ns0": "Seccións do artigo",
+	"searchvue-more-sections": "$1 {{PLURAL:$1|sección|seccións}} máis",
+	"searchvue-help": "Previsualizar os contidos da páxina e contido relacionado.",
+	"searchvue-links-subheading": "De $1",
+	"searchvue-links-heading": "Páxinas relacionadas doutros proxectos",
+	"searchvue-links-showmore": "ollar outras páxinas",
+	"tutorial-popup-title": "Vistas previas dos resultados da procura",
+	"tutorial-popup-text-mobile": "Toca o fragmento do artigo ou a frecha para previsualizar o resultado da procura e ollar contido relacionado.",
+	"tutorial-popup-close": "Pechar"
+}
