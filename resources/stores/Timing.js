@@ -24,6 +24,7 @@ const useTimingStore = Pinia.defineStore( 'timing', {
 			}
 			const took = performance.now() - this.startTime;
 			mw.track( 'timing.SearchVue.LoadPreview', took );
+			mw.track( 'stats.SearchVue_LoadPreview_seconds', took );
 			this.reset();
 		},
 		/**
