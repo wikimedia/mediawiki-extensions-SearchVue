@@ -83,9 +83,9 @@ module.exports = exports = {
 		mapActions( useEventStore, [ 'initEventLoggingSession' ] ),
 		{
 			setQueryQuickViewTitle: function () {
-				const mwUri = new mw.Uri();
-				if ( mwUri.query.quickView ) {
-					this.queryQuickViewTitle = mwUri.query.quickView;
+				const quickView = new URLSearchParams( location.search ).get( 'quickView' );
+				if ( quickView ) {
+					this.queryQuickViewTitle = quickView;
 				}
 			},
 			restoreQuickViewOnNavigation() {
@@ -124,7 +124,7 @@ module.exports = exports = {
 				return result && ( result.text || result.thumbnail );
 			},
 			multiMediaViewerIsOpen() {
-				const urlFragment = mw.Uri().fragment;
+				const urlFragment = location.hash;
 				return urlFragment && urlFragment.indexOf( '/media/' ) !== -1;
 			}
 		}

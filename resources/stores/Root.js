@@ -8,39 +8,42 @@ const useDomStore = require( './Dom.js' );
 const useRequestStatusStore = require( './RequestStatus.js' );
 
 /**
+ * Converts URLSearchParams to object.
+ *
+ * @param {URLSearchParams} params
+ * @return {Object}
+ */
+const urlSearchParamsToObject = ( params ) => {
+	// ES2019 'Object.fromEntries' method is shorter
+	const object = {};
+	for ( const [ k, v ] of params.entries() ) {
+		object[ k ] = v;
+	}
+	return object;
+};
+
+/**
  * Push the current provided title to the browser's session history stack
  *
  * @param {string} title
  */
 const pushTitleToHistoryState = ( title ) => {
-	const mwUri = new mw.Uri();
-	// update mw URI query object with the one currently available within the store
-	// In Vue 3, context.state.uriQuery is a Proxy, and passing it to replaceState()
-	// causes an error saying it can't be cloned. Work around this by cloning the uriQuery
-	// object ourselves, using JSON.parse( JSON.stringify() ) to convert the Proxy to Object.
-	const existingQuery = JSON.parse( JSON.stringify( mwUri.query ) );
-	mwUri.query = Object.assign(
-		{},
-		existingQuery,
-		{ quickView: title }
-	);
-	const queryString = '?' + mwUri.getQueryString();
-	window.history.pushState( mwUri.query, null, queryString );
+	const searchParams = new URLSearchParams( location.search );
+	searchParams.set( 'quickView', title );
+	const queryString = '?' + searchParams.toString();
+	const query = urlSearchParamsToObject( searchParams );
+	window.history.pushState( query, null, queryString );
 };
 
 /**
  * Remove the value of QuickView from the history State.
  */
 const removeQuickViewFromHistoryState = () => {
-	const mwUri = new mw.Uri();
-	// update mw URI query object with the one currently available within the store
-	// In Vue 3, context.state.uriQuery is a Proxy, and passing it to replaceState()
-	// causes an error saying it can't be cloned. Work around this by cloning the uriQuery
-	// object ourselves, using JSON.parse( JSON.stringify() ) to convert the Proxy to Object.
-	mwUri.query = JSON.parse( JSON.stringify( mwUri.query ) );
-	delete mwUri.query.quickView;
-	const queryString = '?' + mwUri.getQueryString();
-	window.history.pushState( mwUri.query, null, queryString );
+	const searchParams = new URLSearchParams( location.search );
+	searchParams.delete( 'quickView' );
+	const queryString = '?' + searchParams.toString();
+	const query = urlSearchParamsToObject( searchParams );
+	window.history.pushState( query, null, queryString );
 };
 
 const useRootStore = Pinia.defineStore( 'root', {
