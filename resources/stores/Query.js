@@ -223,9 +223,7 @@ const generateExpandedSnippet = ( page, currentResult, isMobile ) => {
 		// https://javascript.info/regexp-unicode#unicode-properties-p
 		const separators = '[\\p{P}\\p{Z}\\p{C}]';
 
-		// phpcs:disable
 		const regexFormatHighlight = new RegExp( `(^|${ separators })(${ highlight })($|${ separators })`, 'giu' );
-		// phpcs:enable
 		expandedSnippet = expandedSnippet.replace(
 			regexFormatHighlight,
 			'$1<span class="searchmatch">$2</span>$3'

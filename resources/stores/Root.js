@@ -128,9 +128,7 @@ const useRootStore = Pinia.defineStore( 'root', {
 		toggleVisibily( title ) {
 			let destination = '.searchresults';
 			if ( this.isMobile ) {
-				// phpcs:disable Squiz.WhiteSpace.OperatorSpacing.NoSpaceBefore,Squiz.WhiteSpace.OperatorSpacing.NoSpaceAfter
 				const dataTitleSelector = `[data-prefixedtext="${ title }"]`;
-				// phpcs:enable Squiz.WhiteSpace.OperatorSpacing.NoSpaceBefore,Squiz.WhiteSpace.OperatorSpacing.NoSpaceAfter
 				destination = title ? dataTitleSelector : false;
 			}
 			this.destination = destination;
