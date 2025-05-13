@@ -1,7 +1,7 @@
 {
 	"root": true,
 	"extends": [
-		"wikimedia/client-es6",
+		"wikimedia/client",
 		".eslintshared.json",
 		"wikimedia/mediawiki"
 	],
@@ -20,7 +20,7 @@
 	"overrides": [
 		{
 			"files": "**/*.vue",
-			"extends": "wikimedia/vue-es6",
+			"extends": "wikimedia/vue/es6",
 			"rules": {
 				"vue/html-self-closing": [
 					"error",
