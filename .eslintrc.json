@@ -15,7 +15,9 @@
 		"compat/compat": "warn",
 		"mediawiki/msg-doc": "warn",
 		"implicit-arrow-linebreak": "warn",
-		"no-mixed-spaces-and-tabs": "warn"
+		"no-mixed-spaces-and-tabs": "warn",
+		"unicorn/prefer-includes": "warn",
+		"no-jquery/no-done-fail": "warn"
 	},
 	"overrides": [
 		{
