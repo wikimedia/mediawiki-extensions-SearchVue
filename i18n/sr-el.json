@@ -2,7 +2,12 @@
 	"@metadata": {
 		"authors": []
 	},
+	"searchvue-close": "Zatvori",
+	"searchvue-next": "Sledeće",
+	"searchvue-previous": "Prethodno",
 	"searchvue-commons-viewmore-mobile": "Prikaži još slika",
 	"searchvue-commons-heading-mobile": "Slike sa Vikimedijine ostave",
+	"searchvue-links-subheading": "U $1",
+	"searchvue-links-showmore": "vidi druge stranice",
 	"tutorial-popup-close": "Zatvori"
 }
