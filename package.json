@@ -13,7 +13,7 @@
 		"@vue/test-utils": "2.3.2",
 		"@vue/vue3-jest": "27.0.0-alpha.4",
 		"babel-core": "^6.26.3",
-		"eslint-config-wikimedia": "0.28.2",
+		"eslint-config-wikimedia": "0.29.1",
 		"grunt": "1.6.1",
 		"grunt-banana-checker": "0.13.0",
 		"grunt-eslint": "24.3.0",
@@ -22,7 +22,7 @@
 		"jquery": "3.7.1",
 		"pinia": "2.0.16",
 		"stylelint-config-wikimedia": "0.18.0",
-		"vue": "3.4.27"
+		"vue": "3.5.14"
 	},
 	"eslintIgnore": [
 		"vendor/**"
