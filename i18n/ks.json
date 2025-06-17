@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": []
+	},
+	"searchvue-close": "بَنٛد",
+	"searchvue-next": "اَمہِ پتہٕ",
+	"searchvue-previous": "اَمہِ برونٛہِم",
+	"searchvue-label": "نٕتیٖجہٕ ژھارُنس کُن نظراہ کٕریٚو یَلہٕ",
+	"searchvue-snippet-gotofullpage": "پوٗرٕ صفس پؠٹھ گژھیوٚ",
+	"searchvue-snippet-gotofullpage-ns0": "پوٗرٕ مضموٗنس پؠٹھ گٕژھیوٚ",
+	"searchvue-commons-viewmore": "بییہٚ وُچُھو",
+	"searchvue-commons-footnote": "وِکیٖمیٖیڈیا کامَنٕز منٛز",
+	"searchvue-commons-heading": "رلہٕوٕنی تصویٖرٕ",
+	"searchvue-article-sections-heading": "صَفس مٕنٛز طبقہٕ",
+	"searchvue-article-sections-heading-ns0": "مضموٗنس مٕنٛز طبقہٕ",
+	"searchvue-more-sections": "+ $1 بییہٚ {{PLURAL:$1|طبقہٕ|طبقعٕہ}}",
+	"searchvue-help": "نظراہ ترٲوِو صفن ہِنٛدِؠن موادَن تہٕ رلہٕ وٕنی مَوادَس.",
+	"searchvue-links-subheading": "$1 منز",
+	"tutorial-popup-close": "بَنٛد"
+}
