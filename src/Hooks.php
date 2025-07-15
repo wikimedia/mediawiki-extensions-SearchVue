@@ -30,7 +30,7 @@ class Hooks implements
 	GetPreferencesHook
 {
 	/**
-	 * @var array holding the search result object.
+	 * @var \stdClass[] holding the search result object.
 	 */
 	private $textMatches;
 
@@ -124,7 +124,8 @@ class Hooks implements
 					FullSearchResultWidget::THUMBNAIL_SIZE
 				);
 
-				$formattedResult = $result->getTitle();
+				$formattedResult = new \stdClass;
+				$formattedResult->prefixedText = $result->getTitle()->getPrefixedText();
 				$formattedResult->text = $result->getTextSnippet();
 
 				// TODO: This is just required as a fallback until the following patch is merged:
