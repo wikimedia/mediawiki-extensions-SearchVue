@@ -16,9 +16,6 @@ use Wikimedia\ParamValidator\ParamValidator;
  */
 class GetSearchVueMedia extends SimpleHandler {
 
-	/** @var HttpRequestFactory */
-	private $httpRequestFactory;
-
 	/** @var string|null */
 	private $externalMediaSearchUri;
 
@@ -30,12 +27,6 @@ class GetSearchVueMedia extends SimpleHandler {
 
 	/** @var string|null */
 	private $mediaRepositorySearchUri;
-
-	/** @var UrlUtils */
-	private $urlUtils;
-
-	/** @var Language */
-	private $language;
 
 	/** @var string */
 	private $dbName;
@@ -58,26 +49,17 @@ class GetSearchVueMedia extends SimpleHandler {
 		// https://meta.wikimedia.org/wiki/Complete_list_of_Wikimedia_projects#Core_free-knowledge_projects
 	];
 
-	/**
-	 * @param Config $mainConfig
-	 * @param HttpRequestFactory $httpRequestFactory
-	 * @param UrlUtils $urlUtils
-	 * @param Language $language
-	 */
 	public function __construct(
 		Config $mainConfig,
-		HttpRequestFactory $httpRequestFactory,
-		UrlUtils $urlUtils,
-		Language $language
+		private readonly HttpRequestFactory $httpRequestFactory,
+		private readonly UrlUtils $urlUtils,
+		private readonly Language $language,
 	) {
 		$this->dbName = $mainConfig->get( 'DBname' );
 		$this->externalMediaSearchUri = $mainConfig->get( 'QuickViewMediaRepositoryApiBaseUri' );
 		$this->externalInterwikiSearchUri = $mainConfig->get( 'QuickViewDataRepositoryApiBaseUri' );
 		$this->searchFilterForQID = $mainConfig->get( 'QuickViewSearchFilterForQID' );
 		$this->mediaRepositorySearchUri = $mainConfig->get( 'QuickViewMediaRepositorySearchUri' );
-		$this->httpRequestFactory = $httpRequestFactory;
-		$this->urlUtils = $urlUtils;
-		$this->language = $language;
 	}
 
 	/**
