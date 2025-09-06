@@ -21,7 +21,6 @@ use SearchResult;
 /**
  * @license GPL-2.0-or-later
  */
-
 class Hooks implements
 	SpecialPageBeforeExecuteHook,
 	SpecialSearchResultsHook,
