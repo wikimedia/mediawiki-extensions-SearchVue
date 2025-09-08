@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Kareyac"
+			"Kareyac",
+			"StanProg"
 		]
 	},
+	"searchvue-close": "Затваряне",
 	"tutorial-popup-close": "Затваряне"
 }
