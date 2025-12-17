@@ -6,7 +6,8 @@
 			"DARMAS BUDI SANTOSO",
 			"Rachmat04",
 			"Sannita",
-			"Veracious"
+			"Veracious",
+			"Penyuwangi"
 		]
 	},
 	"searchvue-aria-button": "Buka pratinjau artikel ini.",
@@ -16,7 +17,7 @@
 	"searchvue-close": "Tutup",
 	"searchvue-next": "Selanjutnya",
 	"searchvue-previous": "Sebelumnya",
-	"searchvue-label": "Aktifkan pratinjau hasil pencarian",
+	"searchvue-label": "Nyalakan pratayang hasil pencarian",
 	"searchvue-loading": "Memuat pratinjau",
 	"searchvue-no-content": "Tidak ada konten yang dapat dipratinjau",
 	"searchvue-snippet-gotofullpage": "Buka halaman penuh",
@@ -35,7 +36,7 @@
 	"searchvue-links-showmore": "lihat halaman lain",
 	"tutorial-popup-title": "Pratinjau hasil pencarian",
 	"tutorial-popup-text1": "Klik pada cuplikan artikel untuk melihat pratinjau dari hasil pencarian dan melihat konten terkait.",
-	"tutorial-popup-text2": "Anda dapat mengaktifkan dan menonaktifkan pratinjau di [[Special:Preferences#mw-prefsection-searchoptions|preferensi pencarian]].",
+	"tutorial-popup-text2": "Anda dapat menyalakan dan mematikan pratayang di [[Special:Preferences#mw-prefsection-searchoptions|preferensi pencarian]].",
 	"tutorial-popup-text-mobile": "Sentuh cuplikan artikel atau tanda panah untuk melihat pratinjau hasil pencarian dan melihat konten terkait.",
 	"tutorial-popup-close": "Tutup"
 }
