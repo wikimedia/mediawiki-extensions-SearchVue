@@ -1,6 +1,8 @@
 {
 	"@metadata": {
-		"authors": []
+		"authors": [
+			"Ayaat123"
+		]
 	},
 	"searchvue-close": "بَنٛد",
 	"searchvue-next": "اَمہِ پتہٕ",
@@ -8,7 +10,7 @@
 	"searchvue-label": "نٕتیٖجہٕ ژھارُنس کُن نظراہ کٕریٚو یَلہٕ",
 	"searchvue-snippet-gotofullpage": "پوٗرٕ صفس پؠٹھ گژھیوٚ",
 	"searchvue-snippet-gotofullpage-ns0": "پوٗرٕ مضموٗنس پؠٹھ گٕژھیوٚ",
-	"searchvue-commons-viewmore": "بییہٚ وُچُھو",
+	"searchvue-commons-viewmore": "بیٚیہِ وُچھُو",
 	"searchvue-commons-footnote": "وِکیٖمیٖیڈیا کامَنٕز منٛز",
 	"searchvue-commons-heading": "رلہٕوٕنی تصویٖرٕ",
 	"searchvue-article-sections-heading": "صَفس مٕنٛز طبقہٕ",
