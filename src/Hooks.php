@@ -2,21 +2,21 @@
 
 namespace SearchVue;
 
-use HtmlArmor;
-use ISearchResultSet;
-use MediaWiki\Hook\SpecialSearchResultsAppendHook;
-use MediaWiki\Hook\SpecialSearchResultsHook;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\Preferences\Hook\GetPreferencesHook;
 use MediaWiki\Search\Hook\ShowSearchHitTitleHook;
+use MediaWiki\Search\ISearchResultSet;
+use MediaWiki\Search\SearchResult;
 use MediaWiki\Search\SearchWidgets\FullSearchResultWidget;
 use MediaWiki\SpecialPage\Hook\SpecialPageBeforeExecuteHook;
 use MediaWiki\SpecialPage\SpecialPage;
+use MediaWiki\Specials\Hook\SpecialSearchResultsAppendHook;
+use MediaWiki\Specials\Hook\SpecialSearchResultsHook;
 use MediaWiki\Specials\SpecialSearch;
 use MediaWiki\Title\Title;
 use MediaWiki\User\User;
-use SearchResult;
+use Wikimedia\HtmlArmor\HtmlArmor;
 
 /**
  * @license GPL-2.0-or-later
