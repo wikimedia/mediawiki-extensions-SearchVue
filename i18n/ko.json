@@ -1,14 +1,31 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ykhwong"
+			"Ykhwong",
+			"Tensama0415"
 		]
 	},
 	"searchvue-aria-button": "이 문서의 미리 보기를 엽니다.",
+	"searchvue-dialog-title": "검색 미리보기",
+	"searchvue-close": "닫기",
 	"searchvue-next": "다음",
 	"searchvue-previous": "이전",
+	"searchvue-label": "검색 결과 미리보기 활성화",
 	"searchvue-loading": "미리보기를 불러오는 중",
 	"searchvue-no-content": "미리 볼 내용이 없음",
+	"searchvue-snippet-gotofullpage": "전체 문서 보기",
+	"searchvue-snippet-gotofullpage-ns0": "전체 글 보기",
 	"searchvue-commons-viewmore": "더 보기",
-	"searchvue-commons-viewmore-mobile": "더 많은 이미지 보기"
+	"searchvue-commons-viewmore-mobile": "더 많은 이미지 보기",
+	"searchvue-commons-footnote": "위키미디어 공용",
+	"searchvue-commons-heading": "관련 이미지",
+	"searchvue-commons-heading-mobile": "위키미디어 공용의 관련 이미지",
+	"searchvue-article-sections-heading": "문서의 문단",
+	"searchvue-article-sections-heading-ns0": "글의 문단",
+	"searchvue-more-sections": "+ $1개의 추가 {{PLURAL:$1|문단}}",
+	"searchvue-links-subheading": "$1",
+	"searchvue-links-heading": "다른 프로젝트의 관련 문서",
+	"searchvue-links-showmore": "다른 문서 보기",
+	"tutorial-popup-title": "검색 결과 미리보기",
+	"tutorial-popup-close": "닫기"
 }
