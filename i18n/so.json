@@ -1,0 +1,36 @@
+{
+	"@metadata": {
+		"authors": [
+			"AhmedG612"
+		]
+	},
+	"searchvue-aria-button": "Fur horudhaca maqaalkan.",
+	"searchvue-dialog-title": "Horudhaca raadinta",
+	"searchvue-dialog-aria-label": "Sanduuqa horudhaca waa la furay. Wuxuu muujinayaa macluumaadka muhiimka ah ee maqaalkan iyo waxyaabaha la xiriira.",
+	"searchvue-desc": "Ku darista iyo hagaajinta astaamaha Vue.js ee Special:Search",
+	"searchvue-close": "Xir",
+	"searchvue-next": "Xiga",
+	"searchvue-previous": "Kii hore",
+	"searchvue-label": "Daar horudhaca natiijooyinka raadinta",
+	"searchvue-loading": "Horudhaca soo raraya",
+	"searchvue-no-content": "Ma jiro wax horudhac ah oo la muujin karo",
+	"searchvue-snippet-gotofullpage": "U gudub bogga buuxa",
+	"searchvue-snippet-gotofullpage-ns0": "Ugu dub maqaalka oo dhan",
+	"searchvue-commons-viewmore": "Eeg wax badan",
+	"searchvue-commons-viewmore-mobile": "Eeg sawirro dheeraad ah",
+	"searchvue-commons-footnote": "Wikimedia Commons dhexdiisa",
+	"searchvue-commons-heading": "Sawirro la xiriira",
+	"searchvue-commons-heading-mobile": "Sawirro la xiriira oo ka yimid Wikimedia Commons",
+	"searchvue-article-sections-heading": "Qaybaha bogga",
+	"searchvue-article-sections-heading-ns0": "Qaybaha maqaalkan",
+	"searchvue-more-sections": "+ $1 qaybo {{PLURAL:$1|dheeraad|dheeraad ah}}",
+	"searchvue-help": "Eeg horudhaca nuxurka bogga iyo waxyaabaha la xiriira.",
+	"searchvue-links-subheading": "Gudaha $1",
+	"searchvue-links-heading": "Bogag la xiriira oo ku jira mashaariic kale",
+	"searchvue-links-showmore": "Eeg bogag kale",
+	"tutorial-popup-title": "Horudhacyada natiijooyinka raadinta",
+	"tutorial-popup-text1": "Guji qaybta maqaalka si aad u aragto horudhaca natiijada raadinta iyo waxyaabaha la xiriira.",
+	"tutorial-popup-text2": "Waxaad shidi kartaa ama damin kartaa horudhacyada adigoo isticmaalaya [[Special:Preferences#mw-prefsection-searchoptions|dookhyada raadinta]].",
+	"tutorial-popup-text-mobile": "Taabo qaybta maqaalka ama falaarta si aad u aragto horudhaca natiijada raadinta oo aad u aragto waxyaabo la xiriira.",
+	"tutorial-popup-close": "Xir"
+}
