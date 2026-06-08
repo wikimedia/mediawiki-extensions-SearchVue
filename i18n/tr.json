@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"HakanIST",
 			"Hedda",
 			"SaldırganSincap"
 		]
@@ -17,5 +18,6 @@
 	"searchvue-commons-heading": "İlgili resimler",
 	"searchvue-article-sections-heading": "Sayfadaki bölümler",
 	"searchvue-more-sections": "+ $1 {{PLURAL:$1|bölüm}} daha",
-	"searchvue-help": "Sayfanın içeriğini ve ilgili içerikleri önizleyin."
+	"searchvue-help": "Sayfanın içeriğini ve ilgili içerikleri önizleyin.",
+	"tutorial-popup-close": "Kapat"
 }
