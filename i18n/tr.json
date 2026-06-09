@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Hedda",
-			"SaldırganSincap"
+			"SaldırganSincap",
+			"HakanIST"
 		]
 	},
 	"searchvue-desc": "Vue.js, Özel:Arama'ya eklemeler ve iyileştirmeler içerir",
@@ -17,5 +18,6 @@
 	"searchvue-commons-heading": "İlgili resimler",
 	"searchvue-article-sections-heading": "Sayfadaki bölümler",
 	"searchvue-more-sections": "+ $1 {{PLURAL:$1|bölüm}} daha",
-	"searchvue-help": "Sayfanın içeriğini ve ilgili içerikleri önizleyin."
+	"searchvue-help": "Sayfanın içeriğini ve ilgili içerikleri önizleyin.",
+	"tutorial-popup-close": "Kapat"
 }
