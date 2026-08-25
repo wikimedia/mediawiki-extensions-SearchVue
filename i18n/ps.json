@@ -1,0 +1,36 @@
+{
+	"@metadata": {
+		"authors": [
+			"شاه زمان پټان"
+		]
+	},
+	"searchvue-aria-button": "د دې ليکنې مخکتنه پرانېځئ.",
+	"searchvue-dialog-title": "مخکتنه پلټل",
+	"searchvue-dialog-aria-label": "د مخکتنې خبربکس او پرانېستی دی. دا د دې ليکنې  او اړوند منځپانگې په اړه مهم مالومات ښيي.",
+	"searchvue-desc": "Vue.js د ځانگړی:پلټل لپاره زياتي ځانگړنې او ښه‌والی وړاندې کوي",
+	"searchvue-close": "تړل",
+	"searchvue-next": "راتلونکی",
+	"searchvue-previous": "مخکېنی",
+	"searchvue-label": "د لټون پايلې مخکتنه چارنول",
+	"searchvue-loading": "مخکتنه بارېږي",
+	"searchvue-no-content": "مخکتنې لپاره هېڅ منځپانگه نشته",
+	"searchvue-snippet-gotofullpage": "بشپړ مخ ته ورتلل",
+	"searchvue-snippet-gotofullpage-ns0": "بشپړې ليکنې ته ورتلل",
+	"searchvue-commons-viewmore": "نور کتل",
+	"searchvue-commons-viewmore-mobile": "نور انځورونه کتل",
+	"searchvue-commons-footnote": "ويکي‌‌رسنۍ خونديځ کې",
+	"searchvue-commons-heading": "اړوند انځورونه",
+	"searchvue-commons-heading-mobile": "له ويکي‌رسنۍ خونديځ نه اړوند انځورونه",
+	"searchvue-article-sections-heading": "په مخ کې برخې",
+	"searchvue-article-sections-heading-ns0": "په ليکنه کې برخې",
+	"searchvue-more-sections": "+ $1 {{PLURAL:$1|بله برخه|نورې برخې}}",
+	"searchvue-help": "د مخ او اړوند منځپانگې د منځپانگو مخکتنه",
+	"searchvue-links-subheading": "په $1 کې",
+	"searchvue-links-heading": "په نورو پروژو کې اړوند مخونه",
+	"searchvue-links-showmore": "نور مخونه کتل",
+	"tutorial-popup-title": "د لټون پايلو مخکتنه",
+	"tutorial-popup-text1": "د لټون پايلې د مخکتنې او اړوند منځپانگې د کتلو لپاره د ليکنې پر ټوټه کېکاږئ.",
+	"tutorial-popup-text2": "تاسو کولی شئ د [[Special:Preferences#mw-prefsection-searchoptions|لټون غوره‌توبونه]] کې مختکتنې بلې او گولې کړئ.",
+	"tutorial-popup-text-mobile": "د ليکنې په ټوټه يا تير باندې کېکاږئ؛ ترڅو د لټون پايلو مخکتنه او اړوند منځپانگه وگورئ.",
+	"tutorial-popup-close": "تړل"
+}
