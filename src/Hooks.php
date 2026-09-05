@@ -84,7 +84,7 @@ class Hooks implements
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/SpecialSearchResultsAppend
 	 *
 	 * @param SpecialSearch $special SpecialSearch object ($this)
-	 * @param OutputPage $out $wgOut
+	 * @param OutputPage $out
 	 * @param string $term Search term specified by the user
 	 * @return bool|void True or no return value to continue or false to abort
 	 */
