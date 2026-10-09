@@ -24,7 +24,7 @@
 		"jquery": "3.7.1",
 		"pinia": "2.0.16",
 		"stylelint-config-wikimedia": "0.18.0",
-		"vue": "3.5.14"
+		"vue": "3.5.43"
 	},
 	"eslintIgnore": [
 		"vendor/**"
