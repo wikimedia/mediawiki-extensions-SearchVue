@@ -31,8 +31,7 @@ class GetSearchVueMedia extends SimpleHandler {
 	/** @var string */
 	private $dbName;
 
-	/** @var string[] */
-	private $interwikiSites = [
+	private const INTERWIKI_SITES = [
 		// map of i18n message to (language prefix interpolated) wiki dbname
 		'wikibase-otherprojects-wikipedia' => '%swiki',
 		'wikibase-otherprojects-wiktionary' => '%swiktionary',
@@ -126,7 +125,7 @@ class GetSearchVueMedia extends SimpleHandler {
 		// Replace the placeholder with the wiki languages
 		$sitesList = array_map( static function ( $site ) use ( $languageCode ) {
 			return sprintf( $site, $languageCode );
-		}, $this->interwikiSites );
+		}, self::INTERWIKI_SITES );
 
 		// remove the current site
 		return array_diff( $sitesList, [ $dbName ] );
