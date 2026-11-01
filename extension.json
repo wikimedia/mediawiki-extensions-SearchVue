@@ -90,7 +90,6 @@
 				"jquery.spinner",
 				"vue",
 				"pinia",
-				"web2017-polyfills",
 				"@wikimedia/codex"
 			],
 			"messages": [
